@@ -1,0 +1,49 @@
+@import "../variables";
+
+.section {
+  p {
+    margin: 0.275rem auto;
+  }
+  h1 {
+    &.title {
+      text-transform: uppercase;
+      letter-spacing: 0.25rem;
+    }
+  }
+  ul {
+    li {
+      list-style-type: none;
+      padding-left: 18px;
+      margin: ($size-7 / 2) auto;
+      &:before {
+        font-family: "pittica";
+        content: "\2bc8";
+        color: $primary;
+        font-size: 16px;
+        position: absolute;
+        left: -2px;
+      }
+    }
+    &.page-list {
+      margin-bottom: $size-1;
+      li {
+        &:before {
+          content: "";
+        }
+      }
+    }
+  }
+  .title {
+    font-size: 3.5rem;
+  }
+  .subtitle {
+    font-size: $size-3;
+    margin-bottom: $size-3;
+    a {
+      color: $subtitle-color;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}

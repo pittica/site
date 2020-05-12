@@ -1,0 +1,101 @@
+@import "../../functions";
+@import "../../functions/buttons";
+@import "../../variables";
+
+@include keyframes(article-grid-header) {
+  0% {
+    border-bottom: 0 solid $primary;
+  }
+  25% {
+    border-bottom: 5px solid $grey-darker;
+  }
+  49% {
+    border-bottom: 0 solid $grey-darker;
+  }
+  50% {
+    border-bottom: 0 solid $primary;
+  }
+  100% {
+    border-bottom: 10px solid $primary;
+  }
+}
+
+.article-grid {
+  position: relative;
+  z-index: 3;
+  section {
+    background-color: $white;
+    font-weight: $weight-bold;
+  }
+  @include readmore();
+  .article-grid-header {
+    &:after {
+      content: " ";
+      display: block;
+      width: 100%;
+      height: 90px;
+      background: $white url("/assets/article-bottom.svg") top center repeat-x;
+      background-size: contain;
+      position: relative;
+      z-index: 1;
+    }
+    @include background-cover();
+    overflow: hidden;
+    &:hover {
+      .title {
+        span {
+          @include animate(article-grid-header, 0.5s, 0, ease-in-out);
+        }
+      }
+    }
+    h3 {
+      &.title {
+        margin-bottom: 0;
+        a {
+          display: block;
+          width: 100%;
+          min-height: 280px;
+          overflow: hidden;
+          span {
+            display: block;
+            @include rotate(-3);
+            width: 120%;
+            background-color: $white;
+            color: $grey-darker;
+            display: block;
+            padding: 25px 12%;
+            position: relative;
+            top: -25px;
+            left: -10%;
+            margin-bottom: 90px;
+            strong {
+              display: block;
+              @include rotate(3);
+              position: relative;
+              top: 23px;
+              margin-bottom: 1.5rem;
+              font-size: 1.8rem;
+            }
+          }
+        }
+      }
+    }
+    .date {
+      display: block;
+      background-color: $grey-darker;
+      @include rotate(-3);
+      width: 110%;
+      text-align: right;
+      position: relative;
+      bottom: -16px;
+      small {
+        display: inline-block;
+        @include rotate(3);
+        color: $white;
+        padding: 15px 15% 5px 30px;
+        position: relative;
+        top: -7px;
+      }
+    }
+  }
+}

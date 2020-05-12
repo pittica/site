@@ -1,0 +1,18 @@
+@import "../variables";
+
+.header {
+  margin: ($size-1 * 2) auto $size-2;
+  .title {
+    font-size: $size-1;
+  }
+  .subtitle {
+    font-size: $size-3;
+    margin-bottom: $size-3;
+    a {
+      color: $subtitle-color;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "../functions";
+
+@include keyframes(svg-outline) {
+  0% {
+    fill-opacity: 0;
+    stroke-width: 2px;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    fill-opacity: 0;
+    stroke-width: 2px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+    stroke-width: 0;
+  }
+}
+
+@mixin svg-outline($color, $offset, $duration, $delay: 0s) {
+  stroke: $color;
+  stroke-dasharray: $offset;
+  stroke-dashoffset: $offset;
+  @include animate(svg-outline, $duration, $delay, linear);
+}

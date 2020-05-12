@@ -1,0 +1,60 @@
+@import "../../functions";
+@import "../../variables";
+
+@include keyframes(feature-link) {
+  0% {
+    background-position: -100% 0;
+    @include rotate(4);
+  }
+  100% {
+    background-position: 100% 100%;
+    @include rotate(-2);
+  }
+}
+
+@include keyframes(feature-link-inner) {
+  0% {
+    @include rotate(-4);
+  }
+  100% {
+    @include rotate(2);
+  }
+}
+
+.feature-link {
+  display: inline-block;
+  font-size: $size-2;
+  font-weight: $weight-normal;
+  font-family: $family-secondary;
+  background-color: $primary;
+  color: $primary-invert;
+  padding: $size-4;
+  text-transform: uppercase;
+  letter-spacing: 0.35rem;
+  margin: $size-4;
+  border: 1px solid $primary;
+  @include rotate(4);
+  @include linear-gradient(top, $primary 50%, $primary-invert 50%);
+  @include transition();
+  background-size: 100% 200%;
+  span {
+    display: inline-block;
+    @include rotate(-4);
+    @include transition();
+    &:after {
+      content: "\2bc8";
+      font-family: "pittica";
+      font-size: $size-3;
+      padding-left: $size-5;
+    }
+  }
+  &:hover {
+    background-color: $primary-invert;
+    background-position: 100% 100%;
+    color: $primary;
+    @include rotate(-4);
+    span {
+      @include rotate(4);
+    }
+  }
+}

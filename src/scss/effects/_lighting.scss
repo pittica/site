@@ -1,0 +1,37 @@
+@import "../functions";
+@import "../variables";
+
+$lighting-background: $grey-darker;
+$lighting-accent: $white;
+
+@include keyframes(lighting) {
+  0% {
+    background-color: $lighting-background;
+  }
+  10% {
+    background-color: $lighting-background;
+  }
+  11% {
+    background-color: $lighting-accent;
+  }
+  14% {
+    background-color: $lighting-background;
+  }
+  20% {
+    background-color: $lighting-background;
+  }
+  21% {
+    background-color: $lighting-accent;
+  }
+  24% {
+    background-color: $lighting-background;
+  }
+  104% {
+    background-color: $lighting-background;
+  }
+}
+
+.rain {
+  background-color: $lighting-background;
+  @include animate(lighting, 4.5s, 0, linear, infinite);
+}

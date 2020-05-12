@@ -1,0 +1,36 @@
+@import "../variables";
+@import "../effects/outline";
+
+@import "~bulma/bulma.sass";
+
+.section-container {
+  svg {
+    .outline {
+      @include svg-outline($grey-darker, 1250, 1.5s);
+    }
+  }
+  &.section-right {
+    .section {
+      text-align: right;
+    }
+  }
+  &.section-left {
+    .section {
+      text-align: left;
+    }
+  }
+  .section {
+    padding-top: 0;
+    position: relative;
+    top: -400px;
+    margin-bottom: -350px;
+    @media screen and (max-width: $desktop - 1px) {
+      top: -200px;
+      margin-bottom: -150px;
+    }
+    @media screen and (max-width: $tablet - 1px) {
+      top: -100px;
+      margin-bottom: -50px;
+    }
+  }
+}

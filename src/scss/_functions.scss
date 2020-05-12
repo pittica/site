@@ -1,0 +1,21 @@
+@import "@pittica/scss-functions";
+
+@mixin translate-confusion($name, $x, $y) {
+  @include keyframes($name) {
+    0% {
+      @include translate(0, 0);
+    }
+    50% {
+      @include translate($x, $y);
+    }
+    100% {
+      @include translate(0, 0);
+    }
+  }
+}
+
+@mixin background-cover() {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,84 @@
+@import "../functions";
+@import "../variables";
+
+@include keyframes(airplane-wind) {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.45;
+  }
+  30% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+}
+
+@include keyframes(airplane-position) {
+  0% {
+    left: 0;
+    bottom: 0;
+    @include rotate(0);
+  }
+  20% {
+    left: 20%;
+    bottom: 0;
+    @include rotate(0);
+  }
+  100% {
+    left: 100%;
+    bottom: 30vh;
+    @include rotate(-20);
+  }
+}
+
+@include keyframes(airplane-tires) {
+  0% {
+    @include translate(0, 0);
+  }
+  15% {
+    @include translate(0, 0);
+  }
+  40% {
+    @include translate(-2%, -12%);
+  }
+  100% {
+    @include translate(-2%, -12%);
+  }
+}
+
+.airplane {
+  padding-bottom: 70px;
+  svg {
+    width: 50%;
+    height: auto;
+    position: relative;
+    .airplane-tires {
+      @include translate(0, 0);
+    }
+    .airplane-wind {
+      opacity: 0;
+    }
+  }
+  .children {
+    position: relative;
+    z-index: 2;
+  }
+  .section {
+    padding-bottom: 0;
+  }
+  &.active {
+    svg {
+      @include animate(airplane-position, 5.5s, 0, linear, 1);
+      .airplane-tires {
+        @include animate(airplane-tires, 5.5s, 0, linear, 1);
+      }
+      .airplane-wind {
+        opacity: 0;
+        @include animate(airplane-wind, 5.5s, 0, linear, 1);
+      }
+    }
+  }
+}

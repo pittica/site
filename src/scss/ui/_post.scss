@@ -1,0 +1,58 @@
+@import "../functions";
+@import "../variables";
+
+.blog-post {
+  margin-bottom: ($size-1 * 2);
+  header {
+    @include background-cover();
+    background-attachment: fixed;
+    .hero {
+      padding: 10vh 4%;
+      margin-bottom: $size-2;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+  .post-content {
+    padding: 0.475rem;
+    h1,
+    h3,
+    h4 {
+      margin-bottom: $size-4;
+      font-size: 120%;
+    }
+    h2 {
+      margin-bottom: $size-3;
+      font-size: 150%;
+      border-bottom: 0.125rem solid $primary;
+      padding: ($size-4 / 2);
+    }
+    p {
+      margin: $size-7 auto;
+    }
+    img {
+      margin: $size-4 auto;
+    }
+    ul {
+      li {
+        list-style-type: square;
+        ol {
+          li {
+            list-style-type: lower-alpha;
+          }
+        }
+      }
+    }
+  }
+}
+.bottom-nav {
+  &.post-nav {
+    ul {
+      justify-content: space-between;
+      a {
+        i {
+          padding: 0 0.125rem;
+        }
+      }
+    }
+  }
+}

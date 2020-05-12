@@ -1,0 +1,137 @@
+import React from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
+import Sign from "./ui/sign"
+import PrivacyLink from "./ui/link/privacy-link"
+
+import "../scss/ui/_footer.scss"
+
+const Footer = () => {
+  const { site } = useStaticQuery(
+    graphql`
+        query {
+          site {
+            siteMetadata {
+              organization {
+                company
+                address
+                zipCode
+                city
+                province
+                country
+                email
+                taxId
+                vatId
+                registryId
+              }
+              legal {
+                privacy
+                terms
+                cookies
+              }
+              social {
+                linkedin {
+                  page
+                }
+                github {
+                  username
+                }
+                facebook {
+                  page
+                }
+              }
+              appearance {
+                accent
+                background
+                theme
+              }
+            }
+          }
+        }
+      `
+  )
+  const owner = site.siteMetadata.organization
+  const appearance = site.siteMetadata.appearance
+  const social = site.siteMetadata.social
+  const legal = site.siteMetadata.legal
+
+  let tax = null
+  let email = null
+
+  if (owner.taxId === owner.vatId) {
+    tax = (<div><span className="has-text-primary">Codice Fiscale / Partita IVA</span> {owner.vatId}</div>)
+  } else {
+    tax = (
+      <>
+        <div><span className="has-text-primary">Codice Fiscale</span> {owner.taxId}</div>
+        <div><span className="has-text-primary">Partita IVA</span> {owner.vatId}</div>
+      </>
+    )
+  }
+
+  if (owner.email) {
+    email = (<div><span className="has-text-primary">E-Mail</span> <a href={"mailto:" + owner.email}>{owner.email}</a></div>)
+  }
+
+  return (
+    <footer className="footer">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-one-fifths">
+            <Sign color={appearance.background} />
+          </div>
+          <div className="column is-two-fifths">
+            <h3>{owner.company}</h3>
+            <div className="bracket-group">
+              <div className="icon">
+                <i className="icon-pittica-marker"></i>
+              </div>
+              {owner.address}<br />
+              {owner.zipCode} {owner.city} ({owner.province})<br />
+              {owner.country}
+            </div>
+            {tax}
+            <div><span className="has-text-primary">REA</span> {owner.registryId}</div>
+            {email}
+          </div>
+          <div className="column is-one-fifths">
+            <ul>
+              <li>
+                <PrivacyLink />
+              </li>
+              <li>
+                <Link to={legal.cookies}>Politica sui Cookie</Link>
+              </li>
+              <li>
+                <Link to={legal.terms}>Termini e Condizioni</Link>
+              </li>
+              <li>
+                <Link to={'/legal'}>Note Legali</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="column is-one-fifths">
+            <h2>Seguici</h2>
+            <ul className="social-follow">
+              <li>
+                <a href={"https://www.linkedin.com/company/" + social.linkedin.page + "/"} title="LinkedIn"><i className="icon-pittica-linkedin"></i></a>
+              </li>
+              <li>
+                <a href={"https://github.com/" + social.github.username} title="GitHub"><i className="icon-pittica-github"></i></a>
+              </li>
+              <li>
+                <a href={"https://www.facebook.com/" + social.facebook.page + "/"} title="Facebook"><i className="icon-pittica-facebook"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column is-five-fifths">
+            © {new Date().getFullYear()}, {owner.company}
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+export default Footer
