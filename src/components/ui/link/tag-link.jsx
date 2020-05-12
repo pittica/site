@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "gatsby"
-import { pathify } from "gatsby-plugin-tags/internals"
 import slugify from "slug"
+import { pathify } from "../../../utils/pathify"
 
 import "../../../scss/ui/link/_tag-link.scss"
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "gatsby"
-import { pathify } from "../../../utils/pathify"
 import slugify from "slug"
+import { pathify } from "../../../utils/pathify"
 
 export default class CategoryLink extends Component {
   render() {

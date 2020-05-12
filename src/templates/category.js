@@ -30,9 +30,10 @@ const CategoryTemplate = ({ location, pageContext, data }) => {
 }
 
 export const pageQuery = graphql`
-  query CategoryTemplate($category: String) {
+  query CategoryTemplate($category: String, $limit: Int!, $skip: Int!) {
     allMarkdownRemark(
-      limit: 1000
+      limit: $limit
+      skip: $skip
       filter: { fields: { category: { eq: $category } } }
     ) {
       group(field: frontmatter___category) {
