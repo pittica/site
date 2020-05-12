@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import { Link, graphql } from "gatsby"
 
 import PostLayout from "../components/post-layout"
@@ -8,7 +8,7 @@ import ArticleHeader from "../components/ui/article/article-header"
 
 import "../scss/ui/_post.scss"
 
-class BlogPostTemplate extends React.Component {
+export default class BlogPostTemplate extends Component {
   render() {
     const post = this.props.data.markdownRemark
     const { previous, next } = this.props.pageContext
@@ -77,8 +77,6 @@ class BlogPostTemplate extends React.Component {
   }
 }
 
-export default BlogPostTemplate
-
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
@@ -87,7 +85,7 @@ export const pageQuery = graphql`
         author
       }
     }
-    markdownRemark(fields: {slug: {eq: $slug } }) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
       html

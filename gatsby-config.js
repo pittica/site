@@ -48,7 +48,7 @@ module.exports = {
       theme: `#1d1d1d`
     },
     seo: {
-      image: `/assets/icons/pittica-512x512.jpg`
+      image: `/share.jpg`
     }
   },
   plugins: [
@@ -233,12 +233,6 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
-    {
-      resolve: "gatsby-plugin-categories",
-      options: {
-        templatePath: `${__dirname}/src/templates/category.js`,
-      },
-    },
     {
       resolve: "gatsby-plugin-tags",
       options: {

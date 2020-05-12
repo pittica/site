@@ -1,12 +1,12 @@
-import React from "react"
+import React, { Component } from "react"
 import { Link, graphql } from "gatsby"
-import { pathify } from "gatsby-plugin-categories/internals"
+import { pathify } from "../utils/pathify"
 import slugify from "slug"
 import PropTypes from "prop-types"
 import Layout from "../components/layout"
 import Section from "../components/ui/section"
 
-class CategoriesPage extends React.Component {
+export default class CategoriesPage extends Component {
   render() {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
@@ -30,8 +30,6 @@ class CategoriesPage extends React.Component {
     )
   }
 }
-
-export default CategoriesPage
 
 CategoriesPage.propTypes = {
   data: PropTypes.shape({
