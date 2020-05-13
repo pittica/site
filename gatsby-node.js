@@ -91,6 +91,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   const categories = []
+  const tags = []
 
   posts.data.allMarkdownRemark.edges.forEach((post) => {
     if (post.node.frontmatter.category instanceof Array) {
@@ -107,6 +108,22 @@ exports.createPages = async ({ graphql, actions }) => {
       }
 
       categories[post.node.frontmatter.category].push(post)
+    }
+
+    if (post.node.frontmatter.tags instanceof Array) {
+      post.node.frontmatter.tags.forEach((tag) => {
+        if (!(tag in tags)) {
+          tags[tag] = []
+        }
+
+        tags[tag].push(post)
+      })
+    } else {
+      if (!(post.node.frontmatter.tags in tags)) {
+        tags[post.node.frontmatter.tags] = []
+      }
+
+      tags[post.node.frontmatter.tags].push(post)
     }
   })
 
@@ -125,6 +142,26 @@ exports.createPages = async ({ graphql, actions }) => {
           currentPage: i + 1,
           slug: c,
           category: category
+        }
+      })
+    })
+  })
+
+  Object.keys(tags).forEach((tag) => {
+    const c = slugify(tag, { lower: true })
+    const length = Math.ceil(tags[tag].length / postsPerPage)
+
+    Array.from({ length: length }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/tags/${c}` : `/tags/${c}/${i + 1}`,
+        component: path.resolve("./src/templates/tag.js"),
+        context: {
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          numPages: length,
+          currentPage: i + 1,
+          slug: c,
+          tag: tag
         }
       })
     })
@@ -234,7 +271,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     if (node.frontmatter.category) {
       if (node.frontmatter.category instanceof Array) {
         node.frontmatter.category.forEach((category) => {
-          categories.push(slugify(category, { lower: true }))
+          categories.push(category, { lower: true })
         })
       } else {
         categories.push(node.frontmatter.category)
@@ -245,6 +282,24 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: `category`,
       node,
       value: categories
+    })
+
+    const tags = []
+
+    if (node.frontmatter.tags) {
+      if (node.frontmatter.tags instanceof Array) {
+        node.frontmatter.tags.forEach((tag) => {
+          tags.push(tag)
+        })
+      } else {
+        tags.push(node.frontmatter.tags)
+      }
+    }
+
+    createNodeField({
+      name: `tags`,
+      node,
+      value: tags
     })
   }
 }

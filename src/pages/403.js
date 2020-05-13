@@ -1,6 +1,6 @@
 import React from "react"
 
-import ErrorLayout from "../components/error-layout"
+import ErrorLayout from "../components/layout/error-layout"
 
 import image from "../../static/assets/404.svg"
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import PostLayout from "../components/post-layout"
+import PostLayout from "../components/layout/post-layout"
 import ArticleHeader from "../components/ui/article/article-header"
 
 import "../scss/ui/_post.scss"

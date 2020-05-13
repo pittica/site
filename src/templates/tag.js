@@ -1,7 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
+import EmptyLayout from "../components/layout/empty-layout"
 import Section from "../components/ui/section"
 import Article from "../components/ui/article/article-grid"
 
@@ -25,14 +26,20 @@ const TagTemplate = ({ location, pageContext, data }) => {
       </Layout>
     )
   } else {
-    return null
+    return (
+      <EmptyLayout location={location} title="Tag" value={tag}>
+        Nessun Post Trovato
+      </EmptyLayout>
+    )
   }
 }
 
 export const pageQuery = graphql`
-  query TagTemplate($tag: String) {
+  query TagTemplate($tag: String, $limit: Int!, $skip: Int!) {
     allMarkdownRemark(
-      limit: 2000
+      limit: $limit
+      skip: $skip
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { tags: { in: [$tag] } } }
     ) {
       group(field: frontmatter___tags) {

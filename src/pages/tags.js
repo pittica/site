@@ -1,9 +1,9 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { pathify } from "gatsby-plugin-tags/internals"
+import { pathify } from "../utils/pathify"
 import slugify from "slug"
 import PropTypes from "prop-types"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import Section from "../components/ui/section"
 
 class TagsPage extends React.Component {

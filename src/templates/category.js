@@ -1,7 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
+import EmptyLayout from "../components/layout/empty-layout"
 import Section from "../components/ui/section"
 import Article from "../components/ui/article/article-grid"
 
@@ -25,7 +26,11 @@ const CategoryTemplate = ({ location, pageContext, data }) => {
       </Layout>
     )
   } else {
-    return null
+    return (
+      <EmptyLayout location={location} title="Categoria" value={category}>
+        Nessun Post Trovato
+      </EmptyLayout>
+    )
   }
 }
 
@@ -34,7 +39,8 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       limit: $limit
       skip: $skip
-      filter: { fields: { category: { eq: $category } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fields: { category: { in: [$category] } } }
     ) {
       group(field: frontmatter___category) {
         fieldValue

@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link, graphql } from "gatsby"
 
-import PostLayout from "../components/post-layout"
+import PostLayout from "../components/layout/post-layout"
 import TagLink from "../components/ui/link/tag-link"
 import CategoryLink from "../components/ui/link/category-link"
 import ArticleHeader from "../components/ui/article/article-header"

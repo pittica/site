@@ -27,6 +27,7 @@ main {
     width: 200%;
     height: 100px;
     background: $footer-color;
+    z-index: -1;
     @include rotate(2);
   }
 }

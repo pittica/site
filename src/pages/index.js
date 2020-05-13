@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import About from "../components/sections/about"
 import Blog from "../components/sections/blog"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 
 export default class BlogIndex extends React.Component {
   render() {

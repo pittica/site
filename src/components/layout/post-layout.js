@@ -1,7 +1,7 @@
 import React from "react"
-import Header from "./header"
-import Footer from "./footer"
-import SEO from "../components/seo/seo"
+import Header from "../header"
+import Footer from "../footer"
+import SEO from "../seo/seo"
 
 export default class PostLayout extends React.Component {
   render() {

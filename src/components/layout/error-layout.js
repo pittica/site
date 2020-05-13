@@ -1,7 +1,7 @@
 import React from "react"
-import Layout from "../components/layout"
-import Hero from "../components/ui/hero"
-import Rain from "../components/ui/gfx/rain"
+import Layout from "./layout"
+import Hero from "../ui/hero"
+import Rain from "../ui/gfx/rain"
 
 export default class ErrorLayout extends React.Component {
   render() {

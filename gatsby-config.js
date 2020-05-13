@@ -233,12 +233,6 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
-    {
-      resolve: "gatsby-plugin-tags",
-      options: {
-        templatePath: `${__dirname}/src/templates/tag.js`,
-      },
-    },
     `gatsby-plugin-offline`,
     {
       resolve: 'gatsby-plugin-preconnect',
