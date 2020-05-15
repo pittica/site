@@ -90,7 +90,7 @@ const SEO = ({ postData, frontmatter = {}, image, isBlogPost, title, path = '' }
       )
     }}
   />
-);
+)
 
 SEO.propTypes = {
   isBlogPost: PropTypes.bool,
@@ -102,13 +102,13 @@ SEO.propTypes = {
   }),
   image: PropTypes.string,
   title: PropTypes.string
-};
+}
 
 SEO.defaultProps = {
   isBlogPost: false,
   postData: { childMarkdownRemark: {} },
   image: null,
   title: null
-};
+}
 
-export default SEO;
+export default SEO

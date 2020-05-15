@@ -1,7 +1,9 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
+import { TrustpilotReviews } from "@pittica/gatsby-plugin-trustpilot-widget"
 import Sign from "./ui/sign"
 import PrivacyLink from "./ui/link/privacy-link"
+import Section from "./ui/section"
 
 import "../scss/ui/_footer.scss"
 
@@ -22,6 +24,10 @@ const Footer = () => {
                 taxId
                 vatId
                 registryId
+              }
+              locale {
+                language
+                culture
               }
               legal {
                 privacy
@@ -49,6 +55,7 @@ const Footer = () => {
         }
       `
   )
+
   const owner = site.siteMetadata.organization
   const appearance = site.siteMetadata.appearance
   const social = site.siteMetadata.social
@@ -122,6 +129,17 @@ const Footer = () => {
                 <a href={"https://www.facebook.com/" + social.facebook.page + "/"} title="Facebook"><i className="icon-pittica-facebook"></i></a>
               </li>
             </ul>
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column is-five-fifths">
+            <Section>
+              <TrustpilotReviews
+                language={site.siteMetadata.locale.language}
+                culture={site.siteMetadata.locale.culture}
+                theme="dark"
+              />
+            </Section>
           </div>
         </div>
         <div className="columns">

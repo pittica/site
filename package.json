@@ -1,13 +1,14 @@
 {
   "name": "pittica",
   "private": true,
-  "description": "pittica.com website",
+  "description": "pittica.com website.",
   "version": "1.0.0",
   "author": "Lucio Benini <info@pittica.com>",
   "bugs": {
     "url": "https://github.com/pittica/site/issues"
   },
   "dependencies": {
+    "@pittica/gatsby-plugin-trustpilot-widget": "^1.0.1",
     "@pittica/scss-functions": "^1.1.0",
     "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.6",
@@ -43,6 +44,7 @@
     "react-dom": "^16.13.1",
     "react-helmet": "^5.2.1",
     "react-typography": "^0.16.19",
+    "slug": "^2.1.1",
     "styled-components": "^5.1.0",
     "typography": "^0.16.19"
   },

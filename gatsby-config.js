@@ -243,6 +243,14 @@ module.exports = {
           { domain: 'https://www.google-analytics.com', crossOrigin: true }
         ]
       }
+    },
+    {
+      resolve: `@pittica/gatsby-plugin-trustpilot-widget`,
+      options: {
+        username: "pittica.com",
+        template: "5419b6a8b0d04a076446a9ad",
+        business: "5eaf034c658436000194e69b"
+      }
     }
   ]
 }

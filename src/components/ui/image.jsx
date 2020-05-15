@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import classNames from "classnames"
 
-class Image extends Component {
+export default class Image extends Component {
   render() {
     const className = {
       image: true
@@ -38,5 +38,3 @@ class Image extends Component {
     )
   }
 }
-
-export default Image

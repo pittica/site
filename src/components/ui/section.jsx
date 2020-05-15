@@ -3,7 +3,7 @@ import SectionTitle from "./section-title"
 
 import "../../scss/ui/_section.scss"
 
-class Section extends Component {
+export default class Section extends Component {
   render() {
     return (
       <section className="section">
@@ -17,5 +17,3 @@ class Section extends Component {
     )
   }
 }
-
-export default Section
