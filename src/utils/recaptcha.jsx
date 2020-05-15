@@ -13,10 +13,12 @@ export const ReCaptchaLoader = () => {
 }
 
 export const ReCaptchaUnloader = () => {
-  document.body.removeChild(document.getElementById("grecaptcha-lib"))
+  if (typeof document !== "undefined") {
+    document.body.removeChild(document.getElementById("grecaptcha-lib"))
 
-  if (IsReady()) {
-    delete window.grecaptcha
+    if (IsReady()) {
+      delete window.grecaptcha
+    }
   }
 }
 
