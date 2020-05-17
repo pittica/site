@@ -1,10 +1,9 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-import { pathify } from "../utils/pathify"
-import slugify from "slug"
+import { graphql } from "gatsby"
 import PropTypes from "prop-types"
 import Layout from "../components/layout/layout"
 import Section from "../components/ui/section"
+import TagLink from "../components/ui/link/tag-link"
 
 class TagsPage extends React.Component {
   render() {
@@ -18,9 +17,7 @@ class TagsPage extends React.Component {
             {data.allMarkdownRemark.group.map((node, index) => {
               return (
                 <li key={"tag-" + index}>
-                  <Link to={pathify('tags', slugify(node.fieldValue, { lower: true }))}>
-                    <i className="icon-pittica-tag"></i> {node.fieldValue} ({node.totalCount})
-                  </Link>
+                  <TagLink tag={node.fieldValue} /> ({node.totalCount})
                 </li>
               )
             })}

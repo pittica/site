@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import { TrustpilotReviews } from "@pittica/gatsby-plugin-trustpilot-widget"
+import TrustpilotReviews from "@pittica/gatsby-plugin-trustpilot-widget"
 import Sign from "./ui/sign"
 import PrivacyLink from "./ui/link/privacy-link"
 import Section from "./ui/section"

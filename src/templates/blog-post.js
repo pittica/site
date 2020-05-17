@@ -14,6 +14,21 @@ export default class BlogPostTemplate extends Component {
     const { previous, next } = this.props.pageContext
     const image = post.frontmatter.featuredImage ? post.frontmatter.featuredImage.childImageSharp.sizes.src : null
 
+    let categories
+    let tags
+
+    if (post.frontmatter.categories instanceof Array) {
+      categories = post.frontmatter.categories
+    } else {
+      categories = [post.frontmatter.categories]
+    }
+
+    if (post.frontmatter.tags instanceof Array) {
+      tags = post.frontmatter.tags
+    } else {
+      tags = [post.frontmatter.tags]
+    }
+
     return (
       <PostLayout
         title={post.frontmatter.title}
@@ -32,18 +47,18 @@ export default class BlogPostTemplate extends Component {
                   <h2 className="subtitle">
                     <i className="icon-pittica-clock"></i> {post.frontmatter.date}
                   </h2>
-                  {post.frontmatter.category && (
-                    <h2 className="subtitle" title="Categoria">
-                      <CategoryLink category={post.frontmatter.category} />
+                  {categories.map((category, index) => (
+                    <h2 className="subtitle" title="Categoria" key={"category" + index}>
+                      <CategoryLink category={category} />
                     </h2>
-                  )}
+                  ))}
                 </div>
               </div>
             </section>
           </ArticleHeader>
-          {post.frontmatter.tags && (
+          {tags.length > 0 && (
             <div className="container">
-              {post.frontmatter.tags.map((tag, index) => (
+              {tags.map((tag, index) => (
                 <TagLink tag={tag} key={"tag" + index} />
               ))}
             </div>
@@ -93,7 +108,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "DD/MM/YYYY")
         description
-        category
+        categories
         tags
         featuredImage {
           childImageSharp {

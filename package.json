@@ -8,7 +8,8 @@
     "url": "https://github.com/pittica/site/issues"
   },
   "dependencies": {
-    "@pittica/gatsby-plugin-trustpilot-widget": "^1.0.1",
+    "@pittica/gatsby-plugin-trustpilot-widget": "^1.0.4",
+    "@pittica/gatsby-plugin-blog": "^1.0.0",
     "@pittica/scss-functions": "^1.1.0",
     "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.6",

@@ -1,10 +1,9 @@
 import React, { Component } from "react"
-import { Link, graphql } from "gatsby"
-import { pathify } from "../utils/pathify"
-import slugify from "slug"
+import { graphql } from "gatsby"
 import PropTypes from "prop-types"
 import Layout from "../components/layout/layout"
 import Section from "../components/ui/section"
+import CategoryLink from "../components/ui/link/category-link"
 
 export default class CategoriesPage extends Component {
   render() {
@@ -18,9 +17,7 @@ export default class CategoriesPage extends Component {
             {data.allMarkdownRemark.group.map((node, index) => {
               return (
                 <li key={"category-" + index}>
-                  <Link to={pathify('category', slugify(node.fieldValue, { lower: true }))}>
-                    <i className="icon-pittica-folder"></i> {node.fieldValue} ({node.totalCount})
-                  </Link>
+                  <CategoryLink category={node.fieldValue} /> ({node.totalCount})
                 </li>
               )
             })}
@@ -57,7 +54,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(limit: 2000) {
-      group(field: frontmatter___category) {
+      group(field: frontmatter___categories) {
         fieldValue
         totalCount
       }

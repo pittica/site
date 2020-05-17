@@ -251,6 +251,15 @@ module.exports = {
         template: "5419b6a8b0d04a076446a9ad",
         business: "5eaf034c658436000194e69b"
       }
+    },
+    {
+      resolve: `@pittica/gatsby-plugin-blog`,
+      options: {
+        postsPerPage: 15,
+        templateCategory: "./src/templates/category.js",
+        templateTag: "./src/templates/tag.js",
+        regex: "/^\/(blog)\//s"
+      }
     }
   ]
 }

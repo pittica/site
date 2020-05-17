@@ -1,11 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import { Paginator } from "@pittica/gatsby-plugin-blog"
+
 import Layout from "../components/layout/layout"
 import Header from "../components/ui/header"
 import Section from "../components/ui/section"
 import PageGrid from "../components/ui/article/page-grid"
-import { navigator } from "../utils/paginator"
 
 import pages from "../data/pages.json"
 
@@ -27,7 +28,7 @@ export default class PagesList extends React.Component {
             })}
           </div>
         </Section>
-        {navigator(pageContext)}
+        <Paginator context={pageContext} className="bottom-nav" />
       </Layout>
     )
   }
