@@ -1,12 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import PostLayout from "../components/layout/post-layout"
-import ArticleHeader from "../components/ui/article/article-header"
+import PostLayout from "../../components/layout/post-layout"
+import ArticleHeader from "../../components/ui/article/article-header"
 
-import "../scss/ui/_post.scss"
+import "../../scss/ui/_post.scss"
 
-class DefaultPostTemplate extends React.Component {
+export default class LegalPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
 
@@ -40,10 +40,8 @@ class DefaultPostTemplate extends React.Component {
   }
 }
 
-export default DefaultPostTemplate
-
 export const pageQuery = graphql`
-  query DefaultPostBySlug($slug: String!) {
+  query LegalPostTemplate($slug: String!) {
     site {
       siteMetadata {
         title

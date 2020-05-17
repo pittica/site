@@ -3,14 +3,14 @@ import { graphql } from "gatsby"
 
 import { Paginator } from "@pittica/gatsby-plugin-blog"
 
-import Layout from "../components/layout/layout"
-import Header from "../components/ui/header"
-import Section from "../components/ui/section"
-import PageGrid from "../components/ui/article/page-grid"
+import Layout from "../../components/layout/layout"
+import Header from "../../components/ui/header"
+import Section from "../../components/ui/section"
+import PageGrid from "../../components/ui/article/page-grid"
 
-import pages from "../data/pages.json"
+import pages from "../../data/pages.json"
 
-export default class PagesList extends React.Component {
+export default class LegalListTemplate extends React.Component {
   render() {
     const { data, pageContext } = this.props
 
@@ -35,7 +35,7 @@ export default class PagesList extends React.Component {
 }
 
 export const pageQuery = graphql`
-  query pagesListQuery($skip: Int!, $limit: Int!, $regex: String!) {
+  query LegalListTemplate($skip: Int!, $limit: Int!, $regex: String!) {
     site {
       siteMetadata {
         title
