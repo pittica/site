@@ -212,7 +212,6 @@ module.exports = {
                 siteUrl
               }
             }
-  
             allSitePage {
               edges {
                 node {
