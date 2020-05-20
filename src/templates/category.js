@@ -10,7 +10,7 @@ import Article from "../components/ui/article/article-grid"
 
 const CategoryTemplate = ({ location, pageContext, data }) => {
   const { name } = pageContext
-  
+
   if (data.allMarkdownRemark.edges.length > 0) {
     return (
       <Layout location={location} title={`Categoria "${name}"`}>
