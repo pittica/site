@@ -8,7 +8,7 @@ import Section from "./ui/section"
 import "../scss/ui/_footer.scss"
 
 const Footer = () => {
-  const { site } = useStaticQuery(
+  const { site, siteBuildMetadata } = useStaticQuery(
     graphql`
         query {
           site {
@@ -34,21 +34,35 @@ const Footer = () => {
                 terms
                 cookies
               }
-              social {
-                linkedin {
-                  page
-                }
-                github {
-                  username
-                }
-                facebook {
-                  page
-                }
-              }
               appearance {
                 accent
                 background
                 theme
+              }
+            }
+          }
+          siteBuildMetadata {
+            fields {
+              seo {
+                socials {
+                  twitter {
+                    username
+                    site
+                  }
+                  linkedin {
+                    page
+                  }
+                  github {
+                    username
+                  }
+                  instagram {
+                    username
+                  }
+                  facebook {
+                    page
+                    app
+                  }
+                }
               }
             }
           }
@@ -58,7 +72,7 @@ const Footer = () => {
 
   const owner = site.siteMetadata.organization
   const appearance = site.siteMetadata.appearance
-  const social = site.siteMetadata.social
+  const socials = siteBuildMetadata.fields.seo.socials
   const legal = site.siteMetadata.legal
 
   let tax = null
@@ -120,13 +134,13 @@ const Footer = () => {
             <h2>Seguici</h2>
             <ul className="social-follow">
               <li>
-                <a href={"https://www.linkedin.com/company/" + social.linkedin.page + "/"} title="LinkedIn"><i className="icon-pittica-linkedin"></i></a>
+                <a href={"https://www.linkedin.com/company/" + socials.linkedin.page + "/"} title="LinkedIn"><i className="icon-pittica-linkedin"></i></a>
               </li>
               <li>
-                <a href={"https://github.com/" + social.github.username} title="GitHub"><i className="icon-pittica-github"></i></a>
+                <a href={"https://github.com/" + socials.github.username} title="GitHub"><i className="icon-pittica-github"></i></a>
               </li>
               <li>
-                <a href={"https://www.facebook.com/" + social.facebook.page + "/"} title="Facebook"><i className="icon-pittica-facebook"></i></a>
+                <a href={"https://www.facebook.com/" + socials.facebook.page + "/"} title="Facebook"><i className="icon-pittica-facebook"></i></a>
               </li>
             </ul>
           </div>

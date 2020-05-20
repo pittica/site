@@ -1,7 +1,7 @@
 import React from "react"
 import Header from "../header"
 import Footer from "../footer"
-import SEO from "../seo/seo"
+import { SEO } from "@pittica/gatsby-plugin-seo"
 
 export default class PostLayout extends React.Component {
   render() {

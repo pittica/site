@@ -8,21 +8,6 @@ module.exports = {
       culture: `IT`
     },
     siteUrl: `https://pittica.com/`,
-    social: {
-      twitter: {
-        username: "PitticaDigital"
-      },
-      github: {
-        username: `pittica`
-      },
-      facebook: {
-        page: `PitticaDigital`,
-        app: `600384224115787`
-      },
-      linkedin: {
-        page: `pittica`
-      },
-    },
     legal: {
       privacy: '/legal/privacy',
       terms: '/legal/tos',
@@ -46,9 +31,6 @@ module.exports = {
       accent: `#cc151a`,
       background: `#ffffff`,
       theme: `#1d1d1d`
-    },
-    seo: {
-      image: `/share.jpg`
     }
   },
   plugins: [
@@ -259,6 +241,27 @@ module.exports = {
         templateTag: "./src/templates/tag.js",
         templateArticle: "./src/templates/blog-post.js",
         regex: "/^\/(blog)\//s"
+      }
+    },
+    {
+      resolve: `@pittica/gatsby-plugin-seo`,
+      options: {
+        image: `/share.jpg`,
+        socials: {
+          twitter: {
+            username: "PitticaDigital"
+          },
+          github: {
+            username: `pittica`
+          },
+          facebook: {
+            page: `PitticaDigital`,
+            app: `600384224115787`
+          },
+          linkedin: {
+            page: `pittica`
+          }
+        }
       }
     }
   ]
