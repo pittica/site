@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import ReCaptcha, { ReCaptchaLoader } from "../utils/recaptcha"
+import ReCaptcha, { Loader } from "@pittica/gatsby-plugin-recaptcha"
 import axios from "axios"
 import classNames from "classnames"
 import Layout from "../components/layout/layout"
@@ -29,7 +29,7 @@ class ContactPage extends React.Component {
       message: ""
     }
 
-    ReCaptchaLoader()
+    Loader()
   }
 
   handleClick = () => {
@@ -133,7 +133,7 @@ class ContactPage extends React.Component {
                     <ReCaptcha
                       action="homepage"
                       sitekey="6Ldq-_UUAAAAACZQEpZvFdd2QkwzQxvdHsVpEKVA"
-                      verifyCallback={this.verifyCallback}
+                      callback={this.verifyCallback}
                     />
                   </div>
                   <div className="column">
