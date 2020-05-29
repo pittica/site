@@ -33,5 +33,7 @@ $lighting-accent: $white;
 
 .rain {
   background-color: $lighting-background;
+  position: relative;
+  z-index: -1;
   @include animate(lighting, 4.5s, 0, linear, infinite);
 }
