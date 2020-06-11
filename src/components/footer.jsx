@@ -146,7 +146,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="columns">
-          <div className="column is-five-fifths">
+          <div className="column">
             <Section>
               <TrustpilotReviews
                 language={site.siteMetadata.locale.language}

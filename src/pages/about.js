@@ -4,6 +4,8 @@ import Layout from "../components/layout/layout"
 import Section from "../components/ui/section"
 import Technologies from "../components/sections/technologies"
 
+import Partners from "../components/sections/partners"
+
 import about from "../../static/assets/about.svg"
 import breaker from "../../static/assets/about-breaker.svg"
 
@@ -126,6 +128,9 @@ class AboutPage extends React.Component {
               title: "WordPress"
             }
           ]} />
+        </Section>
+        <Section title="Partner" subtitle="Partner e Associazioni">
+          <Partners />
         </Section>
       </Layout>
     )

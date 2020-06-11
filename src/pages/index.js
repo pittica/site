@@ -3,7 +3,9 @@ import { graphql } from "gatsby"
 
 import About from "../components/sections/about"
 import Blog from "../components/sections/blog"
+import Partners from "../components/sections/partners"
 import Layout from "../components/layout/layout"
+import Section from "../components/ui/section"
 
 export default class BlogIndex extends React.Component {
   render() {
@@ -14,6 +16,9 @@ export default class BlogIndex extends React.Component {
       <Layout location={this.props.location}>
         <About />
         <Blog posts={posts} />
+        <Section>
+          <Partners />
+        </Section>
       </Layout>
     )
   }
