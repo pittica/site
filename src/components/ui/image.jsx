@@ -4,7 +4,7 @@ import classNames from "classnames"
 export default class Image extends Component {
   render() {
     const className = {
-      image: true
+      image: true,
     }
 
     switch (this.props.size) {
@@ -29,12 +29,20 @@ export default class Image extends Component {
       case 128:
         className["is-128x128"] = true
         break
+      case 128:
+        className["is-128x128"] = true
+        break
       default:
         break
     }
 
     return (
-      <img src={this.props.src} alt={this.props.title} title={this.props.title} className={classNames(className)} />
+      <img
+        src={this.props.src}
+        alt={this.props.title}
+        title={this.props.title}
+        className={classNames(className)}
+      />
     )
   }
 }

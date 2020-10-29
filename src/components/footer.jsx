@@ -10,64 +10,64 @@ import "../scss/ui/_footer.scss"
 const Footer = () => {
   const { site, siteBuildMetadata } = useStaticQuery(
     graphql`
-        query {
-          site {
-            siteMetadata {
-              organization {
-                company
-                address
-                zipCode
-                city
-                province
-                country
-                email
-                taxId
-                vatId
-                registryId
-              }
-              locale {
-                language
-                culture
-              }
-              legal {
-                privacy
-                terms
-                cookies
-              }
-              appearance {
-                accent
-                background
-                theme
-              }
+      query {
+        site {
+          siteMetadata {
+            organization {
+              company
+              address
+              zipCode
+              city
+              province
+              country
+              email
+              taxId
+              vatId
+              registryId
+            }
+            locale {
+              language
+              culture
+            }
+            legal {
+              privacy
+              terms
+              cookies
+            }
+            appearance {
+              accent
+              background
+              theme
             }
           }
-          siteBuildMetadata {
-            fields {
-              seo {
-                socials {
-                  twitter {
-                    username
-                    site
-                  }
-                  linkedin {
-                    page
-                  }
-                  github {
-                    username
-                  }
-                  instagram {
-                    username
-                  }
-                  facebook {
-                    page
-                    app
-                  }
+        }
+        siteBuildMetadata {
+          fields {
+            seo {
+              socials {
+                twitter {
+                  username
+                  site
+                }
+                linkedin {
+                  page
+                }
+                github {
+                  username
+                }
+                instagram {
+                  username
+                }
+                facebook {
+                  page
+                  app
                 }
               }
             }
           }
         }
-      `
+      }
+    `
   )
 
   const owner = site.siteMetadata.organization
@@ -79,18 +79,32 @@ const Footer = () => {
   let email = null
 
   if (owner.taxId === owner.vatId) {
-    tax = (<div><span className="has-text-primary">Codice Fiscale / Partita IVA</span> {owner.vatId}</div>)
+    tax = (
+      <div>
+        <span className="has-text-primary">Codice Fiscale / Partita IVA</span>{" "}
+        {owner.vatId}
+      </div>
+    )
   } else {
     tax = (
       <>
-        <div><span className="has-text-primary">Codice Fiscale</span> {owner.taxId}</div>
-        <div><span className="has-text-primary">Partita IVA</span> {owner.vatId}</div>
+        <div>
+          <span className="has-text-primary">Codice Fiscale</span> {owner.taxId}
+        </div>
+        <div>
+          <span className="has-text-primary">Partita IVA</span> {owner.vatId}
+        </div>
       </>
     )
   }
 
   if (owner.email) {
-    email = (<div><span className="has-text-primary">E-Mail</span> <a href={"mailto:" + owner.email}>{owner.email}</a></div>)
+    email = (
+      <div>
+        <span className="has-text-primary">E-Mail</span>{" "}
+        <a href={"mailto:" + owner.email}>{owner.email}</a>
+      </div>
+    )
   }
 
   return (
@@ -106,12 +120,15 @@ const Footer = () => {
               <div className="icon">
                 <i className="icon-pittica-marker"></i>
               </div>
-              {owner.address}<br />
+              {owner.address}
+              <br />
               {owner.zipCode} {owner.city} ({owner.province})<br />
               {owner.country}
             </div>
             {tax}
-            <div><span className="has-text-primary">REA</span> {owner.registryId}</div>
+            <div>
+              <span className="has-text-primary">REA</span> {owner.registryId}
+            </div>
             {email}
           </div>
           <div className="column is-one-fifths">
@@ -126,7 +143,7 @@ const Footer = () => {
                 <Link to={legal.terms}>Termini e Condizioni</Link>
               </li>
               <li>
-                <Link to={'/legal'}>Note Legali</Link>
+                <Link to={"/legal"}>Note Legali</Link>
               </li>
             </ul>
           </div>
@@ -134,13 +151,35 @@ const Footer = () => {
             <h2>Seguici</h2>
             <ul className="social-follow">
               <li>
-                <a href={"https://www.linkedin.com/company/" + socials.linkedin.page + "/"} title="LinkedIn"><i className="icon-pittica-linkedin"></i></a>
+                <a
+                  href={
+                    "https://www.linkedin.com/company/" + socials.linkedin.page
+                  }
+                  title="LinkedIn"
+                >
+                  <i className="icon-pittica-linkedin"></i>
+                  <span>LinkedIn</span>
+                </a>
               </li>
               <li>
-                <a href={"https://github.com/" + socials.github.username} title="GitHub"><i className="icon-pittica-github"></i></a>
+                <a
+                  href={"https://github.com/" + socials.github.username}
+                  title="GitHub"
+                >
+                  <i className="icon-pittica-github"></i>
+                  <span>GitHub</span>
+                </a>
               </li>
               <li>
-                <a href={"https://www.facebook.com/" + socials.facebook.page + "/"} title="Facebook"><i className="icon-pittica-facebook"></i></a>
+                <a
+                  href={
+                    "https://www.facebook.com/" + socials.facebook.page + "/"
+                  }
+                  title="Facebook"
+                >
+                  <i className="icon-pittica-facebook"></i>
+                  <span>Facebook</span>
+                </a>
               </li>
             </ul>
           </div>

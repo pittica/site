@@ -26,6 +26,9 @@
     li {
       display: inline-block;
       padding: $size-7;
+      span {
+        display: none;
+      }
     }
   }
 }
