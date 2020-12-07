@@ -7,18 +7,29 @@ import "../../../scss/ui/article/_article-grid.scss"
 export default class ArticleGrid extends Component {
   render() {
     const node = this.props.node
-    const title = node.frontmatter.title || node.fields.slug;
+    const title = node.frontmatter.title || node.fields.slug
 
     return (
       <article className="article-grid">
-        <ArticleHeader image={node.frontmatter.featuredImage ? node.frontmatter.featuredImage.childImageSharp.sizes.src : null} className="article-grid-header">
+        <ArticleHeader
+          image={
+            node.frontmatter.image
+              ? node.frontmatter.image.childImageSharp.sizes.src
+              : null
+          }
+          className="article-grid-header"
+        >
           <h3 className="title">
             <Link to={`${node.fields.slug}`}>
-              <span><strong>{title}</strong></span>
+              <span>
+                <strong>{title}</strong>
+              </span>
             </Link>
           </h3>
           <Link to={`${node.fields.slug}`} className="date">
-            <small><i className="icon-pittica-clock"></i> {node.frontmatter.date}</small>
+            <small>
+              <i className="icon-pittica-clock"></i> {node.frontmatter.date}
+            </small>
           </Link>
         </ArticleHeader>
         <section>

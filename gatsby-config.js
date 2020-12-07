@@ -5,13 +5,13 @@ module.exports = {
     description: `Mad Scientists At Work.`,
     locale: {
       language: `it`,
-      culture: `IT`
+      culture: `IT`,
     },
     siteUrl: `https://pittica.com/`,
     legal: {
-      privacy: '/legal/privacy',
-      terms: '/legal/tos',
-      cookies: '/legal/cookies'
+      privacy: "/legal/privacy",
+      terms: "/legal/tos",
+      cookies: "/legal/cookies",
     },
     organization: {
       company: `Pittica S.r.l.s.`,
@@ -25,13 +25,13 @@ module.exports = {
       email: `info@pittica.com`,
       taxId: `02650890391`,
       vatId: `02650890391`,
-      registryId: `RA 220518`
+      registryId: `RA 220518`,
     },
     appearance: {
       accent: `#cc151a`,
       background: `#ffffff`,
-      theme: `#1d1d1d`
-    }
+      theme: `#1d1d1d`,
+    },
   },
   plugins: [
     {
@@ -85,36 +85,36 @@ module.exports = {
         https: true,
         www: true,
         SymLinksIfOwnerMatch: true,
-        host: 'pittica.com',
+        host: "pittica.com",
         ErrorDocument: `
           ErrorDocument 401 /error/401/index.html
           ErrorDocument 403 /error/403/index.html
           ErrorDocument 404 /error/404/index.html
           ErrorDocument 500 /error/500/index.html
-        `
-      }
+        `,
+      },
     },
     {
       resolve: `gatsby-plugin-iubenda-cookie-footer`,
       options: {
         iubendaOptions: {
-          "lang": "it",
-          "siteId": 1781270,
-          "countryDetection": true,
-          "consentOnContinuedBrowsing": false,
-          "cookiePolicyInOtherWindow": true,
-          "cookiePolicyId": 29008249,
-          "cookiePolicyUrl": "https://pittica.com/legal/cookies",
-          "banner": {
-            "position": "float-top-center",
-            "textColor": "#fff",
-            "backgroundColor": "#1d1d1d",
-            "acceptButtonDisplay": true,
-            "acceptButtonColor": "#cc151a",
-            "acceptButtonCaptionColor": "#fff"
-          }
-        }
-      }
+          lang: "it",
+          siteId: 1781270,
+          countryDetection: true,
+          consentOnContinuedBrowsing: false,
+          cookiePolicyInOtherWindow: true,
+          cookiePolicyId: 29008249,
+          cookiePolicyUrl: "https://pittica.com/legal/cookies",
+          banner: {
+            position: "float-top-center",
+            textColor: "#fff",
+            backgroundColor: "#1d1d1d",
+            acceptButtonDisplay: true,
+            acceptButtonColor: "#cc151a",
+            acceptButtonCaptionColor: "#fff",
+          },
+        },
+      },
     },
     `gatsby-plugin-sass`,
     {
@@ -209,29 +209,29 @@ module.exports = {
               changefreq: `daily`,
               priority: 0.7,
             }
-          })
-      }
+          }),
+      },
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-offline`,
     {
-      resolve: 'gatsby-plugin-preconnect',
+      resolve: "gatsby-plugin-preconnect",
       options: {
         domains: [
-          { domain: 'https://www.gstatic.com', crossOrigin: true },
-          { domain: 'https://www.google.com', crossOrigin: true },
-          { domain: 'https://www.google-analytics.com', crossOrigin: true }
-        ]
-      }
+          { domain: "https://www.gstatic.com", crossOrigin: true },
+          { domain: "https://www.google.com", crossOrigin: true },
+          { domain: "https://www.google-analytics.com", crossOrigin: true },
+        ],
+      },
     },
     {
       resolve: `@pittica/gatsby-plugin-trustpilot-widget`,
       options: {
         username: "pittica.com",
         template: "5419b6a8b0d04a076446a9ad",
-        business: "5eaf034c658436000194e69b"
-      }
+        business: "5eaf034c658436000194e69b",
+      },
     },
     {
       resolve: `@pittica/gatsby-plugin-blog`,
@@ -241,8 +241,8 @@ module.exports = {
         templateTag: "./src/templates/tag.js",
         templateArticle: "./src/templates/blog-post.js",
         templateList: "./src/templates/blog-list.js",
-        slug: "blog"
-      }
+        slug: "blog",
+      },
     },
     {
       resolve: `@pittica/gatsby-plugin-seo`,
@@ -250,20 +250,20 @@ module.exports = {
         image: `/share.jpg`,
         socials: {
           twitter: {
-            username: "PitticaDigital"
+            username: "PitticaDigital",
           },
           github: {
-            username: `pittica`
+            username: `pittica`,
           },
           facebook: {
             page: `PitticaDigital`,
-            app: `600384224115787`
+            app: `600384224115787`,
           },
           linkedin: {
-            page: `pittica`
-          }
-        }
-      }
-    }
-  ]
+            page: `pittica`,
+          },
+        },
+      },
+    },
+  ],
 }

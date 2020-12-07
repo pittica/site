@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import classNames from "classnames"
 
 import Image from "../ui/image"
 
@@ -28,19 +29,31 @@ export default class AssetsBlock extends Component {
     }
   }
 
+  block(entry) {
+    return (
+      <div
+        className="column is-4-mobile is-3-tablet is-3-desktop is-3-widescreen is-2-fullhd"
+        key={entry.slug}
+      >
+        {this.content(entry)}
+      </div>
+    )
+  }
+
   render() {
     if (this.props.entries.length > 0) {
       return (
-        <div className="columns is-mobile is-multiline is-vcentered is-centered">
+        <div
+          className={classNames({
+            columns: true,
+            "is-mobile": true,
+            "is-multiline": true,
+            "is-vcentered": true,
+            "is-centered": this.props.centered,
+          })}
+        >
           {this.props.entries.map(entry => {
-            return (
-              <div
-                className="column is-4-mobile is-3-tablet is-3-desktop is-3-widescreen is-2-fullhd"
-                key={entry.slug}
-              >
-                {this.content(entry)}
-              </div>
-            )
+            return this.block(entry)
           })}
         </div>
       )
@@ -51,13 +64,15 @@ export default class AssetsBlock extends Component {
 }
 
 AssetsBlock.propTypes = {
-  entries: PropTypes.node,
+  entries: PropTypes.array,
   asset: PropTypes.string,
   size: PropTypes.number,
+  centered: PropTypes.bool,
 }
 
 AssetsBlock.defaultProps = {
   children: null,
   asset: "technologies",
   size: 96,
+  centered: true,
 }

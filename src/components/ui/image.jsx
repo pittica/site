@@ -29,9 +29,6 @@ export default class Image extends Component {
       case 128:
         className["is-128x128"] = true
         break
-      case 128:
-        className["is-128x128"] = true
-        break
       default:
         break
     }

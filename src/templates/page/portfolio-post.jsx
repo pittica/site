@@ -3,13 +3,17 @@ import { graphql } from "gatsby"
 
 import PostLayout from "../../components/layout/post-layout"
 import ArticleHeader from "../../components/ui/article/article-header"
+import Section from "../../components/ui/section"
+import AssetsTechnologies from "../../components/sections/assets-technologies"
 
 import "../../scss/ui/_post.scss"
 
-export default class LegalPostTemplate extends React.Component {
+export default class PortfolioPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
-
+    const image = post.frontmatter.image
+      ? post.frontmatter.image.childImageSharp.sizes.src
+      : null
     return (
       <PostLayout
         title={post.frontmatter.title}
@@ -17,7 +21,7 @@ export default class LegalPostTemplate extends React.Component {
         location={this.props.location}
       >
         <article className="blog-post">
-          <ArticleHeader>
+          <ArticleHeader image={image}>
             <section className="hero">
               <div className="hero-body">
                 <div className="container">
@@ -28,10 +32,27 @@ export default class LegalPostTemplate extends React.Component {
             </section>
           </ArticleHeader>
           <div className="container">
+            <Section>
+              <h3>Tecnologie</h3>
+              <AssetsTechnologies
+                entries={post.frontmatter.techologies}
+                centered={false}
+              />
+            </Section>
             <section
               className="post-content"
               dangerouslySetInnerHTML={{ __html: post.html }}
             />
+            <Section>
+              <h3>URL</h3>
+              <a
+                href={post.frontmatter.url}
+                title={post.frontmatter.title}
+                target="_system"
+              >
+                {post.frontmatter.url}
+              </a>
+            </Section>
           </div>
         </article>
       </PostLayout>
@@ -40,7 +61,7 @@ export default class LegalPostTemplate extends React.Component {
 }
 
 export const pageQuery = graphql`
-  query LegalPostTemplate($slug: String!) {
+  query PortfolioPostTemplate($slug: String!) {
     site {
       siteMetadata {
         title
@@ -55,6 +76,15 @@ export const pageQuery = graphql`
         title
         date(formatString: "DD/MM/YYYY")
         description
+        techologies
+        url
+        image {
+          childImageSharp {
+            sizes(maxWidth: 1280) {
+              ...GatsbyImageSharpSizes
+            }
+          }
+        }
       }
     }
   }

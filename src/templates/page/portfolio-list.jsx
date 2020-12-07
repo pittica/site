@@ -6,11 +6,11 @@ import { Paginator } from "@pittica/gatsby-plugin-blog"
 import Layout from "../../components/layout/layout"
 import Header from "../../components/ui/header"
 import Section from "../../components/ui/section"
-import PageGrid from "../../components/ui/article/page-grid"
+import ArticleGrid from "../../components/ui/article/article-grid"
 
 import pages from "../../data/pages.json"
 
-export default class LegalListTemplate extends React.Component {
+export default class PortfolioListTemplate extends React.Component {
   render() {
     const { data, pageContext } = this.props
 
@@ -27,8 +27,8 @@ export default class LegalListTemplate extends React.Component {
           <div className="columns is-multiline">
             {data.allMarkdownRemark.edges.map(({ node }) => {
               return (
-                <div className="column is-half" key={node.fields.slug}>
-                  <PageGrid node={node} />
+                <div className="column is-one-third" key={node.fields.slug}>
+                  <ArticleGrid node={node} />
                 </div>
               )
             })}
@@ -41,7 +41,7 @@ export default class LegalListTemplate extends React.Component {
 }
 
 export const pageQuery = graphql`
-  query LegalListTemplate($skip: Int!, $limit: Int!, $regex: String!) {
+  query PortfolioListTemplate($skip: Int!, $limit: Int!, $regex: String!) {
     site {
       siteMetadata {
         title
@@ -63,6 +63,13 @@ export const pageQuery = graphql`
             date(formatString: "DD/MM/YYYY")
             title
             description
+            image {
+              childImageSharp {
+                sizes(maxWidth: 630) {
+                  ...GatsbyImageSharpSizes
+                }
+              }
+            }
           }
         }
       }

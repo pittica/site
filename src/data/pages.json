@@ -2,5 +2,9 @@
     "legal": {
         "title": "Note Legali",
         "description": "Documenti e Condizioni di Fornitura Servizi"
+    },
+    "portfolio": {
+        "title": "Portfolio",
+        "description": "I Nostri Lavori"
     }
 }

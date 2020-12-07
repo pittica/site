@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import Section from "../components/ui/section"
 import AssetsBlock from "../components/sections/assets-block"
+import AssetsTechnologies from "../components/sections/assets-technologies"
 
 import Partners from "../components/sections/partners"
 
@@ -84,95 +85,26 @@ class AboutPage extends React.Component {
           </ul>
         </Section>
         <Section title="Tecnologie" subtitle="Con cosa lavoriamo?">
-          <AssetsBlock
+          <AssetsTechnologies
             entries={[
-              {
-                slug: "php",
-                link: "https://www.php.net/",
-                title: "PHP",
-              },
-              {
-                slug: "nodejs",
-                link: "https://nodejs.org/",
-                title: "Node.js",
-              },
-              {
-                slug: "csharp",
-                title: "C#",
-              },
-              {
-                slug: "vuejs",
-                link: "https://vuejs.org/",
-                title: "Vue.js",
-              },
-              {
-                slug: "react",
-                link: "https://reactjs.org/",
-                title: "React",
-              },
-              {
-                slug: "git",
-                link: "https://git-scm.com/",
-                title: "Git",
-              },
-              {
-                slug: "css3",
-                title: "CSS3",
-              },
-              {
-                slug: "html5",
-                title: "HTML5",
-              },
-              {
-                slug: "gatsby",
-                link: "https://www.gatsbyjs.org/",
-                title: "GatsbyJS",
-              },
-              {
-                slug: "jekyll",
-                link: "https://jekyllrb.com/",
-                title: "Jekyll",
-              },
-              {
-                slug: "mysql",
-                link: "https://www.mysql.com/",
-                title: "MySQL",
-              },
-              {
-                slug: "mssql",
-                link: "https://www.microsoft.com/sql-server/",
-                title: "Microsoft SQL Server",
-              },
-              {
-                slug: "bulma",
-                link: "https://bulma.io/",
-                title: "Bulma",
-              },
-              {
-                slug: "bootstrap",
-                link: "https://getbootstrap.com/",
-                title: "Bootstrap",
-              },
-              {
-                slug: "sass",
-                link: "https://sass-lang.com/",
-                title: "SASS",
-              },
-              {
-                slug: "cakephp",
-                link: "https://cakephp.org/",
-                title: "CakePHP",
-              },
-              {
-                slug: "prestashop",
-                link: "https://www.prestashop.com/",
-                title: "PrestaShop",
-              },
-              {
-                slug: "wordpress",
-                link: "https://wordpress.org/",
-                title: "WordPress",
-              },
+              "php",
+              "nodejs",
+              "csharp",
+              "vuejs",
+              "react",
+              "git",
+              "css3",
+              "html5",
+              "gatsby",
+              "jekyll",
+              "mysql",
+              "mssql",
+              "bulma",
+              "bootstrap",
+              "sass",
+              "cakephp",
+              "prestashop",
+              "wordpress",
             ]}
           />
         </Section>
