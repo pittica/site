@@ -6,3 +6,6 @@ image: "./cover.jpg"
 techologies: ["wordpress"]
 url: "https://www.cosmecscarl.com/"
 ---
+Un sito one page per una grande realtà del panorama industriale ravennate.
+
+Abbiamo messo a punto una vetrina corporate, successivamente tradotta in più lingue, per poter fornire una presentazione degna di questa azienda.

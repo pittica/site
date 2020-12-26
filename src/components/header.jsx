@@ -63,6 +63,9 @@ export default class Header extends Component {
                 <Link to={`/about`} className="navbar-item">
                   About
                 </Link>
+                <Link to={`/portfolio`} className="navbar-item">
+                  Portfolio
+                </Link>
               </div>
             </div>
           </nav>

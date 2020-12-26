@@ -32,6 +32,10 @@ export default class PortfolioPostTemplate extends React.Component {
             </section>
           </ArticleHeader>
           <div className="container">
+            <section
+              className="post-content"
+              dangerouslySetInnerHTML={{ __html: post.html }}
+            />
             <Section>
               <h3>Tecnologie</h3>
               <AssetsTechnologies
@@ -39,10 +43,6 @@ export default class PortfolioPostTemplate extends React.Component {
                 centered={false}
               />
             </Section>
-            <section
-              className="post-content"
-              dangerouslySetInnerHTML={{ __html: post.html }}
-            />
             <Section>
               <h3>URL</h3>
               <a
