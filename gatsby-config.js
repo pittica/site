@@ -15,10 +15,10 @@ module.exports = {
     },
     organization: {
       company: `Pittica S.r.l.s.`,
-      address: `Via Garigliano, 4`,
+      address: `Via Le Corbusier, 39`,
       url: `https://pittica.com/`,
       logo: `https://pittica.com/logo.png`,
-      zipCode: `48121`,
+      zipCode: `48124`,
       city: `Ravenna`,
       province: `RA`,
       country: `Italia`,
