@@ -118,4 +118,4 @@ Il costo di ciascun Servizio viene concordate tra le Parti e il Cliente si impeg
 1.  Ai sensi e per gli effetti di cui all'art. 13, del Regolamento UE 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali,
 nonché alla libera circolazione di tali dati e che abroga la direttiva 95/46/CE il Cliente prende atto che il Regolamento Europeo n. 679 del 27 aprile 2016 sul trattamento dei dati personali prevede la tutela delle persone fisiche con riguardo al trattamento dei dati personali.
 
-    Il titolare del trattamento è Pittica S.r.l.s., con sede in Via Garigliano, al numero civico 4, 48121 Ravenna (RA), Codice Fiscale e Partita IVA 02650890391.
+    Il titolare del trattamento è Pittica S.r.l.s., con sede in Via Le Corbusier, al numero civico 39, 48124 Ravenna (RA), Codice Fiscale e Partita IVA 02650890391.
