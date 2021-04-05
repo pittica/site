@@ -1,19 +1,18 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
+import { Link } from 'gatsby';
+import classnames from 'classnames';
+
+import '../../scss/sections/_partners.scss';
 
 const Partners = () => {
   return (
-    <div className="columns is-vcentered">
-      <div className="column is-6 has-text-centered">
+    <div className={classnames('partners', 'columns', 'is-vcentered')}>
+      <div className={classnames('column', 'is-6', 'has-text-centered')}>
         <a href="https://www.assintel.it/soci/pittica_srls/">
-          <img
-            src="/assets/partners/assintel.png"
-            alt="Assintel"
-            className="partener-logo"
-          />
+          <img src="/assets/partners/assintel.png" alt="Assintel" className="partner-logo" />
         </a>
       </div>
-      <div className="column is-6 has-text-centered">
+      <div className={classnames('column', 'is-6', 'has-text-centered')}>
         <Link to="/iubenda-partner" title="iubenda Certified Bronze Partner">
           <img
             src="https://www.iubenda.com/partner/bronze@2x.png"
@@ -24,7 +23,7 @@ const Partners = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Partners
+export default Partners;

@@ -1,21 +1,15 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React, { Component } from 'react';
+import { graphql } from 'gatsby';
 
-import PostLayout from "../../components/layout/post-layout"
-import ArticleHeader from "../../components/ui/article/article-header"
+import PostLayout from '../../components/layout/post-layout';
+import ArticleHeader from '../../components/ui/article/article-header';
 
-import "../../scss/ui/_post.scss"
-
-export default class LegalPostTemplate extends React.Component {
+export default class LegalPostTemplate extends Component {
   render() {
-    const post = this.props.data.markdownRemark
+    const post = this.props.data.markdownRemark;
 
     return (
-      <PostLayout
-        title={post.frontmatter.title}
-        post={post}
-        location={this.props.location}
-      >
+      <PostLayout title={post.frontmatter.title} post={post} location={this.props.location}>
         <article className="blog-post">
           <ArticleHeader>
             <section className="hero">
@@ -28,14 +22,11 @@ export default class LegalPostTemplate extends React.Component {
             </section>
           </ArticleHeader>
           <div className="container">
-            <section
-              className="post-content"
-              dangerouslySetInnerHTML={{ __html: post.html }}
-            />
+            <section className="post-content" dangerouslySetInnerHTML={{ __html: post.html }} />
           </div>
         </article>
       </PostLayout>
-    )
+    );
   }
 }
 
@@ -58,4 +49,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

@@ -1,33 +1,32 @@
-import React, { Component } from "react"
-import classNames from "classnames"
+import React from 'react';
+import classnames from 'classnames';
 
-export default class Hero extends Component {
-  render() {
-    return (
-      <section className="hero">
-        <div className="hero-body">
-          <div className="container">
-            {this.props.title && (
-              <h1 className={classNames({
-                title: true,
-                "is-size-1": true,
-                "has-text-centered": this.props.centered
-              })}>
-                {this.props.title}
-              </h1>
-            )}
-            {this.props.subtitle && (
-              <h2 className={classNames({
-                subtitle: true,
-                "is-size-3": true,
-                "has-text-centered": this.props.centered
-              })}>
-                {this.props.subtitle}
-              </h2>
-            )}
-          </div>
+export default function Hero({ title, subtitle, centered, children, className }) {
+  return (
+    <section className={classnames('hero', className)}>
+      <div className="hero-body">
+        <div className="container">
+          {title && (
+            <h1
+              className={classnames('title', 'is-size-1', {
+                'has-text-centered': centered
+              })}
+            >
+              {title}
+            </h1>
+          )}
+          {subtitle && (
+            <h2
+              className={classnames('subtitle', 'is-size-3', {
+                'has-text-centered': centered
+              })}
+            >
+              {subtitle}
+            </h2>
+          )}
+          {children}
         </div>
-      </section>
-    )
-  }
+      </div>
+    </section>
+  );
 }

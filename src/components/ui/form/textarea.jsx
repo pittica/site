@@ -1,16 +1,16 @@
-import React, { Component } from "react"
+import React from 'react';
 
-export default class Textarea extends Component {
-  render() {
-    return (
-      <div className="field">
-        <div className="control">
-          <label className="label">
-            {this.props.label}
-            <textarea className="textarea" name={this.props.name} placeholder={this.props.placeholder} onChange={this.props.onChange}>{this.props.value}</textarea>
-          </label>
-        </div>
+export default function Textarea({ label, name, placeholder, value, onChange }) {
+  return (
+    <div className="field">
+      <div className="control">
+        <label className="label">
+          {label}
+          <textarea className="textarea" name={name} placeholder={placeholder} onChange={onChange}>
+            {value}
+          </textarea>
+        </label>
       </div>
-    )
-  }
+    </div>
+  );
 }

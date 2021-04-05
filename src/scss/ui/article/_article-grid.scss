@@ -1,5 +1,4 @@
 @import "../../functions";
-@import "../../functions/buttons";
 @import "../../variables";
 
 @include keyframes(article-grid-header) {
@@ -26,8 +25,10 @@
   section {
     background-color: $white;
     font-weight: $weight-bold;
+    a {
+      color: $text;
+    }
   }
-  @include readmore();
   .article-grid-header {
     &:after {
       content: " ";

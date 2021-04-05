@@ -1,12 +1,7 @@
 {
   "hosting": {
     "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**",
-      "**/.cache/**"
-    ],
+    "ignore": [ "firebase.json", "**/.*", "**/node_modules/**", "**/.cache/**" ],
     "headers": [
       {
         "source": "**/*.@(eot|otf|ttf|ttc|woff|woff2|font.css)",

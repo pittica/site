@@ -1,14 +1,19 @@
-import React from "react"
-import { useStaticQuery, graphql, Link } from "gatsby"
-import TrustpilotReviews from "@pittica/gatsby-plugin-trustpilot-widget"
-import Sign from "./ui/sign"
-import PrivacyLink from "./ui/link/privacy-link"
-import Section from "./ui/section"
+import React from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
+import classnames from 'classnames';
+import TrustpilotReviews from '@pittica/gatsby-plugin-trustpilot-widget';
 
-import "../scss/ui/_footer.scss"
+import Sign from './ui/sign';
+import PrivacyLink from './ui/link/privacy-link';
+import Section from './ui/section';
+
+import '../scss/ui/_footer.scss';
 
 const Footer = () => {
-  const { site, siteBuildMetadata } = useStaticQuery(
+  const {
+    site: { siteMetadata: { organization, appearance, locale, legal } },
+    siteBuildMetadata: { fields: { seo: { socials } } }
+  } = useStaticQuery(
     graphql`
       query {
         site {
@@ -68,70 +73,49 @@ const Footer = () => {
         }
       }
     `
-  )
-
-  const owner = site.siteMetadata.organization
-  const appearance = site.siteMetadata.appearance
-  const socials = siteBuildMetadata.fields.seo.socials
-  const legal = site.siteMetadata.legal
-
-  let tax = null
-  let email = null
-
-  if (owner.taxId === owner.vatId) {
-    tax = (
-      <div>
-        <span className="has-text-primary">Codice Fiscale / Partita IVA</span>{" "}
-        {owner.vatId}
-      </div>
-    )
-  } else {
-    tax = (
-      <>
-        <div>
-          <span className="has-text-primary">Codice Fiscale</span> {owner.taxId}
-        </div>
-        <div>
-          <span className="has-text-primary">Partita IVA</span> {owner.vatId}
-        </div>
-      </>
-    )
-  }
-
-  if (owner.email) {
-    email = (
-      <div>
-        <span className="has-text-primary">E-Mail</span>{" "}
-        <a href={"mailto:" + owner.email}>{owner.email}</a>
-      </div>
-    )
-  }
+  );
 
   return (
     <footer className="footer">
       <div className="container">
         <div className="columns">
-          <div className="column is-one-fifths">
+          <div className={classnames('column', 'is-one-fifths')}>
             <Sign color={appearance.background} />
           </div>
-          <div className="column is-two-fifths">
-            <h3>{owner.company}</h3>
+          <div className={classnames('column', 'is-two-fifths')}>
+            <h3>{organization.company}</h3>
             <div className="bracket-group">
               <div className="icon">
-                <i className="icon-pittica-marker"></i>
+                <i className="icon-pittica-marker" />
               </div>
-              {owner.address}
+              {organization.address}
               <br />
-              {owner.zipCode} {owner.city} ({owner.province})<br />
-              {owner.country}
+              {organization.zipCode} {organization.city} ({organization.province})<br />
+              {organization.country}
             </div>
-            {tax}
-            <div>
-              <span className="has-text-primary">REA</span> {owner.registryId}
-            </div>
-            {email}
+            {organization.taxId && (
+              <div>
+                <span className="has-text-primary">Codice Fiscale</span> {organization.taxId}
+              </div>
+            )}
+            {organization.vatId && (
+              <div>
+                <span className="has-text-primary">Partita IVA</span> {organization.vatId}
+              </div>
+            )}
+            {organization.registryId && (
+              <div>
+                <span className="has-text-primary">REA</span> {organization.registryId}
+              </div>
+            )}
+            {organization.email && (
+              <div>
+                <span className="has-text-primary">E-Mail</span>{' '}
+                <a href={`mailto:${organization.email}`}>{organization.email}</a>
+              </div>
+            )}
           </div>
-          <div className="column is-one-fifths">
+          <div className={classnames('column', 'is-one-fifths')}>
             <ul>
               <li>
                 <PrivacyLink />
@@ -143,41 +127,28 @@ const Footer = () => {
                 <Link to={legal.terms}>Termini e Condizioni</Link>
               </li>
               <li>
-                <Link to={"/legal"}>Note Legali</Link>
+                <Link to="/legal">Note Legali</Link>
               </li>
             </ul>
           </div>
-          <div className="column is-one-fifths">
+          <div className={classnames('column', 'is-one-fifths')}>
             <h2>Seguici</h2>
             <ul className="social-follow">
               <li>
-                <a
-                  href={
-                    "https://www.linkedin.com/company/" + socials.linkedin.page
-                  }
-                  title="LinkedIn"
-                >
-                  <i className="icon-pittica-linkedin"></i>
+                <a href={new URL(socials.linkedin.page, 'https://www.linkedin.com/company/').href} title="LinkedIn">
+                  <i className="icon-pittica-linkedin" />
                   <span>LinkedIn</span>
                 </a>
               </li>
               <li>
-                <a
-                  href={"https://github.com/" + socials.github.username}
-                  title="GitHub"
-                >
-                  <i className="icon-pittica-github"></i>
+                <a href={new URL(socials.github.username, 'https://github.com/').href} title="GitHub">
+                  <i className="icon-pittica-github" />
                   <span>GitHub</span>
                 </a>
               </li>
               <li>
-                <a
-                  href={
-                    "https://www.facebook.com/" + socials.facebook.page + "/"
-                  }
-                  title="Facebook"
-                >
-                  <i className="icon-pittica-facebook"></i>
+                <a href={new URL(socials.facebook.page, 'https://www.facebook.com/').href} title="Facebook">
+                  <i className="icon-pittica-facebook" />
                   <span>Facebook</span>
                 </a>
               </li>
@@ -187,22 +158,18 @@ const Footer = () => {
         <div className="columns">
           <div className="column">
             <Section>
-              <TrustpilotReviews
-                language={site.siteMetadata.locale.language}
-                culture={site.siteMetadata.locale.culture}
-                theme="dark"
-              />
+              <TrustpilotReviews language={locale.language} culture={locale.culture} theme="dark" />
             </Section>
           </div>
         </div>
         <div className="columns">
-          <div className="column is-five-fifths">
-            © {new Date().getFullYear()}, {owner.company}
+          <div className={classnames('column', 'is-five-fifths')}>
+            © {new Date().getFullYear()}, {organization.company}
           </div>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

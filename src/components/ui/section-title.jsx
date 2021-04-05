@@ -1,44 +1,28 @@
-import React, { Component } from "react"
-import { Link } from "gatsby"
-import classNames from "classnames"
+import React from 'react';
+import { Link } from 'gatsby';
+import classnames from 'classnames';
 
-export default class SectionTitle extends Component {
-  render() {
-    let title = this.props.title
-    let subtitle = this.props.subtitle
-
-    if (this.props.link) {
-      title = (
-        <Link to={this.props.link}>
-          {this.props.title}
-        </Link>
-      )
-      subtitle = (
-        <Link to={this.props.link}>
-          {this.props.subtitle}
-        </Link>
-      )
-    }
-
-    return (
-      <div className="container">
-        {this.props.title && (
-          <h1 className={classNames({
-            title: true,
-            "has-text-centered": this.props.centered
-          })}>
-            {title}
-          </h1>
-        )}
-        {this.props.subtitle && (
-          <h2 className={classNames({
-            subtitle: true,
-            "has-text-centered": this.props.centered
-          })}>
-            {subtitle}
-          </h2>
-        )}
-      </div>
-    )
-  }
+export default function SectionTitle({ title, subtitle, link, centered }) {
+  return (
+    <div className="container">
+      {title && (
+        <h1
+          className={classnames('title', {
+            'has-text-centered': centered
+          })}
+        >
+          {link ? <Link to={link}>{title}</Link> : title}
+        </h1>
+      )}
+      {subtitle && (
+        <h2
+          className={classnames('subtitle', {
+            'has-text-centered': centered
+          })}
+        >
+          {link ? <Link to={link}>{subtitle}</Link> : subtitle}
+        </h2>
+      )}
+    </div>
+  );
 }

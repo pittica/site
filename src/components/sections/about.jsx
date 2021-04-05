@@ -1,28 +1,29 @@
-import React from "react"
-import FeatureLink from "../ui/link/feature-link"
-import Section from "../ui/section"
-import Underground from "../ui/gfx/underground"
+import React from 'react';
+import classnames from 'classnames';
 
-import "../../scss/ui/_section-container.scss"
+import SectionContainer from '../ui/section-container';
+import Section from '../ui/section';
+import FeatureLink from '../ui/link/feature-link';
+import Underground from '../ui/gfx/underground';
 
 const About = () => {
   return (
-    <div className="section-container section-right">
-      <figure className="image">
+    <SectionContainer left={false}>
         <Underground />
-      </figure>
       <Section title="Pittica" subtitle="Mad Scientists @ Work">
         <div className="container">
-          <div className="columns is-multiline">
-            <div className="column is-two-thirds is-offset-one-third">
-              <p>Il tuo partner per la <strong>trasformazione digitale</strong>.</p>
-              <FeatureLink to={`/about`} label="Leggi" />
+          <div className={classnames('columns', 'is-multiline')}>
+            <div className={classnames('column', 'is-two-thirds', 'is-offset-one-third')}>
+              <p>
+                Il tuo partner per la <strong>trasformazione digitale</strong>.
+              </p>
+              <FeatureLink to="/about" label="Leggi" />
             </div>
           </div>
         </div>
       </Section>
-    </div>
-  )
-}
+    </SectionContainer>
+  );
+};
 
-export default About
+export default About;

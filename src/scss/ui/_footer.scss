@@ -31,4 +31,29 @@
       }
     }
   }
+  .bracket-group {
+    position: relative;
+    padding-left: $size-3;
+    margin: $size-6;
+    &:before {
+      content: "";
+      display: block;
+      height: 90%;
+      width: 20px;
+      border: 3px solid $primary;
+      position: absolute;
+      top: 5%;
+      left: 0;
+      border-right: 0;
+    }
+    .icon {
+      position: absolute;
+      top: 30%;
+      left: -16px;
+      background-color: $grey-darker;
+      color: $white;
+      font-size: 24px;
+      padding: 16px;
+    }
+  }
 }

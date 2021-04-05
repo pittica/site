@@ -2,6 +2,7 @@
 
 .header {
   margin: ($size-1 * 2) auto $size-2;
+  padding: $section-padding;
   .title {
     font-size: $size-1;
   }

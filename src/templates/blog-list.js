@@ -1,32 +1,32 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react';
+import { graphql } from 'gatsby';
+import classnames from 'classnames';
 
-import { Paginator } from "@pittica/gatsby-plugin-blog"
-
-import Layout from "../components/layout/layout"
-import Section from "../components/ui/section"
-import ArticleGrid from "../components/ui/article/article-grid"
+import Layout from '../components/layout/layout';
+import Section from '../components/ui/section';
+import ArticleGrid from '../components/ui/article/article-grid';
+import ListNav from '../components/nav/list-nav';
 
 export default class BlogList extends React.Component {
   render() {
-    const { data, pageContext } = this.props
+    const { data, pageContext, location } = this.props;
 
     return (
-      <Layout location={this.props.location} title="Blog">
+      <Layout location={location} title="Blog">
         <Section title="Blog" subtitle="Pittica says">
-          <div className="columns is-multiline">
+          <div className={classnames('columns', 'is-multiline')}>
             {data.allMarkdownRemark.edges.map(({ node }) => {
               return (
-                <div className="column is-one-third" key={node.fields.slug}>
+                <div className={classnames('column', 'is-one-third')} key={node.fields.slug}>
                   <ArticleGrid node={node} />
                 </div>
-              )
+              );
             })}
           </div>
         </Section>
-        <Paginator context={pageContext} className="bottom-nav" />
+        <ListNav context={pageContext} />
       </Layout>
-    )
+    );
   }
 }
 
@@ -55,9 +55,7 @@ export const pageQuery = graphql`
             description
             image {
               childImageSharp {
-                sizes(maxWidth: 630) {
-                  ...GatsbyImageSharpSizes
-                }
+                gatsbyImageData(width: 640, height: 440, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
               }
             }
           }
@@ -65,4 +63,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

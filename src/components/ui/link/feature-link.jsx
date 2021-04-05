@@ -1,14 +1,12 @@
-import React, { Component } from "react"
-import { Link } from "gatsby"
+import React from 'react';
+import { Link } from 'gatsby';
 
-import "../../../scss/ui/link/_feature-link.scss"
+import '../../../scss/ui/link/_feature-link.scss';
 
-export default class FeatureLink extends Component {
-  render() {
-    return (
-      <Link to={this.props.to} className="feature-link">
-        <span>{this.props.label}</span>
-      </Link>
-    )
-  }
+export default function FeatureLink({ to, label }) {
+  return (
+    <Link to={to} className="feature-link">
+      <span>{label}</span>
+    </Link>
+  );
 }

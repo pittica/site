@@ -1,0 +1,10 @@
+@import "../effects/outline";
+@import "../variables";
+
+.underground {
+    svg {
+        .outline {
+            @include svg-outline($grey-darker, 1250, 1.5s);
+        }
+    }
+}

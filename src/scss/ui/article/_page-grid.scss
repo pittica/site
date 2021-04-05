@@ -1,5 +1,3 @@
-@import "../../functions";
-@import "../../functions/buttons";
 @import "../../variables";
 
 .page-grid {
@@ -12,7 +10,6 @@
     font-weight: $weight-bold;
     margin-bottom: $size-2;
   }
-  @include readmore($primary-invert, $grey-darker, $size-6, right, 0 0 $size-7 0);
   .page-grid-header {
     margin: $size-7 auto;
     h4 {

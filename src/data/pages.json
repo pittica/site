@@ -6,5 +6,13 @@
     "portfolio": {
         "title": "Portfolio",
         "description": "I Nostri Lavori"
+    },
+    "services": {
+        "title": "Servizi",
+        "description": "Cosa Offriamo"
+    },
+    "offers": {
+        "title": "Offerte",
+        "description": "Le Nostre Offerte"
     }
 }

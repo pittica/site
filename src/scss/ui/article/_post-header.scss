@@ -1,0 +1,33 @@
+@import "../../functions";
+@import "../../variables";
+
+.post-header {
+  @include background-cover();
+  background-attachment: fixed;
+  margin-bottom: -48px;
+  .post-data {
+    padding: 10vh 4% $size-1 4%;
+    margin-bottom: $size-2;
+    background-color: rgba(255, 255, 255, 0.75);
+    .post-meta {
+      font-weight: $weight-bold;
+      font-size: $size-4;
+      a {
+        color: $primary;
+        display: block;
+      }
+    }
+    &:after {
+      content: "";
+      display: block;
+      position: relative;
+      top: 100px;
+      left: -50%;
+      width: 200%;
+      height: 100px;
+      background: $footer-color;
+      z-index: 0;
+      @include rotate(-2);
+    }
+  }
+}

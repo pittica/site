@@ -1,0 +1,14 @@
+@import "../variables";
+
+.highlight {
+  padding: $section-padding;
+  text-align: center;
+  .highlight-body {
+    background-color: $primary;
+    color: $primary-invert;
+    display: inline-block;
+    text-align: center;
+    font-size: $size-3;
+    padding: $size-5;
+  }
+}

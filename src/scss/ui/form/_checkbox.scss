@@ -1,0 +1,16 @@
+@import "../../variables";
+
+.checkbox {
+  input {
+    position: absolute;
+  }
+  .inner-checkbox {
+    line-height: $size-7 * 2;
+    padding-left: 25px;
+    position: relative;
+    top: -4px;
+    a {
+      border-bottom: $size-7 / 6 solid $primary;
+    }
+  }
+}

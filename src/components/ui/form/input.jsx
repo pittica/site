@@ -1,16 +1,22 @@
-import React, { Component } from "react"
+import React from 'react';
+import classnames from 'classnames';
 
-export default class Input extends Component {
-  render() {
-    return (
-      <div className="field">
-        <div className="control">
-          <label className="label">
-            {this.props.label}
-            <input className="input" type={this.props.type} name={this.props.name || "text"} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} />
-          </label>
-        </div>
+export default function Input({ type, label, name, placeholder, value, onChange, className }) {
+  return (
+    <div className="field">
+      <div className="control">
+        <label className="label">
+          {label}
+          <input
+            className={classnames('input', className)}
+            type={type || 'text'}
+            name={name}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+          />
+        </label>
       </div>
-    )
-  }
+    </div>
+  );
 }

@@ -1,12 +1,12 @@
-import React, { Component } from "react"
+import React from 'react';
 
-export default class CheckBox extends Component {
-  render() {
-    return (
-      <label className="checkbox">
-        <input type="checkbox" onChange={this.props.onChange} name={this.props.name} value={this.props.value || 1} />
-        {this.props.children}
-      </label>
-    )
-  }
+import '../../../scss/ui/form/_checkbox.scss';
+
+export default function CheckBox({ children, name, value, onChange }) {
+  return (
+    <label className="checkbox">
+      <input type="checkbox" onChange={onChange} name={name} value={value || 1} />
+      <div className="inner-checkbox">{children}</div>
+    </label>
+  );
 }

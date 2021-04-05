@@ -1,9 +1,9 @@
-import React from "react"
-import Layout from "./layout"
-import Hero from "../ui/hero"
-import Rain from "../ui/gfx/rain"
+import React, { Component } from 'react';
+import Layout from './layout';
+import Hero from '../ui/hero';
+import Rain from '../ui/gfx/rain';
 
-export default class ErrorLayout extends React.Component {
+export default class ErrorLayout extends Component {
   render() {
     return (
       <Layout location={this.props.location} title={this.props.title}>
@@ -14,6 +14,6 @@ export default class ErrorLayout extends React.Component {
           </figure>
         </Rain>
       </Layout>
-    )
+    );
   }
 }

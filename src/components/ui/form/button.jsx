@@ -1,26 +1,28 @@
-import React, { Component } from "react"
-import classNames from "classnames"
+import React, { Component } from 'react';
+import classnames from 'classnames';
+
+import '../../../scss/ui/form/_button.scss';
 
 export default class Button extends Component {
-  handleClick = e => {
-    e.nativeEvent.preventDefault()
-    e.nativeEvent.stopImmediatePropagation()
-    this.props.onClick()
-  }
+  handleClick = (e) => {
+    e.nativeEvent.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+    this.props.onClick();
+  };
 
   render() {
-    const classes = classNames({
-      button: true,
-      "is-primary": true,
-      "is-loading": this.props.loading
-    })
+    const classes = classnames('button', 'is-primary', {
+      'is-loading': this.props.loading
+    });
 
     return (
-      <div className={classNames(["field", "is-grouped", "is-grouped-right"])}>
+      <div className={classnames([ 'field', 'is-grouped', 'is-grouped-right' ])}>
         <div className="control">
-          <button onClick={this.handleClick} className={classes}>{this.props.label}</button>
+          <button onClick={this.handleClick} className={classes}>
+            {this.props.label}
+          </button>
         </div>
       </div>
-    )
+    );
   }
 }
