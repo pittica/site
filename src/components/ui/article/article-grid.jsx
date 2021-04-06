@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Link } from 'gatsby';
 import { getImage } from 'gatsby-plugin-image';
@@ -10,36 +11,36 @@ import '../../../scss/ui/article/_article-grid.scss';
 export default class ArticleGrid extends Component {
   render() {
     const node = this.props.node;
-    const title = node.frontmatter.title || node.fields.slug;
-    const image = getImage(node.frontmatter.image);
+    const image = node.image ? getImage(node.image.localFile.childImageSharp) : null;
+    const slug = `/blog/${node.slug}`;
 
     return (
       <article className="article-grid">
         <ArticleHeader image={image ? image.images.fallback.src : null} className="article-grid-header">
           <h3 className="title">
-            <Link to={node.fields.slug}>
+            <Link to={slug}>
               <span>
-                <strong>{title}</strong>
+                <strong>{node.title || slug}</strong>
               </span>
             </Link>
           </h3>
-          {node.frontmatter.date && (
-            <Link to={node.fields.slug} className="date">
+          {node.date && (
+            <Link to={slug} className="date">
               <small>
-                <i className="icon-pittica-clock" /> {node.frontmatter.date}
+                <i className="icon-pittica-clock" /> {node.date}
               </small>
             </Link>
           )}
         </ArticleHeader>
         <section>
           <Link
-            to={node.fields.slug}
+            to={slug}
             dangerouslySetInnerHTML={{
-              __html: node.frontmatter.description || node.excerpt
+              __html: node.description || node.excerpt
             }}
           />
         </section>
-        <ReadmoreLink slug={node.fields.slug} featured={true} />
+        <ReadmoreLink slug={slug} featured={true} />
       </article>
     );
   }

@@ -5,15 +5,13 @@ import Layout from './layout';
 import Header from '../ui/header';
 import Section from '../ui/section';
 
-import pages from '../../data/pages.json';
-
 export default class ListLayout extends Component {
   render() {
-    const { children, context, location } = this.props;
+    const { children, context, location, title, description } = this.props;
 
     return (
-      <Layout location={location} title={pages[context.slug].title}>
-        <Header title={pages[context.slug].title} subtitle={pages[context.slug].description} />
+      <Layout location={location} title={title} description={description}>
+        <Header title={title} subtitle={description} />
         <Section>{children}</Section>
         <ListNav context={context} />
       </Layout>

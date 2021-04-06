@@ -56,6 +56,9 @@ export default class Navbar extends Component {
             <NavbarItem to="/portfolio" location={this.props.location}>
               Portfolio
             </NavbarItem>
+            <NavbarItem to="/offers" location={this.props.location}>
+              Offerte
+            </NavbarItem>
           </div>
         </div>
       </nav>

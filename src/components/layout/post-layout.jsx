@@ -15,8 +15,7 @@ export default class PostLayout extends Component {
       <div className="post-layout">
         <Seo
           title={title}
-          description={post.frontmatter.description || post.excerpt}
-          frontmatter={post.frontmatter}
+          description={post.description || post.subtitle || post.excerpt}
           isBlogPost={true}
           image={image}
           postData={post}

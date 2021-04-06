@@ -1,86 +1,226 @@
-const path = require(`path`);
+require('dotenv').config();
 
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
-  const postsPerPage = 18;
-  const remarks = await graphql(
-    `
-      {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 2000
-          filter: {
-            fields: {
-              slug: {
-                regex: "/^\/(?!blog).+\//s"
-              }
-            }
+const path = require('path');
+const moment = require('moment');
+
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
+  const { data: { pages, posts, categories, tags, portfolio, services, offers, legals } } = await graphql(`{
+    pages: allGraphCmsPage(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
+      nodes {
+        id
+        slug
+      }
+    }
+    posts: allGraphCmsPost(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+      sort: { fields: date, order: DESC }
+    ) {
+      edges {
+        node {
+          slug
+          categories {
+            id
+            name
+            slug
           }
-        ) {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-              }
-            }
+          tags {
+            id
+            name
+            slug
+          }
+        }
+        next {
+          id
+          slug
+          title
+        }
+        previous {
+          id
+          slug
+          title
+        }
+      }
+    }
+    categories: allGraphCmsCategory(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
+      edges {
+        node {
+          name
+          slug
+          posts {
+            id
           }
         }
       }
-    `
-  );
-
-  if (remarks.errors) {
-    throw remarks.errors;
-  }
-
-  const pages = [];
-
-  remarks.data.allMarkdownRemark.edges.forEach((edge) => {
-    let match = edge.node.fields.slug.match(/^\/([\w-]+)\/(?:)/i);
-
-    if (match !== null && match.length > 1) {
-      match = match[1];
-
-      if (!(match in pages)) {
-        pages[match] = [];
-      }
-
-      pages[match].push(edge);
     }
+    tags: allGraphCmsTag(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
+      edges {
+        node {
+          name
+          slug
+          posts {
+            id
+          }
+        }
+      }
+    }
+    portfolio: allGraphCmsPortfolio(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
+      nodes {
+        slug
+      }
+      totalCount
+    }
+    services: allGraphCmsService(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
+      nodes {
+        slug
+      }
+      totalCount
+    }
+    offers: allGraphCmsOffer(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
+      nodes {
+        slug
+      }
+      totalCount
+    }
+    legals: allGraphCmsLegal(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
+      nodes {
+        slug
+      }
+      totalCount
+    }
+  }`);
+
+  pages.nodes.forEach(({ slug }) => {
+    createPage({
+      path: `/${slug}`,
+      component: path.resolve(`./src/templates/page.jsx`),
+      context: {
+        slug
+      }
+    });
   });
 
-  Object.keys(pages).forEach((slug) => {
-    let contents = pages[slug];
-    let total = Math.ceil(contents.length / postsPerPage);
+  posts.edges.forEach(({ node: { slug }, previous, next }) => {
+    createPage({
+      path: `/blog/${slug}`,
+      component: path.resolve(`./src/templates/blog-post.jsx`),
+      context: {
+        slug,
+        previous,
+        next
+      }
+    });
+  });
 
-    Array.from({ length: total }).forEach((_, i) => {
+  const postsPerPage = 1;
+  const blogPages = Math.ceil(posts.edges.length / postsPerPage);
+
+  Array.from({ length: blogPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+      component: path.resolve(`./src/templates/blog-list.jsx`),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        pages: blogPages,
+        current: i + 1,
+        group: 'blog'
+      }
+    });
+  });
+
+  const listfy = (group, slug, length) => {
+    const pages = Math.ceil(length / postsPerPage);
+    const pathParts = [];
+
+    if (group) {
+      pathParts.push(group);
+    }
+
+    if (slug) {
+      pathParts.push(slug);
+    }
+
+    const pathJoin = pathParts.join('/');
+
+    Array.from({ length: pages }).forEach((_, i) => {
       createPage({
-        path: i === 0 ? `/${slug}` : `/${slug}/${i + 1}`,
-        component: path.resolve(`./src/templates/page/${slug}-list.jsx`),
+        path: i === 0 ? `/${pathJoin}` : `/${pathJoin}/${i + 1}`,
+        component: path.resolve(`./src/templates/${group || slug}-list.jsx`),
         context: {
           limit: postsPerPage,
           skip: i * postsPerPage,
-          pages: total,
+          pages,
           current: i + 1,
-          slug: slug,
-          regex: '^/(' + slug + ')/'
+          slug,
+          group
         }
       });
     });
+  };
 
-    contents.forEach((page) => {
+  const postify = (group, nodes) => {
+    nodes.forEach(({ slug }) => {
       createPage({
-        path: page.node.fields.slug,
-        component: path.resolve(`./src/templates/page/${slug}-post.jsx`),
+        path: `/${group}/${slug}`,
+        component: path.resolve(`./src/templates/${group}-post.jsx`),
         context: {
-          slug: page.node.fields.slug
+          slug,
+          group
         }
       });
     });
+  };
+
+  categories.edges.forEach(({ node: { slug, posts } }) => {
+    listfy('category', slug, posts.length);
   });
+
+  tags.edges.forEach(({ node: { slug, posts } }) => {
+    listfy('tag', slug, posts.length);
+  });
+
+  listfy('portfolio', null, portfolio.totalCount);
+  listfy('services', null, services.totalCount);
+  listfy('offers', null, offers.totalCount);
+  listfy('legal', null, legals.totalCount);
+
+  postify('portfolio', portfolio.nodes);
+  postify('services', services.nodes);
+  postify('offers', offers.nodes);
+  postify('legal', legals.nodes);
+};
+
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    GraphCMS_Post: {
+      formattedDate: {
+        type: 'String',
+        resolve: (source) => {
+          const date = new Date(source.date);
+          const m = moment(date);
+          m.locale(process.env.LOCALE);
+
+          return m.format('l');
+        }
+      }
+    }
+  };
+
+  createResolvers(resolvers);
 };
 
 exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {

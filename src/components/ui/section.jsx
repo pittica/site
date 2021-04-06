@@ -8,7 +8,7 @@ import '../../scss/ui/_section.scss';
 export default function Section({ children, title, subtitle, link, className }) {
   return (
     <section className={classnames('section', className)}>
-      <SectionTitle title={title} subtitle={subtitle} link={link} />
+      {(title || subtitle) && <SectionTitle title={title} subtitle={subtitle} link={link} />}
       {children && <div className="container">{children}</div>}
     </section>
   );

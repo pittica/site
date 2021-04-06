@@ -31,7 +31,7 @@
   padding: $size-4;
   text-transform: uppercase;
   letter-spacing: 0.35rem;
-  margin: $size-4;
+  margin: $size-1 $size-4 $size-4 $size-4;
   border: 1px solid $primary;
   @include rotate(4);
   @include linear-gradient(top, $primary 50%, $primary-invert 50%);

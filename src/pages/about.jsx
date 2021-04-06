@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import classnames from 'classnames';
 
 import Layout from '../components/layout/layout';
 import Section from '../components/ui/section';
 import AssetsBlock from '../components/sections/assets-block';
-import AssetsTechnologies from '../components/sections/assets-technologies';
+import ImageLink from '../components/ui/image-link';
+import FeatureLink from '../components/ui/link/feature-link';
 
 import Partners from '../components/sections/partners';
 
 import about from '../../static/assets/about.svg';
 import breaker from '../../static/assets/about-breaker.svg';
 
-class AboutPage extends React.Component {
+class AboutPage extends Component {
   render() {
     return (
       <Layout location={this.props.location} title="About">
@@ -72,31 +73,33 @@ class AboutPage extends React.Component {
             <li>Stampa</li>
             <li>Supporto per selezione risorse umane IT</li>
           </ul>
+          <div className="has-text-centered">
+            <FeatureLink to="/services" label="Vedi i nostri servizi" />
+          </div>
         </Section>
-        <Section title="Tecnologie" subtitle="Con cosa lavoriamo?">
-          <AssetsTechnologies
-            entries={[
-              'php',
-              'nodejs',
-              'csharp',
-              'vuejs',
-              'react',
-              'git',
-              'css3',
-              'html5',
-              'gatsby',
-              'jekyll',
-              'mysql',
-              'mssql',
-              'bulma',
-              'bootstrap',
-              'sass',
-              'cakephp',
-              'prestashop',
-              'wordpress'
-            ]}
-          />
-        </Section>
+        {this.props.data.allGraphCmsTechnology.nodes.length > 0 && (
+          <Section title="Tecnologie" subtitle="Con cosa lavoriamo?">
+            <div className={classnames('columns', 'is-multiline')}>
+              {this.props.data.allGraphCmsTechnology.nodes.map((element, i) => {
+                return (
+                  <div
+                    className={classnames(
+                      'column',
+                      'is-4-mobile',
+                      'is-3-tablet',
+                      'is-3-desktop',
+                      'is-3-widescreen',
+                      'is-2-fullhd'
+                    )}
+                    key={`technology-${i}`}
+                  >
+                    <ImageLink link={element.link} title={element.name} image={element.logo} />
+                  </div>
+                );
+              })}
+            </div>
+          </Section>
+        )}
         <Section title="Rete Aziendale" subtitle="Le Aziende con cui collaboriamo">
           <AssetsBlock
             asset="business-network"
@@ -127,9 +130,15 @@ export default AboutPage;
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        title
+    allGraphCmsTechnology(filter: { stage: { eq: PUBLISHED } }) {
+      nodes {
+        link
+        name
+        logo {
+          localFile {
+            publicURL
+          }
+        }
       }
     }
   }

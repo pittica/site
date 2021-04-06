@@ -56,10 +56,21 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(limit: 2000) {
-      group(field: frontmatter___tags) {
+    allGraphCmsPost(
+      filter: {locale: {eq: it}, stage: {eq: PUBLISHED}}
+      sort: {fields: tags___name, order: ASC}
+    ) {
+      group(field: tags___id) {
+        field
         fieldValue
         totalCount
+      }
+    }
+    allGraphCmsTag(filter: {locale: {eq: it}, stage: {eq: PUBLISHED}}) {
+      nodes {
+        id
+        name
+        slug
       }
     }
   }

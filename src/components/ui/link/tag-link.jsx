@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
-import slugify from 'slug';
-import { pathify } from '../../../utils/pathify';
 
 import '../../../scss/ui/link/_tag-link.scss';
 
-export default class TagLink extends Component {
-  render() {
-    const path = pathify('tag', slugify(this.props.tag, { lower: true }));
-
+export default function TagLink({tag}) {
     return (
-      <Link to={path} className="tag-link">
+      <Link to={`/tag/${tag.slug}`} className="tag-link">
         <span>
-          <i className="icon-pittica-tag" /> {this.props.tag}
+          <i className="icon-pittica-tag" /> {tag.name}
         </span>
       </Link>
     );
   }
-}

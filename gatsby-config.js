@@ -1,11 +1,13 @@
+require('dotenv').config();
+
 module.exports = {
   siteMetadata: {
     title: `Pittica`,
     author: `Pittica S.r.l.s.`,
     description: `Mad Scientists At Work.`,
     locale: {
-      language: `it`,
-      culture: `IT`
+      language: process.env.LOCALE.toLowerCase(),
+      culture: process.env.CULTURE.toUpperCase()
     },
     siteUrl: `https://pittica.com/`,
     legal: {
@@ -34,13 +36,26 @@ module.exports = {
     }
   },
   plugins: [
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        path: `${__dirname}/content/articles`,
-        name: `articles`
+        extensions: [ `.md`, `.mdx` ],
+        mediaTypes: [ `text/markdown`, `text/x-markdown` ]
+      }
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-image`,
+    {
+      resolve: 'gatsby-source-graphcms',
+      options: {
+        endpoint: process.env.GRAPHCMS_ENDPOINT,
+        token: process.env.GRAPHCMS_TOKEN,
+        buildMarkdownNodes: true,
+        locales: [ process.env.LOCALE ],
+        fragmentsPath: 'fragments',
+        downloadLocalImages: true,
+        stages: [ 'DRAFT', 'PUBLISHED' ]
       }
     },
     {
@@ -48,28 +63,6 @@ module.exports = {
       options: {
         path: `${__dirname}/content/assets`,
         name: `assets`
-      }
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 590
-            }
-          },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`
-            }
-          },
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`
-        ]
       }
     },
     {
@@ -98,7 +91,7 @@ module.exports = {
       resolve: `gatsby-plugin-iubenda-cookie-footer`,
       options: {
         iubendaOptions: {
-          lang: 'it',
+          lang: process.env.LOCALE.toLowerCase(),
           siteId: 1781270,
           countryDetection: true,
           consentOnContinuedBrowsing: false,
@@ -213,7 +206,6 @@ module.exports = {
       }
     },
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-styled-components`,
     `gatsby-plugin-offline`,
     {
       resolve: 'gatsby-plugin-preconnect',
@@ -231,17 +223,6 @@ module.exports = {
         username: 'pittica.com',
         template: '5419b6a8b0d04a076446a9ad',
         business: '5eaf034c658436000194e69b'
-      }
-    },
-    {
-      resolve: `@pittica/gatsby-plugin-blog`,
-      options: {
-        postsPerPage: 15,
-        templateCategory: './src/templates/category.js',
-        templateTag: './src/templates/tag.js',
-        templateArticle: './src/templates/blog-post.js',
-        templateList: './src/templates/blog-list.js',
-        slug: 'blog'
       }
     },
     {

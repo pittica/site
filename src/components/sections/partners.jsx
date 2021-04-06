@@ -13,7 +13,7 @@ const Partners = () => {
         </a>
       </div>
       <div className={classnames('column', 'is-6', 'has-text-centered')}>
-        <Link to="/iubenda-partner" title="iubenda Certified Bronze Partner">
+        <Link to="/iubenda" title="iubenda Certified Bronze Partner">
           <img
             src="https://www.iubenda.com/partner/bronze@2x.png"
             alt="iubenda Certified Bronze Partner"

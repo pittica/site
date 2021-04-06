@@ -7,11 +7,11 @@ import Main from '../ui/main';
 
 export default class Layout extends React.Component {
   render() {
-    const { location, title, children } = this.props;
+    const { children, location, title, description } = this.props;
 
     return (
       <div>
-        <Seo title={title} path={location.pathname} />
+        <Seo title={title} description={description} path={location.pathname} />
         <Navbar title={title} location={location} />
         <Main>{children}</Main>
         <Footer />

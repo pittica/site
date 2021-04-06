@@ -4,39 +4,5 @@
 .post-layout {
   .blog-post {
     margin-bottom: ($size-1 * 2);
-    .post-content {
-      padding: 0.475rem;
-      h1,
-      h3,
-      h4 {
-        margin-bottom: $size-4;
-        font-size: 120%;
-      }
-      h2 {
-        margin-bottom: $size-3;
-        font-size: 150%;
-        border-bottom: 0.125rem solid $primary;
-        padding: ($size-4 / 2);
-      }
-      p {
-        margin: $size-7 auto;
-      }
-      img {
-        margin: $size-4 auto;
-      }
-      a {
-        border-bottom: $size-7 / 7 solid $primary;
-      }
-      ul {
-        li {
-          list-style-type: square;
-          ol {
-            li {
-              list-style-type: lower-alpha;
-            }
-          }
-        }
-      }
-    }
   }
 }

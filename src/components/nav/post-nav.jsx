@@ -12,15 +12,15 @@ export default function PostNav({ previous, next }) {
         <ul className="post-nav">
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                <i className="icon-pittica-arrow-left" /> {previous.frontmatter.title}
+              <Link to={`/blog/${previous.slug}`} rel="prev">
+                <i className="icon-pittica-arrow-left" /> {previous.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} <i className="icon-pittica-arrow-right" />
+              <Link to={`/blog/${next.slug}`} rel="next">
+                {next.title} <i className="icon-pittica-arrow-right" />
               </Link>
             )}
           </li>
