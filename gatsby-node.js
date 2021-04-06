@@ -125,7 +125,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     });
   });
 
-  const postsPerPage = 1;
+  const postsPerPage = parseInt(process.env.POSTS_PER_PAGE || 18);
   const blogPages = Math.ceil(posts.edges.length / postsPerPage);
 
   Array.from({ length: blogPages }).forEach((_, i) => {
