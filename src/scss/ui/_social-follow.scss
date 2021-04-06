@@ -1,0 +1,12 @@
+@import "../variables";
+
+.social-follow {
+  margin: $size-6 auto;
+  li {
+    display: inline-block;
+    padding: $size-7 $size-4 $size-7 0;
+    span {
+      display: none;
+    }
+  }
+}

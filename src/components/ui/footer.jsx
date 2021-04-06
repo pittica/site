@@ -3,11 +3,12 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import classnames from 'classnames';
 import TrustpilotReviews from '@pittica/gatsby-plugin-trustpilot-widget';
 
-import Sign from './ui/sign';
-import PrivacyLink from './ui/link/privacy-link';
-import Section from './ui/section';
+import Sign from './sign';
+import PrivacyLink from './link/privacy-link';
+import Section from './section';
+import SocialFollow from './social-follow';
 
-import '../scss/ui/_footer.scss';
+import '../../scss/ui/_footer.scss';
 
 const Footer = () => {
   const {
@@ -131,29 +132,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className={classnames('column', 'is-one-fifths')}>
-            <h2>Seguici</h2>
-            <ul className="social-follow">
-              <li>
-                <a href={new URL(socials.linkedin.page, 'https://www.linkedin.com/company/').href} title="LinkedIn">
-                  <i className="icon-pittica-linkedin" />
-                  <span>LinkedIn</span>
-                </a>
-              </li>
-              <li>
-                <a href={new URL(socials.github.username, 'https://github.com/').href} title="GitHub">
-                  <i className="icon-pittica-github" />
-                  <span>GitHub</span>
-                </a>
-              </li>
-              <li>
-                <a href={new URL(socials.facebook.page, 'https://www.facebook.com/').href} title="Facebook">
-                  <i className="icon-pittica-facebook" />
-                  <span>Facebook</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+          <SocialFollow className={classnames('column', 'is-one-fifths')} socials={socials} />
         </div>
         <div className="columns">
           <div className="column">

@@ -2,7 +2,7 @@ import React from 'react';
 import { Seo } from '@pittica/gatsby-plugin-seo';
 
 import Navbar from '../nav/navbar';
-import Footer from '../footer';
+import Footer from '../ui/footer';
 import Main from '../ui/main';
 
 export default class Layout extends React.Component {

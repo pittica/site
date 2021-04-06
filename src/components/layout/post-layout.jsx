@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Seo } from '@pittica/gatsby-plugin-seo';
 
 import Navbar from '../nav/navbar';
-import Footer from '../footer';
+import Footer from '../ui/footer';
 import Main from '../ui/main';
 
 import '../../scss/layout/_post-layout.scss';

@@ -2,14 +2,14 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    title: `Pittica`,
+    title: process.env.NAME,
     author: `Pittica S.r.l.s.`,
     description: `Mad Scientists At Work.`,
     locale: {
       language: process.env.LOCALE.toLowerCase(),
       culture: process.env.CULTURE.toUpperCase()
     },
-    siteUrl: `https://pittica.com/`,
+    siteUrl: process.env.URL,
     legal: {
       privacy: '/legal/privacy',
       terms: '/legal/tos',
@@ -18,8 +18,8 @@ module.exports = {
     organization: {
       company: `Pittica S.r.l.s.`,
       address: `Via Le Corbusier, 39`,
-      url: `https://pittica.com/`,
-      logo: `https://pittica.com/logo.png`,
+      url: process.env.NAME,
+      logo: `${process.env.NAME}logo.png`,
       zipCode: `48124`,
       city: `Ravenna`,
       province: `RA`,
@@ -97,7 +97,7 @@ module.exports = {
           consentOnContinuedBrowsing: false,
           cookiePolicyInOtherWindow: true,
           cookiePolicyId: 29008249,
-          cookiePolicyUrl: 'https://pittica.com/legal/cookies',
+          cookiePolicyUrl: `${process.env.NAME}legal/cookies`,
           banner: {
             position: 'float-top-center',
             textColor: '#fff',
@@ -127,32 +127,30 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map((edge) => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [ { 'content:encoded': edge.node.html } ]
+            serialize: ({ query: { site: { siteMetadata: { siteUrl } }, allGraphCmsPost: { nodes } } }) => {
+              return nodes.map((node) => {
+                const url = new URL(`/blog/${node.slug}`, siteUrl).href;
+
+                return Object.assign({}, node, {
+                  description: node.excerpt,
+                  date: node.date,
+                  url: url,
+                  guid: url,
+                  custom_elements: [ { 'content:encoded': node.content.html } ]
                 });
               });
             },
             query: `
               {
-                allMarkdownRemark(
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                ) {
-                  edges {
-                    node {
-                      excerpt
+                allGraphCmsPost(filter: {stage: {eq: PUBLISHED}, locale: {eq: it}}) {
+                  nodes {
+                    content {
                       html
-                      fields { slug }
-                      frontmatter {
-                        title
-                        date
-                      }
                     }
+                    title
+                    slug
+                    date
+                    excerpt
                   }
                 }
               }

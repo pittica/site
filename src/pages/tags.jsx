@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 
 import Layout from '../components/layout/layout';
 import Section from '../components/ui/section';
@@ -10,15 +9,23 @@ class TagsPage extends Component {
   render() {
     const { data, location } = this.props;
     const siteTitle = data.site.siteMetadata.title;
+    const tags = {};
+
+    data.tags.nodes.forEach(({ id, name, slug }) => {
+      tags[id] = {
+        name,
+        slug
+      };
+    });
 
     return (
       <Layout location={location} title={siteTitle}>
         <Section title="Tag">
           <ul className="page-list">
-            {data.allMarkdownRemark.group.map((node, index) => {
+            {data.posts.group.map((node, index) => {
               return (
                 <li key={'tag-' + index}>
-                  <TagLink tag={node.fieldValue} /> ({node.totalCount})
+                  <TagLink tag={tags[node.fieldValue]} /> ({node.totalCount})
                 </li>
               );
             })}
@@ -31,24 +38,6 @@ class TagsPage extends Component {
 
 export default TagsPage;
 
-TagsPage.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      group: PropTypes.arrayOf(
-        PropTypes.shape({
-          fieldValue: PropTypes.string.isRequired,
-          totalCount: PropTypes.number.isRequired
-        }).isRequired
-      )
-    }),
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string.isRequired
-      })
-    })
-  })
-};
-
 export const pageQuery = graphql`
   query {
     site {
@@ -56,9 +45,9 @@ export const pageQuery = graphql`
         title
       }
     }
-    allGraphCmsPost(
-      filter: {locale: {eq: it}, stage: {eq: PUBLISHED}}
-      sort: {fields: tags___name, order: ASC}
+    posts: allGraphCmsPost(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+      sort: { fields: tags___name, order: ASC }
     ) {
       group(field: tags___id) {
         field
@@ -66,7 +55,7 @@ export const pageQuery = graphql`
         totalCount
       }
     }
-    allGraphCmsTag(filter: {locale: {eq: it}, stage: {eq: PUBLISHED}}) {
+    tags: allGraphCmsTag(filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }) {
       nodes {
         id
         name

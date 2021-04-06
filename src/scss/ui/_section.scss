@@ -27,6 +27,7 @@
     &.page-list {
       margin-bottom: $size-1;
       li {
+        display: inline-block;
         &:before {
           content: "";
         }

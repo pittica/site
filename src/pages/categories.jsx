@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 
 import Layout from '../components/layout/layout';
 import Section from '../components/ui/section';
@@ -10,15 +9,23 @@ export default class CategoriesPage extends Component {
   render() {
     const { data, location } = this.props;
     const siteTitle = data.site.siteMetadata.title;
+    const categories = {};
+
+    data.categories.nodes.forEach(({ id, name, slug }) => {
+      categories[id] = {
+        name,
+        slug
+      };
+    });
 
     return (
       <Layout location={location} title={siteTitle}>
         <Section title="Categorie">
           <ul className="page-list">
-            {data.allMarkdownRemark.group.map((node, index) => {
+            {data.posts.group.map((node, index) => {
               return (
                 <li key={'category-' + index}>
-                  <CategoryLink category={node.fieldValue} /> ({node.totalCount})
+                  <CategoryLink category={categories[node.fieldValue]} /> ({node.totalCount})
                 </li>
               );
             })}
@@ -29,24 +36,6 @@ export default class CategoriesPage extends Component {
   }
 }
 
-CategoriesPage.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      group: PropTypes.arrayOf(
-        PropTypes.shape({
-          fieldValue: PropTypes.string.isRequired,
-          totalCount: PropTypes.number.isRequired
-        }).isRequired
-      )
-    }),
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string.isRequired
-      })
-    })
-  })
-};
-
 export const pageQuery = graphql`
   query {
     site {
@@ -54,9 +43,9 @@ export const pageQuery = graphql`
         title
       }
     }
-    allGraphCmsPost(
-      filter: {locale: {eq: it}, stage: {eq: PUBLISHED}}
-      sort: {fields: categories___name, order: ASC}
+    posts: allGraphCmsPost(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+      sort: { fields: categories___name, order: ASC }
     ) {
       group(field: categories___id) {
         field
@@ -64,7 +53,7 @@ export const pageQuery = graphql`
         totalCount
       }
     }
-    allGraphCmsCategory(filter: {locale: {eq: it}, stage: {eq: PUBLISHED}}) {
+    categories: allGraphCmsCategory(filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }) {
       nodes {
         id
         name
