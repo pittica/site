@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
-import ReCaptcha, { Loader } from '@pittica/gatsby-plugin-recaptcha';
+import ReCaptcha, { Loader, Unloader } from '@pittica/gatsby-plugin-recaptcha';
 import validator from 'validator';
 
 import Section from '../components/ui/section';
@@ -31,6 +31,10 @@ export default class ContactForm extends Component {
     };
 
     Loader();
+  }
+
+  componentWillUnmount() {
+    Unloader();
   }
 
   loading() {

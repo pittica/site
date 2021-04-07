@@ -79,5 +79,12 @@ fragment Asset on Asset {
       stage
     }
   }
+  logoPartner {
+    ... on Partner {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
   url
 }

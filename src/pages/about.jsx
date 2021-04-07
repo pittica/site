@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 import Layout from '../components/layout/layout';
 import Section from '../components/ui/section';
-import AssetsBlock from '../components/sections/assets-block';
+import Technologies from '../components/ui/technologies';
 import ImageLink from '../components/ui/image-link';
 import FeatureLink from '../components/ui/link/feature-link';
 
@@ -79,45 +79,22 @@ class AboutPage extends Component {
         </Section>
         {this.props.data.allGraphCmsTechnology.nodes.length > 0 && (
           <Section title="Tecnologie" subtitle="Con cosa lavoriamo?">
+            <Technologies nodes={this.props.data.allGraphCmsTechnology.nodes} />
+          </Section>
+        )}
+        {this.props.data.allGraphCmsPartner.nodes.length > 0 && (
+          <Section title="Rete Aziendale" subtitle="Le Aziende con cui collaboriamo">
             <div className={classnames('columns', 'is-multiline')}>
-              {this.props.data.allGraphCmsTechnology.nodes.map((element, i) => {
+              {this.props.data.allGraphCmsPartner.nodes.map((node, i) => {
                 return (
-                  <div
-                    className={classnames(
-                      'column',
-                      'is-4-mobile',
-                      'is-3-tablet',
-                      'is-3-desktop',
-                      'is-3-widescreen',
-                      'is-2-fullhd'
-                    )}
-                    key={`technology-${i}`}
-                  >
-                    <ImageLink link={element.link} title={element.name} image={element.logo} />
+                  <div className={classnames('column', 'is-one-third', 'p-6')} key={`partner-${i}`}>
+                    <ImageLink link={node.link} title={node.name} image={node.logo} />
                   </div>
                 );
               })}
             </div>
           </Section>
         )}
-        <Section title="Rete Aziendale" subtitle="Le Aziende con cui collaboriamo">
-          <AssetsBlock
-            asset="business-network"
-            size={196}
-            entries={[
-              {
-                slug: 'it-easy-informatica',
-                link: 'https://www.iteasyinformatica.it/',
-                title: 'IT Easy Informatica'
-              },
-              {
-                slug: 'resmart',
-                link: 'https://www.resmart.it/',
-                title: 'reSmart'
-              }
-            ]}
-          />
-        </Section>
         <Section title="Partner" subtitle="Partnership e Associazioni">
           <Partners />
         </Section>
@@ -131,6 +108,17 @@ export default AboutPage;
 export const pageQuery = graphql`
   query {
     allGraphCmsTechnology(filter: { stage: { eq: PUBLISHED } }) {
+      nodes {
+        link
+        name
+        logo {
+          localFile {
+            publicURL
+          }
+        }
+      }
+    }
+    allGraphCmsPartner(filter: { stage: { eq: PUBLISHED } }) {
       nodes {
         link
         name

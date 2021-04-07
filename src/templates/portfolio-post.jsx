@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { graphql } from 'gatsby';
 import { getImage } from 'gatsby-plugin-image';
 
 import PostContent from '../components/ui/article/post-content';
 import PostLayout from '../components/layout/post-layout';
 import Section from '../components/ui/section';
-import ImageLink from '../components/ui/image-link';
+import Technologies from '../components/ui/technologies';
 import PostHeader from '../components/ui/article/post-header';
 
 export default class PortfolioPostTemplate extends Component {
@@ -20,39 +19,19 @@ export default class PortfolioPostTemplate extends Component {
         <article className="blog-post">
           <PostHeader image={cover} post={post} />
           <PostContent>{post.content}</PostContent>
-          <div className="container">
-            {post.technologies &&
-            post.technologies.length > 0 && (
-              <Section subtitle="Tecnologie">
-                <div className={classnames('columns', 'is-multiline')}>
-                  {post.technologies.map((element, i) => {
-                    return (
-                      <div
-                        className={classnames(
-                          'column',
-                          'is-4-mobile',
-                          'is-3-tablet',
-                          'is-3-desktop',
-                          'is-3-widescreen',
-                          'is-2-fullhd'
-                        )}
-                        key={`technology-${i}`}
-                      >
-                        <ImageLink link={element.link} title={element.name} image={element.logo} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </Section>
-            )}
-            {post.link && (
-              <Section subtitle="URL">
-                <a href={post.link} title={post.title} target="_system">
-                  {post.link}
-                </a>
-              </Section>
-            )}
-          </div>
+          {post.technologies &&
+          post.technologies.length > 0 && (
+            <Section title="Tecnologie">
+              <Technologies nodes={post.technologies} />
+            </Section>
+          )}
+          {post.link && (
+            <Section title="URL">
+              <a href={post.link} title={post.title} target="_system">
+                {post.link}
+              </a>
+            </Section>
+          )}
         </article>
       </PostLayout>
     );
