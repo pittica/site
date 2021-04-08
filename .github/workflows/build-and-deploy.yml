@@ -15,12 +15,12 @@ jobs:
     - name: Create .env file
       uses: SpicyPizza/create-envfile@v1.0
       with:
-        envkey_NAME: ${{ secrets.NAME }}
-        envkey_URL: ${{ secrets.URL }}
-        envkey_LOCALE: ${{ secrets.LOCALE }}
-        envkey_CULTURE: ${{ secrets.CULTURE }}
-        envkey_GRAPHCMS_ENDPOINT: ${{ secrets.GRAPHCMS_ENDPOINT }}
-        envkey_GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
+        NAME: ${{ secrets.NAME }}
+        URL: ${{ secrets.URL }}
+        LOCALE: ${{ secrets.LOCALE }}
+        CULTURE: ${{ secrets.CULTURE }}
+        GRAPHCMS_ENDPOINT: ${{ secrets.GRAPHCMS_ENDPOINT }}
+        GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
