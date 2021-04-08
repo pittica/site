@@ -12,6 +12,15 @@ jobs:
         node-version: [12.x]
 
     steps:
+    - name: create env file
+      run: |
+        touch .env
+        echo NAME =${{ secrets.NAME }} >> .env
+        echo URL =${{ secrets.URL }} >> .env
+        echo LOCALE =${{ secrets.LOCALE }} >> .env
+        echo CULTURE =${{ secrets.CULTURE }} >> .env
+        echo GRAPHCMS_ENDPOINT =${{ secrets.GRAPHCMS_ENDPOINT }} >> .env
+        echo GRAPHCMS_TOKEN =${{ secrets.GRAPHCMS_TOKEN }} >> .env
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
