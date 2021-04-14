@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import classnames from 'classnames';
 
+import Renderer from '../mdx/renderer';
 import Layout from '../components/layout/layout';
 import Section from '../components/ui/section';
 import Technologies from '../components/ui/technologies';
@@ -20,63 +21,22 @@ class AboutPage extends Component {
         <figure className={classnames('image', 'is-128x128')}>
           <img src={about} alt="About" width="1080" height="1080" />
         </figure>
-        <Section title="About" subtitle="Chi siamo?">
-          <p>
-            La risposta più corretta sarebbe: "Siamo una realtà di consulenza e sviluppo IT focalizzata soprattutto sul
-            web".
-          </p>
-          <p>
-            Vogliamo distaccarci dal tradizionale concetto di Digital Agency. Non volendoci concentrare sul solo aspetto
-            operativo, infatti, seguiamo il business del Cliente sotto tutti i punti di vista. E mettiamo l'azienda
-            nelle condizioni di portare a termine il percorso di sviluppo suggerito. Questo perché sappiamo quali siano
-            i giusti strumenti per poterlo fare.
-          </p>
-          <p>
-            Siamo <strong>consulenti per l'innovazione</strong> impegnati sul fronte dei processi che{' '}
-            <strong>elevano e ottimizzano il business di un'azienda</strong>.
-            <br />
-            Il nostro lavoro consiste nell'analizzare un'impresa per esprimerla al meglio.
-          </p>
-          <p>
-            Lavoriamo insieme alle aziende per sviluppare, potenziare e/o consolidare la loro rete di vendita online e
-            offline, ad esempio.
-            <br />
-            Attraverso attività di comunicazione strategiche, trasformiamo l'identità di un brand in parole e in
-            contenuti visual, aiutiamo le aziende ad acquisire nuovi lead, ci occupiamo di attività di marketing pre e
-            post-vendita.
-            <br />
-            Forniamo anche assistenza tecnica e sistemistica. Dal semplice sito Wordpress a elaborati progetti su
-            Gatsby, dalla revisione del codice all'attività di project management, dall'applicazione desktop ad App
-            progressive: sul piano dello sviluppo informatico, il nostro obiettivo è offrire le migliori tecnologie a
-            disposizione.
-            <br />
-            Ascoltiamo e supportiamo le esigenze del Cliente, prefiggendoci anche di prevenirle.
-          </p>
-          <p>
-            In tutto ciò, abbiamo una certezza: molto (se non tutto) dipende dalla base e dalla logica di un progetto.
-            Se entrambe sono adamantine, le probabilità di successo aumentano sensibilmente.
-          </p>
-        </Section>
+        {this.props.data.about && (
+          <Section title={this.props.data.about.title} subtitle={this.props.data.about.subtitle}>
+            <Renderer>{this.props.data.about.content}</Renderer>
+          </Section>
+        )}
         <figure className={classnames('image', 'is-128x128')}>
           <img src={breaker} alt="About" width="1080" height="1080" />
         </figure>
-        <Section title="Servizi" subtitle="Cosa facciamo?">
-          <ul>
-            <li>Consulenza al retail focalizzata sul local business</li>
-            <li>Sviluppo di tecnologie web e cloud based</li>
-            <li>Implementazione di CMS per la creazione di e-commerce, blog e siti web</li>
-            <li>Hosting professionale</li>
-            <li>Gestione e-mail</li>
-            <li>Consulenza tecnologia e sistemistica</li>
-            <li>Comunicazione, copywriting, social media management e advertising</li>
-            <li>Produzione di contenuti audiovisivi</li>
-            <li>Stampa</li>
-            <li>Supporto per selezione risorse umane IT</li>
-          </ul>
-          <div className="has-text-centered">
-            <FeatureLink to="/services" label="Vedi i nostri servizi" />
-          </div>
-        </Section>
+        {this.props.data.services && (
+          <Section title={this.props.data.services.title} subtitle={this.props.data.services.subtitle}>
+            <Renderer>{this.props.data.services.content}</Renderer>
+          </Section>
+        )}
+        <div className="has-text-centered">
+          <FeatureLink to="/services" label="Vedi i nostri servizi" />
+        </div>
         {this.props.data.allGraphCmsTechnology.nodes.length > 0 && (
           <Section title="Tecnologie" subtitle="Con cosa lavoriamo?">
             <Technologies nodes={this.props.data.allGraphCmsTechnology.nodes} />
@@ -106,6 +66,18 @@ class AboutPage extends Component {
 export default AboutPage;
 
 export const pageQuery = graphql`
+  fragment GraphCMS_SectionFragment on GraphCMS_Section {
+    title
+    subtitle
+    content {
+      markdownNode {
+        childMdx {
+          body
+        }
+      }
+    }
+  }
+
   query {
     allGraphCmsTechnology(filter: { stage: { eq: PUBLISHED } }) {
       nodes {
@@ -128,6 +100,12 @@ export const pageQuery = graphql`
           }
         }
       }
+    }
+    about: graphCmsSection(slug: { eq: "about" }, stage: { eq: PUBLISHED }) {
+      ...GraphCMS_SectionFragment
+    }
+    services: graphCmsSection(slug: { eq: "services" }, stage: { eq: PUBLISHED }) {
+      ...GraphCMS_SectionFragment
     }
   }
 `;
