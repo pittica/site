@@ -52,9 +52,11 @@ export default class PostTemplate extends Component {
           </ArticleHeader>
           <PostContent>{post.content}</PostContent>
           <div className="container">
-            <Section className="has-text-right">
-              <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
-            </Section>
+            {post.price && (
+              <Section className="has-text-right">
+                <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
+              </Section>
+            )}
             {post.confcommercioDiscount && (
               <Section className="has-text-right" title="Convenzione Confcommercio">
                 <p className="subtitle">
