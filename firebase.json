@@ -22,7 +22,7 @@
         ]
       },
       {
-        "source": "**/public/page-data/*",
+        "source": "**/page-data/*",
         "headers": [
           {
             "key": "Cache-Control",
