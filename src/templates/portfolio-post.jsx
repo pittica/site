@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import { getImage } from 'gatsby-plugin-image';
 
 import PostContent from '../components/ui/article/post-content';
 import PostLayout from '../components/layout/post-layout';
 import Section from '../components/ui/section';
 import Technologies from '../components/ui/technologies';
 import PostHeader from '../components/ui/article/post-header';
+import Screenshots from '../components/sections/screenshots';
 
 export default class PortfolioPostTemplate extends Component {
   render() {
     const post = this.props.data.graphCmsPortfolio;
-    const image = getImage(post.image.localFile.childImageSharp);
-    const cover = image ? image.images.fallback.src : null;
+    let cover = post.image && post.image.localFile ? post.image.localFile.publicURL : null;
 
     return (
       <PostLayout title={post.title} post={post} image={cover} location={this.props.location}>
@@ -25,6 +24,7 @@ export default class PortfolioPostTemplate extends Component {
               <Technologies nodes={post.technologies} />
             </Section>
           )}
+          <Screenshots screenshots={post.screenshots} title={post.title} />
           {post.link && (
             <Section title="URL">
               <a href={post.link} title={post.title} target="_system">
@@ -63,8 +63,13 @@ export const pageQuery = graphql`
       description
       image {
         localFile {
+          publicURL
+        }
+      }
+      screenshots {
+        localFile {
           childImageSharp {
-            gatsbyImageData(width: 1920, height: 1080, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+            gatsbyImageData(height: 440, width: 640, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
           }
         }
       }

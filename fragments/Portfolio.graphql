@@ -53,4 +53,12 @@ fragment Portfolio on Portfolio {
       stage
     }
   }
+  screenshots {
+    ... on Asset {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
 }

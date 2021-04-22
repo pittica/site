@@ -6,7 +6,7 @@ import Renderer from '../mdx/renderer';
 import Layout from '../components/layout/layout';
 import Section from '../components/ui/section';
 import Technologies from '../components/ui/technologies';
-import ImageLink from '../components/ui/image-link';
+import ImageLink from '../components/ui/image/image-link';
 import FeatureLink from '../components/ui/link/feature-link';
 
 import Partners from '../components/sections/partners';
