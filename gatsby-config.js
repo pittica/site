@@ -180,8 +180,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        output: `/sitemap.xml`,
-        exclude: [],
+        output: '/./',
         query: `
           {
             site {
@@ -190,21 +189,57 @@ module.exports = {
               }
             }
             allSitePage {
-              edges {
-                node {
-                  path
+              nodes {
+                path
+                context {
+                  group
+                  updatedAt
                 }
               }
             }
-        }`,
-        serialize: ({ site, allSitePage }) =>
-          allSitePage.edges.map((edge) => {
-            return {
-              url: site.siteMetadata.siteUrl + edge.node.path,
-              changefreq: `daily`,
-              priority: 0.7
+          }
+        `,
+        resolvePages: ({ site: { siteMetadata: { siteUrl } }, allSitePage: { nodes } }) =>
+          nodes.map(({ path, context }) => {
+            const page = {
+              path: new URL(path, siteUrl).href,
+              changefreq: 'daily',
+              priority: 0.5,
+              lastmod: null
             };
-          })
+
+            if (context && context) {
+              if (context.updatedAt) {
+                page.lastmod = context.updatedAt;
+              }
+
+              if (context.group) {
+                switch (context.group) {
+                  case 'post':
+                    page.changefreq = 'monthly';
+                    page.priority = 0.7;
+                    break;
+                  case 'page':
+                    page.priority = 0.8;
+                    break;
+                  case 'portfolio':
+                    page.priority = 0.6;
+                    break;
+                  case 'offers':
+                    page.priority = 0.7;
+                    break;
+                  default:
+                    page.priority = path === '/' ? 1.0 : 0.5;
+                    break;
+                }
+              }
+            }
+
+            return page;
+          }),
+        serialize: ({ path, changefreq, priority, lastmod }) => {
+          return { url: path, changefreq, priority, lastmod };
+        }
       }
     },
     `gatsby-plugin-react-helmet`,

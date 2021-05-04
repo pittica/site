@@ -11,6 +11,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       nodes {
         id
         slug
+        updatedAt
       }
     }
     posts: allGraphCmsPost(
@@ -30,6 +31,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             name
             slug
           }
+          updatedAt
         }
         next {
           id
@@ -53,6 +55,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           posts {
             id
           }
+          updatedAt
         }
       }
     }
@@ -66,6 +69,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           posts {
             id
           }
+          updatedAt
         }
       }
     }
@@ -74,6 +78,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     ) {
       nodes {
         slug
+        updatedAt
       }
       totalCount
     }
@@ -82,6 +87,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     ) {
       nodes {
         slug
+        updatedAt
       }
       totalCount
     }
@@ -90,6 +96,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     ) {
       nodes {
         slug
+        updatedAt
       }
       totalCount
     }
@@ -98,29 +105,34 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     ) {
       nodes {
         slug
+        updatedAt
       }
       totalCount
     }
   }`);
 
-  pages.nodes.forEach(({ slug }) => {
+  pages.nodes.forEach(({ slug, updatedAt }) => {
     createPage({
       path: `/${slug}`,
       component: path.resolve(`./src/templates/page.jsx`),
       context: {
-        slug
+        slug,
+        updatedAt,
+        group: 'page'
       }
     });
   });
 
-  posts.edges.forEach(({ node: { slug }, previous, next }) => {
+  posts.edges.forEach(({ node: { slug, updatedAt }, previous, next }) => {
     createPage({
       path: `/blog/${slug}`,
       component: path.resolve(`./src/templates/blog-post.jsx`),
       context: {
         slug,
         previous,
-        next
+        next,
+        updatedAt,
+        group: 'post'
       }
     });
   });
