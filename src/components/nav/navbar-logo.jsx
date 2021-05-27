@@ -33,7 +33,7 @@ export default class NavbarLogo extends Component {
         `}
         render={({ site: { siteMetadata: { appearance: { background } } } }) => (
           <Link to="/" className="navbar-logo">
-            <Sign color={background} alt={this.props.title} />
+            <Sign color={background} alt={this.props.title} width="316" height="69" />
           </Link>
         )}
       />

@@ -1,9 +1,15 @@
 import React from 'react';
 import classnames from 'classnames';
 
-export default function Sign({ color }) {
+export default function Sign({ color, width, height }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140" className="sign-pittica">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 600 140"
+      className="sign-pittica"
+      width={width}
+      height={height}
+    >
       <path
         className="sign-pittica-logo"
         fill={color}

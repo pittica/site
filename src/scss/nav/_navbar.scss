@@ -45,21 +45,4 @@
       height: 2px;
     }
   }
-  &:after {
-    content: "";
-    display: block;
-    background: $primary;
-    height: 87px;
-    width: 336px;
-    max-width: 100%;
-    position: absolute;
-    z-index: 2;
-    top: -13px;
-    left: 0;
-    margin-left: -9px;
-    @include rotate(-3);
-    @include until($tablet) {
-      height: 64px;
-    }
-  }
 }
