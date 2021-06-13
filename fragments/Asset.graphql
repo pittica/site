@@ -94,5 +94,13 @@ fragment Asset on Asset {
       stage
     }
   }
+  imagePerson {
+    ... on Person {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
   url
 }

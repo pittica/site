@@ -1,0 +1,18 @@
+@import "../variables";
+
+.card {
+  .card-image {
+    .image {
+      &.is-square {
+        padding-top: 0;
+      }
+    }
+    &.svg {
+      .image {
+        &.is-square {
+          padding-top: 100%;
+        }
+      }
+    }
+  }
+}

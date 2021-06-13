@@ -1,4 +1,4 @@
-@import "../functions";
+@import "@pittica/scss-functions";
 
 @include keyframes(svg-outline) {
   0% {
@@ -22,4 +22,18 @@
   stroke-dasharray: $offset;
   stroke-dashoffset: $offset;
   @include animate(svg-outline, $duration, $delay, linear);
+}
+
+@mixin translate-confusion($name, $x, $y) {
+  @include keyframes($name) {
+    0% {
+      @include translate(0, 0);
+    }
+    50% {
+      @include translate($x, $y);
+    }
+    100% {
+      @include translate(0, 0);
+    }
+  }
 }

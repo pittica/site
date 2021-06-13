@@ -1,5 +1,6 @@
-@import "../functions";
 @import "../variables";
+
+@import "~bulma/sass/utilities/mixins";
 
 .list-nav {
   ul {
@@ -13,7 +14,7 @@
       display: inline-block;
       margin: $gap / 2;
       padding: 0.75rem;
-      @media screen and (max-width: $tablet) {
+      @include until($tablet) {
         padding: 0.35rem;
         margin: $gap / 5;
       }
@@ -32,7 +33,7 @@
       font-size: $size-1;
       background-color: $primary-invert;
       color: $primary;
-      @media screen and (max-width: $tablet) {
+      @include until($tablet) {
         font-size: $size-4;
       }
     }

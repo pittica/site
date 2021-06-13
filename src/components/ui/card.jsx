@@ -3,19 +3,23 @@ import classnames from 'classnames';
 
 import ImagePost from './image/image-post';
 
+import '../../scss/ui/_card.scss';
+
 export default function Card({ children, image, title, link }) {
   return (
-    <div class="card">
+    <div className="card">
       {image && (
-        <div class="card-image">
-          <figure class={classnames('image', 'is-square')}>
+        <div className={classnames('card-image', image.localFile && image.localFile.extension ? image.localFile.extension.toLowerCase() : null)}>
+          <figure className={classnames('image', 'is-square')}>
             <ImagePost image={image} title={title} link={link} />
           </figure>
         </div>
       )}
-      <div class="card-content">
-        <div class="content">{children}</div>
-      </div>
+      {children && (
+        <div className="card-content">
+          <div className="content">{children}</div>
+        </div>
+      )}
     </div>
   );
 }

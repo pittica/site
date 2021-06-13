@@ -1,22 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-function ImageSwitch({ image, title }) {
-  if (image) {
-    if (image.extension && image.extension.toLowerCase() === 'svg') {
-      return <img src={image.publicURL} alt={title} width="640" height="440" className="svg" />;
-    } else {
-      const sharp = getImage(image.childImageSharp);
-
-      if (sharp) {
-        return <GatsbyImage image={sharp} alt={title} />;
-      }
-    }
-  }
-
-  return null;
-}
+import ImageSwitch from './image-switch';
 
 export default function ImagePost({ image: { localFile }, title, link }) {
   if (localFile) {

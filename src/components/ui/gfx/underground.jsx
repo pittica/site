@@ -21,7 +21,7 @@ export default class Underground extends Component {
           }
         `}
         render={({ site: { siteMetadata: { appearance: { theme, accent } } } }) => (
-          <figure className={classnames("image", "underground")}>
+          <figure className={classnames('image', 'underground')}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
               <path
                 fill={theme}

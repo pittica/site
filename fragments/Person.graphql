@@ -1,4 +1,4 @@
-fragment Post on Post {
+fragment Person on Person {
   stage
   locale
   remoteId: id
@@ -26,11 +26,9 @@ fragment Post on Post {
       stage
     }
   }
-  title
-  slug
-  date
-  excerpt
-  content {
+  name
+  linkedIn
+  bio {
     ... on RichText {
       raw
       html
@@ -46,24 +44,15 @@ fragment Post on Post {
       stage
     }
   }
-  categories {
-    ... on Category {
+  roles {
+    ... on Role {
       remoteTypeName: __typename
       remoteId: id
-      locale
       stage
     }
   }
-  tags {
-    ... on Tag {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
-  }
-  people {
-    ... on Person {
+  posts {
+    ... on Post {
       remoteTypeName: __typename
       remoteId: id
       locale

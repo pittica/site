@@ -1,11 +1,6 @@
-@import "../functions";
 @import "../variables";
 
 @import "~bulma/sass/utilities/mixins";
-
-@include translate-confusion(translate-sign-1, -3px, -18px);
-@include translate-confusion(translate-sign-2, 27px, -1px);
-@include translate-confusion(translate-sign-3, -5px, 18px);
 
 .navbar {
   .navbar-menu {

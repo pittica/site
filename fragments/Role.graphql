@@ -1,0 +1,37 @@
+fragment Role on Role {
+  stage
+  remoteId: id
+  createdAt
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedAt
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedAt
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  name
+  person {
+    ... on Person {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+}

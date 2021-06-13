@@ -1,8 +1,10 @@
-@import "../../functions";
+@import "@pittica/scss-functions";
 @import "../../variables";
 
 .post-header {
-  @include background-cover();
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   margin-bottom: -48px;
   .post-data {
