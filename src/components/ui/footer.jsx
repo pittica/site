@@ -11,10 +11,7 @@ import SocialFollow from './social-follow';
 import '../../scss/ui/_footer.scss';
 
 const Footer = () => {
-  const {
-    site: { siteMetadata: { organization, appearance, locale, legal } },
-    siteBuildMetadata: { fields: { seo: { socials } } }
-  } = useStaticQuery(
+  const { site: { siteMetadata: { organization, appearance, locale, legal } } } = useStaticQuery(
     graphql`
       query {
         site {
@@ -44,31 +41,6 @@ const Footer = () => {
               accent
               background
               theme
-            }
-          }
-        }
-        siteBuildMetadata {
-          fields {
-            seo {
-              socials {
-                twitter {
-                  username
-                  site
-                }
-                linkedin {
-                  page
-                }
-                github {
-                  username
-                }
-                instagram {
-                  username
-                }
-                facebook {
-                  page
-                  app
-                }
-              }
             }
           }
         }
@@ -132,7 +104,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <SocialFollow className={classnames('column', 'is-one-fifths')} socials={socials} />
+          <SocialFollow className={classnames('column', 'is-one-fifths')} />
         </div>
         <div className="columns">
           <div className="column">

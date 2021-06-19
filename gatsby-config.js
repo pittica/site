@@ -2,8 +2,8 @@ require('dotenv').config();
 
 module.exports = {
   flags: {
-    PRESERVE_WEBPACK_CACHE: true,
-    FAST_DEV: true
+ //   PRESERVE_WEBPACK_CACHE: true,
+ //   FAST_DEV: true
   },
   siteMetadata: {
     title: process.env.NAME,
@@ -268,17 +268,22 @@ module.exports = {
         image: `/share.jpg`,
         socials: {
           twitter: {
-            username: 'PitticaDigital'
+            username: 'PitticaDigital',
+            icon: 'icon-pittica-twitter',
+            show: false
           },
           github: {
-            username: `pittica`
+            username: `pittica`,
+            icon: 'icon-pittica-github'
           },
           facebook: {
             page: `PitticaDigital`,
-            app: `600384224115787`
+            app: `600384224115787`,
+            icon: 'icon-pittica-facebook'
           },
           linkedin: {
-            page: `pittica`
+            page: `pittica`,
+            icon: 'icon-pittica-linkedin'
           }
         }
       }
