@@ -1,10 +1,6 @@
 require('dotenv').config();
 
 module.exports = {
-  flags: {
- //   PRESERVE_WEBPACK_CACHE: true,
- //   FAST_DEV: true
-  },
   siteMetadata: {
     title: process.env.NAME,
     author: `Pittica S.r.l.s.`,
@@ -13,7 +9,7 @@ module.exports = {
       language: process.env.LOCALE.toLowerCase(),
       culture: process.env.CULTURE.toUpperCase()
     },
-    siteUrl: process.env.URL,
+    siteUrl: `https://${process.env.HOST}/`,
     legal: {
       privacy: '/legal/privacy',
       terms: '/legal/tos',
@@ -22,8 +18,8 @@ module.exports = {
     organization: {
       company: `Pittica S.r.l.s.`,
       address: `Via Le Corbusier, 39`,
-      url: process.env.NAME,
-      logo: `${process.env.NAME}logo.png`,
+      url: `https://${process.env.HOST}/`,
+      logo: `https://${process.env.HOST}/logo.png`,
       zipCode: `48124`,
       city: `Ravenna`,
       province: `RA`,
@@ -168,8 +164,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Pittica`,
-        short_name: `Pittica`,
+        name: process.env.NAME,
+        short_name: process.env.NAME,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#cc151a`,
