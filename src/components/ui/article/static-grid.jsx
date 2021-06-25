@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { Link } from 'gatsby';
 import ImagePost from '../image/image-post';
 
@@ -13,7 +14,7 @@ export default function StaticGrid({ node, group }) {
     <article className="static-grid">
       <ImagePost image={node.image} title={title} link={link} />
       <section>
-        <h3 className="title">
+        <h3 className={classnames('title', 'pt-4')}>
           <Link to={link}>{title}</Link>
         </h3>
         <Link
