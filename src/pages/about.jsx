@@ -1,26 +1,25 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import classnames from 'classnames';
+import React from "react"
+import { graphql } from "gatsby"
+import classnames from "classnames"
+import { commalify } from "@pittica/gatsby-plugin-utils"
 
-import { commalify } from '../utils/format';
+import Renderer from "../mdx/renderer"
+import Layout from "../components/layout/layout"
+import Section from "../components/ui/section"
+import Technologies from "../components/ui/technologies"
+import ImageLink from "../components/ui/image/image-link"
+import Card from "../components/ui/card"
+import FeatureLink from "../components/ui/link/feature-link"
 
-import Renderer from '../mdx/renderer';
-import Layout from '../components/layout/layout';
-import Section from '../components/ui/section';
-import Technologies from '../components/ui/technologies';
-import ImageLink from '../components/ui/image/image-link';
-import Card from '../components/ui/card';
-import FeatureLink from '../components/ui/link/feature-link';
+import Partners from "../components/sections/partners"
 
-import Partners from '../components/sections/partners';
+import cover from "../../static/assets/about-cover.svg"
+import breaker from "../../static/assets/about-breaker.svg"
 
-import cover from '../../static/assets/about-cover.svg';
-import breaker from '../../static/assets/about-breaker.svg';
-
-export default function AboutPage({ location, data }) {
+export default function About({ location, data }) {
   return (
     <Layout location={location} title="About">
-      <figure className={classnames('image', 'is-128x128')}>
+      <figure className={classnames("image", "is-128x128")}>
         <img src={cover} alt="About" width="1080" height="1080" />
       </figure>
       {data.about && (
@@ -32,10 +31,15 @@ export default function AboutPage({ location, data }) {
         <Section title="Faces">
           <div className="columns">
             {data.people.nodes.map((person, index) => (
-              <div className={classnames('column', 'has-text-centered')} key={'person' + index}>
+              <div
+                className={classnames("column", "has-text-centered")}
+                key={"person-" + index}
+              >
                 <Card image={person.image} title={person.name}>
                   <h5 className="subtitle">{person.name}</h5>
-                  {person.roles.length > 0 && <h6>{commalify(person.roles)}</h6>}
+                  {person.roles.length > 0 && (
+                    <h6>{commalify(person.roles)}</h6>
+                  )}
                   {person.linkedIn && (
                     <a href={person.linkedIn} title="LinkedIn" target="_new">
                       <i className="icon-pittica-linkedin" />
@@ -48,7 +52,7 @@ export default function AboutPage({ location, data }) {
           </div>
         </Section>
       )}
-      <figure className={classnames('image', 'is-128x128')}>
+      <figure className={classnames("image", "is-128x128")}>
         <img src={breaker} alt="About" width="1080" height="1080" />
       </figure>
       {data.services && (
@@ -65,23 +69,31 @@ export default function AboutPage({ location, data }) {
         </Section>
       )}
       {data.partners.nodes.length > 0 && (
-        <Section title="Rete Aziendale" subtitle="Le Aziende con cui collaboriamo">
-          <div className={classnames('columns', 'is-multiline')}>
+        <Section
+          title="Rete Aziendale"
+          subtitle="Le Aziende con cui collaboriamo"
+        >
+          <div className={classnames("columns", "is-multiline")}>
             {data.partners.nodes.map((node, i) => {
               return (
-                <div className={classnames('column', 'is-one-third', 'p-6')} key={`partner-${i}`}>
-                  <ImageLink link={node.link} title={node.name} image={node.logo} />
+                <div
+                  className={classnames("column", "is-one-third", "p-6")}
+                  key={`partner-${i}`}
+                >
+                  <ImageLink
+                    link={node.link}
+                    title={node.name}
+                    image={node.logo}
+                  />
                 </div>
-              );
+              )
             })}
           </div>
         </Section>
       )}
-      <Section title="Partner" subtitle="Partnership e Associazioni">
-        <Partners />
-      </Section>
+      <Partners title="Partner" subtitle="Le nostre Partnership" />
     </Layout>
-  );
+  )
 }
 
 export const pageQuery = graphql`
@@ -123,7 +135,10 @@ export const pageQuery = graphql`
     about: graphCmsSection(slug: { eq: "about" }, stage: { eq: PUBLISHED }) {
       ...GraphCMS_SectionFragment
     }
-    services: graphCmsSection(slug: { eq: "services" }, stage: { eq: PUBLISHED }) {
+    services: graphCmsSection(
+      slug: { eq: "services" }
+      stage: { eq: PUBLISHED }
+    ) {
       ...GraphCMS_SectionFragment
     }
     people: allGraphCmsPerson(filter: { stage: { eq: PUBLISHED } }) {
@@ -143,7 +158,12 @@ export const pageQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              gatsbyImageData(width: 240, height: 240, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+              gatsbyImageData(
+                width: 240
+                height: 240
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
             extension
           }
@@ -151,4 +171,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

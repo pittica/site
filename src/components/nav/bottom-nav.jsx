@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react"
 
-import '../../scss/nav/_bottom-nav.scss';
+import "../../scss/nav/_bottom-nav.scss"
 
 export default function BottomNav({ children }) {
   if (children) {
-    return <nav className="bottom-nav">{children}</nav>;
+    return <nav className="bottom-nav">{children}</nav>
   } else {
-    return null;
+    return null
   }
 }

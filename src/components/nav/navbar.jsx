@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
-import { Link } from 'gatsby';
-import classnames from 'classnames';
+import React, { useState } from "react"
+import { Link } from "gatsby"
+import classnames from "classnames"
 
-import NavbarLogo from './navbar-logo';
-import NavbarItem from './navbar-item';
+import NavbarLogo from "./navbar-logo"
+import NavbarItem from "./navbar-item"
 
-import '../../scss/nav/_navbar.scss';
+import "../../scss/nav/_navbar.scss"
 
 export default function Navbar({ location }) {
-  const [ burger, setBurger ] = useState(false);
+  const [burger, setBurger] = useState(false)
 
   const handleClick = (e) => {
-    e.preventDefault();
-    setBurger(!burger);
+    e.preventDefault()
+    setBurger(!burger)
 
-    return false;
-  };
+    return false
+  }
 
   return (
-    <nav className={classnames('navbar', 'is-fixed-top')} role="navigation" aria-label="main navigation">
+    <nav
+      className={classnames("navbar", "is-fixed-top")}
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div className="navbar-brand">
         <NavbarLogo />
         <Link
           to="/"
           onClick={handleClick}
           role="button"
-          className={classnames('navbar-burger', 'burger', {
-            'is-active': burger
+          className={classnames("navbar-burger", "burger", {
+            "is-active": burger,
           })}
           aria-label="menu"
           aria-expanded="false"
@@ -37,8 +41,8 @@ export default function Navbar({ location }) {
         </Link>
       </div>
       <div
-        className={classnames('navbar-menu', {
-          'is-active': burger
+        className={classnames("navbar-menu", {
+          "is-active": burger,
         })}
       >
         <div className="navbar-start">
@@ -60,5 +64,5 @@ export default function Navbar({ location }) {
         </div>
       </div>
     </nav>
-  );
+  )
 }

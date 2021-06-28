@@ -1,14 +1,16 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import classnames from 'classnames';
+import React from "react"
+import { Link } from "gatsby"
+import classnames from "classnames"
+
+import "../../scss/ui/_section-title.scss"
 
 export default function SectionTitle({ title, subtitle, link, centered }) {
   return (
-    <div className="container">
+    <div className={classnames("container", "section-title")}>
       {title && (
         <h1
-          className={classnames('title', {
-            'has-text-centered': centered
+          className={classnames("title", {
+            "has-text-centered": centered,
           })}
         >
           {link ? <Link to={link}>{title}</Link> : title}
@@ -16,13 +18,13 @@ export default function SectionTitle({ title, subtitle, link, centered }) {
       )}
       {subtitle && (
         <h2
-          className={classnames('subtitle', {
-            'has-text-centered': centered
+          className={classnames("subtitle", {
+            "has-text-centered": centered,
           })}
         >
           {link ? <Link to={link}>{subtitle}</Link> : subtitle}
         </h2>
       )}
     </div>
-  );
+  )
 }

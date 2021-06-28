@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from "react"
+import { Link } from "gatsby"
 
-import BottomNav from './bottom-nav';
+import BottomNav from "./bottom-nav"
 
-import '../../scss/nav/_post-nav.scss';
+import "../../scss/nav/_post-nav.scss"
 
 export default function PostNav({ previous, next }) {
   if (previous || next) {
@@ -26,8 +26,8 @@ export default function PostNav({ previous, next }) {
           </li>
         </ul>
       </BottomNav>
-    );
+    )
   } else {
-    return null;
+    return null
   }
 }

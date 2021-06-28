@@ -46,4 +46,17 @@
       padding: 16px;
     }
   }
+  .social-follow {
+    margin-bottom: $size-2 auto;
+    li {
+      display: inline-block;
+      padding: $size-7 $size-4 $size-7 0;
+      span {
+        display: none;
+      }
+      i {
+        font-size: $size-2;
+      }
+    }
+  }
 }

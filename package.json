@@ -2,7 +2,7 @@
   "name": "pittica",
   "private": true,
   "description": "pittica.com website.",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "author": "Lucio Benini <info@pittica.com>",
   "bugs": {
     "url": "https://github.com/pittica/site/issues"
@@ -12,8 +12,9 @@
     "@mdx-js/react": "^1.6.22",
     "@pittica/gatsby-plugin-canvas-animations": "^1.2.1",
     "@pittica/gatsby-plugin-recaptcha": "^1.0.1",
-    "@pittica/gatsby-plugin-seo": "^2.1.0",
+    "@pittica/gatsby-plugin-seo": "^2.1.5",
     "@pittica/gatsby-plugin-trustpilot-widget": "^1.0.4",
+    "@pittica/gatsby-plugin-utils": "^1.0.1",
     "@pittica/scss-functions": "^1.1.1",
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.10.6",
@@ -37,7 +38,7 @@
     "gatsby-transformer-sharp": "^3.8.0",
     "ink": "^3.0.8",
     "moment": "^2.29.1",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.24.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -49,10 +50,14 @@
     "bulma": "^0.9.3",
     "gatsby-cli": "^3.8.0",
     "node-sass": "^5.0.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.2"
   },
   "homepage": "https://pittica.com",
-  "keywords": [ "gatsby", "pittica", "website" ],
+  "keywords": [
+    "gatsby",
+    "pittica",
+    "website"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

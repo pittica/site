@@ -1,24 +1,33 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from "react"
+import { Link } from "gatsby"
 
-import Hero from '../hero';
-import ArticleHeader from './article-header';
+import Hero from "../hero"
+import ArticleHeader from "./article-header"
 
-import '../../../scss/ui/article/_post-header.scss';
+import "../../../scss/ui/article/_post-header.scss"
 
-export default function PostHeader({ post: { title, description, date, categories }, image }) {
+export default function PostHeader({
+  post: { title, description, date, categories },
+  image,
+}) {
   return (
     <ArticleHeader image={image} className="post-header">
       <Hero title={title} subtitle={description} className="post-data">
         {categories && categories.length > 0 && (
-          <div className="post-meta" title={categories.length > 1 ? 'Categorie' : 'Categoria'}>
+          <div
+            className="post-meta"
+            title={categories.length > 1 ? "Categorie" : "Categoria"}
+          >
             <span className="icon-text">
               <span className="icon">
                 <i className="icon-pittica-folder" />
               </span>
               <span>
                 {categories.map((category, index) => (
-                  <Link to={`/category/${category.slug}`} key={'category-' + index}>
+                  <Link
+                    to={`/category/${category.slug}`}
+                    key={"category-" + index}
+                  >
                     {category.name}
                   </Link>
                 ))}
@@ -33,5 +42,5 @@ export default function PostHeader({ post: { title, description, date, categorie
         )}
       </Hero>
     </ArticleHeader>
-  );
+  )
 }

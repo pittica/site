@@ -1,0 +1,11 @@
+@import "../variables";
+
+.partners {
+  .columns {
+    padding: $size-1 0;
+    img {
+      max-height: 70px;
+      width: auto;
+    }
+  }
+}

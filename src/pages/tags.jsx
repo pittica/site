@@ -1,42 +1,37 @@
-import React, { Component } from 'react';
-import { graphql } from 'gatsby';
+import React from "react"
+import { graphql } from "gatsby"
 
-import Layout from '../components/layout/layout';
-import Section from '../components/ui/section';
-import TagLink from '../components/ui/link/tag-link';
+import Layout from "../components/layout/layout"
+import Section from "../components/ui/section"
+import TagLink from "../components/ui/link/tag-link"
 
-class TagsPage extends Component {
-  render() {
-    const { data, location } = this.props;
-    const siteTitle = data.site.siteMetadata.title;
-    const tags = {};
+export default function Tags({ data, location }) {
+  const siteTitle = data.site.siteMetadata.title
+  const tags = {}
 
-    data.tags.nodes.forEach(({ id, name, slug }) => {
-      tags[id] = {
-        name,
-        slug
-      };
-    });
+  data.tags.nodes.forEach(({ id, name, slug }) => {
+    tags[id] = {
+      name,
+      slug,
+    }
+  })
 
-    return (
-      <Layout location={location} title={siteTitle}>
-        <Section title="Tag">
-          <ul className="page-list">
-            {data.posts.group.map((node, index) => {
-              return (
-                <li key={'tag-' + index}>
-                  <TagLink tag={tags[node.fieldValue]} /> ({node.totalCount})
-                </li>
-              );
-            })}
-          </ul>
-        </Section>
-      </Layout>
-    );
-  }
+  return (
+    <Layout location={location} title={siteTitle}>
+      <Section title="Tag">
+        <ul className="page-list">
+          {data.posts.group.map((node, index) => {
+            return (
+              <li key={"tag-" + index}>
+                <TagLink tag={tags[node.fieldValue]} /> ({node.totalCount})
+              </li>
+            )
+          })}
+        </ul>
+      </Section>
+    </Layout>
+  )
 }
-
-export default TagsPage;
 
 export const pageQuery = graphql`
   query {
@@ -55,7 +50,9 @@ export const pageQuery = graphql`
         totalCount
       }
     }
-    tags: allGraphCmsTag(filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }) {
+    tags: allGraphCmsTag(
+      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+    ) {
       nodes {
         id
         name
@@ -63,4 +60,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

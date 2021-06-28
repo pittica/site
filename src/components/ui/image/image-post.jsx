@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from "react"
+import { Link } from "gatsby"
 
-import ImageSwitch from './image-switch';
+import ImageSwitch from "./image-switch"
 
 export default function ImagePost({ image: { localFile }, title, link }) {
   if (localFile) {
@@ -10,11 +10,11 @@ export default function ImagePost({ image: { localFile }, title, link }) {
         <Link to={link}>
           <ImageSwitch title={title} image={localFile} />
         </Link>
-      );
+      )
     } else {
-      return <ImageSwitch title={title} image={localFile} />;
+      return <ImageSwitch title={title} image={localFile} />
     }
   } else {
-    return null;
+    return null
   }
 }

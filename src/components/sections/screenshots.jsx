@@ -1,8 +1,8 @@
-import React from 'react';
-import classnames from 'classnames';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React from "react"
+import classnames from "classnames"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
-import Section from '../ui/section';
+import Section from "../ui/section"
 
 export default function Screenshots({ screenshots, title }) {
   if (screenshots && screenshots.length > 0) {
@@ -10,22 +10,22 @@ export default function Screenshots({ screenshots, title }) {
       <Section title="Screenshot" className="screenshots">
         <div className="columns">
           {screenshots.map((screenshot, i) => {
-            const image = getImage(screenshot.localFile.childImageSharp);
+            const image = getImage(screenshot.localFile.childImageSharp)
 
             if (image) {
               return (
-                <div className={classnames('column', 'is-6')} key={i}>
+                <div className={classnames("column", "is-6")} key={i}>
                   <GatsbyImage image={image} alt={title} />
                 </div>
-              );
+              )
             } else {
-              return null;
+              return null
             }
           })}
         </div>
       </Section>
-    );
+    )
   } else {
-    return null;
+    return null
   }
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from "react"
+import { Link } from "gatsby"
 
 export default function CategoryLink({ category }) {
   return (
@@ -8,5 +8,5 @@ export default function CategoryLink({ category }) {
         <i className="icon-pittica-folder" /> {category.name}
       </span>
     </Link>
-  );
+  )
 }

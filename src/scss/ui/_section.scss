@@ -2,7 +2,7 @@
 
 .section {
   p {
-    margin: 0.275rem auto;
+    margin: ($size-7 / 2) auto;
   }
   h1 {
     &.title {
@@ -13,15 +13,17 @@
   ul {
     li {
       list-style-type: none;
-      padding-left: 18px;
+      padding-left: $size-4;
       margin: ($size-7 / 2) auto;
       &:before {
         font-family: "pittica";
         content: "\2bc8";
         color: $primary;
-        font-size: 16px;
+        font-size: $size-6;
         position: absolute;
-        left: -2px;
+        left: -($size-7 / 4);
+        padding-top: $size-7 / 6;
+        padding-left: $size-7 / 3;
       }
     }
     &.page-list {
@@ -37,18 +39,5 @@
   .container {
     margin-top: $size-4;
     margin-bottom: $size-6;
-  }
-  .title {
-    font-size: 3.5rem;
-  }
-  .subtitle {
-    font-size: $size-3;
-    margin-bottom: $size-3;
-    a {
-      color: $subtitle-color;
-      &:hover {
-        color: $primary;
-      }
-    }
   }
 }
