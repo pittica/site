@@ -94,7 +94,7 @@ export default function Offers({ data: { post }, location }) {
             subtitle="Richiedi maggiori informazioni."
           />
           <ContactForm />
-          {post.services && (
+          {post.services && post.services.length > 0 && (
             <Section
               title="Servizi"
               subtitle="I servizi di riferimento dell'offerta"

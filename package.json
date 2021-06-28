@@ -2,7 +2,7 @@
   "name": "pittica",
   "private": true,
   "description": "pittica.com website.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "Lucio Benini <info@pittica.com>",
   "bugs": {
     "url": "https://github.com/pittica/site/issues"
