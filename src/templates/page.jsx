@@ -22,11 +22,11 @@ export default function Page({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query PageBySlug($slug: String!) {
+  query PageBySlug($slug: String!, $locale: GraphCMS_Locale!) {
     post: graphCmsPage(
       slug: { eq: $slug }
       stage: { eq: PUBLISHED }
-      locale: { eq: it }
+      locale: { eq: $locale }
     ) {
       id
       title

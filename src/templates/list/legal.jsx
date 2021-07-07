@@ -33,9 +33,13 @@ export default function Legal({
 }
 
 export const pageQuery = graphql`
-  query LegalListTemplate($skip: Int!, $limit: Int!) {
+  query LegalListTemplate(
+    $skip: Int!
+    $limit: Int!
+    $locale: GraphCMS_Locale!
+  ) {
     posts: allGraphCmsLegal(
-      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+      filter: { locale: { eq: $locale }, stage: { eq: PUBLISHED } }
       limit: $limit
       skip: $skip
     ) {

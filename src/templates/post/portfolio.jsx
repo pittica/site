@@ -28,11 +28,17 @@ export default function Portfolio({ data: { post }, location }) {
           </Section>
         )}
         <Screenshots screenshots={post.screenshots} title={post.title} />
-        {post.link && (
+        {post.links && post.links.length > 0 && (
           <Section title="URL">
-            <a href={post.link} title={post.title} target="_system">
-              {post.link}
-            </a>
+            <ul>
+              {post.links.map((link, i) => (
+                <li key={`link-${i}`}>
+                  <a href={link} title={post.title} target="_system">
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </Section>
         )}
       </article>
@@ -41,15 +47,15 @@ export default function Portfolio({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query PortfolioPostTemplate($slug: String!) {
+  query PortfolioPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
     post: graphCmsPortfolio(
       stage: { eq: PUBLISHED }
-      locale: { eq: it }
+      locale: { eq: $locale }
       slug: { eq: $slug }
     ) {
       title
       slug
-      link
+      links
       content {
         markdownNode {
           childMdx {

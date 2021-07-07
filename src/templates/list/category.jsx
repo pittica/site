@@ -4,25 +4,33 @@ import { graphql } from "gatsby"
 import CategoryLayout from "../../components/layout/category-layout"
 
 export default function Category({
-  data: { category, posts },
+  data: {
+    category: { name },
+    posts: { nodes },
+  },
   pageContext,
   location,
 }) {
   return (
     <CategoryLayout
       context={pageContext}
-      nodes={posts.edges}
-      label={`Categoria "${category.name}"`}
+      nodes={nodes}
+      label={`Categoria "${name}"`}
       location={location}
     />
   )
 }
 
 export const pageQuery = graphql`
-  query CategoryList($id: String, $slug: String, $limit: Int!, $skip: Int!) {
+  query CategoryListTemplate(
+    $slug: String
+    $limit: Int!
+    $skip: Int!
+    $locale: GraphCMS_Locale!
+  ) {
     category: graphCmsCategory(
       slug: { eq: $slug }
-      locale: { eq: it }
+      locale: { eq: $locale }
       stage: { eq: PUBLISHED }
     ) {
       name
@@ -32,31 +40,31 @@ export const pageQuery = graphql`
       skip: $skip
       sort: { fields: date, order: DESC }
       filter: {
+        categories: {
+          elemMatch: { slug: { eq: $slug }, locale: { eq: $locale } }
+        }
+        locale: { eq: $locale }
         stage: { eq: PUBLISHED }
-        locale: { eq: it }
-        categories: { elemMatch: { id: { eq: $id } } }
       }
     ) {
-      edges {
-        node {
-          id
-          image {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 640
-                  height: 440
-                  placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
+      nodes {
+        id
+        image {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 640
+                height: 440
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
-          slug
-          excerpt
-          date: formattedDate
-          title
         }
+        slug
+        excerpt
+        date: formattedDate
+        title
       }
     }
   }

@@ -66,10 +66,10 @@ export default function Services({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query ServicesPostTemplate($slug: String!) {
+  query ServicesPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
     post: graphCmsService(
       stage: { eq: PUBLISHED }
-      locale: { eq: it }
+      locale: { eq: $locale }
       slug: { eq: $slug }
     ) {
       id

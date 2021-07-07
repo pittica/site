@@ -15,7 +15,7 @@ export default function CategoryLayout({ context, nodes, label, location }) {
       <Layout location={location} title={label}>
         <Section title={label} subtitle={name}>
           <div className={classnames("columns", "is-multiline")}>
-            {nodes.map(({ node }) => {
+            {nodes.map((node) => {
               return (
                 <div
                   className={classnames("column", "is-one-third")}

@@ -36,7 +36,7 @@ export default function Blog({
 }
 
 export const pageQuery = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!) {
+  query BlogListTemplate($skip: Int!, $limit: Int!) {
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip

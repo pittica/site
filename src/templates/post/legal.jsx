@@ -26,10 +26,10 @@ export default function Legal({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query LegalPostTemplate($slug: String!) {
+  query LegalPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
     post: graphCmsLegal(
       stage: { eq: PUBLISHED }
-      locale: { eq: it }
+      locale: { eq: $locale }
       slug: { eq: $slug }
     ) {
       id

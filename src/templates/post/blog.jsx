@@ -8,6 +8,7 @@ import Renderer from "../../mdx/renderer"
 import PostNav from "../../components/nav/post-nav"
 import PostLayout from "../../components/layout/post-layout"
 import TagLink from "../../components/ui/link/tag-link"
+import Section from "../../components/ui/section"
 import PostHeader from "../../components/ui/article/post-header"
 import ImagePost from "../../components/ui/image/image-post"
 
@@ -42,7 +43,7 @@ export default function Blog({
         </div>
       </article>
       <PostNav previous={previous} next={next} />
-      <div className="container">
+      <Section>
         <h3 className="title">Credits</h3>
         <div className="columns">
           {post.people.length > 0 && (
@@ -66,21 +67,22 @@ export default function Blog({
           )}
           {post.image.credits && (
             <div className={classnames("column", "has-text-right")}>
+              <h3 className="title">Cover</h3>
               <Renderer>{post.image.credits}</Renderer>
             </div>
           )}
         </div>
-      </div>
+      </Section>
     </PostLayout>
   )
 }
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String!, $locale: GraphCMS_Locale!) {
     post: graphCmsPost(
       slug: { eq: $slug }
       stage: { eq: PUBLISHED }
-      locale: { eq: it }
+      locale: { eq: $locale }
     ) {
       id
       title

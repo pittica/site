@@ -24,107 +24,127 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           id
           slug
           updatedAt
+          locale
         }
       }
       posts: allGraphCmsPost(
         filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
         sort: { fields: date, order: DESC }
       ) {
-        edges {
-          node {
-            slug
-            categories {
-              id
-              name
+        group(field: locale) {
+          edges {
+            node {
               slug
+              categories {
+                id
+                name
+                slug
+              }
+              tags {
+                id
+                name
+                slug
+              }
+              updatedAt
+              locale
             }
-            tags {
+            next {
               id
-              name
               slug
+              title
             }
-            updatedAt
+            previous {
+              id
+              slug
+              title
+            }
           }
-          next {
-            id
-            slug
-            title
-          }
-          previous {
-            id
-            slug
-            title
-          }
+          totalCount
+          locale: fieldValue
         }
       }
       categories: allGraphCmsCategory(
         filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       ) {
-        edges {
-          node {
-            name
-            slug
-            posts {
-              id
-            }
-            updatedAt
+        nodes {
+          name
+          slug
+          posts {
+            id
           }
+          updatedAt
+          locale
         }
       }
       tags: allGraphCmsTag(
         filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       ) {
-        edges {
-          node {
-            name
-            slug
-            posts {
-              id
-            }
-            updatedAt
+        nodes {
+          name
+          slug
+          posts {
+            id
           }
+          updatedAt
+          locale
         }
       }
       portfolio: allGraphCmsPortfolio(
         filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       ) {
-        nodes {
-          slug
-          updatedAt
+        group(field: locale) {
+          nodes {
+            slug
+            updatedAt
+            locale
+          }
+          totalCount
+          locale: fieldValue
         }
-        totalCount
       }
       services: allGraphCmsService(
         filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       ) {
-        nodes {
-          slug
-          updatedAt
+        group(field: locale) {
+          nodes {
+            slug
+            updatedAt
+            locale
+          }
+          totalCount
+          locale: fieldValue
         }
-        totalCount
       }
       offers: allGraphCmsOffer(
         filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       ) {
-        nodes {
-          slug
-          updatedAt
+        group(field: locale) {
+          nodes {
+            slug
+            updatedAt
+            locale
+          }
+          totalCount
+          locale: fieldValue
         }
-        totalCount
       }
       legals: allGraphCmsLegal(
         filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       ) {
-        nodes {
-          slug
-          updatedAt
+        group(field: locale) {
+          nodes {
+            slug
+            updatedAt
+            locale
+          }
+          totalCount
+          locale: fieldValue
         }
-        totalCount
       }
     }
   `)
 
-  pages.nodes.forEach(({ slug, updatedAt }) => {
+  pages.nodes.forEach(({ slug, updatedAt, locale }) => {
     createPage({
       path: `/${slug}`,
       component: path.resolve(`./src/templates/page.jsx`),
@@ -132,43 +152,49 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         slug,
         updatedAt,
         group: "page",
+        locale,
       },
     })
   })
 
-  posts.edges.forEach(({ node: { slug, updatedAt }, previous, next }) => {
-    createPage({
-      path: `/blog/${slug}`,
-      component: path.resolve(`./src/templates/post/blog.jsx`),
-      context: {
-        slug,
-        previous,
-        next,
-        updatedAt,
-        group: "post",
-      },
+  const limit = parseInt(process.env.POSTS_PER_PAGE || 18)
+
+  posts.group.forEach(({ edges, totalCount, locale }) => {
+    edges.forEach(({ node: { slug, updatedAt }, previous, next }) => {
+      createPage({
+        path: `/blog/${slug}`,
+        component: path.resolve(`./src/templates/post/blog.jsx`),
+        context: {
+          slug,
+          previous,
+          next,
+          updatedAt,
+          group: "post",
+          locale,
+        },
+      })
+    })
+
+    const blogPages = Math.ceil(totalCount / limit)
+
+    Array.from({ length: blogPages }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+        component: path.resolve(`./src/templates/list/blog.jsx`),
+        context: {
+          limit,
+          skip: i * limit,
+          pages: blogPages,
+          current: i + 1,
+          group: "blog",
+          locale,
+        },
+      })
     })
   })
 
-  const postsPerPage = parseInt(process.env.POSTS_PER_PAGE || 18)
-  const blogPages = Math.ceil(posts.edges.length / postsPerPage)
-
-  Array.from({ length: blogPages }).forEach((_, i) => {
-    createPage({
-      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-      component: path.resolve(`./src/templates/list/blog.jsx`),
-      context: {
-        limit: postsPerPage,
-        skip: i * postsPerPage,
-        pages: blogPages,
-        current: i + 1,
-        group: "blog",
-      },
-    })
-  })
-
-  const listfy = (group, slug, length) => {
-    const pages = Math.ceil(length / postsPerPage)
+  const listfy = (group, slug, length, locale) => {
+    const pages = Math.ceil(length / limit)
     const pathParts = []
 
     if (group) {
@@ -186,18 +212,19 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         path: i === 0 ? `/${pathJoin}` : `/${pathJoin}/${i + 1}`,
         component: path.resolve(`./src/templates/list/${group || slug}.jsx`),
         context: {
-          limit: postsPerPage,
-          skip: i * postsPerPage,
+          limit,
+          skip: i * limit,
           pages,
           current: i + 1,
           slug,
           group,
+          locale,
         },
       })
     })
   }
 
-  const postify = (group, nodes) => {
+  const postify = (group, nodes, locale) => {
     nodes.forEach(({ slug }) => {
       createPage({
         path: `/${group}/${slug}`,
@@ -205,28 +232,39 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         context: {
           slug,
           group,
+          locale,
         },
       })
     })
   }
 
-  categories.edges.forEach(({ node: { slug, posts } }) => {
-    listfy("category", slug, posts.length)
+  categories.nodes.forEach(({ slug, posts, locale }) => {
+    listfy("category", slug, posts.length, locale)
   })
 
-  tags.edges.forEach(({ node: { slug, posts } }) => {
-    listfy("tag", slug, posts.length)
+  tags.nodes.forEach(({ slug, posts, locale }) => {
+    listfy("tag", slug, posts.length, locale)
   })
 
-  listfy("portfolio", null, portfolio.totalCount)
-  listfy("services", null, services.totalCount)
-  listfy("offers", null, offers.totalCount)
-  listfy("legal", null, legals.totalCount)
+  portfolio.group.forEach(({ nodes, locale, totalCount }) => {
+    listfy("portfolio", null, totalCount, locale)
+    postify("portfolio", nodes, locale)
+  })
 
-  postify("portfolio", portfolio.nodes)
-  postify("services", services.nodes)
-  postify("offers", offers.nodes)
-  postify("legal", legals.nodes)
+  services.group.forEach(({ nodes, locale, totalCount }) => {
+    listfy("services", null, totalCount, locale)
+    postify("services", nodes, locale)
+  })
+
+  offers.group.forEach(({ nodes, locale, totalCount }) => {
+    listfy("offers", null, totalCount, locale)
+    postify("offers", nodes, locale)
+  })
+
+  legals.group.forEach(({ nodes, locale, totalCount }) => {
+    listfy("legal", null, totalCount, locale)
+    postify("legal", nodes, locale)
+  })
 }
 
 exports.createResolvers = ({ createResolvers }) => {

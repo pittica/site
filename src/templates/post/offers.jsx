@@ -125,13 +125,14 @@ export default function Offers({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query OffersPostTemplate($slug: String!) {
+  query OffersPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
     post: graphCmsOffer(
       slug: { eq: $slug }
       stage: { eq: PUBLISHED }
-      locale: { eq: it }
+      locale: { eq: $locale }
     ) {
       slug
+      locale
       title
       description
       base

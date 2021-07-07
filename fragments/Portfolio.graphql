@@ -45,7 +45,7 @@ fragment Portfolio on Portfolio {
       text
     }
   }
-  link
+  links
   technologies {
     ... on Technology {
       remoteTypeName: __typename

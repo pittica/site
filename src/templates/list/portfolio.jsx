@@ -21,7 +21,7 @@ export default function Portfolio({
       description="I nostri lavori"
     >
       <div className={classnames("columns", "is-multiline", "is-mobile")}>
-        {nodes.map(({ title, slug, image, description }) => {
+        {nodes.map(({ title, slug, image }) => {
           const link = groupify(slug, pageContext.group)
 
           return (
@@ -30,15 +30,12 @@ export default function Portfolio({
                 "column",
                 "is-half-mobile",
                 "is-one-third-tablet",
-                "is-one-fifth-desktop"
+                "is-one-quarter-desktop"
               )}
               key={slug}
             >
-              <article>
-                <Card image={image} title={title} link={link}>
-                  <h4 className="title">{title}</h4>
-                  <p>{description}</p>
-                </Card>
+              <article className="p-6">
+                <Card image={image} title={title} link={link} />
               </article>
             </div>
           )
@@ -49,17 +46,21 @@ export default function Portfolio({
 }
 
 export const pageQuery = graphql`
-  query PortfolioListTemplate($skip: Int!, $limit: Int!) {
+  query PortfolioListTemplate(
+    $skip: Int!
+    $limit: Int!
+    $locale: GraphCMS_Locale!
+  ) {
     posts: allGraphCmsPortfolio(
-      filter: { stage: { eq: PUBLISHED }, locale: { eq: it } }
+      filter: { stage: { eq: PUBLISHED }, locale: { eq: $locale } }
       limit: $limit
       skip: $skip
       sort: { fields: updatedAt, order: DESC }
     ) {
       nodes {
         slug
+        locale
         title
-        description
         image {
           localFile {
             childImageSharp {
