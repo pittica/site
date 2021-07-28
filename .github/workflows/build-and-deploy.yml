@@ -1,6 +1,12 @@
 name: Build and Deploy
 
 on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Build and Deploy'
+        required: true
+        default: 'Build and Deploy'
   pull_request:
     types: [closed]
     branches:
