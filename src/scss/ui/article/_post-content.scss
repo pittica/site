@@ -22,7 +22,7 @@
     margin: $size-4 auto;
   }
   a {
-    border-bottom: $size-7 / 7 solid $primary;
+    border-bottom: ($size-7 / 7) solid $primary;
   }
   ul {
     li {
@@ -32,6 +32,11 @@
           list-style-type: lower-alpha;
         }
       }
+    }
+  }
+  .image {
+    img {
+      max-width: 100%;
     }
   }
 }

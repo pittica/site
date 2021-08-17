@@ -1,8 +1,17 @@
 {
   "hosting": {
     "public": "public",
-    "ignore": [ "firebase.json", "**/.*", "**/node_modules/**", "**/.cache/**" ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/.cache/**"],
     "headers": [
+      {
+        "source": "**/*",
+        "headers": [
+          {
+            "key": "cache-control",
+            "value": "public, max-age=0, must-revalidate"
+          }
+        ]
+      },
       {
         "source": "**/*.@(eot|otf|ttf|ttc|woff|woff2|font.css)",
         "headers": [

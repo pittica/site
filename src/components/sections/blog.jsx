@@ -9,7 +9,7 @@ export default function Blog({ posts }) {
     return (
       <Section title="Blog" subtitle="Pittica says" link="/blog">
         <div className={classnames("columns", "is-multiline")}>
-          {posts.map(({ node }) => {
+          {posts.map((node) => {
             return (
               <div
                 className={classnames("column", "is-one-third")}

@@ -13,8 +13,8 @@ import FeatureLink from "../components/ui/link/feature-link"
 
 import Partners from "../components/sections/partners"
 
-import cover from "../../static/assets/about-cover.svg"
-import breaker from "../../static/assets/about-breaker.svg"
+import cover from "../images/about/cover.svg"
+import breaker from "../images/about/breaker.svg"
 
 export default function About({ location, data }) {
   return (

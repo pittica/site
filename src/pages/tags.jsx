@@ -1,29 +1,22 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { categorify } from "@pittica/gatsby-plugin-utils"
 
 import Layout from "../components/layout/layout"
 import Section from "../components/ui/section"
 import TagLink from "../components/ui/link/tag-link"
 
-export default function Tags({ data, location }) {
-  const siteTitle = data.site.siteMetadata.title
-  const tags = {}
-
-  data.tags.nodes.forEach(({ id, name, slug }) => {
-    tags[id] = {
-      name,
-      slug,
-    }
-  })
+export default function Tags({ data: { tags, posts, site }, location }) {
+  const groups = categorify(tags.nodes)
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={site.siteMetadata.title}>
       <Section title="Tag">
         <ul className="page-list">
-          {data.posts.group.map((node, index) => {
+          {posts.group.map((node, index) => {
             return (
               <li key={"tag-" + index}>
-                <TagLink tag={tags[node.fieldValue]} /> ({node.totalCount})
+                <TagLink tag={groups[node.fieldValue]} /> ({node.totalCount})
               </li>
             )
           })}

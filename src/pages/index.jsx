@@ -8,14 +8,14 @@ import Layout from "../components/layout/layout"
 
 export default function Index({
   data: {
-    posts: { edges },
+    posts: { nodes },
   },
   location,
 }) {
   return (
     <Layout location={location}>
       <About />
-      <Blog posts={edges} />
+      <Blog posts={nodes} />
       <Partners />
     </Layout>
   )
@@ -28,26 +28,24 @@ export const pageQuery = graphql`
       filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       sort: { fields: date, order: DESC }
     ) {
-      edges {
-        node {
-          id
-          image {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 640
-                  height: 440
-                  placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
+      nodes {
+        id
+        image {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 640
+                height: 440
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
-          slug
-          excerpt
-          date: formattedDate
-          title
         }
+        slug
+        excerpt
+        date: formattedDate
+        title
       }
     }
   }

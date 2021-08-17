@@ -285,6 +285,7 @@ exports.createResolvers = ({ createResolvers }) => {
   createResolvers(resolvers)
 }
 
+/*
 exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
   if (stage === "build-javascript") {
     const config = getConfig()
@@ -299,3 +300,5 @@ exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
     actions.replaceWebpackConfig(config)
   }
 }
+
+*/
