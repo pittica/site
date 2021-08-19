@@ -1,11 +1,11 @@
 import React from "react"
 import classnames from "classnames"
 
-import ListNav from "../nav/list-nav"
-import Layout from "./layout"
-import EmptyLayout from "./empty-layout"
-import Section from "../ui/section"
 import ArticleGrid from "../ui/article/article-grid"
+import Section from "../ui/section"
+import Hero from "../ui/hero"
+import Layout from "./layout"
+import ListNav from "../nav/list-nav"
 
 export default function CategoryLayout({ context, nodes, label, location }) {
   const { name } = context
@@ -32,9 +32,10 @@ export default function CategoryLayout({ context, nodes, label, location }) {
     )
   } else {
     return (
-      <EmptyLayout location={location} title={label} value={name}>
-        Nessun Post Trovato
-      </EmptyLayout>
+      <Layout location={location} title={`${label} "${name}"`}>
+        <Hero title={label} subtitle={name} />
+        <Section>Nessun Post Trovato</Section>
+      </Layout>
     )
   }
 }

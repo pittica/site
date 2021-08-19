@@ -3,14 +3,14 @@ import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 import classnames from "classnames"
 
+import ArticleHeader from "../../components/ui/article/article-header"
+import ContactForm from "../../components/contact-form"
+import Hero from "../../components/ui/hero"
+import Highlight from "../../components/ui/highlight"
 import PostContent from "../../components/ui/article/post-content"
 import PostLayout from "../../components/layout/post-layout"
 import Section from "../../components/ui/section"
-import ContactForm from "../../components/contact-form"
-import Hero from "../../components/ui/hero"
-import ArticleHeader from "../../components/ui/article/article-header"
 import StaticGrid from "../../components/ui/article/static-grid"
-import Highlight from "../../components/ui/highlight"
 
 export default function Offers({ data: { post }, location }) {
   const image = getImage(post.image.localFile.childImageSharp)
@@ -43,83 +43,78 @@ export default function Offers({ data: { post }, location }) {
       image={cover}
       location={location}
     >
-      <article className="blog-post">
-        <ArticleHeader image={cover} className="post-header">
-          <Hero
-            title={post.title}
-            subtitle={post.description}
-            className="post-data"
-          >
-            {post.price && (
-              <Highlight>
-                {post.price}€{base}
-              </Highlight>
-            )}
-          </Hero>
-        </ArticleHeader>
-        <PostContent>{post.content}</PostContent>
-        <div className="container">
+      <ArticleHeader image={cover} className="post-header">
+        <Hero
+          title={post.title}
+          subtitle={post.description}
+          className="post-data"
+        >
           {post.price && (
-            <Section className="has-text-right">
-              <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
-            </Section>
+            <Highlight>
+              {post.price}€{base}
+            </Highlight>
           )}
-          {post.confcommercioDiscount && (
-            <Section
-              className="has-text-right"
-              title="Convenzione Confcommercio"
-            >
-              <p className="subtitle">
-                Sconto <strong>{post.confcommercioDiscount}%</strong>
-              </p>
-              <p>
-                Pittica offre uno sconto speciale a tutti i soci Confcommercio.
-              </p>
-              <p>
-                Presenta la tua Tessera Associativa Confcommercio per ottenere
-                sconti, servizi aggiuntivi e particolari condizioni di favore.
-              </p>
-              {post.confcommercioLink && (
-                <a
-                  href={post.confcommercioLink}
-                  title="Convenzione Confcommercio"
-                >
-                  {post.confcommercioLink}
-                </a>
-              )}
-            </Section>
-          )}
+        </Hero>
+      </ArticleHeader>
+      <PostContent>{post.content}</PostContent>
+      <div className="container">
+        {post.price && (
+          <Section className="has-text-right">
+            <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
+          </Section>
+        )}
+        {post.confcommercioDiscount && (
+          <Section className="has-text-right" title="Convenzione Confcommercio">
+            <p className="subtitle">
+              Sconto <strong>{post.confcommercioDiscount}%</strong>
+            </p>
+            <p>
+              Pittica offre uno sconto speciale a tutti i soci Confcommercio.
+            </p>
+            <p>
+              Presenta la tua Tessera Associativa Confcommercio per ottenere
+              sconti, servizi aggiuntivi e particolari condizioni di favore.
+            </p>
+            {post.confcommercioLink && (
+              <a
+                href={post.confcommercioLink}
+                title="Convenzione Confcommercio"
+              >
+                {post.confcommercioLink}
+              </a>
+            )}
+          </Section>
+        )}
+        <Section
+          title="Contattaci"
+          subtitle="Richiedi maggiori informazioni."
+        />
+        <ContactForm id="offer" />
+        {post.services && post.services.length > 0 && (
           <Section
-            title="Contattaci"
-            subtitle="Richiedi maggiori informazioni."
-          />
-          <ContactForm />
-          {post.services && post.services.length > 0 && (
-            <Section
-              title="Servizi"
-              subtitle="I servizi di riferimento dell'offerta"
-            >
-              <div className={classnames("columns", "is-multiline")}>
-                {post.services.map((element) => {
-                  return (
-                    <div
-                      className={classnames(
-                        "column",
-                        "is-12-mobile",
-                        "is-6-tablet",
-                        "is-3-desktop"
-                      )}
-                      key={element.slug}
-                    >
-                      <StaticGrid node={element} group="services" />
-                    </div>
-                  )
-                })}
-              </div>
-            </Section>
-          )}
-        </div>
-      </article>
+            title="Servizi"
+            subtitle="I servizi di riferimento dell'offerta"
+          >
+            <div className={classnames("columns", "is-multiline")}>
+              {post.services.map((element) => {
+                return (
+                  <div
+                    className={classnames(
+                      "column",
+                      "is-12-mobile",
+                      "is-6-tablet",
+                      "is-3-desktop"
+                    )}
+                    key={element.slug}
+                  >
+                    <StaticGrid node={element} group="services" />
+                  </div>
+                )
+              })}
+            </div>
+          </Section>
+        )}
+      </div>
     </PostLayout>
   )
 }

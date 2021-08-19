@@ -1,13 +1,28 @@
 import React from "react"
-import SectionTitle from "./section-title"
+import { Link } from "gatsby"
 
 import "../../scss/ui/_header.scss"
 
 export default function Header({ children, title, subtitle, link }) {
-  return (
-    <header className="header">
-      <SectionTitle title={title} subtitle={subtitle} link={link} />
-      {children && <div className="container">{children}</div>}
-    </header>
-  )
+  if (title || subtitle || children) {
+    return (
+      <header className="header">
+        <div className="container">
+          {title && (
+            <h1 className="title">
+              {link ? <Link to={link}>{title}</Link> : title}
+            </h1>
+          )}
+          {subtitle && (
+            <h2 className="subtitle">
+              {link ? <Link to={link}>{subtitle}</Link> : subtitle}
+            </h2>
+          )}
+          {children}
+        </div>
+      </header>
+    )
+  } else {
+    return null
+  }
 }

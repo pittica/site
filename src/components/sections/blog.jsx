@@ -1,8 +1,8 @@
 import React from "react"
 import classnames from "classnames"
 
-import Section from "../ui/section"
 import ArticleGrid from "../ui/article/article-grid"
+import Section from "../ui/section"
 
 export default function Blog({ posts }) {
   if (posts.length > 0) {

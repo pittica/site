@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import Hero from "../hero"
 import ArticleHeader from "./article-header"
+import Hero from "../hero"
 
 import "../../../scss/ui/article/_post-header.scss"
 

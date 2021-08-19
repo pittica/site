@@ -1,7 +1,7 @@
 import React from "react"
 
-import Layout from "../components/layout/layout"
 import Hero from "../components/ui/hero"
+import Layout from "../components/layout/layout"
 import Rain from "../components/ui/gfx/rain"
 
 import image from "../images/404.svg"

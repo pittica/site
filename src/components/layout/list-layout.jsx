@@ -1,9 +1,9 @@
 import React from "react"
 
-import ListNav from "../nav/list-nav"
-import Layout from "./layout"
-import Header from "../ui/header"
 import Section from "../ui/section"
+import Layout from "./layout"
+import ListNav from "../nav/list-nav"
+import Header from "../ui/header"
 
 export default function ListLayout({
   children,

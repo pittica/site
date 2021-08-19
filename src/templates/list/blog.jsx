@@ -2,10 +2,10 @@ import React from "react"
 import { graphql } from "gatsby"
 import classnames from "classnames"
 
-import Layout from "../../components/layout/layout"
-import Section from "../../components/ui/section"
 import ArticleGrid from "../../components/ui/article/article-grid"
+import Layout from "../../components/layout/layout"
 import ListNav from "../../components/nav/list-nav"
+import Section from "../../components/ui/section"
 
 export default function Blog({
   data: {

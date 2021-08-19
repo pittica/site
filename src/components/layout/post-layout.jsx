@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Seo } from "@pittica/gatsby-plugin-seo"
 
 import Navbar from "../nav/navbar"
@@ -19,8 +20,18 @@ export default function PostLayout({ location, title, children, post, image }) {
         path={location.pathname}
       />
       <Navbar title={title} location={location} />
-      <Main>{children}</Main>
+      <Main>
+        <article className="blog-post">{children}</article>
+      </Main>
       <Footer />
     </div>
   )
+}
+
+PostLayout.propTypes = {
+  location: PropTypes.object,
+  title: PropTypes.string,
+  children: PropTypes.any,
+  post: PropTypes.object,
+  image: PropTypes.string,
 }

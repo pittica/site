@@ -82,7 +82,7 @@ function Paginate({ context }) {
   return items
 }
 
-function ListNav({ context }) {
+export default function ListNav({ context }) {
   if (context.pages > 1) {
     return (
       <nav className="list-nav">
@@ -95,5 +95,3 @@ function ListNav({ context }) {
     return null
   }
 }
-
-export default ListNav

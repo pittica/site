@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classnames from "classnames"
 
 export default function Input({
@@ -27,4 +28,14 @@ export default function Input({
       </div>
     </div>
   )
+}
+
+Input.propTypes = {
+  type: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
 }

@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+
 import ReadmoreLink from "../link/readmore-link"
 
 import "../../../scss/ui/article/_page-grid.scss"

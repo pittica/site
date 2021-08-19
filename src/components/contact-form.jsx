@@ -1,67 +1,41 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
+import PropTypes from "prop-types"
 import axios from "axios"
 import classnames from "classnames"
-import ReCaptcha, { Loader, Unloader } from "@pittica/gatsby-plugin-recaptcha"
+import ReCaptcha from "@pittica/gatsby-plugin-recaptcha"
 import validator from "validator"
 
-import Section from "../components/ui/section"
-import Input from "../components/ui/form/input"
-import Textarea from "../components/ui/form/textarea"
-import CheckBox from "../components/ui/form/checkbox"
 import Button from "../components/ui/form/button"
+import CheckBox from "../components/ui/form/checkbox"
+import Input from "../components/ui/form/input"
 import PrivacyLink from "../components/ui/link/privacy-link"
+import Section from "../components/ui/section"
+import Textarea from "../components/ui/form/textarea"
 
-export default class ContactForm extends Component {
-  constructor(props) {
-    super(props)
+export default function ContactForm({ onLoading, id }) {
+  const [loading, setLoading] = useState(false)
+  const [privacy, setPrivacy] = useState(false)
+  const [error, setError] = useState(false)
+  const [complete, setComplete] = useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+  const [validation, setValidation] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
-    this.state = {
-      active: false,
-      loading: false,
-      privacy: false,
-      captcha: null,
-      error: false,
-      complete: false,
-      name: "",
-      email: "",
-      message: "",
-      validation: {
-        email: false,
-      },
-    }
+  const submit = (captcha) => {
+    if (privacy && captcha && validation) {
+      setLoading(true)
 
-    Loader()
-  }
-
-  componentWillUnmount() {
-    Unloader()
-  }
-
-  loading() {
-    if (this.props.onLoading) {
-      this.props.onLoading(this.state)
-    }
-  }
-
-  handleClick = () => {
-    if (
-      this.state.privacy &&
-      this.state.captcha &&
-      this.state.validation.email
-    ) {
-      this.setState(() => {
-        return {
-          active: true,
-          loading: true,
-        }
-      })
-      this.loading()
+      if (onLoading) {
+        onLoading(true)
+      }
 
       const data = new FormData()
-      data.set("name", this.state.name)
-      data.set("email", this.state.email)
-      data.set("message", this.state.message)
-      data.set("g-recaptcha", this.state.captcha)
+      data.set("name", name)
+      data.set("email", email)
+      data.set("message", message)
+      data.set("g-recaptcha", captcha)
 
       axios
         .post("https://contact.pittica.com/", data, {
@@ -71,154 +45,144 @@ export default class ContactForm extends Component {
           },
         })
         .then(() => {
-          this.setState({
-            loading: false,
-            error: false,
-            complete: true,
-            captcha: null,
-          })
+          setError(false)
+          setLoading(false)
+          setComplete(true)
+          setSubmitted(false)
 
-          this.loading()
+          if (onLoading) {
+            onLoading(true)
+          }
         })
         .catch(() => {
-          this.setState({
-            active: false,
-            loading: false,
-            error: true,
-            complete: true,
-            captcha: null,
-          })
+          setError(true)
+          setLoading(false)
+          setComplete(true)
+          setSubmitted(false)
 
-          this.loading()
+          if (onLoading) {
+            onLoading(false)
+          }
         })
     }
   }
 
-  handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     const target = e.target
 
     if (target.type === "email") {
-      this.setState({
-        validation: {
-          email: validator.isEmail(target.value),
-        },
-      })
+      setValidation(validator.isEmail(target.value))
     }
 
-    const value = target.value
-    const name = target.name
-    this.setState({
-      [name]: value,
-    })
+    switch (target.name) {
+      case "name":
+        setName(target.value)
+        return false
+      case "email":
+        setEmail(target.value)
+        return false
+      case "message":
+        setMessage(target.value)
+        return false
+      default:
+        return false
+    }
   }
 
-  handlePrivacy = (e) => {
-    let checked = e.target.checked
-
-    this.setState(() => {
-      return {
-        privacy: checked,
-      }
-    })
-  }
-
-  verifyCallback = (token) => {
-    this.setState(() => {
-      return {
-        captcha: token,
-      }
-    })
-  }
-
-  render() {
-    return (
-      <Section>
-        {!this.state.complete && (
-          <form method="post">
-            <div className="columns">
-              <div className="column">
-                <Input
-                  name="name"
-                  label="Nome"
-                  onChange={this.handleInputChange}
-                />
-              </div>
-              <div className="column">
-                <Input
-                  type="email"
-                  name="email"
-                  label="E-Mail"
-                  onChange={this.handleInputChange}
-                  className={classnames({
-                    "is-danger": !this.state.validation.email,
-                  })}
-                />
-              </div>
+  return (
+    <Section>
+      {!complete && (
+        <form method="post">
+          <div className="columns">
+            <div className="column">
+              <Input name="name" label="Nome" onChange={handleInputChange} />
             </div>
-            <div className="columns">
-              <div className="column">
-                <Textarea
-                  label="Messaggio"
-                  name="message"
-                  onChange={this.handleInputChange}
-                />
-              </div>
+            <div className="column">
+              <Input
+                type="email"
+                name="email"
+                label="E-Mail"
+                onChange={handleInputChange}
+                className={classnames({
+                  "is-danger": !validation.email,
+                })}
+              />
             </div>
-            <div className="columns">
-              <div className="column">
-                <CheckBox name="privacy" onChange={this.handlePrivacy}>
-                  Dichiaro di aver letto l'
-                  <PrivacyLink>informativa sulla privacy</PrivacyLink> e
-                  autorizzo il trattamento dei miei dati personali ai sensi del
-                  Dlgs. 196 del 30 giugno 2003 e dell'art. 13 GDPR (Regolamento
-                  UE 2016/679) per finalità di contatto.
-                </CheckBox>
-              </div>
-            </div>
-            <div className="columns">
-              <div className="column">
-                <ReCaptcha
-                  action="homepage"
-                  sitekey="6Ldq-_UUAAAAACZQEpZvFdd2QkwzQxvdHsVpEKVA"
-                  callback={this.verifyCallback}
-                />
-              </div>
-              <div className="column">
-                <Button
-                  label="Invia"
-                  onClick={this.handleClick}
-                  loading={this.state.loading}
-                />
-              </div>
-            </div>
-          </form>
-        )}
-        {this.state.complete && (
-          <div
-            className={classnames({
-              notification: true,
-              "is-info": !this.state.error,
-              "is-danger": this.state.error,
-            })}
-          >
-            {!this.state.error ? (
-              <div>
-                <h3>Messaggio inviato!</h3>
-                <p>Sarai ricontattato nel più breve tempo possibile.</p>
-                <p>Grazie per averci contattato.</p>
-              </div>
-            ) : (
-              <div>
-                <h3>Messaggio non inviato!</h3>
-                <p>
-                  C'è stato un problema tecnico nell'invio del tuo messaggio.
-                </p>
-                <p>Ci scusiamo per l'inconveniente.</p>
-              </div>
-            )}
           </div>
-        )}
-      </Section>
-    )
-  }
+          <div className="columns">
+            <div className="column">
+              <Textarea
+                label="Messaggio"
+                name="message"
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column">
+              <CheckBox
+                name="privacy"
+                onChange={(e) => setPrivacy(e.target.checked)}
+              >
+                Dichiaro di aver letto l'
+                <PrivacyLink>informativa sulla privacy</PrivacyLink> e autorizzo
+                il trattamento dei miei dati personali ai sensi del Dlgs. 196
+                del 30 giugno 2003 e dell'art. 13 GDPR (Regolamento UE 2016/679)
+                per finalità di contatto.
+              </CheckBox>
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column">
+              <ReCaptcha
+                action="homepage"
+                siteKey="6Ldq-_UUAAAAACZQEpZvFdd2QkwzQxvdHsVpEKVA"
+                onVerify={(token) => submit(token)}
+                submitted={submitted}
+                id={`${id}-recaptcha`}
+              />
+            </div>
+            <div className="column">
+              <Button
+                label="Invia"
+                onClick={() => setSubmitted(true)}
+                loading={loading}
+              />
+            </div>
+          </div>
+        </form>
+      )}
+      {complete && (
+        <div
+          className={classnames("notification", {
+            "is-info": !error,
+            "is-danger": error,
+          })}
+        >
+          {!error ? (
+            <div>
+              <h3>Messaggio inviato!</h3>
+              <p>Sarai ricontattato nel più breve tempo possibile.</p>
+              <p>Grazie per averci contattato.</p>
+            </div>
+          ) : (
+            <div>
+              <h3>Messaggio non inviato!</h3>
+              <p>C'è stato un problema tecnico nell'invio del tuo messaggio.</p>
+              <p>Ci scusiamo per l'inconveniente.</p>
+            </div>
+          )}
+        </div>
+      )}
+    </Section>
+  )
+}
+
+ContactForm.propTypes = {
+  onLoading: PropTypes.func,
+  id: PropTypes.string,
+}
+
+ContactForm.defaultProps = {
+  id: "contact-form",
 }

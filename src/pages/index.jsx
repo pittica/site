@@ -1,10 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
+import classnames from "classnames"
 
-import About from "../components/sections/about"
 import Blog from "../components/sections/blog"
-import Partners from "../components/sections/partners"
+import FeatureLink from "../components/ui/link/feature-link"
 import Layout from "../components/layout/layout"
+import Partners from "../components/sections/partners"
+import Section from "../components/ui/section"
+import SectionContainer from "../components/ui/section-container"
+import Underground from "../components/ui/gfx/underground"
 
 export default function Index({
   data: {
@@ -14,7 +18,28 @@ export default function Index({
 }) {
   return (
     <Layout location={location}>
-      <About />
+      <SectionContainer left={false}>
+        <Underground />
+        <Section title="Pittica" subtitle="Mad Scientists @ Work">
+          <div className="container">
+            <div className={classnames("columns", "is-multiline")}>
+              <div
+                className={classnames(
+                  "column",
+                  "is-two-thirds",
+                  "is-offset-one-third"
+                )}
+              >
+                <p>
+                  Il tuo partner per la <strong>trasformazione digitale</strong>
+                  .
+                </p>
+                <FeatureLink to="/about" label="Leggi" />
+              </div>
+            </div>
+          </div>
+        </Section>
+      </SectionContainer>
       <Blog posts={nodes} />
       <Partners />
     </Layout>

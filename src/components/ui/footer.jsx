@@ -4,9 +4,9 @@ import classnames from "classnames"
 import TrustpilotReviews from "@pittica/gatsby-plugin-trustpilot-widget"
 import { SocialFollow } from "@pittica/gatsby-plugin-seo"
 
-import Sign from "./sign"
 import PrivacyLink from "./link/privacy-link"
 import Section from "./section"
+import Sign from "./sign"
 
 import "../../scss/ui/_footer.scss"
 

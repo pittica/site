@@ -3,8 +3,8 @@ import { graphql } from "gatsby"
 import classnames from "classnames"
 import { groupify } from "@pittica/gatsby-plugin-utils"
 
-import ListLayout from "../../components/layout/list-layout"
 import Card from "../../components/ui/card"
+import ListLayout from "../../components/layout/list-layout"
 
 export default function Portfolio({
   data: {

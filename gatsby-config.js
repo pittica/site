@@ -55,7 +55,7 @@ module.exports = {
         locales: [process.env.LOCALE],
         fragmentsPath: "fragments",
         downloadLocalImages: true,
-        stages: ["DRAFT", "PUBLISHED"],
+        stages: ["PUBLISHED"],
       },
     },
     {

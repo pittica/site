@@ -2,11 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import PostContent from "../../components/ui/article/post-content"
+import PostHeader from "../../components/ui/article/post-header"
 import PostLayout from "../../components/layout/post-layout"
+import Screenshots from "../../components/sections/screenshots"
 import Section from "../../components/ui/section"
 import Technologies from "../../components/ui/technologies"
-import PostHeader from "../../components/ui/article/post-header"
-import Screenshots from "../../components/sections/screenshots"
 
 export default function Portfolio({ data: { post }, location }) {
   const cover =
@@ -19,29 +19,27 @@ export default function Portfolio({ data: { post }, location }) {
       image={cover}
       location={location}
     >
-      <article className="blog-post">
-        <PostHeader image={cover} post={post} />
-        <PostContent>{post.content}</PostContent>
-        {post.technologies && post.technologies.length > 0 && (
-          <Section title="Tecnologie">
-            <Technologies nodes={post.technologies} />
-          </Section>
-        )}
-        <Screenshots screenshots={post.screenshots} title={post.title} />
-        {post.links && post.links.length > 0 && (
-          <Section title="URL">
-            <ul>
-              {post.links.map((link, i) => (
-                <li key={`link-${i}`}>
-                  <a href={link} title={post.title} target="_system">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </Section>
-        )}
-      </article>
+      <PostHeader image={cover} post={post} />
+      <PostContent>{post.content}</PostContent>
+      {post.technologies && post.technologies.length > 0 && (
+        <Section title="Tecnologie">
+          <Technologies nodes={post.technologies} />
+        </Section>
+      )}
+      <Screenshots screenshots={post.screenshots} title={post.title} />
+      {post.links && post.links.length > 0 && (
+        <Section title="URL">
+          <ul>
+            {post.links.map((link, i) => (
+              <li key={`link-${i}`}>
+                <a href={link} title={post.title} target="_system">
+                  {link}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
     </PostLayout>
   )
 }

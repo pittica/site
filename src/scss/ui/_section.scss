@@ -39,5 +39,23 @@
   .container {
     margin-top: $size-4;
     margin-bottom: $size-6;
+    &.section-title {
+      .title {
+        a {
+          color: $primary;
+          font-size: $size-1;
+        }
+      }
+      .subtitle {
+        font-size: $size-3;
+        margin-bottom: $size-3;
+        a {
+          color: $subtitle-color;
+          &:hover {
+            color: $subtitle-color;
+          }
+        }
+      }
+    }
   }
 }

@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import PostContent from "../components/ui/article/post-content"
-import Layout from "../components/layout/layout"
 import Hero from "../components/ui/hero"
+import Layout from "../components/layout/layout"
+import PostContent from "../components/ui/article/post-content"
 
 export default function Page({ data: { post }, location }) {
   return (

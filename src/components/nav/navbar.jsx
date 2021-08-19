@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import classnames from "classnames"
 
-import NavbarLogo from "./navbar-logo"
 import NavbarItem from "./navbar-item"
+import NavbarLogo from "./navbar-logo"
 
 import "../../scss/nav/_navbar.scss"
 

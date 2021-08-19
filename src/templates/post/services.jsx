@@ -3,12 +3,12 @@ import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 import classnames from "classnames"
 
-import PostContent from "../../components/ui/article/post-content"
-import PostLayout from "../../components/layout/post-layout"
+import ArticleHeader from "../../components/ui/article/article-header"
 import ContactForm from "../../components/contact-form"
 import Hero from "../../components/ui/hero"
+import PostContent from "../../components/ui/article/post-content"
+import PostLayout from "../../components/layout/post-layout"
 import Section from "../../components/ui/section"
-import ArticleHeader from "../../components/ui/article/article-header"
 import StaticGrid from "../../components/ui/article/static-grid"
 
 export default function Services({ data: { post }, location }) {
@@ -22,45 +22,40 @@ export default function Services({ data: { post }, location }) {
       image={cover}
       location={location}
     >
-      <article className="blog-post">
-        <ArticleHeader image={cover} className="post-header">
-          <Hero
-            title={post.title}
-            subtitle={post.description}
-            className="post-data"
-          />
-        </ArticleHeader>
-        <PostContent>{post.content}</PostContent>
-        {post.offers && (
-          <Section
-            title="Offerte"
-            subtitle="Le offerte collegate a questo servizio"
-          >
-            <div className={classnames("columns", "is-multiline")}>
-              {post.offers.map((element) => {
-                return (
-                  <div
-                    className={classnames(
-                      "column",
-                      "is-12-mobile",
-                      "is-6-tablet",
-                      "is-3-desktop"
-                    )}
-                    key={element.slug}
-                  >
-                    <StaticGrid node={element} group="offers" />
-                  </div>
-                )
-              })}
-            </div>
-          </Section>
-        )}
-        <Section
-          title="Contattaci"
-          subtitle="Richiedi maggiori informazioni."
+      <ArticleHeader image={cover} className="post-header">
+        <Hero
+          title={post.title}
+          subtitle={post.description}
+          className="post-data"
         />
-        <ContactForm />
-      </article>
+      </ArticleHeader>
+      <PostContent>{post.content}</PostContent>
+      {post.offers && (
+        <Section
+          title="Offerte"
+          subtitle="Le offerte collegate a questo servizio"
+        >
+          <div className={classnames("columns", "is-multiline")}>
+            {post.offers.map((element) => {
+              return (
+                <div
+                  className={classnames(
+                    "column",
+                    "is-12-mobile",
+                    "is-6-tablet",
+                    "is-3-desktop"
+                  )}
+                  key={element.slug}
+                >
+                  <StaticGrid node={element} group="offers" />
+                </div>
+              )
+            })}
+          </div>
+        </Section>
+      )}
+      <Section title="Contattaci" subtitle="Richiedi maggiori informazioni." />
+      <ContactForm id="service" />
     </PostLayout>
   )
 }

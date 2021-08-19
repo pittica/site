@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 export default function Textarea({
   label,
@@ -24,4 +25,12 @@ export default function Textarea({
       </div>
     </div>
   )
+}
+
+Textarea.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
 }

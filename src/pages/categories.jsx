@@ -2,9 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import { categorify } from "@pittica/gatsby-plugin-utils"
 
+import CategoryLink from "../components/ui/link/category-link"
 import Layout from "../components/layout/layout"
 import Section from "../components/ui/section"
-import CategoryLink from "../components/ui/link/category-link"
 
 export default function Categories({
   data: { categories, posts, site },

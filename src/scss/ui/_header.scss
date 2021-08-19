@@ -5,6 +5,10 @@
   padding: $section-padding;
   .title {
     font-size: $size-1;
+    a {
+      color: $primary;
+      font-size: $size-1;
+    }
   }
   .subtitle {
     font-size: $size-3;
@@ -12,7 +16,7 @@
     a {
       color: $subtitle-color;
       &:hover {
-        color: $primary;
+        color: $subtitle-color;
       }
     }
   }
