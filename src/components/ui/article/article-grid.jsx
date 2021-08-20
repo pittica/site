@@ -2,8 +2,8 @@ import React from "react"
 import { Link } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 
+import ArticleCage from "./article-cage"
 import ArticleHeader from "./article-header"
-import ReadmoreLink from "../link/readmore-link"
 
 import "../../../scss/ui/article/_article-grid.scss"
 
@@ -14,7 +14,7 @@ export default function ArticleGrid({ node }) {
   const slug = `/blog/${node.slug}`
 
   return (
-    <article className="article-grid">
+    <ArticleCage node={node} slug={slug} className="article-grid">
       <ArticleHeader
         image={image ? image.images.fallback.src : null}
         className="article-grid-header"
@@ -34,15 +34,6 @@ export default function ArticleGrid({ node }) {
           </Link>
         )}
       </ArticleHeader>
-      <section>
-        <Link
-          to={slug}
-          dangerouslySetInnerHTML={{
-            __html: node.description || node.excerpt,
-          }}
-        />
-      </section>
-      <ReadmoreLink slug={slug} featured={true} />
-    </article>
+    </ArticleCage>
   )
 }

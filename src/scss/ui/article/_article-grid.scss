@@ -54,6 +54,8 @@
     h3 {
       &.title {
         margin-bottom: 0;
+        text-transform: none;
+        font-size: $size-3;
         a {
           display: block;
           width: 100%;

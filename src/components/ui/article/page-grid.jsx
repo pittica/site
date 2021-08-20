@@ -1,38 +1,27 @@
 import React from "react"
 import { Link } from "gatsby"
+import { groupify } from "@pittica/gatsby-plugin-utils"
 
-import ReadmoreLink from "../link/readmore-link"
+import ArticleCage from "./article-cage"
+import Title from "../title"
 
 import "../../../scss/ui/article/_page-grid.scss"
 
 export default function PageGrid({ node, group }) {
   const title = node.title || node.slug
-  const parts = []
-
-  if (group) {
-    parts.push(group)
-  }
-
-  parts.push(node.slug)
-
-  const link = `/${parts.join("/")}`
+  const slug = groupify(node.slug, group)
 
   return (
-    <article className="page-grid">
-      <header className="page-grid-header">
-        <h4 className="title">
-          <Link to={link}>{title}</Link>
-        </h4>
-      </header>
+    <ArticleCage node={node} slug={slug} featured={false} className="page-grid">
+      <Title link={slug}>{title}</Title>
       <section>
         <Link
-          to={link}
+          to={slug}
           dangerouslySetInnerHTML={{
             __html: node.description || node.subtitle || node.excerpt,
           }}
         />
       </section>
-      <ReadmoreLink slug={link} />
-    </article>
+    </ArticleCage>
   )
 }

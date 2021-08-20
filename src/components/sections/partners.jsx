@@ -4,12 +4,10 @@ import classnames from "classnames"
 
 import Section from "../ui/section"
 
-import "../../scss/sections/_partners.scss"
-
 export default function Partners({ title, subtitle }) {
   return (
     <Section className="partners" title={title} subtitle={subtitle}>
-      <div className={classnames("columns", "is-vcentered", "is-multiline")}>
+      <div className={classnames("columns", "is-vcentered", "is-multiline", "p-5")}>
         <div className={classnames("column", "is-4", "has-text-centered")}>
           <a
             href="https://cloud.withgoogle.com/partners/detail/?id=pittica"

@@ -2,10 +2,10 @@ import React from "react"
 import classnames from "classnames"
 
 import ArticleGrid from "../ui/article/article-grid"
-import Section from "../ui/section"
 import Hero from "../ui/hero"
 import Layout from "./layout"
 import ListNav from "../nav/list-nav"
+import Section from "../ui/section"
 
 export default function CategoryLayout({ context, nodes, label, location }) {
   const { name } = context

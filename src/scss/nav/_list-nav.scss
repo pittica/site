@@ -13,9 +13,9 @@
     span {
       display: inline-block;
       margin: $gap / 2;
-      padding: 0.75rem;
+      padding: $size-7;
       @include until($tablet) {
-        padding: 0.35rem;
+        padding: $size-7 / 2;
         margin: $gap / 5;
       }
     }

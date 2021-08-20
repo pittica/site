@@ -1,15 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import BottomNav from "./bottom-nav"
-
 import "../../scss/nav/_post-nav.scss"
 
 export default function PostNav({ previous, next }) {
   if (previous || next) {
     return (
-      <BottomNav>
-        <ul className="post-nav">
+      <nav className="post-nav">
+        <ul>
           <li>
             {previous && (
               <Link to={`/blog/${previous.slug}`} rel="prev">
@@ -25,7 +23,7 @@ export default function PostNav({ previous, next }) {
             )}
           </li>
         </ul>
-      </BottomNav>
+      </nav>
     )
   } else {
     return null

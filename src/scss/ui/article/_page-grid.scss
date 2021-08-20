@@ -1,7 +1,7 @@
 @import "../../variables";
 
 .page-grid {
-  border: 1px solid $grey-darker;
+  border: ($size-7 / 5) solid $grey-darker;
   padding: $size-1 0 0 $size-3;
   position: relative;
   z-index: 3;
@@ -10,9 +10,9 @@
     font-weight: $weight-bold;
     margin-bottom: $size-2;
   }
-  .page-grid-header {
+  .header {
     margin: $size-7 auto;
-    h4 {
+    h1 {
       &.title {
         margin-bottom: 0;
         a {
