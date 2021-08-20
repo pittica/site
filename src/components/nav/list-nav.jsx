@@ -1,54 +1,25 @@
 import React from "react"
-import { Link } from "gatsby"
-import classNames from "classnames"
 
-import "../../scss/nav/_list-nav.scss"
-
-function Ellipsis({ upper }) {
-  return (
-    <li key={"page-" + (upper ? "ellipsis-upper" : "ellipsis-lower")}>
-      <span>...</span>
-    </li>
-  )
-}
-
-function ListItem({ context, page }) {
-  let link = ""
-
-  if (context.group) {
-    link += "/" + context.group
-  }
-
-  if (context.slug) {
-    link += "/" + context.slug
-  }
-
-  if (page > 1) {
-    link += "/" + page
-  }
-
-  return (
-    <li key={"page-" + page}>
-      <Link
-        to={link}
-        className={classNames({
-          current: context.current === page,
-        })}
-      >
-        {page}
-      </Link>
-    </li>
-  )
-}
+import Ellipsis from "./ellipsis"
+import ListItem from "./list-item"
+import PostList from "./post-list"
 
 function Paginate({ context }) {
   const items = []
 
   if (context.pages > 1) {
-    items.push(<ListItem context={context} page={1} key="li-0" />)
+    items.push(
+      <ListItem
+        group={context.group}
+        slug={context.slug}
+        current={context.current}
+        page={1}
+        key="li-0"
+      />
+    )
 
     if (context.current > 3) {
-      items.push(<Ellipsis upper={false} key="ellip-0" />)
+      items.push(<Ellipsis key="ellip-0" />)
     }
   }
 
@@ -61,18 +32,28 @@ function Paginate({ context }) {
       page < context.current + 2 &&
       page > context.current - 2
     ) {
-      items.push(<ListItem context={context} page={page} key={`li-${i}`} />)
+      items.push(
+        <ListItem
+          group={context.group}
+          slug={context.slug}
+          current={context.current}
+          page={page}
+          key={`li-${i}`}
+        />
+      )
     }
   }
 
   if (context.pages > 1) {
     if (context.current < context.pages - 2) {
-      items.push(<Ellipsis upper={true} key="ellip-1" />)
+      items.push(<Ellipsis key="ellip-1" />)
     }
 
     items.push(
       <ListItem
-        context={context}
+        group={context.group}
+        slug={context.slug}
+        current={context.current}
         page={context.pages}
         key={`li-${context.pages}`}
       />
@@ -86,9 +67,9 @@ export default function ListNav({ context }) {
   if (context.pages > 1) {
     return (
       <nav className="list-nav">
-        <ul>
+        <PostList>
           <Paginate context={context} />
-        </ul>
+        </PostList>
       </nav>
     )
   } else {

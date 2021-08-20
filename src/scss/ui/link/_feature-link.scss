@@ -1,4 +1,5 @@
 @import "@pittica/scss-functions";
+
 @import "../../variables";
 
 @include keyframes(feature-link) {
@@ -30,7 +31,7 @@
   color: $primary-invert;
   padding: $size-4;
   text-transform: uppercase;
-  letter-spacing: 0.35rem;
+  letter-spacing: $size-7 / 2;
   margin: $size-1 $size-4 $size-4 $size-4;
   border: 1px solid $primary;
   @include rotate(4);
