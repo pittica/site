@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import classnames from "classnames"
+import classNames from "classnames"
 
 export default function Input({
   type,
@@ -17,7 +17,7 @@ export default function Input({
         <label className="label">
           {label}
           <input
-            className={classnames("input", className)}
+            className={classNames("input", className)}
             type={type || "text"}
             name={name}
             placeholder={placeholder}

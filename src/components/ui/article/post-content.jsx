@@ -8,7 +8,9 @@ import "../../../scss/ui/article/_post-content.scss"
 export default function PostContent({ children }) {
   return (
     <Section className="post-content">
-      <Renderer>{children}</Renderer>
+      <div className="content">
+        <Renderer>{children}</Renderer>
+      </div>
     </Section>
   )
 }

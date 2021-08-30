@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import Blog from "../components/sections/blog"
 import FeatureLink from "../components/ui/link/feature-link"
@@ -22,9 +22,9 @@ export default function Index({
         <Underground />
         <Section title="Pittica" subtitle="Mad Scientists @ Work">
           <div className="container">
-            <div className={classnames("columns", "is-multiline")}>
+            <div className={classNames("columns", "is-multiline")}>
               <div
-                className={classnames(
+                className={classNames(
                   "column",
                   "is-two-thirds",
                   "is-offset-one-third"

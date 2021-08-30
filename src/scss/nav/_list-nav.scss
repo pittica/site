@@ -1,0 +1,24 @@
+@import "../variables";
+
+@import "~bulma/sass/utilities/mixins";
+
+.list-nav {
+  &.pagination {
+    a {
+      display: inline-block;
+      margin: $gap / 2;
+      @include until($tablet) {
+        padding: $size-7 / 2;
+        margin: $gap / 5;
+      }
+      background-color: $primary;
+      color: $primary-invert;
+      border-color: $primary;
+      &.is-current {
+        background-color: $primary-invert;
+        color: $primary;
+        border-color: $primary;
+      }
+    }
+  }
+}

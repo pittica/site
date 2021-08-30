@@ -1,34 +1,18 @@
 import React from "react"
-
-import ListItem from "./list-item"
-import PostList from "./post-list"
+import classNames from "classnames"
+import { Post } from "@pittica/gatsby-plugin-navigation"
 
 import "../../scss/nav/_post-nav.scss"
 
 export default function PostNav({ previous, next }) {
-  if (previous || next) {
-    return (
-      <nav className="post-nav">
-        <PostList>
-          {previous && (
-            <ListItem
-              group="blog"
-              slug={previous.slug}
-              rel="prev"
-              single={true}
-            >
-              <i className="icon-pittica-arrow-left" /> {previous.title}
-            </ListItem>
-          )}
-          {next && (
-            <ListItem group="blog" slug={next.slug} rel="prev" single={true}>
-              {next.title} <i className="icon-pittica-arrow-right" />
-            </ListItem>
-          )}
-        </PostList>
-      </nav>
-    )
-  } else {
-    return null
-  }
+  return (
+    <Post
+      previous={previous}
+      next={next}
+      group="blog"
+      className={classNames("is-centered", "post-nav")}
+      iconNext="icon-pittica-arrow-right"
+      iconPrevious="icon-pittica-arrow-left"
+    />
+  )
 }

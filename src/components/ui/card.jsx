@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import ImagePost from "./image/image-post"
 
@@ -10,14 +10,14 @@ export default function Card({ children, image, title, link }) {
     <div className="card">
       {image && (
         <div
-          className={classnames(
+          className={classNames(
             "card-image",
             image.localFile && image.localFile.extension
               ? image.localFile.extension.toLowerCase()
               : null
           )}
         >
-          <figure className={classnames("image", "is-square")}>
+          <figure className={classNames("image", "is-square")}>
             <ImagePost image={image} title={title} link={link} />
           </figure>
         </div>

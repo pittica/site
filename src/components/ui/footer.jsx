@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 import TrustpilotReviews from "@pittica/gatsby-plugin-trustpilot-widget"
 import { SocialFollow } from "@pittica/gatsby-plugin-seo"
 
@@ -56,10 +56,10 @@ export default function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="columns">
-          <div className={classnames("column", "is-one-fifths")}>
+          <div className={classNames("column", "is-one-fifths")}>
             <Sign color={appearance.background} />
           </div>
-          <div className={classnames("column", "is-two-fifths")}>
+          <div className={classNames("column", "is-two-fifths")}>
             <h3>{organization.company}</h3>
             <div className="bracket-group">
               <div className="icon">
@@ -98,9 +98,9 @@ export default function Footer() {
               </div>
             )}
           </div>
-          <div className={classnames("column", "is-two-fifths")}>
+          <div className={classNames("column", "is-two-fifths")}>
             <div className="columns">
-              <div className={classnames("column", "is-half")}>
+              <div className={classNames("column", "is-half")}>
                 <ul>
                   <li>
                     <PrivacyLink />
@@ -117,7 +117,7 @@ export default function Footer() {
                 </ul>
               </div>
               <div
-                className={classnames(
+                className={classNames(
                   "column",
                   "is-half",
                   "has-text-centered-mobile"
@@ -126,7 +126,7 @@ export default function Footer() {
                 <SocialFollow />
               </div>
             </div>
-            <div className={classnames("column", "has-text-centered-mobile")}>
+            <div className={classNames("column", "has-text-centered-mobile")}>
               <a
                 href="https://www.assintel.it/soci/pittica_srls/"
                 target="_new"
@@ -153,7 +153,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="columns">
-          <div className={classnames("column", "is-five-fifths")}>
+          <div className={classNames("column", "is-five-fifths")}>
             © {new Date().getFullYear()}, {organization.company}
           </div>
         </div>

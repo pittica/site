@@ -1,13 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
-import classnames from "classnames"
+import classNames from "classnames"
 import { RainCanvas } from "@pittica/gatsby-plugin-canvas-animations"
 
 import "../../../scss/effects/_lighting.scss"
 
 export default function Rain({ children }) {
   return (
-    <div className={classnames("ui-effects", "rain")}>
+    <div className={classNames("ui-effects", "rain")}>
       <RainCanvas />
       <div>{children}</div>
     </div>

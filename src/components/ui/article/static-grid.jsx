@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 import { Link } from "gatsby"
 import ImagePost from "../image/image-post"
 import { groupify } from "@pittica/gatsby-plugin-utils"
@@ -14,7 +14,7 @@ export default function StaticGrid({ node, group }) {
     <ArticleCage node={node} slug={slug} className="static-grid">
       <ImagePost image={node.image} title={title} link={slug} />
       <section>
-        <h3 className={classnames("title", "pt-4")}>
+        <h3 className={classNames("title", "pt-4")}>
           <Link to={slug}>{title}</Link>
         </h3>
       </section>

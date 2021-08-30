@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 import { groupify } from "@pittica/gatsby-plugin-utils"
 
 import Card from "../../components/ui/card"
@@ -20,13 +20,13 @@ export default function Portfolio({
       title="Portfolio"
       description="I nostri lavori"
     >
-      <div className={classnames("columns", "is-multiline", "is-mobile")}>
+      <div className={classNames("columns", "is-multiline", "is-mobile")}>
         {nodes.map(({ title, slug, image }) => {
           const link = groupify(slug, pageContext.group)
 
           return (
             <div
-              className={classnames(
+              className={classNames(
                 "column",
                 "is-half-mobile",
                 "is-one-third-tablet",

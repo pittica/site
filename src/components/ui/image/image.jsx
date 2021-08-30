@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 
 export default function Image({ src, title, size, className }) {
   let classSize = null
@@ -36,7 +36,7 @@ export default function Image({ src, title, size, className }) {
       src={src}
       alt={title}
       title={title}
-      className={classnames("image", classSize, className)}
+      className={classNames("image", classSize, className)}
     />
   )
 }

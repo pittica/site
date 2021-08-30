@@ -1,14 +1,14 @@
 import React from "react"
 import { Link } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import Section from "../ui/section"
 
 export default function Partners({ title, subtitle }) {
   return (
     <Section className="partners" title={title} subtitle={subtitle}>
-      <div className={classnames("columns", "is-vcentered", "is-multiline", "p-5")}>
-        <div className={classnames("column", "is-4", "has-text-centered")}>
+      <div className={classNames("columns", "is-vcentered", "is-multiline", "p-5")}>
+        <div className={classNames("column", "is-4", "has-text-centered")}>
           <a
             href="https://cloud.withgoogle.com/partners/detail/?id=pittica"
             target="_new"
@@ -21,7 +21,7 @@ export default function Partners({ title, subtitle }) {
             />
           </a>
         </div>
-        <div className={classnames("column", "is-4", "has-text-centered")}>
+        <div className={classNames("column", "is-4", "has-text-centered")}>
           <a
             href="https://cloud.withgoogle.com/partners/detail/?id=pittica"
             target="_new"
@@ -34,7 +34,7 @@ export default function Partners({ title, subtitle }) {
             />
           </a>
         </div>
-        <div className={classnames("column", "is-4", "has-text-centered")}>
+        <div className={classNames("column", "is-4", "has-text-centered")}>
           <Link
             to="/iubenda"
             title="iubenda Certified Bronze Partner"

@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import ListLayout from "../../components/layout/list-layout"
 import PageGrid from "../../components/ui/article/page-grid"
@@ -19,10 +19,10 @@ export default function Legal({
       title="Note Legali"
       description="Documenti e Condizioni di Fornitura Servizi"
     >
-      <div className={classnames("columns", "is-multiline")}>
+      <div className={classNames("columns", "is-multiline")}>
         {nodes.map((node) => {
           return (
-            <div className={classnames("column", "is-half")} key={node.slug}>
+            <div className={classNames("column", "is-half")} key={node.slug}>
               <PageGrid node={node} group={pageContext.group} />
             </div>
           )

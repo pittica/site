@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 import Section from "../ui/section"
@@ -14,7 +14,7 @@ export default function Screenshots({ screenshots, title }) {
 
             if (image) {
               return (
-                <div className={classnames("column", "is-6")} key={i}>
+                <div className={classNames("column", "is-6")} key={i}>
                   <GatsbyImage image={image} alt={title} />
                 </div>
               )

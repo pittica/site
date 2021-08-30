@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 import { commalify } from "@pittica/gatsby-plugin-utils"
 
 import Card from "../components/ui/card"
@@ -18,7 +18,7 @@ import breaker from "../images/about/breaker.svg"
 export default function About({ location, data }) {
   return (
     <Layout location={location} title="About">
-      <figure className={classnames("image", "is-128x128")}>
+      <figure className={classNames("image", "is-128x128")}>
         <img src={cover} alt="About" width="1080" height="1080" />
       </figure>
       {data.about && (
@@ -31,7 +31,7 @@ export default function About({ location, data }) {
           <div className="columns">
             {data.people.nodes.map((person, index) => (
               <div
-                className={classnames("column", "has-text-centered")}
+                className={classNames("column", "has-text-centered")}
                 key={"person-" + index}
               >
                 <Card image={person.image} title={person.name}>
@@ -51,7 +51,7 @@ export default function About({ location, data }) {
           </div>
         </Section>
       )}
-      <figure className={classnames("image", "is-128x128")}>
+      <figure className={classNames("image", "is-128x128")}>
         <img src={breaker} alt="About" width="1080" height="1080" />
       </figure>
       {data.services && (
@@ -72,11 +72,11 @@ export default function About({ location, data }) {
           title="Rete Aziendale"
           subtitle="Le Aziende con cui collaboriamo"
         >
-          <div className={classnames("columns", "is-multiline")}>
+          <div className={classNames("columns", "is-multiline")}>
             {data.partners.nodes.map((node, i) => {
               return (
                 <div
-                  className={classnames("column", "is-one-third", "p-6")}
+                  className={classNames("column", "is-one-third", "p-6")}
                   key={`partner-${i}`}
                 >
                   <ImageLink

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import Airplane from "../components/ui/gfx/airplane"
 import ContactForm from "../components/contact-form"
@@ -51,13 +51,13 @@ export default function Contact({ location }) {
       <Section>
         <h3>{company}</h3>
         <div className="columns">
-          <div className={classnames("column", "is-half")}>
+          <div className={classNames("column", "is-half")}>
             {address}
             <br />
             {zipCode} {city} ({province})<br />
             {country}
           </div>
-          <div className={classnames("column", "is-half")}>
+          <div className={classNames("column", "is-half")}>
             <span className="has-text-primary">E-Mail</span>{" "}
             <a href={`mailto:${email}`} title={email}>
               {email}

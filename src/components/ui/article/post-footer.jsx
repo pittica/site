@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 import { commalify } from "@pittica/gatsby-plugin-utils"
 
 import ImagePost from "../image/image-post"
@@ -16,12 +16,12 @@ export default function PostFooter({ post: { people, image } }) {
             <div className="column">
               {people.map((person, index) => (
                 <div className="columns" key={"person" + index}>
-                  <div className={classnames("column", "is-3")}>
-                    <figure className={classnames("image", "is-square")}>
+                  <div className={classNames("column", "is-3")}>
+                    <figure className={classNames("image", "is-square")}>
                       <ImagePost image={person.image} title={person.name} />
                     </figure>
                   </div>
-                  <div className={classnames("column", "is-9")}>
+                  <div className={classNames("column", "is-9")}>
                     <h5 className="subtitle">{person.name}</h5>
                     {person.roles.length > 0 && (
                       <span>{commalify(person.roles)}</span>
@@ -32,7 +32,7 @@ export default function PostFooter({ post: { people, image } }) {
             </div>
           )}
           {image.credits && (
-            <div className={classnames("column", "has-text-right")}>
+            <div className={classNames("column", "has-text-right")}>
               <h3 className="title">Cover</h3>
               <Renderer>{image.credits}</Renderer>
             </div>

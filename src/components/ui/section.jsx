@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import Title from "./title"
 import Subtitle from "./subtitle"
@@ -14,9 +14,9 @@ export default function Section({
   className,
 }) {
   return (
-    <section className={classnames("section", className)}>
+    <section className={classNames("section", className)}>
       {(title || subtitle) && (
-        <div className={classnames("container")}>
+        <div className={classNames("container")}>
           <Title link={link}>{title}</Title>
           <Subtitle link={link}>{subtitle}</Subtitle>
         </div>

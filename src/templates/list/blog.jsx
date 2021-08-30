@@ -1,37 +1,23 @@
 import React from "react"
 import { graphql } from "gatsby"
-import classnames from "classnames"
 
-import ArticleGrid from "../../components/ui/article/article-grid"
-import Layout from "../../components/layout/layout"
-import ListNav from "../../components/nav/list-nav"
-import Section from "../../components/ui/section"
+import CategoryLayout from "../../components/layout/category-layout"
 
 export default function Blog({
   data: {
-    posts: { edges },
+    posts: { nodes },
   },
   pageContext,
   location,
 }) {
   return (
-    <Layout location={location} title="Blog">
-      <Section title="Blog" subtitle="Pittica says">
-        <div className={classnames("columns", "is-multiline")}>
-          {edges.map(({ node }) => {
-            return (
-              <div
-                className={classnames("column", "is-one-third")}
-                key={node.slug}
-              >
-                <ArticleGrid node={node} />
-              </div>
-            )
-          })}
-        </div>
-      </Section>
-      <ListNav context={pageContext} />
-    </Layout>
+    <CategoryLayout
+      context={pageContext}
+      nodes={nodes}
+      label="Blog"
+      location={location}
+      description="Pittica says"
+    />
   )
 }
 
@@ -43,27 +29,25 @@ export const pageQuery = graphql`
       filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       sort: { fields: date, order: DESC }
     ) {
-      edges {
-        node {
-          id
-          image {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 640
-                  height: 440
-                  placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
+      nodes {
+        id
+        image {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 640
+                height: 440
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
-          slug
-          excerpt
-          date: formattedDate
-          title
-          locale
         }
+        slug
+        excerpt
+        date: formattedDate
+        title
+        locale
       }
     }
   }

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import ArticleHeader from "../../components/ui/article/article-header"
 import ContactForm from "../../components/contact-form"
@@ -35,11 +35,11 @@ export default function Services({ data: { post }, location }) {
           title="Offerte"
           subtitle="Le offerte collegate a questo servizio"
         >
-          <div className={classnames("columns", "is-multiline")}>
+          <div className={classNames("columns", "is-multiline")}>
             {post.offers.map((element) => {
               return (
                 <div
-                  className={classnames(
+                  className={classNames(
                     "column",
                     "is-12-mobile",
                     "is-6-tablet",

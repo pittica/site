@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 
 export default function Hero({
   title,
@@ -9,12 +9,12 @@ export default function Hero({
   className,
 }) {
   return (
-    <section className={classnames("hero", className)}>
+    <section className={classNames("hero", className)}>
       <div className="hero-body">
         <div className="container">
           {title && (
             <h1
-              className={classnames("title", "is-size-1", {
+              className={classNames("title", "is-size-1", {
                 "has-text-centered": centered,
               })}
             >
@@ -23,7 +23,7 @@ export default function Hero({
           )}
           {subtitle && (
             <h2
-              className={classnames("subtitle", "is-size-3", {
+              className={classNames("subtitle", "is-size-3", {
                 "has-text-centered": centered,
               })}
             >

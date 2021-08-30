@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Seo } from "@pittica/gatsby-plugin-seo"
 
 import Footer from "../ui/footer"
-import Navbar from "../nav/navbar"
+import TopMenu from "../nav/top-menu"
 import Main from "../ui/main"
 
 import "../../scss/layout/_post-layout.scss"
@@ -19,7 +19,7 @@ export default function PostLayout({ location, title, children, post, image }) {
         postData={post}
         path={location.pathname}
       />
-      <Navbar title={title} location={location} />
+      <TopMenu location={location} />
       <Main>
         <article className="blog-post">{children}</article>
       </Main>

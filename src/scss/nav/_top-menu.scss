@@ -1,0 +1,116 @@
+@import "../variables";
+@import "../effects/outline";
+
+@import "~bulma/sass/utilities/mixins";
+
+@include translate-confusion(translate-sign-1, -3px, -18px);
+@include translate-confusion(translate-sign-2, 27px, -1px);
+@include translate-confusion(translate-sign-3, -5px, 18px);
+
+.navbar {
+  .navbar-menu {
+    .navbar-start {
+      padding-left: 324px;
+      @include until($tablet) {
+        padding-left: 0;
+      }
+      .navbar-item {
+        text-transform: uppercase;
+        font-family: $family-secondary;
+        letter-spacing: 0.1rem;
+        font-size: $size-6 + $size-7;
+        background-size: 100% 200%;
+        @include transition();
+        @include from($desktop) {
+          background-position: 100% 0;
+          @include linear-gradient(top, $grey-darker 50%, $primary-invert 51%);
+        }
+        &:hover {
+          background-position: 100% 100%;
+        }
+        &.is-active {
+          background-position: 100% 100%;
+        }
+      }
+    }
+    &.is-active {
+      position: relative;
+      z-index: 0;
+      @include until($desktop) {
+        background-color: $primary-invert;
+      }
+      .navbar-start {
+        .navbar-item {
+          text-align: right;
+          @include until($desktop) {
+            color: $grey-darker;
+          }
+        }
+      }
+    }
+  }
+  .navbar-logo {
+    position: absolute;
+    z-index: 3;
+    top: -13px;
+    left: 0;
+    display: block;
+    background: $primary;
+    height: 87px;
+    width: 336px;
+    max-width: 100%;
+    margin-left: -9px;
+    @include rotate(-3);
+    @include until($tablet) {
+      height: 76px;
+      width: 320px;
+    }
+    svg {
+      position: relative;
+      top: 16px;
+      width: 100%;
+      height: auto;
+      @include until($tablet) {
+        height: 68px;
+        max-width: 236px;
+        left: 13px;
+      }
+      &.sign-pittica {
+        .sign-pittica-logo {
+          @include svg-outline($primary-invert, 1132, 2.5s);
+        }
+        .sign-pittica-icon {
+          @include svg-outline($primary-invert, 350, 1.5s);
+        }
+      }
+    }
+    &:hover,
+    &:focus {
+      .sign-pittica {
+        .sign-icon-1 {
+          @include animate(translate-sign-1, 0.5s, 0s, linear);
+        }
+        .sign-icon-2 {
+          @include animate(translate-sign-2, 0.5s, 0s, linear);
+        }
+        .sign-icon-3 {
+          @include animate(translate-sign-3, 0.5s, 0s, linear);
+        }
+      }
+    }
+  }
+  .navbar-burger {
+    color: $primary-invert;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    &.is-active {
+      background-color: $primary-invert;
+      color: $primary;
+    }
+    span {
+      height: 2px;
+    }
+  }
+}

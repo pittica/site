@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import axios from "axios"
-import classnames from "classnames"
+import classNames from "classnames"
 import ReCaptcha from "@pittica/gatsby-plugin-recaptcha"
 import validator from "validator"
 
@@ -103,7 +103,7 @@ export default function ContactForm({ onLoading, id }) {
                 name="email"
                 label="E-Mail"
                 onChange={handleInputChange}
-                className={classnames({
+                className={classNames({
                   "is-danger": !validation.email,
                 })}
               />
@@ -154,7 +154,7 @@ export default function ContactForm({ onLoading, id }) {
       )}
       {complete && (
         <div
-          className={classnames("notification", {
+          className={classNames("notification", {
             "is-info": !error,
             "is-danger": error,
           })}

@@ -1,3 +1,21 @@
+@import "../variables";
+
 .post-nav {
-  justify-content: space-between;
+  display: inline-block;
+  width: 100%;
+  margin-top: $size-2;
+  a {
+    background-color: $primary;
+    color: $primary-invert;
+    &.pagination-previous {
+      i {
+        padding-right: $size-7;
+      }
+    }
+    &.pagination-next {
+      i {
+        padding-left: $size-7;
+      }
+    }
+  }
 }
