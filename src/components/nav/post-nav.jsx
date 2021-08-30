@@ -22,7 +22,7 @@ export default function PostNav({ previous, next }) {
           )}
           {next && (
             <ListItem group="blog" slug={next.slug} rel="prev" single={true}>
-              {previous.title} <i className="icon-pittica-arrow-right" />
+              {next.title} <i className="icon-pittica-arrow-right" />
             </ListItem>
           )}
         </PostList>
