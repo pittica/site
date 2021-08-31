@@ -32,7 +32,7 @@ export default function TopMenu({ location }) {
     <Navbar
       className={classNames("top-menu", "is-fixed-top")}
       location={location}
-      items={[
+      startItems={[
         { to: "/contact", label: "Contatti" },
         { to: "/blog", label: "Blog" },
         { to: "/about", label: "About" },
