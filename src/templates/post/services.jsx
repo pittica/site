@@ -1,15 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
-import classNames from "classnames"
 
 import ArticleHeader from "../../components/ui/article/article-header"
 import ContactForm from "../../components/contact-form"
 import Hero from "../../components/ui/hero"
 import PostContent from "../../components/ui/article/post-content"
+import PostBlock from "../../components/ui/article/post-block"
 import PostLayout from "../../components/layout/post-layout"
 import Section from "../../components/ui/section"
-import StaticGrid from "../../components/ui/article/static-grid"
 
 export default function Services({ data: { post }, location }) {
   const image = getImage(post.image.localFile.childImageSharp)
@@ -30,30 +29,12 @@ export default function Services({ data: { post }, location }) {
         />
       </ArticleHeader>
       <PostContent>{post.content}</PostContent>
-      {post.offers && (
-        <Section
-          title="Offerte"
-          subtitle="Le offerte collegate a questo servizio"
-        >
-          <div className={classNames("columns", "is-multiline")}>
-            {post.offers.map((element) => {
-              return (
-                <div
-                  className={classNames(
-                    "column",
-                    "is-12-mobile",
-                    "is-6-tablet",
-                    "is-3-desktop"
-                  )}
-                  key={element.slug}
-                >
-                  <StaticGrid node={element} group="offers" />
-                </div>
-              )
-            })}
-          </div>
-        </Section>
-      )}
+      <PostBlock
+        title="Offerte"
+        subtitle="Le offerte collegate a questo servizio"
+        posts={post.offers}
+        group="offers"
+      />
       <Section title="Contattaci" subtitle="Richiedi maggiori informazioni." />
       <ContactForm id="service" />
     </PostLayout>

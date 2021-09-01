@@ -1,16 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
-import classNames from "classnames"
 
 import ArticleHeader from "../../components/ui/article/article-header"
 import ContactForm from "../../components/contact-form"
 import Hero from "../../components/ui/hero"
 import Highlight from "../../components/ui/highlight"
 import PostContent from "../../components/ui/article/post-content"
+import PostBlock from "../../components/ui/article/post-block"
 import PostLayout from "../../components/layout/post-layout"
 import Section from "../../components/ui/section"
-import StaticGrid from "../../components/ui/article/static-grid"
 
 export default function Offers({ data: { post }, location }) {
   const image = getImage(post.image.localFile.childImageSharp)
@@ -90,30 +89,12 @@ export default function Offers({ data: { post }, location }) {
           subtitle="Richiedi maggiori informazioni."
         />
         <ContactForm id="offer" />
-        {post.services && post.services.length > 0 && (
-          <Section
-            title="Servizi"
-            subtitle="I servizi di riferimento dell'offerta"
-          >
-            <div className={classNames("columns", "is-multiline")}>
-              {post.services.map((element) => {
-                return (
-                  <div
-                    className={classNames(
-                      "column",
-                      "is-12-mobile",
-                      "is-6-tablet",
-                      "is-3-desktop"
-                    )}
-                    key={element.slug}
-                  >
-                    <StaticGrid node={element} group="services" />
-                  </div>
-                )
-              })}
-            </div>
-          </Section>
-        )}
+        <PostBlock
+          title="Servizi"
+          subtitle="I servizi di riferimento dell'offerta"
+          posts={post.services}
+          group="services"
+        />
       </div>
     </PostLayout>
   )

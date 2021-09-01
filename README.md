@@ -9,10 +9,6 @@
 
 This project contains the main enterprise [website](https://pittica.com/) of Pittica.
 
-## Specs
-
-Based on [Gatsby starter blog](https://github.com/gatsbyjs/gatsby-starter-blog).
-
 ### Development
 
 Navigate into your new site's directory and start it up.
@@ -23,4 +19,4 @@ gatsby develop
 
 ## Copyright
 
-(c) 2020-2021, Pittaca S.r.l.s.
+(c) 2020-2021, [Pittica S.r.l.s.](https://pittica.com).

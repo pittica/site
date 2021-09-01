@@ -1,23 +1,8 @@
 import React from "react"
 
-import Image from "./image"
+import ImageContent from "./image-content"
 
-function ImageContent({ image, title, size, className }) {
-  if (image && image.localFile) {
-    return (
-      <Image
-        src={image.localFile.publicURL}
-        title={title}
-        size={size}
-        className={className}
-      />
-    )
-  } else {
-    return title
-  }
-}
-
-function ImageLink({ link, title, image, size, className }) {
+export default function ImageLink({ link, title, image, size, className }) {
   if (link) {
     return (
       <a href={link} title={title} target="_system">
@@ -40,5 +25,3 @@ function ImageLink({ link, title, image, size, className }) {
     )
   }
 }
-
-export default ImageLink
