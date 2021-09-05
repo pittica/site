@@ -14,7 +14,6 @@ on:
 
 env:
     NAME: ${{ secrets.NAME }}
-    URL: ${{ secrets.URL }}
     HOST: ${{ secrets.HOST }}
     LOCALE: ${{ secrets.LOCALE }}
     CULTURE: ${{ secrets.CULTURE }}
