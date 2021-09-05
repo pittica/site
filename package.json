@@ -18,7 +18,7 @@
     "@pittica/gatsby-plugin-trustpilot-widget": "^1.0.4",
     "@pittica/gatsby-plugin-utils": "^1.1.1",
     "@pittica/scss-functions": "^1.1.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "classnames": "^2.3.1",
     "gatsby": "^3.13.0",
     "gatsby-plugin-feed": "^3.13.0",

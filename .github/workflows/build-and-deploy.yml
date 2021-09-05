@@ -15,6 +15,7 @@ on:
 env:
     NAME: ${{ secrets.NAME }}
     URL: ${{ secrets.URL }}
+    HOST: ${{ secrets.HOST }}
     LOCALE: ${{ secrets.LOCALE }}
     CULTURE: ${{ secrets.CULTURE }}
     GRAPHCMS_ENDPOINT: ${{ secrets.GRAPHCMS_ENDPOINT }}
@@ -26,7 +27,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
