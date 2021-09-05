@@ -2,7 +2,7 @@
   "name": "pittica",
   "private": true,
   "description": "pittica.com website.",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "author": "Lucio Benini <info@pittica.com>",
   "bugs": {
     "url": "https://github.com/pittica/site/issues"
@@ -12,7 +12,7 @@
     "@mdx-js/react": "^1.6.22",
     "@pittica/gatsby-plugin-canvas-animations": "^1.2.1",
     "@pittica/gatsby-plugin-mdx-shortcodes": "^1.0.1",
-    "@pittica/gatsby-plugin-navigation": "^1.2.0",
+    "@pittica/gatsby-plugin-navigation": "^1.2.1",
     "@pittica/gatsby-plugin-recaptcha": "^2.0.2",
     "@pittica/gatsby-plugin-seo": "^2.2.1",
     "@pittica/gatsby-plugin-trustpilot-widget": "^1.0.4",

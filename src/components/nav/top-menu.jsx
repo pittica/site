@@ -38,6 +38,7 @@ export default function TopMenu({ location }) {
         { to: "/about", label: "About" },
         { to: "/portfolio", label: "Portfolio" },
         { to: "/offers", label: "Offerte" },
+        { link: "https://support.pittica.com", label: "Supporto" },
       ]}
     >
       <Sign color={background} alt={title} width="316" height="69" />
