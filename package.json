@@ -12,7 +12,7 @@
     "@mdx-js/react": "^1.6.22",
     "@pittica/gatsby-plugin-canvas-animations": "^1.2.1",
     "@pittica/gatsby-plugin-mdx-shortcodes": "^1.0.1",
-    "@pittica/gatsby-plugin-navigation": "^1.2.1",
+    "@pittica/gatsby-plugin-navigation": "^1.2.2",
     "@pittica/gatsby-plugin-recaptcha": "^2.0.2",
     "@pittica/gatsby-plugin-seo": "^2.2.1",
     "@pittica/gatsby-plugin-trustpilot-widget": "^1.0.4",
