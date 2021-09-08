@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import classNames from "classnames"
 
-import Blog from "../components/sections/blog"
+import ArticleGrid from "../components/ui/article/article-grid"
 import FeatureLink from "../components/ui/link/feature-link"
 import Layout from "../components/layout/layout"
 import Partners from "../components/sections/partners"
@@ -20,7 +20,10 @@ export default function Index({
     <Layout location={location}>
       <SectionContainer left={false}>
         <Underground />
-        <Section title="Pittica" subtitle="Mad Scientists @ Work">
+        <Section
+          title="Pittica"
+          subtitle="Il tuo partner per la trasformazione digitale"
+        >
           <div className="container">
             <div className={classNames("columns", "is-multiline")}>
               <div
@@ -30,17 +33,32 @@ export default function Index({
                   "is-offset-one-third"
                 )}
               >
-                <p>
-                  Il tuo partner per la <strong>trasformazione digitale</strong>
-                  .
-                </p>
                 <FeatureLink to="/about" label="Leggi" />
               </div>
             </div>
           </div>
         </Section>
       </SectionContainer>
-      <Blog posts={nodes} />
+      {nodes.length > 0 && (
+        <Section
+          title="Blog"
+          subtitle="Approfondimenti dal mondo digitale"
+          link="/blog"
+        >
+          <div className={classNames("columns", "is-multiline")}>
+            {nodes.map((node) => {
+              return (
+                <div
+                  className={classNames("column", "is-one-third")}
+                  key={node.slug}
+                >
+                  <ArticleGrid node={node} />
+                </div>
+              )
+            })}
+          </div>
+        </Section>
+      )}
       <Partners />
     </Layout>
   )

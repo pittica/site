@@ -13,7 +13,7 @@ export default function Page({ data: { post }, location }) {
       description={post.subtitle}
       location={location}
     >
-      <article className="blog-post">
+      <article>
         <Hero title={post.title} subtitle={post.subtitle} />
         <PostContent>{post.content}</PostContent>
       </article>

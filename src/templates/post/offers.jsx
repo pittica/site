@@ -1,15 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
+import { Seo } from "@pittica/gatsby-plugin-seo"
 
-import ArticleHeader from "../../components/ui/article/article-header"
 import ContactForm from "../../components/contact-form"
-import Hero from "../../components/ui/hero"
+import Footer from "../../components/ui/footer"
 import Highlight from "../../components/ui/highlight"
+import Main from "../../components/ui/main"
 import PostContent from "../../components/ui/article/post-content"
 import PostBlock from "../../components/ui/article/post-block"
-import PostLayout from "../../components/layout/post-layout"
+import PostHeader from "../../components/ui/article/post-header"
 import Section from "../../components/ui/section"
+import TopMenu from "../../components/nav/top-menu"
 
 export default function Offers({ data: { post }, location }) {
   const image = getImage(post.image.localFile.childImageSharp)
@@ -36,67 +38,87 @@ export default function Offers({ data: { post }, location }) {
   }
 
   return (
-    <PostLayout
-      title={post.title}
-      post={post}
-      image={cover}
-      location={location}
-    >
-      <ArticleHeader image={cover} className="post-header">
-        <Hero
-          title={post.title}
-          subtitle={post.description}
-          className="post-data"
+    <div className="offer">
+      <Seo
+        title={post.title}
+        description={post.description}
+        isBlogPost={false}
+        image={cover}
+        postData={post}
+        path={location.pathname}
+      />
+      <TopMenu location={location} />
+      <Main>
+        <article
+          itemProp="offers"
+          itemScope={true}
+          itemType="https://schema.org/Offer"
         >
-          {post.price && (
-            <Highlight>
-              {post.price}€{base}
-            </Highlight>
-          )}
-        </Hero>
-      </ArticleHeader>
-      <PostContent>{post.content}</PostContent>
-      <div className="container">
-        {post.price && (
-          <Section className="has-text-right">
-            <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
-          </Section>
-        )}
-        {post.confcommercioDiscount && (
-          <Section className="has-text-right" title="Convenzione Confcommercio">
-            <p className="subtitle">
-              Sconto <strong>{post.confcommercioDiscount}%</strong>
-            </p>
-            <p>
-              Pittica offre uno sconto speciale a tutti i soci Confcommercio.
-            </p>
-            <p>
-              Presenta la tua Tessera Associativa Confcommercio per ottenere
-              sconti, servizi aggiuntivi e particolari condizioni di favore.
-            </p>
-            {post.confcommercioLink && (
-              <a
-                href={post.confcommercioLink}
+          <PostHeader image={cover} post={post}>
+            {post.price && (
+              <Highlight>
+                <strong itemProp="price" content={post.price}>
+                  {post.price}
+                </strong>
+                €{base}
+                <meta itemProp="priceCurrency" content="EUR" />
+                <link
+                  itemProp="availability"
+                  href="https://schema.org/InStock"
+                />
+              </Highlight>
+            )}
+            <meta itemProp="name" content={post.title} />
+          </PostHeader>
+          <PostContent>{post.content}</PostContent>
+          <div className="container">
+            {post.price && (
+              <Section className="has-text-right">
+                <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
+              </Section>
+            )}
+            {post.confcommercioDiscount && (
+              <Section
+                className="has-text-right"
                 title="Convenzione Confcommercio"
               >
-                {post.confcommercioLink}
-              </a>
+                <p className="subtitle">
+                  Sconto <strong>{post.confcommercioDiscount}%</strong>
+                </p>
+                <p>
+                  Pittica offre uno sconto speciale a tutti i soci
+                  Confcommercio.
+                </p>
+                <p>
+                  Presenta la tua Tessera Associativa Confcommercio per ottenere
+                  sconti, servizi aggiuntivi e particolari condizioni di favore.
+                </p>
+                {post.confcommercioLink && (
+                  <a
+                    href={post.confcommercioLink}
+                    title="Convenzione Confcommercio"
+                  >
+                    {post.confcommercioLink}
+                  </a>
+                )}
+              </Section>
             )}
-          </Section>
-        )}
-        <Section
-          title="Contattaci"
-          subtitle="Richiedi maggiori informazioni."
-        />
-        <ContactForm id="offer" />
-        <PostBlock
-          title="Servizi"
-          subtitle="I servizi di riferimento dell'offerta"
-          posts={post.services}
-          group="services"
-        />
-      </div>
-    </PostLayout>
+            <Section
+              title="Contattaci"
+              subtitle="Richiedi maggiori informazioni."
+            />
+            <ContactForm id="offer" />
+            <PostBlock
+              title="Servizi"
+              subtitle="I servizi di riferimento dell'offerta"
+              posts={post.services}
+              group="services"
+            />
+          </div>
+        </article>
+      </Main>
+      <Footer />
+    </div>
   )
 }
 

@@ -12,24 +12,21 @@ import Renderer from "../mdx/renderer"
 import Section from "../components/ui/section"
 import Technologies from "../components/ui/technologies"
 
-import cover from "../images/about/cover.svg"
-import breaker from "../images/about/breaker.svg"
-
-export default function About({ location, data }) {
+export default function About({
+  location,
+  data: { about, people, services, technologies, partners },
+}) {
   return (
     <Layout location={location} title="About">
-      <figure className={classNames("image", "is-128x128")}>
-        <img src={cover} alt="About" width="1080" height="1080" />
-      </figure>
-      {data.about && (
-        <Section title={data.about.title} subtitle={data.about.subtitle}>
-          <Renderer>{data.about.content}</Renderer>
+      {about && (
+        <Section title={about.title} subtitle={about.subtitle}>
+          <Renderer>{about.content}</Renderer>
         </Section>
       )}
-      {data.people.nodes.length > 0 && (
+      {people.nodes.length > 0 && (
         <Section title="Faces">
           <div className="columns">
-            {data.people.nodes.map((person, index) => (
+            {people.nodes.map((person, index) => (
               <div
                 className={classNames("column", "has-text-centered")}
                 key={"person-" + index}
@@ -51,29 +48,26 @@ export default function About({ location, data }) {
           </div>
         </Section>
       )}
-      <figure className={classNames("image", "is-128x128")}>
-        <img src={breaker} alt="About" width="1080" height="1080" />
-      </figure>
-      {data.services && (
-        <Section title={data.services.title} subtitle={data.services.subtitle}>
-          <Renderer>{data.services.content}</Renderer>
+      {services && (
+        <Section title={services.title} subtitle={services.subtitle}>
+          <Renderer>{services.content}</Renderer>
         </Section>
       )}
       <div className="has-text-centered">
         <FeatureLink to="/services" label="Vedi i nostri servizi" />
       </div>
-      {data.technologies.nodes.length > 0 && (
+      {technologies.nodes.length > 0 && (
         <Section title="Tecnologie" subtitle="Con cosa lavoriamo?">
-          <Technologies nodes={data.technologies.nodes} />
+          <Technologies nodes={technologies.nodes} />
         </Section>
       )}
-      {data.partners.nodes.length > 0 && (
+      {partners.nodes.length > 0 && (
         <Section
           title="Rete Aziendale"
           subtitle="Le Aziende con cui collaboriamo"
         >
           <div className={classNames("columns", "is-multiline")}>
-            {data.partners.nodes.map((node, i) => {
+            {partners.nodes.map((node, i) => {
               return (
                 <div
                   className={classNames("column", "is-one-third", "p-6")}

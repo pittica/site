@@ -1,10 +1,12 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 
+import Icon from "../../components/ui/icon"
 import PostContent from "../../components/ui/article/post-content"
 import PostFooter from "../../components/ui/article/post-footer"
 import PostHeader from "../../components/ui/article/post-header"
+import PostMeta from "../../components/ui/article/post-meta"
 import PostNav from "../../components/nav/post-nav"
 import PostLayout from "../../components/layout/post-layout"
 import TagLink from "../../components/ui/link/tag-link"
@@ -24,7 +26,29 @@ export default function Blog({
       post={post}
       location={location}
     >
-      <PostHeader image={cover} post={post} />
+      <PostHeader image={cover} post={post}>
+        {post.categories && post.categories.length > 0 && (
+          <PostMeta
+            title={post.categories.length > 1 ? "Categorie" : "Categoria"}
+          >
+            <Icon className="icon-pittica-folder">
+              {post.categories.map((category, index) => (
+                <Link
+                  to={`/category/${category.slug}`}
+                  key={"category-" + index}
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </Icon>
+          </PostMeta>
+        )}
+        {post.date && (
+          <PostMeta>
+            <Icon className="icon-pittica-clock">{post.date}</Icon>
+          </PostMeta>
+        )}
+      </PostHeader>
       {post.tags.length > 0 && (
         <div className="container">
           {post.tags.map((tag, index) => (

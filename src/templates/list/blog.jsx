@@ -16,7 +16,7 @@ export default function Blog({
       nodes={nodes}
       label="Blog"
       location={location}
-      description="Pittica says"
+      description="Approfondimenti dal mondo digitale"
     />
   )
 }

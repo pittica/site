@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 
 export default function ArticleHeader({ children, image, className }) {
   if (image) {
@@ -13,4 +14,10 @@ export default function ArticleHeader({ children, image, className }) {
   } else {
     return <header className={className}>{children}</header>
   }
+}
+
+ArticleHeader.propTypes = {
+  children: PropTypes.any,
+  image: PropTypes.string,
+  className: PropTypes.string,
 }

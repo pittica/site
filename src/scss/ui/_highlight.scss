@@ -10,5 +10,8 @@
     text-align: center;
     font-size: $size-3;
     padding: $size-5;
+    strong {
+      color: $primary-invert;
+    }
   }
 }

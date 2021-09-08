@@ -2,11 +2,10 @@ import React from "react"
 import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 
-import ArticleHeader from "../../components/ui/article/article-header"
 import ContactForm from "../../components/contact-form"
-import Hero from "../../components/ui/hero"
 import PostContent from "../../components/ui/article/post-content"
 import PostBlock from "../../components/ui/article/post-block"
+import PostHeader from "../../components/ui/article/post-header"
 import PostLayout from "../../components/layout/post-layout"
 import Section from "../../components/ui/section"
 
@@ -21,13 +20,7 @@ export default function Services({ data: { post }, location }) {
       image={cover}
       location={location}
     >
-      <ArticleHeader image={cover} className="post-header">
-        <Hero
-          title={post.title}
-          subtitle={post.description}
-          className="post-data"
-        />
-      </ArticleHeader>
+      <PostHeader image={cover} post={post} />
       <PostContent>{post.content}</PostContent>
       <PostBlock
         title="Offerte"

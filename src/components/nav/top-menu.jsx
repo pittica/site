@@ -33,11 +33,11 @@ export default function TopMenu({ location }) {
       className={classNames("top-menu", "is-fixed-top")}
       location={location}
       startItems={[
-        { to: "/contact", label: "Contatti" },
-        { to: "/blog", label: "Blog" },
-        { to: "/about", label: "About" },
+        { to: "/about", label: "Chi Siamo" },
         { to: "/portfolio", label: "Portfolio" },
         { to: "/offers", label: "Offerte" },
+        { to: "/blog", label: "Blog" },
+        { to: "/contact", label: "Contatti" },
         { link: "https://support.pittica.com", label: "Supporto" },
       ]}
     >

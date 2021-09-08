@@ -1,0 +1,10 @@
+@import "../../variables";
+
+.post-meta {
+  font-weight: $weight-bold;
+  font-size: $size-4;
+  a {
+    color: $primary;
+    display: block;
+  }
+}
