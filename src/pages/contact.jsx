@@ -3,8 +3,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import classNames from "classnames"
 
 import ContactForm from "../components/contact-form"
-import Hero from "../components/ui/hero"
-import Layout from "../components/layout/layout"
+import Header from "../components/ui/header"
+import Layout from "../layouts/layout"
 import Section from "../components/ui/section"
 
 export default function Contact({ location }) {
@@ -24,7 +24,7 @@ export default function Contact({ location }) {
     },
   } = useStaticQuery(
     graphql`
-      query {
+      query ContactPage {
         site {
           siteMetadata {
             organization {
@@ -43,8 +43,12 @@ export default function Contact({ location }) {
   )
 
   return (
-    <Layout location={location} title="Contatti">
-      <Hero title="Contatti" subtitle="Mettiti in contatto con noi" />
+    <Layout
+      location={location}
+      title="Contatti"
+      description="Mettiti in contatto con noi"
+    >
+      <Header title="Contatti" subtitle="Mettiti in contatto con noi" />
       <Section>
         <h3>{company}</h3>
         <div className="columns">

@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import CategoryLayout from "../../components/layout/category-layout"
 
-export default function Tag({
+export default function Tags({
   data: {
     tag: { name },
     posts: { nodes },
@@ -22,7 +22,7 @@ export default function Tag({
 }
 
 export const pageQuery = graphql`
-  query TagListTemplate(
+  query TagsListTemplate(
     $slug: String
     $limit: Int!
     $skip: Int!

@@ -8,9 +8,10 @@ import ArticleHeader from "./article-header"
 import "../../../scss/ui/article/_article-grid.scss"
 
 export default function ArticleGrid({ node }) {
-  const image = node.image
-    ? getImage(node.image.localFile.childImageSharp)
-    : null
+  const image =
+    node.image && node.image.localFile
+      ? getImage(node.image.localFile.childImageSharp)
+      : null
   const slug = `/blog/${node.slug}`
 
   return (

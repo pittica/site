@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classNames from "classnames"
 
 export default function Sign({ color, width, height }) {
@@ -32,4 +33,15 @@ export default function Sign({ color, width, height }) {
       />
     </svg>
   )
+}
+
+Sign.propTypes = {
+  color: PropTypes.string.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
+}
+
+Sign.defaultProps = {
+  width: 316,
+  height: 69,
 }

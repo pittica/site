@@ -1,10 +1,51 @@
 @import "../effects/outline";
 @import "../variables";
 
+@import "~bulma/sass/utilities/mixins";
+
 .underground {
-    svg {
-        .outline {
-            @include svg-outline($grey-darker, 1250, 1.5s);
-        }
+  svg {
+    .outline {
+      @include svg-outline($grey-darker, 1250, 1.5s);
     }
+  }
+  figcaption {
+    text-align: right;
+    padding-top: 0;
+    padding-right: $size-3;
+    position: relative;
+    top: -600px;
+    margin-bottom: -350px;
+    @include until($widescreen) {
+      top: -500px;
+      margin-bottom: -150px;
+    }
+    @include until($desktop) {
+      top: -200px;
+      margin-bottom: -150px;
+    }
+    @include until($tablet) {
+      top: -100px;
+      margin-bottom: -50px;
+    }
+    h1 {
+      color: $primary;
+      text-transform: uppercase;
+      background-color: rgba($primary-invert, 0.75);
+      font-size: $size-2;
+      @include until($desktop) {
+        font-size: $size-2;
+      }
+    }
+    h2 {
+      background-color: rgba($primary-invert, 0.75);
+      font-size: $size-3;
+      @include until($desktop) {
+        font-size: $size-4;
+      }
+      @include until($tablet) {
+        font-size: $size-5;
+      }
+    }
+  }
 }

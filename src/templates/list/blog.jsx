@@ -22,11 +22,11 @@ export default function Blog({
 }
 
 export const pageQuery = graphql`
-  query BlogListTemplate($skip: Int!, $limit: Int!) {
+  query BlogListTemplate($skip: Int!, $limit: Int!, $locale: GraphCMS_Locale!) {
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip
-      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+      filter: { locale: { eq: $locale }, stage: { eq: PUBLISHED } }
       sort: { fields: date, order: DESC }
     ) {
       nodes {

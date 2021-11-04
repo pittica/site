@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { getImage } from "gatsby-plugin-image"
 
 import Icon from "../../components/ui/icon"
 import PostContent from "../../components/ui/article/post-content"
@@ -11,13 +10,14 @@ import PostNav from "../../components/nav/post-nav"
 import PostLayout from "../../components/layout/post-layout"
 import TagLink from "../../components/ui/link/tag-link"
 
+import getCoverFallback from "../../utils/get-cover-fallback"
+
 export default function Blog({
   data: { post },
   pageContext: { previous, next },
   location,
 }) {
-  const image = post.image ? getImage(post.image.localFile) : null
-  const cover = image ? image.images.fallback.src : null
+  const cover = getCoverFallback(post)
 
   return (
     <PostLayout
@@ -25,6 +25,7 @@ export default function Blog({
       image={cover}
       post={post}
       location={location}
+      author={post.people ? post.people.name : null}
     >
       <PostHeader image={cover} post={post}>
         {post.categories && post.categories.length > 0 && (
@@ -34,7 +35,7 @@ export default function Blog({
             <Icon className="icon-pittica-folder">
               {post.categories.map((category, index) => (
                 <Link
-                  to={`/category/${category.slug}`}
+                  to={`/categories/${category.slug}`}
                   key={"category-" + index}
                 >
                   {category.name}
@@ -56,7 +57,7 @@ export default function Blog({
           ))}
         </div>
       )}
-      <PostContent>{post.content}</PostContent>
+      <PostContent content={post.content} />
       <PostNav previous={previous} next={next} />
       <PostFooter post={post} />
     </PostLayout>
@@ -64,7 +65,7 @@ export default function Blog({
 }
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!, $locale: GraphCMS_Locale!) {
+  query BlogPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
     post: graphCmsPost(
       slug: { eq: $slug }
       stage: { eq: PUBLISHED }

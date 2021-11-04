@@ -17,23 +17,25 @@
     @include rotate(2);
   }
   .inner-page {
-    h1 {
-      font-size: $size-1;
-    }
-    h2 {
-      font-size: $size-2;
-    }
-    h3 {
-      font-size: $size-3;
-    }
-    h4 {
-      font-size: $size-4;
-    }
-    h5 {
-      font-size: $size-5;
-    }
-    h6 {
-      font-size: $size-6;
+    .container {
+      h1 {
+        font-size: $size-1;
+      }
+      h2 {
+        font-size: $size-2;
+      }
+      h3 {
+        font-size: $size-3;
+      }
+      h4 {
+        font-size: $size-4;
+      }
+      h5 {
+        font-size: $size-5;
+      }
+      h6 {
+        font-size: $size-6;
+      }
     }
   }
 }

@@ -1,22 +1,20 @@
 @import "../variables";
 
 .post-layout {
-  .blog-post {
-    margin-bottom: ($size-1 * 2);
-    h1 {
-      &.title {
-        font-size: $size-2;
-      }
+  margin-bottom: ($size-1 * 2);
+  h1 {
+    &.title {
+      font-size: $size-2;
     }
-    h2 {
-      &.subtitle {
-        font-size: $size-3;
-      }
+  }
+  h2 {
+    &.subtitle {
+      font-size: $size-3;
     }
-    .static-grid {
-      h3 {
-        font-size: $size-4;
-      }
+  }
+  .static-grid {
+    h3 {
+      font-size: $size-4;
     }
   }
 }

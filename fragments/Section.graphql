@@ -3,29 +3,8 @@ fragment Section on Section {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
-  createdBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   updatedAt(variation: COMBINED)
-  updatedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   publishedAt(variation: COMBINED)
-  publishedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   title
   slug
   subtitle
@@ -35,6 +14,72 @@ fragment Section on Section {
       html
       markdown
       text
+    }
+  }
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  offers {
+    ... on Offer {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+  services {
+    ... on Service {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+  technologies {
+    ... on Technology {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  people {
+    ... on Person {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+  partners {
+    ... on Partner {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  partnerships {
+    ... on Partnership {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
     }
   }
 }

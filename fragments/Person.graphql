@@ -3,6 +3,12 @@ fragment Person on Person {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
+  updatedAt(variation: COMBINED)
+  publishedAt(variation: COMBINED)
+  name
+  bio
+  linkedIn
+  email
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -10,7 +16,6 @@ fragment Person on Person {
       stage
     }
   }
-  updatedAt(variation: COMBINED)
   updatedBy {
     ... on User {
       remoteTypeName: __typename
@@ -18,22 +23,11 @@ fragment Person on Person {
       stage
     }
   }
-  publishedAt(variation: COMBINED)
   publishedBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
       stage
-    }
-  }
-  name
-  linkedIn
-  bio {
-    ... on RichText {
-      raw
-      html
-      markdown
-      text
     }
   }
   image {

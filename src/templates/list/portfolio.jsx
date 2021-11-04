@@ -34,7 +34,7 @@ export default function Portfolio({
               )}
               key={slug}
             >
-              <article className="p-6">
+              <article>
                 <Card image={image} title={title} link={link} />
               </article>
             </div>
@@ -55,7 +55,7 @@ export const pageQuery = graphql`
       filter: { stage: { eq: PUBLISHED }, locale: { eq: $locale } }
       limit: $limit
       skip: $skip
-      sort: { fields: updatedAt, order: DESC }
+      sort: { fields: [sticky, updatedAt], order: DESC }
     ) {
       nodes {
         slug

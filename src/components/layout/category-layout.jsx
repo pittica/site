@@ -2,8 +2,9 @@ import React from "react"
 import classNames from "classnames"
 
 import ArticleGrid from "../ui/article/article-grid"
+import Header from "../ui/header"
 import Hero from "../ui/hero"
-import Layout from "./layout"
+import Layout from "../../layouts/layout"
 import ListNav from "../nav/list-nav"
 import Section from "../ui/section"
 
@@ -19,7 +20,8 @@ export default function CategoryLayout({
   if (nodes.length > 0) {
     return (
       <Layout location={location} title={label} description={description}>
-        <Section title={label} subtitle={description || name}>
+        <Header title={label} subtitle={description || name} />
+        <Section>
           <div className={classNames("columns", "is-multiline")}>
             {nodes.map((node) => {
               return (

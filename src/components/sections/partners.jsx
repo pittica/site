@@ -1,54 +1,23 @@
 import React from "react"
-import { Link } from "gatsby"
 import classNames from "classnames"
 
-import Section from "../ui/section"
+import ImageLink from "../ui/image/image-link"
 
-export default function Partners({ title, subtitle }) {
-  return (
-    <Section className="partners" title={title} subtitle={subtitle}>
-      <div className={classNames("columns", "is-vcentered", "is-multiline", "p-5")}>
-        <div className={classNames("column", "is-4", "has-text-centered")}>
-          <a
-            href="https://cloud.withgoogle.com/partners/detail/?id=pittica"
-            target="_new"
+export default function Partners({ nodes }) {
+  if (nodes.length > 0) {
+    return (
+      <div className={classNames("columns", "is-multiline")}>
+        {nodes.map(({ link, name, logo }, i) => (
+          <div
+            className={classNames("column", "is-one-third", "p-6")}
+            key={`partner-${i}`}
           >
-            <img
-              src="/assets/partners/google-cloud.svg"
-              alt="Google Cloud"
-              width="225"
-              height="70"
-            />
-          </a>
-        </div>
-        <div className={classNames("column", "is-4", "has-text-centered")}>
-          <a
-            href="https://cloud.withgoogle.com/partners/detail/?id=pittica"
-            target="_new"
-          >
-            <img
-              src="/assets/partners/google-for-education.svg"
-              alt="Google for Education"
-              width="250"
-              height="70"
-            />
-          </a>
-        </div>
-        <div className={classNames("column", "is-4", "has-text-centered")}>
-          <Link
-            to="/iubenda"
-            title="iubenda Certified Bronze Partner"
-            target="_new"
-          >
-            <img
-              src="https://www.iubenda.com/partner/bronze@2x.png"
-              alt="iubenda Certified Bronze Partner"
-              width="306"
-              height="108"
-            />
-          </Link>
-        </div>
+            <ImageLink link={link} title={name} image={logo} />
+          </div>
+        ))}
       </div>
-    </Section>
-  )
+    )
+  } else {
+    return null
+  }
 }

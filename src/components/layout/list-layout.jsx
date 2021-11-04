@@ -1,7 +1,7 @@
 import React from "react"
 
 import Header from "../ui/header"
-import Layout from "./layout"
+import Layout from "../../layouts/layout"
 import ListNav from "../nav/list-nav"
 import Section from "../ui/section"
 

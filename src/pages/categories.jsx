@@ -3,17 +3,17 @@ import { graphql } from "gatsby"
 import { categorify } from "@pittica/gatsby-plugin-utils"
 
 import CategoryLink from "../components/ui/link/category-link"
-import Layout from "../components/layout/layout"
+import Layout from "../layouts/layout"
 import Section from "../components/ui/section"
 
 export default function Categories({
-  data: { categories, posts, site },
+  data: { categories, posts },
   location,
 }) {
   const groups = categorify(categories.nodes)
 
   return (
-    <Layout location={location} title={site.siteMetadata.title}>
+    <Layout location={location} title="Categorie">
       <Section title="Categorie">
         <ul className="page-list">
           {posts.group.map((node, index) => {
@@ -31,12 +31,7 @@ export default function Categories({
 }
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
+  query CategoriesPage {
     posts: allGraphCmsPost(
       filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       sort: { fields: categories___name, order: ASC }

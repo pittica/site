@@ -3,29 +3,8 @@ fragment Offer on Offer {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
-  createdBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   updatedAt(variation: COMBINED)
-  updatedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   publishedAt(variation: COMBINED)
-  publishedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   title
   slug
   description
@@ -37,6 +16,28 @@ fragment Offer on Offer {
       text
     }
   }
+  price
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
   image {
     ... on Asset {
       remoteTypeName: __typename
@@ -45,10 +46,6 @@ fragment Offer on Offer {
       stage
     }
   }
-  price
-  base
-  confcommercioDiscount
-  confcommercioLink
   services {
     ... on Service {
       remoteTypeName: __typename
@@ -57,4 +54,5 @@ fragment Offer on Offer {
       stage
     }
   }
+  base
 }

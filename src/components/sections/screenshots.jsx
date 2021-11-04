@@ -10,7 +10,7 @@ export default function Screenshots({ screenshots, title }) {
       <Section title="Screenshot" className="screenshots">
         <div className="columns">
           {screenshots.map((screenshot, i) => {
-            const image = getImage(screenshot.localFile.childImageSharp)
+            const image = screenshot.localFile ? getImage(screenshot.localFile.childImageSharp) : null
 
             if (image) {
               return (

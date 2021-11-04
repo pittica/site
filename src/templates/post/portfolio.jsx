@@ -5,8 +5,8 @@ import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
 import PostLayout from "../../components/layout/post-layout"
 import Screenshots from "../../components/sections/screenshots"
+import Technologies from "../../components/sections/technologies"
 import Section from "../../components/ui/section"
-import Technologies from "../../components/ui/technologies"
 
 export default function Portfolio({ data: { post }, location }) {
   const cover =
@@ -20,7 +20,7 @@ export default function Portfolio({ data: { post }, location }) {
       location={location}
     >
       <PostHeader image={cover} post={post} />
-      <PostContent>{post.content}</PostContent>
+      <PostContent content={post.content} />
       {post.technologies && post.technologies.length > 0 && (
         <Section title="Tecnologie">
           <Technologies nodes={post.technologies} />

@@ -5,7 +5,7 @@ import "../../../scss/ui/link/_tag-link.scss"
 
 export default function TagLink({ tag: { slug, name } }) {
   return (
-    <Link to={`/tag/${slug}`} className="tag-link">
+    <Link to={`/tags/${slug}`} className="tag-link">
       <span>
         <i className="icon-pittica-tag" /> {name}
       </span>

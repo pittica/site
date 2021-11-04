@@ -3,29 +3,8 @@ fragment Asset on Asset {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
-  createdBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   updatedAt(variation: COMBINED)
-  updatedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   publishedAt(variation: COMBINED)
-  publishedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   handle
   fileName
   height
@@ -38,6 +17,28 @@ fragment Asset on Asset {
       html
       markdown
       text
+    }
+  }
+  data
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
     }
   }
   imagePost {
@@ -99,6 +100,13 @@ fragment Asset on Asset {
       remoteTypeName: __typename
       remoteId: id
       locale
+      stage
+    }
+  }
+  logoPartnership {
+    ... on Partnership {
+      remoteTypeName: __typename
+      remoteId: id
       stage
     }
   }

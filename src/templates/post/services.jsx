@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { getImage } from "gatsby-plugin-image"
 
 import ContactForm from "../../components/contact-form"
 import PostContent from "../../components/ui/article/post-content"
@@ -9,9 +8,10 @@ import PostHeader from "../../components/ui/article/post-header"
 import PostLayout from "../../components/layout/post-layout"
 import Section from "../../components/ui/section"
 
+import getCoverFallback from "../../utils/get-cover-fallback"
+
 export default function Services({ data: { post }, location }) {
-  const image = getImage(post.image.localFile.childImageSharp)
-  const cover = image ? image.images.fallback.src : null
+  const cover = getCoverFallback(post)
 
   return (
     <PostLayout
@@ -21,7 +21,7 @@ export default function Services({ data: { post }, location }) {
       location={location}
     >
       <PostHeader image={cover} post={post} />
-      <PostContent>{post.content}</PostContent>
+      <PostContent content={post.content} />
       <PostBlock
         title="Offerte"
         subtitle="Le offerte collegate a questo servizio"

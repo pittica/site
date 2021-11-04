@@ -1,30 +1,30 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Seo } from "@pittica/gatsby-plugin-seo"
 
-import Footer from "../ui/footer"
-import TopMenu from "../nav/top-menu"
-import Main from "../ui/main"
+import Layout from "../../layouts/layout"
 
 import "../../scss/layout/_post-layout.scss"
 
-export default function PostLayout({ location, title, children, post, image }) {
+export default function PostLayout({
+  location,
+  title,
+  children,
+  post,
+  image,
+  author,
+}) {
   return (
-    <div className="post-layout">
-      <Seo
-        title={title}
-        description={post.description || post.subtitle || post.excerpt}
-        isBlogPost={true}
-        image={image}
-        postData={post}
-        path={location.pathname}
-      />
-      <TopMenu location={location} />
-      <Main>
-        <article className="blog-post">{children}</article>
-      </Main>
-      <Footer />
-    </div>
+    <Layout
+      title={title}
+      description={post.description || post.subtitle || post.excerpt}
+      blog={true}
+      image={image}
+      post={post}
+      location={location}
+      author={author}
+    >
+      <article className="post-layout">{children}</article>
+    </Layout>
   )
 }
 
@@ -34,4 +34,5 @@ PostLayout.propTypes = {
   children: PropTypes.any,
   post: PropTypes.object,
   image: PropTypes.string,
+  author: PropTypes.string,
 }

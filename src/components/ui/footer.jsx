@@ -13,11 +13,12 @@ import "../../scss/ui/_footer.scss"
 export default function Footer() {
   const {
     site: {
-      siteMetadata: { organization, appearance, locale, legal },
+      siteMetadata: { organization, appearance, locale },
     },
+    legal,
   } = useStaticQuery(
     graphql`
-      query {
+      query Footer {
         site {
           siteMetadata {
             organization {
@@ -31,21 +32,25 @@ export default function Footer() {
               taxId
               vatId
               registryId
+              shareCapital
             }
             locale {
               language
               culture
-            }
-            legal {
-              privacy
-              terms
-              cookies
             }
             appearance {
               accent
               background
               theme
             }
+          }
+        }
+        legal: allGraphCmsLegal(
+          filter: { footer: { eq: true }, stage: { eq: PUBLISHED } }
+        ) {
+          nodes {
+            slug
+            title
           }
         }
       }
@@ -56,10 +61,17 @@ export default function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="columns">
-          <div className={classNames("column", "is-one-fifths")}>
+          <div
+            className={classNames(
+              "column",
+              "is-4",
+              "has-text-right",
+              "has-text-left-mobile"
+            )}
+          >
             <Sign color={appearance.background} />
           </div>
-          <div className={classNames("column", "is-two-fifths")}>
+          <div className={classNames("column", "is-4")}>
             <h3>{organization.company}</h3>
             <div className="bracket-group">
               <div className="icon">
@@ -89,6 +101,12 @@ export default function Footer() {
                 {organization.registryId}
               </div>
             )}
+            {organization.shareCapital && (
+              <div>
+                <span className="has-text-primary">Capitale Sociale</span>{" "}
+                {organization.shareCapital}
+              </div>
+            )}
             {organization.email && (
               <div>
                 <span className="has-text-primary">E-Mail</span>{" "}
@@ -98,35 +116,28 @@ export default function Footer() {
               </div>
             )}
           </div>
-          <div className={classNames("column", "is-two-fifths")}>
-            <div className="columns">
-              <div className={classNames("column", "is-half")}>
-                <ul>
-                  <li>
-                    <PrivacyLink />
+          <div className={classNames("column", "is-4")}>
+            <div>
+              <ul>
+                <li>
+                  <PrivacyLink />
+                </li>
+                {legal.nodes.map((page, i) => (
+                  <li key={`legal-${i}-${page.slug}`}>
+                    <Link to={`/legal/${page.slug}`} title={page.title}>
+                      {page.title}
+                    </Link>
                   </li>
-                  <li>
-                    <Link to={legal.cookies}>Politica sui Cookie</Link>
-                  </li>
-                  <li>
-                    <Link to={legal.terms}>Termini e Condizioni</Link>
-                  </li>
-                  <li>
-                    <Link to="/legal">Note Legali</Link>
-                  </li>
-                </ul>
-              </div>
-              <div
-                className={classNames(
-                  "column",
-                  "is-half",
-                  "has-text-centered-mobile"
-                )}
-              >
-                <SocialFollow />
-              </div>
+                ))}
+                <li>
+                  <Link to="/legal">Note Legali</Link>
+                </li>
+              </ul>
             </div>
-            <div className={classNames("column", "has-text-centered-mobile")}>
+            <div className="has-text-centered-mobile">
+              <SocialFollow />
+            </div>
+            <div className="has-text-centered-mobile">
               <a
                 href="https://www.assintel.it/soci/pittica_srls/"
                 target="_new"
@@ -148,6 +159,9 @@ export default function Footer() {
                 language={locale.language}
                 culture={locale.culture}
                 theme="dark"
+                username="pittica.com"
+                template="5419b6a8b0d04a076446a9ad"
+                business="5eaf034c658436000194e69b"
               />
             </Section>
           </div>

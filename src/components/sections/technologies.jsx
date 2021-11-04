@@ -1,7 +1,7 @@
 import React from "react"
 import classNames from "classnames"
 
-import ImageLink from "./image/image-link"
+import ImageLink from "../ui/image/image-link"
 
 export default function Technologies({ nodes }) {
   return (

@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import CategoryLayout from "../../components/layout/category-layout"
 
-export default function Category({
+export default function Categories({
   data: {
     category: { name },
     posts: { nodes },
@@ -22,19 +22,12 @@ export default function Category({
 }
 
 export const pageQuery = graphql`
-  query CategoryListTemplate(
+  query CategoriesListTemplate(
     $slug: String
     $limit: Int!
     $skip: Int!
     $locale: GraphCMS_Locale!
   ) {
-    category: graphCmsCategory(
-      slug: { eq: $slug }
-      locale: { eq: $locale }
-      stage: { eq: PUBLISHED }
-    ) {
-      name
-    }
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip
@@ -66,6 +59,13 @@ export const pageQuery = graphql`
         date: formattedDate
         title
       }
+    }
+    category: graphCmsCategory(
+      slug: { eq: $slug }
+      locale: { eq: $locale }
+      stage: { eq: PUBLISHED }
+    ) {
+      name
     }
   }
 `

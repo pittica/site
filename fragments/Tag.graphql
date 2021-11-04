@@ -3,6 +3,10 @@ fragment Tag on Tag {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
+  updatedAt(variation: COMBINED)
+  publishedAt(variation: COMBINED)
+  name
+  slug
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -10,7 +14,6 @@ fragment Tag on Tag {
       stage
     }
   }
-  updatedAt(variation: COMBINED)
   updatedBy {
     ... on User {
       remoteTypeName: __typename
@@ -18,7 +21,6 @@ fragment Tag on Tag {
       stage
     }
   }
-  publishedAt(variation: COMBINED)
   publishedBy {
     ... on User {
       remoteTypeName: __typename
@@ -26,8 +28,6 @@ fragment Tag on Tag {
       stage
     }
   }
-  name
-  slug
   posts {
     ... on Post {
       remoteTypeName: __typename

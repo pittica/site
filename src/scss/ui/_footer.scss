@@ -21,6 +21,10 @@
       color: $white;
     }
   }
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
   .bracket-group {
     position: relative;
     padding-left: $size-3;
@@ -47,7 +51,7 @@
     }
   }
   .social-follow {
-    margin-bottom: $size-2 auto;
+    margin: $size-3 auto;
     li {
       display: inline-block;
       padding: $size-7 $size-4 $size-7 0;

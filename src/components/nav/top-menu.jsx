@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classNames from "classnames"
 import { useStaticQuery, graphql } from "gatsby"
 import { Navbar } from "@pittica/gatsby-plugin-navigation"
@@ -16,7 +17,7 @@ export default function TopMenu({ location }) {
       },
     },
   } = useStaticQuery(graphql`
-    query {
+    query TopMenu {
       site {
         siteMetadata {
           title
@@ -41,7 +42,11 @@ export default function TopMenu({ location }) {
         { link: "https://support.pittica.com", label: "Supporto" },
       ]}
     >
-      <Sign color={background} alt={title} width="316" height="69" />
+      <Sign color={background} alt={title} width={316} height={69} />
     </Navbar>
   )
+}
+
+TopMenu.propTypes = {
+  location: PropTypes.object,
 }

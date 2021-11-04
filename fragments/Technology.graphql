@@ -2,6 +2,11 @@ fragment Technology on Technology {
   stage
   remoteId: id
   createdAt
+  updatedAt
+  publishedAt
+  name
+  slug
+  link
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -9,7 +14,6 @@ fragment Technology on Technology {
       stage
     }
   }
-  updatedAt
   updatedBy {
     ... on User {
       remoteTypeName: __typename
@@ -17,7 +21,6 @@ fragment Technology on Technology {
       stage
     }
   }
-  publishedAt
   publishedBy {
     ... on User {
       remoteTypeName: __typename
@@ -25,8 +28,6 @@ fragment Technology on Technology {
       stage
     }
   }
-  name
-  slug
   logo {
     ... on Asset {
       remoteTypeName: __typename
@@ -35,7 +36,6 @@ fragment Technology on Technology {
       stage
     }
   }
-  link
   portfolios {
     ... on Portfolio {
       remoteTypeName: __typename

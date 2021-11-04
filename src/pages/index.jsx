@@ -2,43 +2,36 @@ import React from "react"
 import { graphql } from "gatsby"
 import classNames from "classnames"
 
-import ArticleGrid from "../components/ui/article/article-grid"
 import FeatureLink from "../components/ui/link/feature-link"
-import Layout from "../components/layout/layout"
-import Partners from "../components/sections/partners"
+import Layout from "../layouts/layout"
+import Partnerships from "../components/sections/partnerships"
 import Section from "../components/ui/section"
-import SectionContainer from "../components/ui/section-container"
+import ArticleGrid from "../components/ui/article/article-grid"
 import Underground from "../components/ui/gfx/underground"
 
 export default function Index({
   data: {
+    site: {
+      siteMetadata: {
+        appearance: { accent, theme },
+      },
+    },
     posts: { nodes },
+    parterships,
   },
   location,
 }) {
   return (
-    <Layout location={location}>
-      <SectionContainer left={false}>
-        <Underground />
-        <Section
-          title="Pittica"
-          subtitle="Il tuo partner per la trasformazione digitale"
-        >
-          <div className="container">
-            <div className={classNames("columns", "is-multiline")}>
-              <div
-                className={classNames(
-                  "column",
-                  "is-two-thirds",
-                  "is-offset-one-third"
-                )}
-              >
-                <FeatureLink to="/about" label="Leggi" />
-              </div>
-            </div>
-          </div>
-        </Section>
-      </SectionContainer>
+    <Layout
+      location={location}
+      title="Pittica"
+      subtitle="Il tuo partner per la trasformazione digitale"
+    >
+      <Underground accent={accent} theme={theme}>
+        <h1>Pittica</h1>
+        <h2>Il tuo partner per la trasformazione digitale</h2>
+        <FeatureLink to="/about" label="Scopri" />
+      </Underground>
       {nodes.length > 0 && (
         <Section
           title="Blog"
@@ -59,13 +52,23 @@ export default function Index({
           </div>
         </Section>
       )}
-      <Partners />
+      <Section>
+        <Partnerships nodes={parterships.nodes} />
+      </Section>
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query {
+  query IndexPage {
+    site {
+      siteMetadata {
+        appearance {
+          accent
+          theme
+        }
+      }
+    }
     posts: allGraphCmsPost(
       limit: 3
       filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
@@ -89,6 +92,26 @@ export const pageQuery = graphql`
         excerpt
         date: formattedDate
         title
+      }
+    }
+    parterships: allGraphCmsPartnership {
+      nodes {
+        id
+        name
+        page {
+          slug
+        }
+        link
+        logo {
+          localFile {
+            extension
+            publicURL
+          }
+          height
+          width
+          data
+        }
+        logoUrl
       }
     }
   }

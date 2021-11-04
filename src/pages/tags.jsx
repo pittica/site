@@ -2,15 +2,15 @@ import React from "react"
 import { graphql } from "gatsby"
 import { categorify } from "@pittica/gatsby-plugin-utils"
 
-import Layout from "../components/layout/layout"
+import Layout from "../layouts/layout"
 import Section from "../components/ui/section"
 import TagLink from "../components/ui/link/tag-link"
 
-export default function Tags({ data: { tags, posts, site }, location }) {
+export default function Tags({ data: { tags, posts }, location }) {
   const groups = categorify(tags.nodes)
 
   return (
-    <Layout location={location} title={site.siteMetadata.title}>
+    <Layout location={location} title="Tag">
       <Section title="Tag">
         <ul className="page-list">
           {posts.group.map((node, index) => {
@@ -27,12 +27,7 @@ export default function Tags({ data: { tags, posts, site }, location }) {
 }
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
+  query TagsPage {
     posts: allGraphCmsPost(
       filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
       sort: { fields: tags___name, order: ASC }

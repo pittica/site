@@ -2,6 +2,10 @@ fragment Partner on Partner {
   stage
   remoteId: id
   createdAt
+  updatedAt
+  publishedAt
+  name
+  link
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -9,7 +13,6 @@ fragment Partner on Partner {
       stage
     }
   }
-  updatedAt
   updatedBy {
     ... on User {
       remoteTypeName: __typename
@@ -17,7 +20,6 @@ fragment Partner on Partner {
       stage
     }
   }
-  publishedAt
   publishedBy {
     ... on User {
       remoteTypeName: __typename
@@ -25,8 +27,6 @@ fragment Partner on Partner {
       stage
     }
   }
-  name
-  link
   logo {
     ... on Asset {
       remoteTypeName: __typename

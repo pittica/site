@@ -1,38 +1,36 @@
 require("dotenv").config()
 
+const siteUrl = process.env.URL || `https://${process.env.HOST}`
+
 module.exports = {
   siteMetadata: {
     title: process.env.NAME,
-    author: `Pittica S.r.l.s.`,
-    description: `Mad Scientists At Work.`,
+    author: process.env.SITE_AUTHOR,
+    description: process.env.SITE_DESCRIPTION,
     locale: {
       language: process.env.LOCALE.toLowerCase(),
       culture: process.env.CULTURE.toUpperCase(),
     },
-    siteUrl: `https://${process.env.HOST}/`,
-    legal: {
-      privacy: "/legal/privacy",
-      terms: "/legal/tos",
-      cookies: "/legal/cookies",
-    },
+    siteUrl: `${siteUrl}/`,
     organization: {
-      company: `Pittica S.r.l.s.`,
-      address: `Via Le Corbusier, 39`,
-      url: `https://${process.env.HOST}/`,
-      logo: `https://${process.env.HOST}/logo.png`,
-      zipCode: `48124`,
-      city: `Ravenna`,
-      province: `RA`,
-      country: `Italia`,
-      email: `info@pittica.com`,
-      taxId: `02650890391`,
-      vatId: `02650890391`,
-      registryId: `RA 220518`,
+      company: process.env.ORGANIZATION_COMPANY,
+      address: process.env.ORGANIZATION_ADDRESS_STREET,
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/logo.png`,
+      zipCode: process.env.ORGANIZATION_ADDRESS_ZIPCODE,
+      city: process.env.ORGANIZATION_CITY,
+      province: process.env.ORGANIZATION_PROVINCE,
+      country: process.env.ORGANIZATION_COUNTRY,
+      email: process.env.ORGANIZATION_EMAIL,
+      taxId: process.env.ORGANIZATION_TAX_ID,
+      vatId: process.env.ORGANIZATION_VAT_ID,
+      registryId: process.env.ORGANIZATION_REGISTRY_ID,
+      shareCapital: process.env.ORGANIZATION_SHARE_CAPITAL,
     },
     appearance: {
-      accent: `#cc151a`,
-      background: `#ffffff`,
-      theme: `#1d1d1d`,
+      accent: process.env.APPEARANCE_ACCENT,
+      background: process.env.APPEARANCE_BACKGROUND,
+      theme: process.env.APPEARANCE_THEME,
     },
   },
   plugins: [
@@ -55,7 +53,11 @@ module.exports = {
         locales: [process.env.LOCALE],
         fragmentsPath: "fragments",
         downloadLocalImages: true,
-        stages: ["PUBLISHED"],
+        stages:
+          (process.env.ENV || process.env.NODE_ENV) !== "production"
+            ? ["DRAFT", "PUBLISHED"]
+            : ["PUBLISHED"],
+        concurrency: 10,
       },
     },
     {
@@ -66,38 +68,30 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
-        trackingId: `UA-156974102-1`,
-        anonymize: true,
+        googleAnalytics: {
+          trackingId: process.env.GOOGLE_ANALYTICS_ID,
+          cookieName: "pittica-gdpr-analytics",
+          anonymize: true,
+          allowAdFeatures: false,
+        },
+        environments: ["production", "development"],
       },
     },
     {
-      resolve: `gatsby-plugin-iubenda-cookie-footer`,
+      resolve: `@pittica/gatsby-plugin-cookiehub`,
       options: {
-        iubendaOptions: {
-          lang: process.env.LOCALE.toLowerCase(),
-          siteId: 1781270,
-          countryDetection: true,
-          consentOnContinuedBrowsing: false,
-          cookiePolicyInOtherWindow: true,
-          cookiePolicyId: 29008249,
-          cookiePolicyUrl: `${process.env.NAME}legal/cookies`,
-          banner: {
-            position: "float-top-center",
-            textColor: "#fff",
-            backgroundColor: "#1d1d1d",
-            acceptButtonDisplay: true,
-            acceptButtonColor: "#cc151a",
-            acceptButtonCaptionColor: "#fff",
-          },
-        },
+        code: process.env.COOKIEHUB_ID,
+        debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
+        cookie: "pittica-gdpr",
       },
     },
     `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-feed`,
       options: {
+        generator: process.env.SITE_AUTHOR,
         query: `
           {
             site {
@@ -122,19 +116,27 @@ module.exports = {
             }) => {
               return nodes.map((node) => {
                 const url = new URL(`/blog/${node.slug}`, siteUrl).href
+                const author =
+                  node.people.length > 0
+                    ? `${node.people[0].email} (${node.people[0].name})`
+                    : `${process.env.ORGANIZATION_EMAIL} (${process.env.SITE_AUTHOR})`
 
                 return Object.assign({}, node, {
                   description: node.excerpt,
                   date: node.date,
                   url: url,
                   guid: url,
-                  custom_elements: [{ "content:encoded": node.content.html }],
+                  custom_elements: [
+                    { "content:encoded": node.content.html },
+                    { author },
+                  ],
+                  author,
                 })
               })
             },
             query: `
               {
-                allGraphCmsPost(filter: {stage: {eq: PUBLISHED}, locale: {eq: it}}) {
+                allGraphCmsPost(filter: { stage: { eq: PUBLISHED }, locale: { eq: ${process.env.LOCALE} } }) {
                   nodes {
                     content {
                       html
@@ -143,6 +145,10 @@ module.exports = {
                     slug
                     date
                     excerpt
+                    people {
+                      name
+                      email
+                    }
                   }
                 }
               }
@@ -248,34 +254,26 @@ module.exports = {
       },
     },
     {
-      resolve: `@pittica/gatsby-plugin-trustpilot-widget`,
-      options: {
-        username: "pittica.com",
-        template: "5419b6a8b0d04a076446a9ad",
-        business: "5eaf034c658436000194e69b",
-      },
-    },
-    {
       resolve: `@pittica/gatsby-plugin-seo`,
       options: {
         image: `/share.jpg`,
         socials: {
           twitter: {
-            username: "PitticaDigital",
+            username: process.env.SOCIAL_TWITTER_USERNAME,
             icon: "icon-pittica-twitter",
             show: false,
           },
           github: {
-            username: `pittica`,
+            username: process.env.SOCIAL_GITHUB_USERNAME,
             icon: "icon-pittica-github",
           },
           facebook: {
-            page: `PitticaDigital`,
-            app: `600384224115787`,
+            page: process.env.SOCIAL_FACEBOOK_PAGE,
+            app: process.env.SOCIAL_FACEBOOK_APP,
             icon: "icon-pittica-facebook",
           },
           linkedin: {
-            page: `pittica`,
+            page: process.env.SOCIAL_LINKEDIN_PAGE,
             icon: "icon-pittica-linkedin",
           },
         },
