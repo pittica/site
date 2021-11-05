@@ -6,7 +6,6 @@ fragment Section on Section {
   updatedAt(variation: COMBINED)
   publishedAt(variation: COMBINED)
   title
-  slug
   subtitle
   content {
     ... on RichText {
@@ -16,6 +15,7 @@ fragment Section on Section {
       text
     }
   }
+  list
   createdBy {
     ... on User {
       remoteTypeName: __typename

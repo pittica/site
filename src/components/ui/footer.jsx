@@ -2,6 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import classNames from "classnames"
 import TrustpilotReviews from "@pittica/gatsby-plugin-trustpilot-widget"
+import { CookiesSettings } from "@pittica/gatsby-plugin-cookiehub"
 import { SocialFollow } from "@pittica/gatsby-plugin-seo"
 
 import PrivacyLink from "./link/privacy-link"
@@ -121,6 +122,9 @@ export default function Footer() {
               <ul>
                 <li>
                   <PrivacyLink />
+                </li>
+                <li>
+                  <CookiesSettings label="Impostazioni Cookies" />
                 </li>
                 {legal.nodes.map((page, i) => (
                   <li key={`legal-${i}-${page.slug}`}>

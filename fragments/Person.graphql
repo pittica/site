@@ -7,8 +7,8 @@ fragment Person on Person {
   publishedAt(variation: COMBINED)
   name
   bio
-  linkedIn
   email
+  linkedIn
   createdBy {
     ... on User {
       remoteTypeName: __typename
