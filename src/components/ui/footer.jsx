@@ -8,6 +8,7 @@ import { Logo } from "@pittica/art"
 
 import PrivacyLink from "./link/privacy-link"
 import Section from "./section"
+import Pair from "./pair"
 
 import "../../scss/ui/_footer.scss"
 
@@ -84,38 +85,11 @@ export default function Footer() {
               {organization.province})<br />
               {organization.country}
             </div>
-            {organization.taxId && (
-              <div>
-                <span className="has-text-primary">Codice Fiscale</span>{" "}
-                {organization.taxId}
-              </div>
-            )}
-            {organization.vatId && (
-              <div>
-                <span className="has-text-primary">Partita IVA</span>{" "}
-                {organization.vatId}
-              </div>
-            )}
-            {organization.registryId && (
-              <div>
-                <span className="has-text-primary">REA</span>{" "}
-                {organization.registryId}
-              </div>
-            )}
-            {organization.shareCapital && (
-              <div>
-                <span className="has-text-primary">Capitale Sociale</span>{" "}
-                {organization.shareCapital}
-              </div>
-            )}
-            {organization.email && (
-              <div>
-                <span className="has-text-primary">E-Mail</span>{" "}
-                <a href={`mailto:${organization.email}`}>
-                  {organization.email}
-                </a>
-              </div>
-            )}
+            <Pair label="Codice Fiscale" value={organization.taxId} />
+            <Pair label="Partita IVA" value={organization.vatId} />
+            <Pair label="REA" value={organization.registryId} />
+            <Pair label="Capitale Sociale" value={organization.shareCapital} />
+            <Pair label="E-Mail<" value={organization.email} />
           </div>
           <div className={classNames("column", "is-4")}>
             <div>
