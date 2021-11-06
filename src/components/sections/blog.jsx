@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classNames from "classnames"
 
 import ArticleGrid from "../ui/article/article-grid"
@@ -25,4 +26,12 @@ export default function Blog({ posts }) {
   } else {
     return null
   }
+}
+
+Blog.propTypes = {
+  posts: PropTypes.array.isRequired,
+}
+
+Blog.defaultProps = {
+  posts: [],
 }

@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classNames from "classnames"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
@@ -9,12 +10,15 @@ export default function Screenshots({ screenshots, title }) {
     return (
       <Section title="Screenshot" className="screenshots">
         <div className="columns">
-          {screenshots.map((screenshot, i) => {
-            const image = screenshot.localFile ? getImage(screenshot.localFile.childImageSharp) : null
+          {screenshots.map(({ localFile }, i) => {
+            const image = localFile ? getImage(localFile.childImageSharp) : null
 
             if (image) {
               return (
-                <div className={classNames("column", "is-6")} key={i}>
+                <div
+                  className={classNames("column", "is-6")}
+                  key={`screenshots-${i}`}
+                >
                   <GatsbyImage image={image} alt={title} />
                 </div>
               )
@@ -28,4 +32,13 @@ export default function Screenshots({ screenshots, title }) {
   } else {
     return null
   }
+}
+
+Screenshots.propTypes = {
+  screenshots: PropTypes.array,
+  title: PropTypes.string,
+}
+
+Screenshots.defaultProps = {
+  screenshots: [],
 }

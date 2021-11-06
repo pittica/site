@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import classNames from "classnames"
 
@@ -16,19 +17,17 @@ function PartnershipsImage({ name, logo, logoUrl, width, height }) {
         height={height ? height : null}
       />
     )
+  } else if (logo && logo.localFile) {
+    return (
+      <ImageSwitch
+        image={logo.localFile}
+        title={name}
+        width={width ? width : logo.data.width ? logo.data.width : null}
+        height={height ? height : logo.data.height ? logo.data.height : null}
+      />
+    )
   } else {
-    if (logo.localFile) {
-      return (
-        <ImageSwitch
-          image={logo.localFile}
-          title={name}
-          width={width ? width : logo.data.width ? logo.data.width : null}
-          height={height ? height : logo.data.height ? logo.data.height : null}
-        />
-      )
-    } else {
-      return null
-    }
+    return <strong>{name}</strong>
   }
 }
 
@@ -72,7 +71,7 @@ function PartnershipsLink({ name, page, link, logo, logoUrl, width, height }) {
   }
 }
 
-export default function Partnerships({ nodes }) {
+export default function Partnerships({ nodes, list }) {
   if (nodes && nodes.length > 0) {
     return (
       <div
@@ -83,31 +82,43 @@ export default function Partnerships({ nodes }) {
           "parterships"
         )}
       >
-        {nodes.map(({ id, name, page, link, logo, logoUrl, width, height }) => {
-          if (logo || logoUrl) {
-            return (
-              <div
-                key={id}
-                className={classNames("column", "is-4", "has-text-centered")}
-              >
-                <PartnershipsLink
-                  name={name}
-                  page={page}
-                  link={link}
-                  logo={logo}
-                  logoUrl={logoUrl}
-                  width={width}
-                  height={height}
-                />
-              </div>
-            )
-          } else {
-            return null
+        {nodes.map(
+          ({ id, name, page, link, logo, logoUrl, width, height }, i) => {
+            if (logo || logoUrl) {
+              return (
+                <div
+                  key={`partnerships-${i}-${id}`}
+                  className={classNames("column", "is-4", "has-text-centered")}
+                >
+                  <PartnershipsLink
+                    name={name}
+                    page={page}
+                    link={link}
+                    logo={list ? null : logo}
+                    logoUrl={list ? null : logoUrl}
+                    width={width}
+                    height={height}
+                  />
+                </div>
+              )
+            } else {
+              return null
+            }
           }
-        })}
+        )}
       </div>
     )
   } else {
     return null
   }
+}
+
+Partnerships.propTypes = {
+  nodes: PropTypes.array.isRequired,
+  list: PropTypes.bool,
+}
+
+Partnerships.defaultProps = {
+  nodes: [],
+  list: false,
 }

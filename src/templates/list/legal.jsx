@@ -2,8 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import classNames from "classnames"
 
-import ListLayout from "../../components/layout/list-layout"
 import PageGrid from "../../components/ui/article/page-grid"
+import ListLayout from "../../components/layout/list-layout"
 
 export default function Legal({
   data: {

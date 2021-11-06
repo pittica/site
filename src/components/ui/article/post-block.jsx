@@ -39,7 +39,3 @@ PostBlock.propTypes = {
   group: PropTypes.string,
   posts: PropTypes.array.isRequired,
 }
-
-PostBlock.defaultProps = {
-  featured: [],
-}

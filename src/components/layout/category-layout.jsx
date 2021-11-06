@@ -4,9 +4,9 @@ import classNames from "classnames"
 import ArticleGrid from "../ui/article/article-grid"
 import Header from "../ui/header"
 import Hero from "../ui/hero"
+import Section from "../ui/section"
 import Layout from "../../layouts/layout"
 import ListNav from "../nav/list-nav"
-import Section from "../ui/section"
 
 export default function CategoryLayout({
   context,

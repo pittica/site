@@ -1,14 +1,14 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-import Icon from "../../components/ui/icon"
 import PostContent from "../../components/ui/article/post-content"
 import PostFooter from "../../components/ui/article/post-footer"
 import PostHeader from "../../components/ui/article/post-header"
 import PostMeta from "../../components/ui/article/post-meta"
-import PostNav from "../../components/nav/post-nav"
-import PostLayout from "../../components/layout/post-layout"
 import TagLink from "../../components/ui/link/tag-link"
+import Icon from "../../components/ui/icon"
+import PostNav from "../../components/nav/post-nav"
+import Layout from "../../layouts/layout"
 
 import getCoverFallback from "../../utils/get-cover-fallback"
 
@@ -20,47 +20,53 @@ export default function Blog({
   const cover = getCoverFallback(post)
 
   return (
-    <PostLayout
+    <Layout
       title={post.title}
+      description={post.excerpt}
+      blog={true}
       image={cover}
       post={post}
       location={location}
-      author={post.people ? post.people.name : null}
+      author={
+        post.people && post.people.length > 0 ? post.people[0].name : null
+      }
     >
-      <PostHeader image={cover} post={post}>
-        {post.categories && post.categories.length > 0 && (
-          <PostMeta
-            title={post.categories.length > 1 ? "Categorie" : "Categoria"}
-          >
-            <Icon className="icon-pittica-folder">
-              {post.categories.map((category, index) => (
-                <Link
-                  to={`/categories/${category.slug}`}
-                  key={"category-" + index}
-                >
-                  {category.name}
-                </Link>
-              ))}
-            </Icon>
-          </PostMeta>
+      <article>
+        <PostHeader image={cover} post={post}>
+          {post.categories && post.categories.length > 0 && (
+            <PostMeta
+              title={post.categories.length > 1 ? "Categorie" : "Categoria"}
+            >
+              <Icon className="icon-pittica-folder">
+                {post.categories.map((category, index) => (
+                  <Link
+                    to={`/categories/${category.slug}`}
+                    key={"category-" + index}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+              </Icon>
+            </PostMeta>
+          )}
+          {post.date && (
+            <PostMeta>
+              <Icon className="icon-pittica-clock">{post.date}</Icon>
+            </PostMeta>
+          )}
+        </PostHeader>
+        {post.tags.length > 0 && (
+          <div className="container">
+            {post.tags.map((tag, index) => (
+              <TagLink tag={tag} key={"tag" + index} />
+            ))}
+          </div>
         )}
-        {post.date && (
-          <PostMeta>
-            <Icon className="icon-pittica-clock">{post.date}</Icon>
-          </PostMeta>
-        )}
-      </PostHeader>
-      {post.tags.length > 0 && (
-        <div className="container">
-          {post.tags.map((tag, index) => (
-            <TagLink tag={tag} key={"tag" + index} />
-          ))}
-        </div>
-      )}
-      <PostContent content={post.content} />
+        <PostContent content={post.content} />
+      </article>
       <PostNav previous={previous} next={next} />
       <PostFooter post={post} />
-    </PostLayout>
+    </Layout>
   )
 }
 
@@ -110,6 +116,7 @@ export const pageQuery = graphql`
         }
       }
       people {
+        id
         name
         roles {
           name

@@ -2,11 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 import classNames from "classnames"
 
-import FeatureLink from "../components/ui/link/feature-link"
-import Layout from "../layouts/layout"
-import Partnerships from "../components/sections/partnerships"
-import Section from "../components/ui/section"
 import ArticleGrid from "../components/ui/article/article-grid"
+import FeatureLink from "../components/ui/link/feature-link"
+import Section from "../components/ui/section"
+import Partnerships from "../components/sections/partnerships"
+import Layout from "../layouts/layout"
 import Underground from "../components/ui/gfx/underground"
 
 export default function Index({

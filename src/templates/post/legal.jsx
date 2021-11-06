@@ -2,23 +2,25 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import ArticleHeader from "../../components/ui/article/article-header"
-import Hero from "../../components/ui/hero"
 import PostContent from "../../components/ui/article/post-content"
-import PostLayout from "../../components/layout/post-layout"
+import Hero from "../../components/ui/hero"
+import Layout from "../../layouts/layout"
 
 export default function Legal({ data: { post }, location }) {
   return (
-    <PostLayout
+    <Layout
       title={post.title}
       description={post.description}
       post={post}
       location={location}
     >
-      <ArticleHeader>
-        <Hero title={post.title} subtitle={post.description}></Hero>
-      </ArticleHeader>
-      <PostContent content={post.content} />
-    </PostLayout>
+      <article>
+        <ArticleHeader>
+          <Hero title={post.title} subtitle={post.description}></Hero>
+        </ArticleHeader>
+        <PostContent content={post.content} />
+      </article>
+    </Layout>
   )
 }
 

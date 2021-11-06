@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classNames from "classnames"
 import { Link } from "gatsby"
 import ImagePost from "../image/image-post"
@@ -20,4 +21,8 @@ export default function StaticGrid({ node, group }) {
       </section>
     </ArticleCage>
   )
+}
+
+StaticGrid.propTypes = {
+  node: PropTypes.object,
 }

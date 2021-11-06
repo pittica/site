@@ -3,22 +3,17 @@ import { graphql } from "gatsby"
 
 import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
-import PostLayout from "../../components/layout/post-layout"
+import Section from "../../components/ui/section"
 import Screenshots from "../../components/sections/screenshots"
 import Technologies from "../../components/sections/technologies"
-import Section from "../../components/ui/section"
+import Layout from "../../layouts/layout"
 
 export default function Portfolio({ data: { post }, location }) {
   const cover =
     post.image && post.image.localFile ? post.image.localFile.publicURL : null
 
   return (
-    <PostLayout
-      title={post.title}
-      post={post}
-      image={cover}
-      location={location}
-    >
+    <Layout title={post.title} post={post} image={cover} location={location}>
       <PostHeader image={cover} post={post} />
       <PostContent content={post.content} />
       {post.technologies && post.technologies.length > 0 && (
@@ -40,7 +35,7 @@ export default function Portfolio({ data: { post }, location }) {
           </ul>
         </Section>
       )}
-    </PostLayout>
+    </Layout>
   )
 }
 

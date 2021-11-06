@@ -3,8 +3,8 @@ import { graphql } from "gatsby"
 import { categorify } from "@pittica/gatsby-plugin-utils"
 
 import CategoryLink from "../components/ui/link/category-link"
-import Layout from "../layouts/layout"
 import Section from "../components/ui/section"
+import Layout from "../layouts/layout"
 
 export default function Categories({
   data: { categories, posts },

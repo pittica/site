@@ -2,9 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import { categorify } from "@pittica/gatsby-plugin-utils"
 
-import Layout from "../layouts/layout"
-import Section from "../components/ui/section"
 import TagLink from "../components/ui/link/tag-link"
+import Section from "../components/ui/section"
+import Layout from "../layouts/layout"
 
 export default function Tags({ data: { tags, posts }, location }) {
   const groups = categorify(tags.nodes)

@@ -1,10 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import PostContent from "../components/ui/article/post-content"
+import PageSection from "../components/ui/article/page-section"
 import Header from "../components/ui/header"
 import Layout from "../layouts/layout"
-import PageSection from "../components/ui/article/page-section"
-import PostContent from "../components/ui/article/post-content"
 
 export default function Page({ data: { post }, location }) {
   return (
@@ -145,6 +145,7 @@ export const pageQuery = graphql`
           }
           logoUrl
         }
+        list
       }
     }
   }
