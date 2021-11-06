@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import StaticLayout from "../../components/layout/static-layout"
+import Directory from "../../layouts/directory"
 
 export default function Offers({
   data: {
@@ -11,10 +11,10 @@ export default function Offers({
   location,
 }) {
   return (
-    <StaticLayout
-      context={pageContext}
-      location={location}
+    <Directory
       nodes={nodes}
+      location={location}
+      context={pageContext}
       title="Offerte"
       description="Le nostre proposte"
     />

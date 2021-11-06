@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 
 import PostContent from "../components/ui/article/post-content"
 import PageSection from "../components/ui/article/page-section"
-import Header from "../components/ui/header"
 import Layout from "../layouts/layout"
 
 export default function Page({ data: { post }, location }) {
@@ -13,11 +12,11 @@ export default function Page({ data: { post }, location }) {
       post={post}
       description={post.subtitle}
       location={location}
+      header={true}
     >
-      <Header title={post.title} subtitle={post.subtitle} />
       <PostContent content={post.content} />
-      {post.sections.map((section) => (
-        <PageSection key={section.id} section={section} />
+      {post.sections.map((section, i) => (
+        <PageSection key={`page-${i}-${section.id}`} section={section} />
       ))}
     </Layout>
   )

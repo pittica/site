@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import CategoryLayout from "../../components/layout/category-layout"
+import Grid from "../../layouts/grid"
 
 export default function Blog({
   data: {
@@ -11,7 +11,7 @@ export default function Blog({
   location,
 }) {
   return (
-    <CategoryLayout
+    <Grid
       context={pageContext}
       nodes={nodes}
       label="Blog"

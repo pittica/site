@@ -2,8 +2,8 @@ import React from "react"
 import classNames from "classnames"
 import { MarkdownRenderer } from "@pittica/gatsby-plugin-mdx-shortcodes"
 
-import Section from "../section"
 import People from "../../sections/people"
+import Section from "../section"
 
 export default function PostFooter({ post: { people, image } }) {
   if (people.length > 0 || image.credits) {

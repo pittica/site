@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: 'Build and Deploy'
+        description: "Build and Deploy"
         required: true
-        default: 'Build and Deploy'
+        default: "Build and Deploy"
   pull_request:
     types: [closed]
     branches:
       - master
 
 env:
-    NAME: ${{ secrets.NAME }}
-    HOST: ${{ secrets.HOST }}
-    LOCALE: ${{ secrets.LOCALE }}
-    CULTURE: ${{ secrets.CULTURE }}
-    GRAPHCMS_ENDPOINT: ${{ secrets.GRAPHCMS_ENDPOINT }}
-    GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
+  NAME: ${{ secrets.NAME }}
+  HOST: ${{ secrets.HOST }}
+  LOCALE: ${{ secrets.LOCALE }}
+  CULTURE: ${{ secrets.CULTURE }}
+  GRAPHCMS_ENDPOINT: ${{ secrets.GRAPHCMS_ENDPOINT }}
+  GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
 
 jobs:
   build:
@@ -26,22 +26,22 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: 16
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run build --if-present
-      env:
-        CI: true
-    - name: Firebase GitHub Action
-      uses: pizzafox/firebase-action@1.0.7
-      env:
-        PROJECT_ID: ${{ secrets.FIREBASE_PROJECT }}
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      with:
-        args: deploy
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build --if-present
+        env:
+          CI: true
+      - name: Firebase GitHub Action
+        uses: pizzafox/firebase-action@1.0.7
+        env:
+          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        with:
+          args: deploy

@@ -1,11 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
-import classNames from "classnames"
 
-import ArticleGrid from "../components/ui/article/article-grid"
+import Blog from "../components/sections/blog"
+import Partnerships from "../components/sections/partnerships"
 import FeatureLink from "../components/ui/link/feature-link"
 import Section from "../components/ui/section"
-import Partnerships from "../components/sections/partnerships"
 import Layout from "../layouts/layout"
 import Underground from "../components/ui/gfx/underground"
 
@@ -32,26 +31,7 @@ export default function Index({
         <h2>Il tuo partner per la trasformazione digitale</h2>
         <FeatureLink to="/about" label="Scopri" />
       </Underground>
-      {nodes.length > 0 && (
-        <Section
-          title="Blog"
-          subtitle="Approfondimenti dal mondo digitale"
-          link="/blog"
-        >
-          <div className={classNames("columns", "is-multiline")}>
-            {nodes.map((node) => {
-              return (
-                <div
-                  className={classNames("column", "is-one-third")}
-                  key={node.slug}
-                >
-                  <ArticleGrid node={node} />
-                </div>
-              )
-            })}
-          </div>
-        </Section>
-      )}
+      <Blog nodes={nodes} />
       <Section>
         <Partnerships nodes={parterships.nodes} />
       </Section>

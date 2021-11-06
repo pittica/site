@@ -1,32 +1,24 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { categorify } from "@pittica/gatsby-plugin-utils"
 
-import CategoryLink from "../components/ui/link/category-link"
-import Section from "../components/ui/section"
-import Layout from "../layouts/layout"
+import List from "../layouts/list"
 
 export default function Categories({
-  data: { categories, posts },
+  data: {
+    posts: { group },
+    entries: { nodes },
+  },
   location,
 }) {
-  const groups = categorify(categories.nodes)
-
   return (
-    <Layout location={location} title="Categorie">
-      <Section title="Categorie">
-        <ul className="page-list">
-          {posts.group.map((node, index) => {
-            return (
-              <li key={"category-" + index}>
-                <CategoryLink category={groups[node.fieldValue]} /> (
-                {node.totalCount})
-              </li>
-            )
-          })}
-        </ul>
-      </Section>
-    </Layout>
+    <List
+      location={location}
+      nodes={nodes}
+      groups={group}
+      group="categories"
+      title="Categorie"
+      icon="folder"
+    />
   )
 }
 
@@ -42,7 +34,7 @@ export const pageQuery = graphql`
         totalCount
       }
     }
-    categories: allGraphCmsCategory(
+    entries: allGraphCmsCategory(
       filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
     ) {
       nodes {

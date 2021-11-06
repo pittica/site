@@ -1,33 +1,31 @@
 import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
-import Section from "../ui/section"
+import getCover from "../../utils/get-cover"
 
-export default function Screenshots({ screenshots, title }) {
-  if (screenshots && screenshots.length > 0) {
+export default function Screenshots({ nodes, title }) {
+  if (nodes && nodes.length > 0) {
     return (
-      <Section title="Screenshot" className="screenshots">
-        <div className="columns">
-          {screenshots.map(({ localFile }, i) => {
-            const image = localFile ? getImage(localFile.childImageSharp) : null
+      <div className="columns">
+        {nodes.map((node, i) => {
+          const image = getCover({ image: node })
 
-            if (image) {
-              return (
-                <div
-                  className={classNames("column", "is-6")}
-                  key={`screenshots-${i}`}
-                >
-                  <GatsbyImage image={image} alt={title} />
-                </div>
-              )
-            } else {
-              return null
-            }
-          })}
-        </div>
-      </Section>
+          if (image) {
+            return (
+              <div
+                className={classNames("column", "is-6")}
+                key={`screenshots-${i}-${node.id}`}
+              >
+                <GatsbyImage image={image} alt={title} />
+              </div>
+            )
+          } else {
+            return null
+          }
+        })}
+      </div>
     )
   } else {
     return null
@@ -35,10 +33,10 @@ export default function Screenshots({ screenshots, title }) {
 }
 
 Screenshots.propTypes = {
-  screenshots: PropTypes.array,
+  nodes: PropTypes.array,
   title: PropTypes.string,
 }
 
 Screenshots.defaultProps = {
-  screenshots: [],
+  nodes: [],
 }

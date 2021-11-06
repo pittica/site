@@ -1,23 +1,21 @@
 import React from "react"
 import { Link } from "gatsby"
-import { getImage } from "gatsby-plugin-image"
+import { groupify } from "@pittica/gatsby-plugin-utils"
 
 import ArticleCage from "./article-cage"
 import ArticleHeader from "./article-header"
 
+import getCoverFallback from "../../../utils/get-cover-fallback"
+
 import "../../../scss/ui/article/_article-grid.scss"
 
 export default function ArticleGrid({ node }) {
-  const image =
-    node.image && node.image.localFile
-      ? getImage(node.image.localFile.childImageSharp)
-      : null
-  const slug = `/blog/${node.slug}`
+  const slug = groupify(node.slug, "blog")
 
   return (
     <ArticleCage node={node} slug={slug} className="article-grid">
       <ArticleHeader
-        image={image ? image.images.fallback.src : null}
+        image={getCoverFallback(node)}
         className="article-grid-header"
       >
         <h3 className="title">

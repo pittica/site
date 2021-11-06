@@ -1,28 +1,24 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { categorify } from "@pittica/gatsby-plugin-utils"
 
-import TagLink from "../components/ui/link/tag-link"
-import Section from "../components/ui/section"
-import Layout from "../layouts/layout"
+import List from "../layouts/list"
 
-export default function Tags({ data: { tags, posts }, location }) {
-  const groups = categorify(tags.nodes)
-
+export default function Tags({
+  data: {
+    posts: { group },
+    entries: { nodes },
+  },
+  location,
+}) {
   return (
-    <Layout location={location} title="Tag">
-      <Section title="Tag">
-        <ul className="page-list">
-          {posts.group.map((node, index) => {
-            return (
-              <li key={"tag-" + index}>
-                <TagLink tag={groups[node.fieldValue]} /> ({node.totalCount})
-              </li>
-            )
-          })}
-        </ul>
-      </Section>
-    </Layout>
+    <List
+      location={location}
+      nodes={nodes}
+      groups={group}
+      group="tags"
+      title="Tags"
+      icon="tag"
+    />
   )
 }
 
@@ -38,7 +34,7 @@ export const pageQuery = graphql`
         totalCount
       }
     }
-    tags: allGraphCmsTag(
+    entries: allGraphCmsTag(
       filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
     ) {
       nodes {

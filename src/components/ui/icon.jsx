@@ -1,20 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
+import classNames from "classnames"
 
-export default function Icon({ children, className }) {
+export default function Icon({ children, glyph, className }) {
   if (children) {
     return (
       <span className="icon-text">
-        <span className="icon">
-          <i className={className}></i>
+        <span className={classNames("icon", className)}>
+          <i className={glyph}></i>
         </span>
         <span>{children}</span>
       </span>
     )
   } else {
     return (
-      <span className="icon">
-        <i className={className}></i>
+      <span className={classNames("icon", className)}>
+        <i className={glyph}></i>
       </span>
     )
   }
@@ -22,5 +23,6 @@ export default function Icon({ children, className }) {
 
 Icon.propTypes = {
   children: PropTypes.any,
-  className: PropTypes.string.isRequired,
+  glyph: PropTypes.string.isRequired,
+  className: PropTypes.string,
 }

@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import StaticLayout from "../../components/layout/static-layout"
+import Directory from "../../layouts/directory"
 
-export default function Services({
+export default function Offers({
   data: {
     posts: { nodes },
   },
@@ -11,10 +11,10 @@ export default function Services({
   location,
 }) {
   return (
-    <StaticLayout
-      context={pageContext}
-      location={location}
+    <Directory
       nodes={nodes}
+      location={location}
+      context={pageContext}
       title="Servizi"
       description="I nostri servizi"
     />

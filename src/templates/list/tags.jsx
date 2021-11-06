@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import CategoryLayout from "../../components/layout/category-layout"
+import Grid from "../../layouts/grid"
 
 export default function Tags({
   data: {
@@ -12,10 +12,11 @@ export default function Tags({
   location,
 }) {
   return (
-    <CategoryLayout
+    <Grid
       context={pageContext}
       nodes={nodes}
-      label={`Tag "${name}"`}
+      label={name}
+      description={`Articoli con tag "${name}"`}
       location={location}
     />
   )

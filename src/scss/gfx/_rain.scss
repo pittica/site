@@ -1,0 +1,28 @@
+@import "@pittica/scss-functions";
+
+@import "../effects/lighting";
+@import "../variables";
+
+.rain {
+  background-color: $grey-darker;
+  position: relative;
+  z-index: -1;
+  overflow: hidden;
+  @include animate(lighting, 4.5s, 0, linear, infinite);
+  canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .image {
+    img {
+      max-height: 75vh;
+      margin-bottom: 0;
+    }
+  }
+  .hero {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+}

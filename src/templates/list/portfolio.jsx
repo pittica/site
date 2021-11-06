@@ -4,7 +4,9 @@ import classNames from "classnames"
 import { groupify } from "@pittica/gatsby-plugin-utils"
 
 import Card from "../../components/ui/card"
-import ListLayout from "../../components/layout/list-layout"
+import Section from "../../components/ui/section"
+import ListNav from "../../components/nav/list-nav"
+import Layout from "../../layouts/layout"
 
 export default function Portfolio({
   data: {
@@ -14,34 +16,38 @@ export default function Portfolio({
   location,
 }) {
   return (
-    <ListLayout
+    <Layout
       location={location}
       context={pageContext}
       title="Portfolio"
       description="I nostri lavori"
+      header={true}
     >
-      <div className={classNames("columns", "is-multiline", "is-mobile")}>
-        {nodes.map(({ title, slug, image }) => {
-          const link = groupify(slug, pageContext.group)
+      <Section>
+        <div className={classNames("columns", "is-multiline", "is-mobile")}>
+          {nodes.map(({ id, title, slug, image }, i) => {
+            const link = groupify(slug, pageContext.group)
 
-          return (
-            <div
-              className={classNames(
-                "column",
-                "is-half-mobile",
-                "is-one-third-tablet",
-                "is-one-quarter-desktop"
-              )}
-              key={slug}
-            >
-              <article>
-                <Card image={image} title={title} link={link} />
-              </article>
-            </div>
-          )
-        })}
-      </div>
-    </ListLayout>
+            return (
+              <div
+                className={classNames(
+                  "column",
+                  "is-half-mobile",
+                  "is-one-third-tablet",
+                  "is-one-quarter-desktop"
+                )}
+                key={`portfolio-${i}-${id}`}
+              >
+                <article>
+                  <Card image={image} title={title} link={link} />
+                </article>
+              </div>
+            )
+          })}
+        </div>
+      </Section>
+      <ListNav context={pageContext} />
+    </Layout>
   )
 }
 

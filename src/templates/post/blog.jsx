@@ -5,10 +5,11 @@ import PostContent from "../../components/ui/article/post-content"
 import PostFooter from "../../components/ui/article/post-footer"
 import PostHeader from "../../components/ui/article/post-header"
 import PostMeta from "../../components/ui/article/post-meta"
-import TagLink from "../../components/ui/link/tag-link"
 import Icon from "../../components/ui/icon"
 import PostNav from "../../components/nav/post-nav"
 import Layout from "../../layouts/layout"
+
+import { groupify } from "@pittica/gatsby-plugin-utils"
 
 import getCoverFallback from "../../utils/get-cover-fallback"
 
@@ -37,28 +38,43 @@ export default function Blog({
             <PostMeta
               title={post.categories.length > 1 ? "Categorie" : "Categoria"}
             >
-              <Icon className="icon-pittica-folder">
-                {post.categories.map((category, index) => (
-                  <Link
-                    to={`/categories/${category.slug}`}
-                    key={"category-" + index}
-                  >
-                    {category.name}
-                  </Link>
-                ))}
-              </Icon>
+              {post.categories.length > 0 && (
+                <div className="container">
+                  {post.categories.map((category, i) => (
+                    <Icon
+                      key={`tags-${i}-${category.id}`}
+                      glyph="icon-pittica-folder"
+                    >
+                      <Link
+                        to={groupify(category.slug, "categories")}
+                        title={category.name}
+                      >
+                        {category.name}
+                      </Link>
+                    </Icon>
+                  ))}
+                </div>
+              )}
             </PostMeta>
           )}
           {post.date && (
             <PostMeta>
-              <Icon className="icon-pittica-clock">{post.date}</Icon>
+              <Icon glyph="icon-pittica-clock">{post.date}</Icon>
             </PostMeta>
           )}
         </PostHeader>
         {post.tags.length > 0 && (
           <div className="container">
-            {post.tags.map((tag, index) => (
-              <TagLink tag={tag} key={"tag" + index} />
+            {post.tags.map((tag, i) => (
+              <Icon
+                key={`tags-${i}-${tag.id}`}
+                glyph="icon-pittica-tag"
+                className="has-text-primary"
+              >
+                <Link to={groupify(tag.slug, "tags")} title={tag.name}>
+                  {tag.name}
+                </Link>
+              </Icon>
             ))}
           </div>
         )}

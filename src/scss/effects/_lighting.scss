@@ -1,56 +1,29 @@
 @import "@pittica/scss-functions";
 @import "../variables";
 
-$lighting-background: $grey-darker;
-$lighting-accent: $white;
-
 @include keyframes(lighting) {
   0% {
-    background-color: $lighting-background;
+    background-color: $grey-darker;
   }
   10% {
-    background-color: $lighting-background;
+    background-color: $grey-darker;
   }
   11% {
-    background-color: $lighting-accent;
+    background-color: $white;
   }
   14% {
-    background-color: $lighting-background;
+    background-color: $grey-darker;
   }
   20% {
-    background-color: $lighting-background;
+    background-color: $grey-darker;
   }
   21% {
-    background-color: $lighting-accent;
+    background-color: $white;
   }
   24% {
-    background-color: $lighting-background;
+    background-color: $grey-darker;
   }
   104% {
-    background-color: $lighting-background;
-  }
-}
-
-.rain {
-  background-color: $lighting-background;
-  position: relative;
-  z-index: -1;
-  overflow: hidden;
-  @include animate(lighting, 4.5s, 0, linear, infinite);
-  canvas {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .image {
-    img {
-      max-height: 75vh;
-      margin-bottom: 0;
-    }
-  }
-  .hero {
-    position: absolute;
-    width: 100%;
-    z-index: 2;
+    background-color: $grey-darker;
   }
 }

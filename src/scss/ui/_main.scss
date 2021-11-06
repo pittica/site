@@ -3,7 +3,7 @@
 
 .main {
   overflow: hidden;
-  margin: 0 auto;
+  margin: 0 auto ($size-1 * 2) auto;
   &:after {
     content: "";
     display: block;

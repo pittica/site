@@ -12,7 +12,7 @@ export default function StaticGrid({ node, group }) {
   const slug = groupify(node.slug, group)
 
   return (
-    <ArticleCage node={node} slug={slug} className="static-grid">
+    <ArticleCage node={node} slug={slug}>
       <ImagePost image={node.image} title={title} link={slug} />
       <section>
         <h3 className={classNames("title", "pt-4")}>

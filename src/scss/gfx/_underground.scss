@@ -4,6 +4,7 @@
 @import "~bulma/sass/utilities/mixins";
 
 .underground {
+  z-index: -1;
   svg {
     .outline {
       @include svg-outline($grey-darker, 1250, 1.5s);

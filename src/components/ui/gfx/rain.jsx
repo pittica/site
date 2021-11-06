@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import classNames from "classnames"
 import { Rain as RainCanvas } from "@pittica/gatsby-plugin-canvas-animations"
 
-import "../../../scss/effects/_lighting.scss"
+import "../../../scss/gfx/_rain.scss"
 
 export default function Rain({ children }) {
   return (

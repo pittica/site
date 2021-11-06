@@ -12,7 +12,7 @@ import PrivacyLink from "../components/ui/link/privacy-link"
 import Section from "../components/ui/section"
 import Textarea from "../components/ui/form/textarea"
 
-export default function ContactForm({ onLoading, id }) {
+export default function ContactForm({ onLoading, id, title, subtitle }) {
   const [loading, setLoading] = useState(false)
   const [privacy, setPrivacy] = useState(false)
   const [error, setError] = useState(false)
@@ -90,7 +90,7 @@ export default function ContactForm({ onLoading, id }) {
   }
 
   return (
-    <Section>
+    <Section title={title} subtitle={subtitle}>
       {!complete && (
         <form method="post">
           <div className="columns">
@@ -181,6 +181,8 @@ export default function ContactForm({ onLoading, id }) {
 ContactForm.propTypes = {
   onLoading: PropTypes.func,
   id: PropTypes.string,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
 }
 
 ContactForm.defaultProps = {

@@ -1,9 +1,11 @@
 import React from "react"
-import { graphql } from "gatsby"
 import classNames from "classnames"
+import { graphql } from "gatsby"
 
 import PageGrid from "../../components/ui/article/page-grid"
-import ListLayout from "../../components/layout/list-layout"
+import Section from "../../components/ui/section"
+import ListNav from "../../components/nav/list-nav"
+import Layout from "../../layouts/layout"
 
 export default function Legal({
   data: {
@@ -13,22 +15,26 @@ export default function Legal({
   location,
 }) {
   return (
-    <ListLayout
+    <Layout
       location={location}
       context={pageContext}
       title="Note Legali"
       description="Documenti e Condizioni di Fornitura Servizi"
+      header={true}
     >
-      <div className={classNames("columns", "is-multiline")}>
-        {nodes.map((node) => {
-          return (
-            <div className={classNames("column", "is-half")} key={node.slug}>
-              <PageGrid node={node} group={pageContext.group} />
-            </div>
-          )
-        })}
-      </div>
-    </ListLayout>
+      <Section>
+        <div className={classNames("columns", "is-multiline")}>
+          {nodes.map((node) => {
+            return (
+              <div className={classNames("column", "is-half")} key={node.slug}>
+                <PageGrid node={node} group={pageContext.group} />
+              </div>
+            )
+          })}
+        </div>
+      </Section>
+      <ListNav context={pageContext} />
+    </Layout>
   )
 }
 

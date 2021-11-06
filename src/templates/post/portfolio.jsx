@@ -14,27 +14,31 @@ export default function Portfolio({ data: { post }, location }) {
 
   return (
     <Layout title={post.title} post={post} image={cover} location={location}>
-      <PostHeader image={cover} post={post} />
-      <PostContent content={post.content} />
-      {post.technologies && post.technologies.length > 0 && (
-        <Section title="Tecnologie">
-          <Technologies nodes={post.technologies} />
+      <article>
+        <PostHeader image={cover} post={post} />
+        <PostContent content={post.content} />
+        {post.technologies && post.technologies.length > 0 && (
+          <Section title="Tecnologie">
+            <Technologies nodes={post.technologies} />
+          </Section>
+        )}
+        <Section title="Screenshot">
+          <Screenshots nodes={post.screenshots} title={post.title} />
         </Section>
-      )}
-      <Screenshots screenshots={post.screenshots} title={post.title} />
-      {post.links && post.links.length > 0 && (
-        <Section title="URL">
-          <ul>
-            {post.links.map((link, i) => (
-              <li key={`link-${i}`}>
-                <a href={link} title={post.title} target="_system">
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      )}
+        {post.links && post.links.length > 0 && (
+          <Section title="URL">
+            <ul>
+              {post.links.map((link, i) => (
+                <li key={`link-${i}`}>
+                  <a href={link} title={post.title} target="_system">
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+      </article>
     </Layout>
   )
 }

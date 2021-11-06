@@ -1,12 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Highlight from "../../components/ui/highlight"
 import ContactForm from "../../components/contact-form"
-import PostBlock from "../../components/ui/article/post-block"
 import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
-import Highlight from "../../components/ui/highlight"
 import Section from "../../components/ui/section"
+import Services from "../../components/sections/services"
 import Layout from "../../layouts/layout"
 
 import getCoverFallback from "../../utils/get-cover-fallback"
@@ -14,7 +14,7 @@ import getPaymentInterval from "../../utils/get-payment-interval"
 
 export default function Offers({ data: { post }, location }) {
   const cover = getCoverFallback(post)
-  
+
   return (
     <Layout
       title={post.title}
@@ -43,24 +43,22 @@ export default function Offers({ data: { post }, location }) {
           <meta itemProp="name" content={post.title} />
         </PostHeader>
         <PostContent content={post.content} />
-        <div className="container">
-          {post.price && (
-            <Section className="has-text-right">
-              <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
-            </Section>
-          )}
-          <Section
-            title="Contattaci"
-            subtitle="Richiedi maggiori informazioni."
-          />
-          <ContactForm id="offer" />
-          <PostBlock
-            title="Servizi"
-            subtitle="I servizi di riferimento dell'offerta"
-            posts={post.services}
-            group="services"
-          />
-        </div>
+        {post.price && (
+          <Section className="has-text-right">
+            <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
+          </Section>
+        )}
+        <ContactForm
+          id="offer"
+          title="Contattaci"
+          subtitle="Richiedi maggiori informazioni"
+        />
+        <Section
+          title="Servizi"
+          subtitle="I servizi di riferimento dell'offerta"
+        >
+          <Services nodes={post.services} />
+        </Section>
       </article>
     </Layout>
   )
@@ -99,10 +97,7 @@ export const pageQuery = graphql`
         }
       }
       services {
-        slug
-        title
-      }
-      services {
+        id
         slug
         title
         description

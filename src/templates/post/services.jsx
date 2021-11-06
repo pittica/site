@@ -2,10 +2,10 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import ContactForm from "../../components/contact-form"
-import PostBlock from "../../components/ui/article/post-block"
 import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
 import Section from "../../components/ui/section"
+import Offers from "../../components/sections/offers"
 import Layout from "../../layouts/layout"
 
 import getCoverFallback from "../../utils/get-cover-fallback"
@@ -23,14 +23,17 @@ export default function Services({ data: { post }, location }) {
     >
       <PostHeader image={cover} post={post} />
       <PostContent content={post.content} />
-      <PostBlock
+      <Section
         title="Offerte"
         subtitle="Le offerte collegate a questo servizio"
-        posts={post.offers}
-        group="offers"
+      >
+        <Offers nodes={post.offers} />
+      </Section>
+      <ContactForm
+        id="service"
+        title="Contattaci"
+        subtitle="Richiedi maggiori informazioni"
       />
-      <Section title="Contattaci" subtitle="Richiedi maggiori informazioni." />
-      <ContactForm id="service" />
     </Layout>
   )
 }

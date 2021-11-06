@@ -3,9 +3,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import classNames from "classnames"
 
 import ContactForm from "../components/contact-form"
-import Header from "../components/ui/header"
-import Layout from "../layouts/layout"
 import Section from "../components/ui/section"
+import Layout from "../layouts/layout"
 
 export default function Contact({ location }) {
   const {
@@ -47,8 +46,8 @@ export default function Contact({ location }) {
       location={location}
       title="Contatti"
       description="Mettiti in contatto con noi"
+      header={true}
     >
-      <Header title="Contatti" subtitle="Mettiti in contatto con noi" />
       <Section>
         <h3>{company}</h3>
         <div className="columns">

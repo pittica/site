@@ -1,8 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
+import classNames from "classnames"
 import { Link } from "gatsby"
 
-import ReadmoreLink from "../link/readmore-link"
+import "../../../scss/ui/article/_article-cage.scss"
 
 export default function ArticleCage({
   node,
@@ -12,7 +13,7 @@ export default function ArticleCage({
   featured,
 }) {
   return (
-    <article className={className}>
+    <article className={classNames("article-cage", className)}>
       {children}
       <section>
         <Link
@@ -22,7 +23,9 @@ export default function ArticleCage({
           }}
         />
       </section>
-      <ReadmoreLink slug={slug} featured={featured} />
+      <div className={classNames("readmore-link", { "is-featured": featured })}>
+        <Link to={slug}>Leggi di più...</Link>
+      </div>
     </article>
   )
 }
