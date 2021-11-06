@@ -23,12 +23,15 @@ export default function Services({ data: { post }, location }) {
     >
       <PostHeader image={cover} post={post} />
       <PostContent content={post.content} />
-      <Section
-        title="Offerte"
-        subtitle="Le offerte collegate a questo servizio"
-      >
-        <Offers nodes={post.offers} />
-      </Section>
+
+      {post.offers.length > 0 && (
+        <Section
+          title="Offerte"
+          subtitle="Le offerte collegate a questo servizio"
+        >
+          <Offers nodes={post.offers} />
+        </Section>
+      )}
       <ContactForm
         id="service"
         title="Contattaci"

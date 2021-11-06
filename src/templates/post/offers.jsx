@@ -53,12 +53,14 @@ export default function Offers({ data: { post }, location }) {
           title="Contattaci"
           subtitle="Richiedi maggiori informazioni"
         />
-        <Section
-          title="Servizi"
-          subtitle="I servizi di riferimento dell'offerta"
-        >
-          <Services nodes={post.services} />
-        </Section>
+        {post.services.length > 0 && (
+          <Section
+            title="Servizi"
+            subtitle="I servizi di riferimento dell'offerta"
+          >
+            <Services nodes={post.services} />
+          </Section>
+        )}
       </article>
     </Layout>
   )

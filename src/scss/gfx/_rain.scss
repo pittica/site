@@ -15,9 +15,11 @@
     height: 100%;
   }
   .image {
-    img {
+    svg {
       max-height: 75vh;
       margin-bottom: 0;
+      height: auto;
+      width: 100%;
     }
   }
   .hero {

@@ -4,10 +4,10 @@ import classNames from "classnames"
 import TrustpilotReviews from "@pittica/gatsby-plugin-trustpilot-widget"
 import { CookiesSettings } from "@pittica/gatsby-plugin-cookiehub"
 import { SocialFollow } from "@pittica/gatsby-plugin-seo"
+import { Logo } from "@pittica/art"
 
 import PrivacyLink from "./link/privacy-link"
 import Section from "./section"
-import Sign from "./sign"
 
 import "../../scss/ui/_footer.scss"
 
@@ -70,7 +70,7 @@ export default function Footer() {
               "has-text-left-mobile"
             )}
           >
-            <Sign color={appearance.background} />
+            <Logo color={appearance.background} />
           </div>
           <div className={classNames("column", "is-4")}>
             <h3>{organization.company}</h3>

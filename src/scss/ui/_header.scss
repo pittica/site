@@ -3,4 +3,12 @@
 .header {
   margin: ($size-1 * 2) auto $size-2;
   padding: $section-padding;
+  &.is-sticky {
+    .title {
+      font-size: $size-1;
+    }
+    .subtitle {
+      font-size: $size-2;
+    }
+  }
 }

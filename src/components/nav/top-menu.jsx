@@ -3,8 +3,7 @@ import PropTypes from "prop-types"
 import classNames from "classnames"
 import { useStaticQuery, graphql } from "gatsby"
 import { Navbar } from "@pittica/gatsby-plugin-navigation"
-
-import Sign from "../ui/sign"
+import { Logo } from "@pittica/art"
 
 import "../../scss/nav/_top-menu.scss"
 
@@ -12,7 +11,6 @@ export default function TopMenu({ location }) {
   const {
     site: {
       siteMetadata: {
-        title,
         appearance: { background },
       },
     },
@@ -20,7 +18,6 @@ export default function TopMenu({ location }) {
     query TopMenu {
       site {
         siteMetadata {
-          title
           appearance {
             background
           }
@@ -42,7 +39,7 @@ export default function TopMenu({ location }) {
         { link: "https://support.pittica.com", label: "Supporto" },
       ]}
     >
-      <Sign color={background} alt={title} width={316} height={69} />
+      <Logo color={background} width={316} height={69} />
     </Navbar>
   )
 }

@@ -75,25 +75,25 @@
         max-width: 236px;
         left: 13px;
       }
-      &.sign-pittica {
-        .sign-pittica-logo {
+      &.logo-pittica {
+        .logo-pittica-logo {
           @include svg-outline($primary-invert, 1132, 2.5s);
         }
-        .sign-pittica-icon {
+        .logo-pittica-icon {
           @include svg-outline($primary-invert, 350, 1.5s);
         }
       }
     }
     &:hover,
     &:focus {
-      .sign-pittica {
-        .sign-icon-1 {
+      .logo-pittica {
+        .logo-pittica-icon-1 {
           @include animate(translate-sign-1, 0.5s, 0s, linear);
         }
-        .sign-icon-2 {
+        .logo-pittica-icon-2 {
           @include animate(translate-sign-2, 0.5s, 0s, linear);
         }
-        .sign-icon-3 {
+        .logo-pittica-icon-3 {
           @include animate(translate-sign-3, 0.5s, 0s, linear);
         }
       }

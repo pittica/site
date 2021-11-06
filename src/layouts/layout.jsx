@@ -30,7 +30,7 @@ export default function Layout({
         author={author}
       />
       <TopMenu location={location} />
-      {header && <Header title={title} subtitle={description} />}
+      {header && <Header title={title} subtitle={description} sticky={true} />}
       <Main>{children}</Main>
       <Footer />
     </div>

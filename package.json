@@ -10,8 +10,9 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "@pittica/art": "^2.0.0",
     "@pittica/gatsby-plugin-canvas-animations": "^2.0.3",
-    "@pittica/gatsby-plugin-cookiehub": "^2.10.0",
+    "@pittica/gatsby-plugin-cookiehub": "^2.1.0",
     "@pittica/gatsby-plugin-mdx-shortcodes": "^1.2.0",
     "@pittica/gatsby-plugin-navigation": "^2.0.3",
     "@pittica/gatsby-plugin-recaptcha": "^2.0.3",
