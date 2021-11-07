@@ -11,6 +11,7 @@ fragment Asset on Asset {
   width
   size
   mimeType
+  title
   credits {
     ... on RichText {
       raw
@@ -107,6 +108,22 @@ fragment Asset on Asset {
     ... on Partnership {
       remoteTypeName: __typename
       remoteId: id
+      stage
+    }
+  }
+  attachmentSection {
+    ... on Section {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+  attachmentsLegal {
+    ... on Legal {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
       stage
     }
   }

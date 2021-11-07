@@ -1,0 +1,20 @@
+@import "../variables";
+
+.attachments {
+    .column {
+        background-color: $grey-darker;
+        a {
+            display: block;
+            padding-top: $size-1;
+            padding-bottom: $size-1;
+            width: 100%;
+            p {
+                color: $primary-invert;
+                text-align: center;
+                .icon {
+                    font-size: $size-1;
+                }
+            }
+        }
+    }
+}

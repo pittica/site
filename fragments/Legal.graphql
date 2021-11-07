@@ -38,4 +38,12 @@ fragment Legal on Legal {
       stage
     }
   }
+  attachments {
+    ... on Asset {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
 }

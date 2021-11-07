@@ -2,6 +2,8 @@ require("dotenv").config()
 
 const path = require("path")
 const moment = require("moment")
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const { fileCategory } = require("@pittica/gatsby-plugin-utils")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const {
@@ -280,7 +282,48 @@ exports.createResolvers = ({ createResolvers }) => {
         },
       },
     },
+    GraphCMS_Asset: {
+      category: {
+        type: "String",
+        resolve: ({ fileName }) => {
+          if (fileName) {
+            return fileCategory(path.extname(fileName))
+          }
+
+          return null
+        },
+      },
+    },
   }
 
   createResolvers(resolvers)
+}
+
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode },
+  createNodeId,
+  getCache,
+  cache,
+}) => {
+  if (node.remoteTypeName === "Asset" && !node.mimeType.includes("image/")) {
+    try {
+      const ext = path.extname(node.fileName)
+      const fileNode = await createRemoteFileNode({
+        url: node.url,
+        parentNodeId: node.id,
+        createNode,
+        createNodeId,
+        cache,
+        getCache,
+        ...(node.fileName && { name: path.basename(node.fileName, ext), ext }),
+      })
+
+      if (fileNode) {
+        node.localFile = fileNode.id
+      }
+    } catch (e) {
+      console.error("graphcms", e)
+    }
+  }
 }

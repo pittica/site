@@ -144,6 +144,15 @@ export const pageQuery = graphql`
           }
           logoUrl
         }
+        attachments {
+          id
+          title
+          fileName
+          localFile {
+            publicURL
+          }
+          category
+        }
         list
       }
     }

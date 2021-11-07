@@ -1,45 +1,4 @@
-@import "@pittica/scss-functions";
+@import "@pittica/icons";
 
 @import url("https://fonts.googleapis.com/css?family=Anton&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i&display=swap");
-
-@include font(pittica);
-@include icon-family(pittica);
-
-@include icon(pittica, sign, "\e900");
-@include icon(pittica, logo-sign, "\e901");
-@include icon(pittica, logo, "\e917");
-@include icon(pittica, search, "\1f50e");
-@include icon(pittica, zoomin, "\e904");
-@include icon(pittica, zoomout, "\e905");
-@include icon(pittica, envelope, "\1f4e7");
-@include icon(pittica, paperclip, "\1f4ce");
-@include icon(pittica, tag, "\1f516");
-@include icon(pittica, bookmark, "\1f4d1");
-@include icon(pittica, folder, "\1f4c1");
-@include icon(pittica, heart, "\e907");
-@include icon(pittica, cloud, "\2601");
-@include icon(pittica, star, "\2b50");
-@include icon(pittica, printer, "\e90a");
-@include icon(pittica, home, "\1f3e0");
-@include icon(pittica, users, "\1f465");
-@include icon(pittica, user, "\1f464");
-@include icon(pittica, screen, "\e90e");
-@include icon(pittica, phone, "\e90f");
-@include icon(pittica, phone-portrait, "\e910");
-@include icon(pittica, phone-landscape, "\e911");
-@include icon(pittica, tablet, "\e912");
-@include icon(pittica, tablet-landscape, "\e913");
-@include icon(pittica, laptop, "\e914");
-@include icon(pittica, vcard, "\e915");
-@include icon(pittica, marker, "\1f4cd");
-@include icon(pittica, clock, "\1f551");
-@include icon(pittica, arrow-left, "\2bc7");
-@include icon(pittica, arrow-right, "\2bc8");
-@include icon(pittica, arrow-down, "\2bc6");
-@include icon(pittica, arrow-up, "\2bc5");
-@include icon(pittica, github, "\e91c");
-@include icon(pittica, instagram, "\e91e");
-@include icon(pittica, linkedin, "\e91d");
-@include icon(pittica, twitter, "\e91f");
-@include icon(pittica, facebook, "\e902");

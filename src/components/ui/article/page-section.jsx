@@ -8,6 +8,7 @@ import Partnerships from "../../sections/partnerships"
 import People from "../../sections/people"
 import Services from "../../sections/services"
 import Technologies from "../../sections/technologies"
+import Attachments from "../../sections/attachments"
 
 export default function PageSection({
   section: {
@@ -20,6 +21,7 @@ export default function PageSection({
     people,
     partners,
     partnerships,
+    attachments,
     list,
   },
 }) {
@@ -32,6 +34,7 @@ export default function PageSection({
       <People nodes={people} list={list} />
       <Partners nodes={partners} list={list} />
       <Partnerships nodes={partnerships} list={list} />
+      <Attachments nodes={attachments} list={list} />
     </Section>
   )
 }

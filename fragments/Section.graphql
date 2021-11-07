@@ -82,4 +82,12 @@ fragment Section on Section {
       stage
     }
   }
+  attachments {
+    ... on Asset {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
 }
