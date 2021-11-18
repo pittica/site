@@ -1,0 +1,127 @@
+fragment ScheduledOperation on ScheduledOperation {
+  stage
+  remoteId: id
+  createdAt
+  updatedAt
+  publishedAt
+  description
+  errorMessage
+  rawPayload
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  release {
+    ... on ScheduledRelease {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  status
+  affectedDocuments {
+    ... on Asset {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Category {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Legal {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Offer {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Page {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Partner {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+    ... on Partnership {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+    ... on Person {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Portfolio {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Post {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Role {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+    ... on Section {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Service {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Tag {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Technology {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+}
