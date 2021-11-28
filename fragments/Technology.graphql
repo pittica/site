@@ -44,4 +44,11 @@ fragment Technology on Technology {
       stage
     }
   }
+  scheduledIn {
+    ... on ScheduledOperation {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
 }

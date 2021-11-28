@@ -14,11 +14,12 @@
     "@pittica/gatsby-plugin-canvas-animations": "^2.0.3",
     "@pittica/gatsby-plugin-cookiehub": "^2.1.0",
     "@pittica/gatsby-plugin-mdx-shortcodes": "^1.2.0",
-    "@pittica/gatsby-plugin-navigation": "^3.0.1",
+    "@pittica/gatsby-plugin-navigation": "^3.0.2",
     "@pittica/gatsby-plugin-recaptcha": "^2.0.3",
     "@pittica/gatsby-plugin-seo": "^3.0.8",
     "@pittica/gatsby-plugin-trustpilot-widget": "^3.0.0",
     "@pittica/gatsby-plugin-utils": "^2.1.0",
+    "@pittica/gatsby-plugin-video": "^1.1.0",
     "@pittica/icons": "^1.1.0",
     "@pittica/scss-functions": "^1.1.1",
     "axios": "^0.24.0",
@@ -49,7 +50,7 @@
     "bulma": "^0.9.3",
     "gatsby-cli": "^3.14.0",
     "node-sass": "^6.0.1",
-    "prettier": "^2.4.1"
+    "prettier": "^2.5.0"
   },
   "homepage": "https://pittica.com",
   "keywords": [

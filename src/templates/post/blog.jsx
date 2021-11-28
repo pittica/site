@@ -33,7 +33,11 @@ export default function Blog({
       }
     >
       <article>
-        <PostHeader image={cover} post={post}>
+        <PostHeader
+          image={cover}
+          title={post.title}
+          description={post.description}
+        >
           {post.categories && post.categories.length > 0 && (
             <PostMeta
               title={post.categories.length > 1 ? "Categorie" : "Categoria"}

@@ -18,6 +18,7 @@ fragment Portfolio on Portfolio {
   }
   links
   sticky
+  videos
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -59,6 +60,13 @@ fragment Portfolio on Portfolio {
       remoteTypeName: __typename
       remoteId: id
       locale
+      stage
+    }
+  }
+  scheduledIn {
+    ... on ScheduledOperation {
+      remoteTypeName: __typename
+      remoteId: id
       stage
     }
   }

@@ -1,6 +1,9 @@
 import React from "react"
 import classNames from "classnames"
 
+import Title from "./title"
+import Subtitle from "./subtitle"
+
 export default function Hero({
   title,
   subtitle,
@@ -12,24 +15,20 @@ export default function Hero({
     <section className={classNames("hero", className)}>
       <div className="hero-body">
         <div className="container">
-          {title && (
-            <h1
-              className={classNames("title", "is-size-1", {
-                "has-text-centered": centered,
-              })}
-            >
-              {title}
-            </h1>
-          )}
-          {subtitle && (
-            <h2
-              className={classNames("subtitle", "is-size-3", {
-                "has-text-centered": centered,
-              })}
-            >
-              {subtitle}
-            </h2>
-          )}
+          <Title
+            className={classNames("is-size-1", {
+              "has-text-centered": centered,
+            })}
+          >
+            {title}
+          </Title>
+          <Subtitle
+            className={classNames("is-size-3", {
+              "has-text-centered": centered,
+            })}
+          >
+            {subtitle}
+          </Subtitle>
           {children}
         </div>
       </div>

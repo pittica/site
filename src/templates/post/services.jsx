@@ -21,9 +21,12 @@ export default function Services({ data: { post }, location }) {
       image={cover}
       location={location}
     >
-      <PostHeader image={cover} post={post} />
+      <PostHeader
+        image={cover}
+        title={post.title}
+        description={post.description}
+      />
       <PostContent content={post.content} />
-
       {post.offers.length > 0 && (
         <Section
           title="Offerte"

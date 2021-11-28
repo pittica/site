@@ -2,11 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Blog from "../components/sections/blog"
-import Partnerships from "../components/sections/partnerships"
 import FeatureLink from "../components/ui/link/feature-link"
+import Partnerships from "../components/sections/partnerships"
 import Section from "../components/ui/section"
-import Layout from "../layouts/layout"
 import Underground from "../components/ui/gfx/underground"
+import Layout from "../layouts/layout"
 
 export default function Index({
   data: {

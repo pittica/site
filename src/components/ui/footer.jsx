@@ -115,19 +115,6 @@ export default function Footer() {
             <div className="has-text-centered-mobile">
               <SocialFollow />
             </div>
-            <div className="has-text-centered-mobile">
-              <a
-                href="https://www.assintel.it/soci/pittica_srls/"
-                target="_new"
-              >
-                <img
-                  src="/assets/assintel.png"
-                  alt="Assintel"
-                  width="258"
-                  height="48"
-                />
-              </a>
-            </div>
           </div>
         </div>
         <div className="columns">

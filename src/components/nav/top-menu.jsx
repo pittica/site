@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import { Navbar } from "@pittica/gatsby-plugin-navigation"
 import { Logo } from "@pittica/art"
 
@@ -39,7 +39,9 @@ export default function TopMenu({ location }) {
         { link: "https://support.pittica.com", label: "Supporto" },
       ]}
     >
-      <Logo color={background} width={316} height={69} />
+      <Link to="/" className="navbar-logo">
+        <Logo color={background} width={316} height={69} />
+      </Link>
     </Navbar>
   )
 }

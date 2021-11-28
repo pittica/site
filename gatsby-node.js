@@ -240,6 +240,27 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
+  const wrapperify = (nodes, group, title, icon) => {
+    createPage({
+      path: `/${group}`,
+      component: path.resolve(`./src/templates/list.jsx`),
+      context: {
+        group,
+        title,
+        icon,
+        nodes: nodes.map(({ name, slug, posts, locale }) => ({
+          name,
+          slug,
+          count: posts.length,
+          locale,
+        })),
+      },
+    })
+  }
+
+  wrapperify(categories.nodes, "categories", "Categorie", "folder")
+  wrapperify(tags.nodes, "tags", "Tag", "tag")
+
   categories.nodes.forEach(({ slug, posts, locale }) => {
     listfy("categories", slug, posts.length, locale)
   })

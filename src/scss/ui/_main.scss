@@ -36,6 +36,15 @@
       h6 {
         font-size: $size-6;
       }
+      ul {
+        &.inline {
+          li {
+            display: inline-block;
+            margin-right: $size-5;
+            margin-bottom: $size-5;
+          }
+        }
+      }
     }
   }
 }

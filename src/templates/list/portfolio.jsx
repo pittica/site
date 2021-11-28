@@ -3,8 +3,8 @@ import { graphql } from "gatsby"
 import classNames from "classnames"
 import { groupify } from "@pittica/gatsby-plugin-utils"
 
-import Card from "../../components/ui/card"
 import Section from "../../components/ui/section"
+import Card from "../../components/ui/card"
 import ListNav from "../../components/nav/list-nav"
 import Layout from "../../layouts/layout"
 

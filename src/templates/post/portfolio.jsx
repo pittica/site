@@ -5,6 +5,7 @@ import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
 import Section from "../../components/ui/section"
 import Screenshots from "../../components/sections/screenshots"
+import Videos from "../../components/sections/videos"
 import Technologies from "../../components/sections/technologies"
 import Layout from "../../layouts/layout"
 
@@ -15,16 +16,27 @@ export default function Portfolio({ data: { post }, location }) {
   return (
     <Layout title={post.title} post={post} image={cover} location={location}>
       <article>
-        <PostHeader image={cover} post={post} />
+        <PostHeader
+          image={cover}
+          title={post.title}
+          description={post.description}
+        />
         <PostContent content={post.content} />
         {post.technologies && post.technologies.length > 0 && (
           <Section title="Tecnologie">
             <Technologies nodes={post.technologies} />
           </Section>
         )}
-        <Section title="Screenshot">
-          <Screenshots nodes={post.screenshots} title={post.title} />
-        </Section>
+        {post.videos && post.videos.length > 0 && (
+          <Section title="Video">
+            <Videos nodes={post.videos} title={post.title} />
+          </Section>
+        )}
+        {post.screenshots && post.screenshots.length > 0 && (
+          <Section title="Screenshot">
+            <Screenshots nodes={post.screenshots} title={post.title} />
+          </Section>
+        )}
         {post.links && post.links.length > 0 && (
           <Section title="URL">
             <ul>
@@ -87,6 +99,7 @@ export const pageQuery = graphql`
           }
         }
       }
+      videos
     }
   }
 `

@@ -1,13 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Highlight from "../../components/ui/highlight"
 import ContactForm from "../../components/contact-form"
 import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
 import Section from "../../components/ui/section"
 import Services from "../../components/sections/services"
 import Layout from "../../layouts/layout"
+import Highlight from "../../components/ui/highlight"
 
 import getCoverFallback from "../../utils/get-cover-fallback"
 import getPaymentInterval from "../../utils/get-payment-interval"
@@ -29,7 +29,11 @@ export default function Offers({ data: { post }, location }) {
         itemScope={true}
         itemType="https://schema.org/Offer"
       >
-        <PostHeader image={cover} post={post}>
+        <PostHeader
+          image={cover}
+          title={post.title}
+          description={post.description}
+        >
           {post.price && (
             <Highlight>
               <strong itemProp="price" content={post.price}>

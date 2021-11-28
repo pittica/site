@@ -2,8 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Seo } from "@pittica/gatsby-plugin-seo"
 
-import Header from "../components/ui/header"
 import Footer from "../components/ui/footer"
+import Header from "../components/ui/header"
 import Main from "../components/ui/main"
 import TopMenu from "../components/nav/top-menu"
 
