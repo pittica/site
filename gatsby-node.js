@@ -1,9 +1,13 @@
 require("dotenv").config()
 
+const fs = require("fs")
 const path = require("path")
 const moment = require("moment")
-const { createRemoteFileNode } = require("gatsby-source-filesystem")
-const { fileCategory } = require("@pittica/gatsby-plugin-utils")
+const {
+  createRemoteFileNode,
+  createFilePath,
+} = require("gatsby-source-filesystem")
+const { fileCategory, commalify } = require("@pittica/gatsby-plugin-utils")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const {

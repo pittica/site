@@ -1,5 +1,7 @@
 require("dotenv").config()
 
+const { commalify } = require("@pittica/gatsby-plugin-utils")
+
 const siteUrl = process.env.URL || `https://${process.env.HOST}`
 
 module.exports = {
@@ -118,7 +120,7 @@ module.exports = {
                 const url = new URL(`/blog/${node.slug}`, siteUrl).href
                 const author =
                   node.people.length > 0
-                    ? `${node.people[0].email} (${node.people[0].name})`
+                    ? `${node.people[0].email} (${node.people[0].firstName} ${node.people[0].lastName})`
                     : `${process.env.ORGANIZATION_EMAIL} (${process.env.SITE_AUTHOR})`
 
                 return Object.assign({}, node, {
@@ -146,7 +148,8 @@ module.exports = {
                     date
                     excerpt
                     people {
-                      name
+                      firstName
+                      lastName
                       email
                     }
                   }
@@ -277,6 +280,53 @@ module.exports = {
             icon: "icon-pittica-linkedin",
           },
         },
+      },
+    },
+    {
+      resolve: `@pittica/gatsby-plugin-vcard`,
+      options: {
+        query: `
+          {
+            people: allGraphCmsPerson(filter: { stage: { eq: PUBLISHED } }) {
+              nodes {
+                firstName
+                lastName
+                roles {
+                  name
+                }
+                email
+                phone
+                linkedIn
+                image {
+                  localFile {
+                    absolutePath
+                  }
+                }
+              }
+            }
+          }
+        `,
+        getNodes: (data) => data.people.nodes,
+        resolve: ({
+          firstName,
+          lastName,
+          roles,
+          email,
+          phone,
+          linkedIn,
+          image,
+        }) => ({
+          firstName,
+          lastName,
+          role: commalify(roles.map(({ name }) => name)),
+          email,
+          phone,
+          linkedIn,
+          photo: image.localFile ? image.localFile.absolutePath : null,
+        }),
+        organization: process.env.ORGANIZATION_COMPANY,
+        logo: `${__dirname}/static/logo.png`,
+        url: siteUrl,
       },
     },
   ],

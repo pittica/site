@@ -96,7 +96,8 @@ export const pageQuery = graphql`
         }
         people {
           id
-          name
+          firstName
+          lastName
           bio
           email
           linkedIn

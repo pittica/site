@@ -5,9 +5,11 @@ fragment Person on Person {
   createdAt(variation: COMBINED)
   updatedAt(variation: COMBINED)
   publishedAt(variation: COMBINED)
-  name
+  firstName
+  lastName
   bio
   email
+  phone
   linkedIn
   createdBy {
     ... on User {

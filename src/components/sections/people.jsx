@@ -10,9 +10,9 @@ export default function People({ nodes, list }) {
     if (list) {
       return (
         <ul>
-          {nodes.map(({ id, name, email, linkedIn }, i) => (
+          {nodes.map(({ id, firstName, lastName, email, linkedIn }, i) => (
             <li key={`people-${i}-${id}`}>
-              {name}
+              {firstName} {lastName}
               {linkedIn && (
                 <a href={linkedIn} title="LinkedIn" target="_new">
                   <i className={classNames("icon-pittica-linkedin", "p-2")} />
@@ -30,13 +30,13 @@ export default function People({ nodes, list }) {
     } else {
       return (
         <div className={classNames("columns", "is-multiline", "mb-6")}>
-          {nodes.map(({ id, name, image, roles, email, linkedIn, bio }, i) => (
+          {nodes.map(({ id, firstName, lastName, image, roles, email, linkedIn, bio }, i) => (
             <div
               className={classNames("column", "has-text-centered")}
               key={`people-${i}-${id}`}
             >
-              <Card image={image} title={name}>
-                <h5 className="subtitle">{name}</h5>
+              <Card image={image} title={`${firstName} ${lastName}`}>
+                <h5 className="subtitle">{firstName} {lastName}</h5>
                 {roles.length > 0 && (
                   <div>
                     <strong>{commalify(roles)}</strong>

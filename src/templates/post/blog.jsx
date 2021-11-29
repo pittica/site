@@ -137,7 +137,8 @@ export const pageQuery = graphql`
       }
       people {
         id
-        name
+        firstName
+        lastName
         roles {
           name
         }

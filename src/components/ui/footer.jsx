@@ -89,7 +89,7 @@ export default function Footer() {
             <Pair label="Partita IVA" value={organization.vatId} />
             <Pair label="REA" value={organization.registryId} />
             <Pair label="Capitale Sociale" value={organization.shareCapital} />
-            <Pair label="E-Mail<" value={organization.email} />
+            <Pair label="E-Mail" value={organization.email} />
           </div>
           <div className={classNames("column", "is-4")}>
             <div>
