@@ -4,8 +4,10 @@ import { MDXProvider } from "@mdx-js/react"
 
 import "./src/scss/style.scss"
 
-const wrapRootElement = ({ element }) => (
-  <MDXProvider components={Shortcodes}>{element}</MDXProvider>
-)
+export function wrapRootElement({ element }) {
+  return <MDXProvider components={Shortcodes}>{element}</MDXProvider>
+}
 
-export { wrapRootElement }
+export function onServiceWorkerUpdateReady() {
+  window.location.reload()
+}

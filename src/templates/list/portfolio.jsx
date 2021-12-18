@@ -61,7 +61,7 @@ export const pageQuery = graphql`
       filter: { stage: { eq: PUBLISHED }, locale: { eq: $locale } }
       limit: $limit
       skip: $skip
-      sort: { fields: [sticky, updatedAt], order: DESC }
+      sort: { fields: [sticky, updatedAt], order: [DESC, DESC] }
     ) {
       nodes {
         slug

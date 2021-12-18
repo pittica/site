@@ -74,7 +74,9 @@ export const pageQuery = graphql`
         title
       }
     }
-    parterships: allGraphCmsPartnership {
+    parterships: allGraphCmsPartnership(
+      filter: { stage: { eq: PUBLISHED } }
+    ) {
       nodes {
         id
         name
