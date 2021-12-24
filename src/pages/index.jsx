@@ -23,8 +23,7 @@ export default function Index({
   return (
     <Layout
       location={location}
-      title="Pittica"
-      subtitle="Il tuo partner per la trasformazione digitale"
+      description="Il tuo partner per la trasformazione digitale"
     >
       <Underground accent={accent} theme={theme}>
         <h1>Pittica</h1>
@@ -74,9 +73,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    parterships: allGraphCmsPartnership(
-      filter: { stage: { eq: PUBLISHED } }
-    ) {
+    parterships: allGraphCmsPartnership(filter: { stage: { eq: PUBLISHED } }) {
       nodes {
         id
         name
