@@ -45,22 +45,14 @@ export default function Services({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query ServicesPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
-    post: graphCmsService(
-      stage: { eq: PUBLISHED }
-      locale: { eq: $locale }
-      slug: { eq: $slug }
-    ) {
+  query ServicesPostTemplate($slug: String!) {
+    post: graphCmsService(stage: { eq: PUBLISHED }, slug: { eq: $slug }) {
       id
       title
       slug
       description
       content {
-        markdownNode {
-          childMdx {
-            body
-          }
-        }
+        html
       }
       image {
         localFile {
@@ -82,8 +74,8 @@ export const pageQuery = graphql`
           localFile {
             childImageSharp {
               gatsbyImageData(
-                width: 1920
-                height: 1080
+                height: 440
+                width: 640
                 placeholder: BLURRED
                 formats: [AUTO, WEBP, AVIF]
               )

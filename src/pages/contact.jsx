@@ -1,13 +1,14 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import classNames from "classnames"
 
 import ContactForm from "../components/contact-form"
 import Section from "../components/ui/section"
 import Layout from "../layouts/layout"
 
-export default function Contact({ location }) {
-  const {
+export default function Contact({
+  location,
+  data: {
     site: {
       siteMetadata: {
         organization: {
@@ -21,26 +22,8 @@ export default function Contact({ location }) {
         },
       },
     },
-  } = useStaticQuery(
-    graphql`
-      query ContactPage {
-        site {
-          siteMetadata {
-            organization {
-              company
-              address
-              zipCode
-              city
-              province
-              country
-              email
-            }
-          }
-        }
-      }
-    `
-  )
-
+  },
+}) {
   return (
     <Layout
       location={location}
@@ -71,3 +54,21 @@ export default function Contact({ location }) {
     </Layout>
   )
 }
+
+export const pageQuery = graphql`
+  query ContactPage {
+    site {
+      siteMetadata {
+        organization {
+          company
+          address
+          zipCode
+          city
+          province
+          country
+          email
+        }
+      }
+    }
+  }
+`

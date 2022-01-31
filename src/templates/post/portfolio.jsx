@@ -56,21 +56,13 @@ export default function Portfolio({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query PortfolioPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
-    post: graphCmsPortfolio(
-      stage: { eq: PUBLISHED }
-      locale: { eq: $locale }
-      slug: { eq: $slug }
-    ) {
+  query PortfolioPostTemplate($slug: String!) {
+    post: graphCmsPortfolio(stage: { eq: PUBLISHED }, slug: { eq: $slug }) {
       title
       slug
       links
       content {
-        markdownNode {
-          childMdx {
-            body
-          }
-        }
+        html
       }
       technologies {
         logo {

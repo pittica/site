@@ -1,56 +1,50 @@
 @import "@pittica/scss-functions";
 @import "../../variables";
 
-@include keyframes(article-grid-header) {
+@include keyframes(hover-bg) {
   0% {
-    border-bottom: 0 solid $primary;
-  }
-  25% {
-    border-bottom: 5px solid $grey-darker;
-  }
-  49% {
-    border-bottom: 0 solid $grey-darker;
+    background-position: 0;
   }
   50% {
-    border-bottom: 0 solid $primary;
+    background-position: 100%;
+    color: $primary-invert;
   }
   100% {
-    border-bottom: 10px solid $primary;
+    background-position: 0;
+    color: $primary-invert;
   }
 }
 
+@mixin gradient() {
+  background-size: 300% 100%;
+  @include linear-gradient(
+    "right",
+    $primary 0%,
+    $primary 35%,
+    $primary-invert 35%,
+    $primary-invert 65%,
+    $primary 65%,
+    $primary 100%
+  );
+}
+
 .article-grid {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   position: relative;
   z-index: 3;
   section {
-    background-color: $white;
+    background-color: rgba($primary-invert, 0.75);
+    margin: $size-7;
+    padding: $size-7;
     font-weight: $weight-bold;
     a {
       color: $text;
     }
   }
-  .article-grid-header {
-    &:after {
-      content: " ";
-      display: block;
-      width: 100%;
-      height: 90px;
-      background: $white url("../../../images/article/bottom.svg") top center repeat-x;
-      background-size: contain;
-      position: relative;
-      z-index: 1;
-    }
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+  header {
     overflow: hidden;
-    &:hover {
-      .title {
-        span {
-          @include animate(article-grid-header, 0.5s, 0, ease-in-out);
-        }
-      }
-    }
     h3 {
       &.title {
         margin-bottom: 0;
@@ -59,7 +53,6 @@
         a {
           display: block;
           width: 100%;
-          min-height: 280px;
           overflow: hidden;
           span {
             display: block;
@@ -73,6 +66,7 @@
             top: -25px;
             left: -10%;
             margin-bottom: 90px;
+            text-align: center;
             strong {
               display: block;
               @include rotate(3);
@@ -85,21 +79,43 @@
         }
       }
     }
-    .date {
-      display: block;
-      background-color: $grey-darker;
-      @include rotate(-3);
-      width: 110%;
-      text-align: right;
+  }
+  .date {
+    display: block;
+    color: $grey-darker;
+    width: 100%;
+    text-align: right;
+    small {
+      background-color: rgba($primary-invert, 0.75);
+      display: inline-block;
+      padding: $size-7;
       position: relative;
-      bottom: -16px;
-      small {
-        display: inline-block;
-        @include rotate(3);
-        color: $white;
-        padding: 15px 15% 5px 30px;
-        position: relative;
-        top: -7px;
+      top: -5px;
+    }
+  }
+  .readmore-link {
+    text-align: right;
+    a {
+      background-color: $primary;
+      color: $primary-invert;
+      background-position: 100%;
+      background-size: 300% 100%;
+      @include linear-gradient(
+        "right",
+        $primary 0%,
+        $primary 35%,
+        $primary-invert 35%,
+        $primary-invert 65%,
+        $primary 65%,
+        $primary 100%
+      );
+      display: inline-block;
+      padding: $size-7;
+      position: relative;
+      top: 23px;
+      text-transform: uppercase;
+      &:hover {
+        @include animate(hover-bg, 0.5s, 0, ease-in-out);
       }
     }
   }

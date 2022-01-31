@@ -1,13 +1,10 @@
 require("dotenv").config()
 
-const fs = require("fs")
 const path = require("path")
 const moment = require("moment")
-const {
-  createRemoteFileNode,
-  createFilePath,
-} = require("gatsby-source-filesystem")
-const { fileCategory, commalify } = require("@pittica/gatsby-plugin-utils")
+const { fileCategory } = require("@pittica/gatsby-plugin-utils")
+
+const { createAsset } = require("./src/utils/filesystem")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const {
@@ -22,10 +19,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       legals,
     },
   } = await graphql(`
-    {
-      pages: allGraphCmsPage(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
-      ) {
+    query GatsbyNode {
+      pages: allGraphCmsPage(filter: { stage: { eq: PUBLISHED } }) {
         nodes {
           id
           slug
@@ -34,7 +29,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         }
       }
       posts: allGraphCmsPost(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
+        filter: { stage: { eq: PUBLISHED } }
         sort: { fields: date, order: DESC }
       ) {
         group(field: locale) {
@@ -69,9 +64,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale: fieldValue
         }
       }
-      categories: allGraphCmsCategory(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
-      ) {
+      categories: allGraphCmsCategory(filter: { stage: { eq: PUBLISHED } }) {
         nodes {
           name
           slug
@@ -82,9 +75,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale
         }
       }
-      tags: allGraphCmsTag(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
-      ) {
+      tags: allGraphCmsTag(filter: { stage: { eq: PUBLISHED } }) {
         nodes {
           name
           slug
@@ -95,9 +86,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale
         }
       }
-      portfolio: allGraphCmsPortfolio(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
-      ) {
+      portfolio: allGraphCmsPortfolio(filter: { stage: { eq: PUBLISHED } }) {
         group(field: locale) {
           nodes {
             slug
@@ -108,9 +97,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale: fieldValue
         }
       }
-      services: allGraphCmsService(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
-      ) {
+      services: allGraphCmsService(filter: { stage: { eq: PUBLISHED } }) {
         group(field: locale) {
           nodes {
             slug
@@ -121,9 +108,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale: fieldValue
         }
       }
-      offers: allGraphCmsOffer(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
-      ) {
+      offers: allGraphCmsOffer(filter: { stage: { eq: PUBLISHED } }) {
         group(field: locale) {
           nodes {
             slug
@@ -134,9 +119,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale: fieldValue
         }
       }
-      legals: allGraphCmsLegal(
-        filter: { locale: { eq: ${process.env.LOCALE} }, stage: { eq: PUBLISHED } }
-      ) {
+      legals: allGraphCmsLegal(filter: { stage: { eq: PUBLISHED } }) {
         group(field: locale) {
           nodes {
             slug
@@ -307,48 +290,46 @@ exports.createResolvers = ({ createResolvers }) => {
         },
       },
     },
-    GraphCMS_Asset: {
-      category: {
-        type: "String",
-        resolve: ({ fileName }) => {
-          if (fileName) {
-            return fileCategory(path.extname(fileName))
-          }
-
-          return null
-        },
-      },
-    },
   }
 
   createResolvers(resolvers)
 }
 
+exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
+  createTypes(`
+    type GraphCMS_Asset implements Node {
+      localFile: File @link(from: "fields.localFile")
+      category: String
+    }
+  `)
+}
+
 exports.onCreateNode = async ({
   node,
-  actions: { createNode },
+  actions: { createNode, createNodeField },
   createNodeId,
   getCache,
   cache,
 }) => {
-  if (node.remoteTypeName === "Asset" && !node.mimeType.includes("image/")) {
-    try {
-      const ext = path.extname(node.fileName)
-      const fileNode = await createRemoteFileNode({
-        url: node.url,
-        parentNodeId: node.id,
+  switch (node.remoteTypeName) {
+    case "Asset":
+      const fileNode = await createAsset(
+        node,
         createNode,
         createNodeId,
-        cache,
         getCache,
-        ...(node.fileName && { name: path.basename(node.fileName, ext), ext }),
-      })
+        cache
+      )
 
       if (fileNode) {
-        node.localFile = fileNode.id
+        createNodeField({ node, name: "localFile", value: fileNode.id })
+        createNodeField({
+          node,
+          name: "category",
+          value: fileCategory(fileNode.ext),
+        })
       }
-    } catch (e) {
-      console.error("graphcms", e)
-    }
+
+      return
   }
 }

@@ -5,7 +5,7 @@ import { groupify } from "@pittica/gatsby-plugin-utils"
 import Icon from "../components/ui/icon"
 import Layout from "../layouts/layout"
 
-export default function Categories({
+export default function List({
   pageContext: { group, title, icon, nodes },
   location,
 }) {

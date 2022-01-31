@@ -52,13 +52,9 @@ export default function Portfolio({
 }
 
 export const pageQuery = graphql`
-  query PortfolioListTemplate(
-    $skip: Int!
-    $limit: Int!
-    $locale: GraphCMS_Locale!
-  ) {
+  query PortfolioListTemplate($skip: Int!, $limit: Int!) {
     posts: allGraphCmsPortfolio(
-      filter: { stage: { eq: PUBLISHED }, locale: { eq: $locale } }
+      filter: { stage: { eq: PUBLISHED } }
       limit: $limit
       skip: $skip
       sort: { fields: [sticky, updatedAt], order: [DESC, DESC] }

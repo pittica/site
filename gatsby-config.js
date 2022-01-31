@@ -36,39 +36,49 @@ module.exports = {
     },
   },
   plugins: [
-    {
-      resolve: `gatsby-plugin-mdx`,
-      options: {
-        extensions: [`.md`, `.mdx`],
-        mediaTypes: [`text/markdown`, `text/x-markdown`],
-      },
-    },
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
     {
-      resolve: "gatsby-source-graphcms",
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          formats: [`auto`, `webp`, `avif`],
+          placeholder: `blurred`,
+          quality: 50,
+          breakpoints: [750, 1080, 1366, 1920],
+          backgroundColor: `transparent`,
+          tracedSVGOptions: {},
+          blurredOptions: {},
+          jpgOptions: {},
+          pngOptions: {},
+          webpOptions: {},
+          avifOptions: {},
+        },
+      },
+    },
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/images`,
+        name: `images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-graphcms`,
       options: {
         endpoint: process.env.GRAPHCMS_ENDPOINT,
         token: process.env.GRAPHCMS_TOKEN,
-        buildMarkdownNodes: true,
         locales: [process.env.LOCALE],
         fragmentsPath: "fragments",
-        downloadLocalImages: true,
         stages:
           (process.env.ENV || process.env.NODE_ENV) !== "production"
             ? ["DRAFT", "PUBLISHED"]
             : ["PUBLISHED"],
-        concurrency: 10,
+        queryConcurrency: 10,
+        typePrefix: "GraphCMS_",
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/content/assets`,
-        name: `assets`,
-      },
-    },
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
@@ -89,7 +99,14 @@ module.exports = {
         cookie: "pittica-gdpr",
       },
     },
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: siteUrl,
+        sitemap: `${siteUrl}/sitemap-index.xml`,
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -122,20 +139,46 @@ module.exports = {
                   node.people.length > 0
                     ? `${node.people[0].email} (${node.people[0].firstName} ${node.people[0].lastName})`
                     : `${process.env.ORGANIZATION_EMAIL} (${process.env.SITE_AUTHOR})`
+                const custom_elements = [
+                  { "content:encoded": node.content.html },
+                  { author },
+                  { "dc:date": node.date },
+                ]
+
+                node.categories.forEach(({ name }) =>
+                  custom_elements.push({ category: name })
+                )
+
+                if (node.image && node.image.localFile) {
+                  custom_elements.push({
+                    enclosure: {
+                      _attr: {
+                        url: node.image.localFile.publicURL,
+                        length: node.image.localFile.size,
+                        type: node.image.mimeType,
+                      },
+                    },
+                  })
+                }
 
                 return Object.assign({}, node, {
                   description: node.excerpt,
                   date: node.date,
                   url: url,
                   guid: url,
-                  custom_elements: [
-                    { "content:encoded": node.content.html },
-                    { author },
-                  ],
+                  custom_elements,
                   author,
                 })
               })
             },
+            setup: (options) => ({
+              ...options,
+              custom_elements: [
+                { language: process.env.LOCALE },
+                { "dc:language": process.env.LOCALE },
+                { "dc:creator": process.env.SITE_AUTHOR },
+              ],
+            }),
             query: `
               {
                 allGraphCmsPost(filter: { stage: { eq: PUBLISHED }, locale: { eq: ${process.env.LOCALE} } }) {
@@ -152,12 +195,22 @@ module.exports = {
                       lastName
                       email
                     }
+                    categories {
+                      name
+                    }
+                    image {
+                      localFile {
+                        publicURL
+                        size
+                      }
+                      mimeType
+                    }
                   }
                 }
               }
             `,
             output: "/rss.xml",
-            title: "Pittica's RSS Feed",
+            title: "Pittica",
           },
         ],
       },
@@ -171,7 +224,7 @@ module.exports = {
         background_color: process.env.APPEARANCE_BACKGROUND,
         theme_color: process.env.APPEARANCE_ACCENT,
         display: `minimal-ui`,
-        icon: `content/assets/icon.png`,
+        icon: `images/icon.png`,
       },
     },
     {
@@ -180,29 +233,17 @@ module.exports = {
         output: "/./",
         query: `
           {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
             allSitePage {
               nodes {
                 path
-                context {
-                  group
-                  updatedAt
-                }
+                pageContext
               }
             }
           }
         `,
-        resolvePages: ({
-          site: {
-            siteMetadata: { siteUrl },
-          },
-          allSitePage: { nodes },
-        }) =>
-          nodes.map(({ path, context }) => {
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({ allSitePage: { nodes } }) =>
+          nodes.map(({ path, pageContext }) => {
             const page = {
               path: new URL(path, siteUrl).href,
               changefreq: "daily",
@@ -210,13 +251,13 @@ module.exports = {
               lastmod: null,
             }
 
-            if (context && context) {
-              if (context.updatedAt) {
-                page.lastmod = context.updatedAt
+            if (pageContext) {
+              if (pageContext.updatedAt) {
+                page.lastmod = pageContext.updatedAt
               }
 
-              if (context.group) {
-                switch (context.group) {
+              if (pageContext.group) {
+                switch (pageContext.group) {
                   case "post":
                     page.changefreq = "monthly"
                     page.priority = 0.7

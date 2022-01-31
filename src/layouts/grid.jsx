@@ -28,16 +28,14 @@ export default function Grid({
       >
         <Section>
           <div className={classNames("columns", "is-multiline")}>
-            {nodes.map((node) => {
-              return (
-                <div
-                  className={classNames("column", "is-one-third")}
-                  key={node.slug}
-                >
-                  <ArticleGrid node={node} />
-                </div>
-              )
-            })}
+            {nodes.map((node) => (
+              <div
+                className={classNames("column", "is-one-third")}
+                key={node.slug}
+              >
+                <ArticleGrid node={node} />
+              </div>
+            ))}
           </div>
         </Section>
         {nav && <ListNav context={context} />}

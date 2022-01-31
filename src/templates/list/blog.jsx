@@ -22,11 +22,11 @@ export default function Blog({
 }
 
 export const pageQuery = graphql`
-  query BlogListTemplate($skip: Int!, $limit: Int!, $locale: GraphCMS_Locale!) {
+  query BlogListTemplate($skip: Int!, $limit: Int!) {
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip
-      filter: { locale: { eq: $locale }, stage: { eq: PUBLISHED } }
+      filter: { stage: { eq: PUBLISHED } }
       sort: { fields: date, order: DESC }
     ) {
       nodes {
@@ -34,12 +34,7 @@ export const pageQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 640
-                height: 440
-                placeholder: BLURRED
-                formats: [AUTO, WEBP, AVIF]
-              )
+              gatsbyImageData(width: 640, height: 440)
             }
           }
         }

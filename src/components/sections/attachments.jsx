@@ -11,8 +11,8 @@ export default function Attachments({ nodes }) {
     return (
       <div className={classNames("columns", "attachments")}>
         {nodes.map(
-          ({ id, title, fileName, localFile: { publicURL }, category }, i) => {
-            if (publicURL) {
+          ({ id, title, fileName, localFile, category }, i) => {
+            if (localFile && localFile.publicURL) {
               const name = title || fileName
 
               return (
@@ -20,7 +20,7 @@ export default function Attachments({ nodes }) {
                   className={classNames("column", "is-one-third")}
                   key={`attachments-${i}-${id}`}
                 >
-                  <a href={publicURL} title={name}>
+                  <a href={localFile.publicURL} title={name}>
                     <p>
                       <Icon
                         glyph={`icon-pittica-file${

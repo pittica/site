@@ -2,10 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Seo } from "@pittica/gatsby-plugin-seo"
 
-import Footer from "../components/ui/footer"
 import Header from "../components/ui/header"
 import Main from "../components/ui/main"
-import TopMenu from "../components/nav/top-menu"
 
 export default function Layout({
   children,
@@ -29,10 +27,8 @@ export default function Layout({
         postData={post}
         author={author}
       />
-      <TopMenu location={location} />
       {header && <Header title={title} subtitle={description} sticky={true} />}
       <Main>{children}</Main>
-      <Footer />
     </div>
   )
 }

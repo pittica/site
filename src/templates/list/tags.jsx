@@ -23,19 +23,13 @@ export default function Tags({
 }
 
 export const pageQuery = graphql`
-  query TagsListTemplate(
-    $slug: String
-    $limit: Int!
-    $skip: Int!
-    $locale: GraphCMS_Locale!
-  ) {
+  query TagsListTemplate($slug: String, $limit: Int!, $skip: Int!) {
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip
       sort: { fields: updatedAt, order: DESC }
       filter: {
-        tags: { elemMatch: { slug: { eq: $slug }, locale: { eq: $locale } } }
-        locale: { eq: $locale }
+        tags: { elemMatch: { slug: { eq: $slug } } }
         stage: { eq: PUBLISHED }
       }
     ) {
@@ -59,11 +53,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    tag: graphCmsTag(
-      slug: { eq: $slug }
-      locale: { eq: $locale }
-      stage: { eq: PUBLISHED }
-    ) {
+    tag: graphCmsTag(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
       name
     }
   }

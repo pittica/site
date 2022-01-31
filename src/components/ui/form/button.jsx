@@ -8,7 +8,10 @@ export default function Button({ loading, label, onClick }) {
   const handleClick = (e) => {
     e.nativeEvent.preventDefault()
     e.nativeEvent.stopImmediatePropagation()
-    onClick()
+
+    if (typeof onClick === "function") {
+      onClick()
+    }
   }
 
   const classes = classNames("button", "is-primary", {

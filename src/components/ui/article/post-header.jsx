@@ -1,18 +1,20 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import ArticleHeader from "./article-header"
 import Hero from "../hero"
 
 import "../../../scss/ui/article/_post-header.scss"
 
 export default function PostHeader({ title, description, image, children }) {
   return (
-    <ArticleHeader image={image} className="post-header">
+    <header
+      style={image ? { backgroundImage: `url(${image})` } : null}
+      className="post-header"
+    >
       <Hero title={title} subtitle={description} className="post-data">
         {children}
       </Hero>
-    </ArticleHeader>
+    </header>
   )
 }
 

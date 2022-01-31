@@ -23,21 +23,13 @@ export default function Categories({
 }
 
 export const pageQuery = graphql`
-  query CategoriesListTemplate(
-    $slug: String
-    $limit: Int!
-    $skip: Int!
-    $locale: GraphCMS_Locale!
-  ) {
+  query CategoriesListTemplate($slug: String, $limit: Int!, $skip: Int!) {
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip
       sort: { fields: date, order: DESC }
       filter: {
-        categories: {
-          elemMatch: { slug: { eq: $slug }, locale: { eq: $locale } }
-        }
-        locale: { eq: $locale }
+        categories: { elemMatch: { slug: { eq: $slug } } }
         stage: { eq: PUBLISHED }
       }
     ) {
@@ -61,11 +53,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    category: graphCmsCategory(
-      slug: { eq: $slug }
-      locale: { eq: $locale }
-      stage: { eq: PUBLISHED }
-    ) {
+    category: graphCmsCategory(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
       name
     }
   }

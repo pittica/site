@@ -7,14 +7,6 @@ fragment Section on Section {
   publishedAt(variation: COMBINED)
   title
   subtitle
-  content {
-    ... on RichText {
-      raw
-      html
-      markdown
-      text
-    }
-  }
   list
   createdBy {
     ... on User {

@@ -1,24 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { MarkdownRenderer } from "@pittica/gatsby-plugin-mdx-shortcodes"
 
 import Section from "../section"
 
 import "../../../scss/ui/article/_post-content.scss"
 
 export default function PostContent({ content, title, subtitle }) {
-  if (content) {
+  if (content && content.html) {
     return (
       <Section className="post-content" title={title} subtitle={subtitle}>
-        <div className="content">
-          {content.markdownNode ? (
-            <MarkdownRenderer>{content}</MarkdownRenderer>
-          ) : typeof content === "object" ? (
-            Object.values(content)
-          ) : (
-            content
-          )}
-        </div>
+        <div
+          className="content"
+          dangerouslySetInnerHTML={{ __html: content.html }}
+        />
       </Section>
     )
   } else {

@@ -1,11 +1,18 @@
 import React from "react"
-import Shortcodes from "@pittica/gatsby-plugin-mdx-shortcodes"
-import { MDXProvider } from "@mdx-js/react"
+
+import Footer from "./src/components/ui/footer"
+import TopMenu from "./src/components/nav/top-menu"
 
 import "./src/scss/style.scss"
 
-export function wrapRootElement({ element }) {
-  return <MDXProvider components={Shortcodes}>{element}</MDXProvider>
+export function wrapPageElement({ element, props }) {
+  return (
+    <div>
+      <TopMenu location={props.location} />
+      {element}
+      <Footer />
+    </div>
+  )
 }
 
 export function onServiceWorkerUpdateReady() {

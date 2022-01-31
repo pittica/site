@@ -132,7 +132,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="columns">
-          <div className={classNames("column", "is-five-fifths")}>
+          <div className={classNames("column", "is-full")}>
             © {new Date().getFullYear()}, {organization.company}
           </div>
         </div>

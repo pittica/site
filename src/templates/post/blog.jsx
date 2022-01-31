@@ -91,22 +91,14 @@ export default function Blog({
 }
 
 export const pageQuery = graphql`
-  query BlogPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
-    post: graphCmsPost(
-      slug: { eq: $slug }
-      stage: { eq: PUBLISHED }
-      locale: { eq: $locale }
-    ) {
+  query BlogPostTemplate($slug: String!) {
+    post: graphCmsPost(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
       id
       title
       date: formattedDate
       excerpt
       content {
-        markdownNode {
-          childMdx {
-            body
-          }
-        }
+        html
       }
       categories {
         name
@@ -119,20 +111,11 @@ export const pageQuery = graphql`
       image {
         localFile {
           childImageSharp {
-            gatsbyImageData(
-              width: 1920
-              height: 1080
-              placeholder: BLURRED
-              formats: [AUTO, WEBP, AVIF]
-            )
+            gatsbyImageData(width: 1920, height: 1080)
           }
         }
         credits {
-          markdownNode {
-            childMdx {
-              body
-            }
-          }
+          html
         }
       }
       people {
@@ -145,12 +128,7 @@ export const pageQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 240
-                height: 240
-                placeholder: BLURRED
-                formats: [AUTO, WEBP, AVIF]
-              )
+              gatsbyImageData(width: 240, height: 240)
             }
           }
         }

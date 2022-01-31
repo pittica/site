@@ -22,13 +22,9 @@ export default function Offers({
 }
 
 export const pageQuery = graphql`
-  query OffersListTemplate(
-    $skip: Int!
-    $limit: Int!
-    $locale: GraphCMS_Locale!
-  ) {
+  query OffersListTemplate($skip: Int!, $limit: Int!) {
     posts: allGraphCmsOffer(
-      filter: { locale: { eq: $locale }, stage: { eq: PUBLISHED } }
+      filter: { stage: { eq: PUBLISHED } }
       limit: $limit
       skip: $skip
     ) {

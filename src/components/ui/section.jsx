@@ -16,7 +16,7 @@ export default function Section({
   return (
     <section className={classNames("section", className)}>
       {(title || subtitle) && (
-        <div className={classNames("container")}>
+        <div className="container">
           <Title link={link}>{title}</Title>
           <Subtitle link={link}>{subtitle}</Subtitle>
         </div>

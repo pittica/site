@@ -23,32 +23,17 @@ export default function Page({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query PageTemplate($slug: String!, $locale: GraphCMS_Locale!) {
-    post: graphCmsPage(
-      slug: { eq: $slug }
-      stage: { eq: PUBLISHED }
-      locale: { eq: $locale }
-    ) {
+  query PageTemplate($slug: String!) {
+    post: graphCmsPage(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
       title
       subtitle
       content {
-        markdownNode {
-          childMdx {
-            body
-          }
-        }
+        html
       }
       sections {
         id
         title
         subtitle
-        content {
-          markdownNode {
-            childMdx {
-              body
-            }
-          }
-        }
         offers {
           id
           title

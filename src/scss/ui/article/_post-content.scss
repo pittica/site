@@ -20,6 +20,9 @@
   }
   img {
     margin: $size-4 auto;
+    max-width: 100%;
+    width: auto;
+    display: block;
   }
   a {
     border-bottom: ($size-7 / 7) solid $primary;
@@ -32,12 +35,6 @@
           list-style-type: lower-alpha;
         }
       }
-    }
-  }
-  .image {
-    img {
-      max-width: 100%;
-      width: auto;
     }
   }
 }

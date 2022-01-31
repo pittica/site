@@ -6,8 +6,8 @@ import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
 import Section from "../../components/ui/section"
 import Services from "../../components/sections/services"
-import Layout from "../../layouts/layout"
 import Highlight from "../../components/ui/highlight"
+import Layout from "../../layouts/layout"
 
 import getCoverFallback from "../../utils/get-cover-fallback"
 import getPaymentInterval from "../../utils/get-payment-interval"
@@ -71,23 +71,15 @@ export default function Offers({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query OffersPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
-    post: graphCmsOffer(
-      slug: { eq: $slug }
-      stage: { eq: PUBLISHED }
-      locale: { eq: $locale }
-    ) {
+  query OffersPostTemplate($slug: String!) {
+    post: graphCmsOffer(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
       slug
       locale
       title
       description
       base
       content {
-        markdownNode {
-          childMdx {
-            body
-          }
-        }
+        html
       }
       price
       image {

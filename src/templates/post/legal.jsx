@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import ArticleHeader from "../../components/ui/article/article-header"
 import PostContent from "../../components/ui/article/post-content"
 import Hero from "../../components/ui/hero"
 import Section from "../../components/ui/section"
@@ -17,9 +16,9 @@ export default function Legal({ data: { post }, location }) {
       location={location}
     >
       <article>
-        <ArticleHeader>
+        <header>
           <Hero title={post.title} subtitle={post.description}></Hero>
-        </ArticleHeader>
+        </header>
         <PostContent content={post.content} />
         {post.attachments.length > 0 && (
           <Section title="Allegati">
@@ -32,22 +31,14 @@ export default function Legal({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query LegalPostTemplate($slug: String!, $locale: GraphCMS_Locale!) {
-    post: graphCmsLegal(
-      stage: { eq: PUBLISHED }
-      locale: { eq: $locale }
-      slug: { eq: $slug }
-    ) {
+  query LegalPostTemplate($slug: String!) {
+    post: graphCmsLegal(stage: { eq: PUBLISHED }, slug: { eq: $slug }) {
       id
       title
       slug
       description
       content {
-        markdownNode {
-          childMdx {
-            body
-          }
-        }
+        html
       }
       attachments {
         id

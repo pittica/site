@@ -1,6 +1,5 @@
 import React from "react"
 
-import PostContent from "./post-content"
 import Section from "../section"
 import Offers from "../../sections/offers"
 import Partners from "../../sections/partners"
@@ -14,7 +13,6 @@ export default function PageSection({
   section: {
     title,
     subtitle,
-    content,
     offers,
     services,
     technologies,
@@ -27,7 +25,6 @@ export default function PageSection({
 }) {
   return (
     <Section title={title} subtitle={subtitle}>
-      <PostContent content={content} />
       <Technologies nodes={technologies} list={list} />
       <Offers nodes={offers} list={list} />
       <Services nodes={services} list={list} />
