@@ -2,9 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import classNames from "classnames"
 
-import ContactForm from "../components/contact-form"
 import Section from "../components/ui/section"
 import Layout from "../layouts/layout"
+import ContactForm from "../components/contact-form"
 
 export default function Contact({
   location,
@@ -50,7 +50,11 @@ export default function Contact({
           </div>
         </div>
       </Section>
-      <ContactForm id="contact" />
+      <ContactForm
+        region="eu1"
+        portalId="25034302"
+        formId="13783600-3a0e-4ed1-8233-d2a51d7c7c31"
+      />
     </Layout>
   )
 }

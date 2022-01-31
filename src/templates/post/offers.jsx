@@ -53,9 +53,11 @@ export default function Offers({ data: { post }, location }) {
           </Section>
         )}
         <ContactForm
-          id="offer"
           title="Contattaci"
           subtitle="Richiedi maggiori informazioni"
+          region="eu1"
+          portalId="25034302"
+          formId="13783600-3a0e-4ed1-8233-d2a51d7c7c31"
         />
         {post.services.length > 0 && (
           <Section
