@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@pittica/art": "^2.1.0",
-    "@pittica/gatsby-plugin-canvas-animations": "^2.0.3",
+    "@pittica/gatsby-plugin-canvas-animations": "^2.1.0",
     "@pittica/gatsby-plugin-cookiehub": "^2.1.0",
     "@pittica/gatsby-plugin-navigation": "^3.1.0",
     "@pittica/gatsby-plugin-seo": "^4.1.0",

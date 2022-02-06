@@ -13,6 +13,7 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
       charSet="utf-8"
       type="text/javascript"
       src="//js-eu1.hsforms.net/forms/shell.js"
+      key="hsforms"
     ></script>,
   ])
 }

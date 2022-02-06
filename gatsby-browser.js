@@ -16,5 +16,5 @@ export function wrapPageElement({ element, props }) {
 }
 
 export function onServiceWorkerUpdateReady() {
-  window.location.reload()
+  window.location.reload(true)
 }
