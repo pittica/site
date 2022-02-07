@@ -20,7 +20,7 @@
     "@pittica/icons": "^1.1.0",
     "@pittica/scss-functions": "^1.1.1",
     "classnames": "^2.3.1",
-    "gatsby": "^4.6.0",
+    "gatsby": "^4.6.2",
     "gatsby-plugin-feed": "^4.6.0",
     "gatsby-plugin-gdpr-cookies": "^2.0.8",
     "gatsby-plugin-image": "^2.6.0",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "bulma": "^0.9.3",
-    "gatsby-cli": "^4.6.0",
+    "gatsby-cli": "^4.6.1",
     "node-sass": "^6.0.0",
     "prettier": "^2.5.0"
   },
