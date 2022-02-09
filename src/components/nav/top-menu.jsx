@@ -32,8 +32,8 @@ export default function TopMenu({ location }) {
       location={location}
       startItems={[
         { to: "/about", label: "Chi Siamo" },
-        { to: "/portfolio", label: "Portfolio" },
         { to: "/blog", label: "Blog" },
+        { to: "/portfolio", label: "Portfolio" },
         { to: "/contact", label: "Contatti" },
         { link: "https://support.pittica.com", label: "Supporto" },
       ]}

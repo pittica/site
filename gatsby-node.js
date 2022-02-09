@@ -51,13 +51,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             }
             next {
               id
-              slug
-              title
             }
             previous {
               id
-              slug
-              title
             }
           }
           totalCount
@@ -200,8 +196,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         component: path.resolve(`./src/templates/post/blog.jsx`),
         context: {
           slug,
-          previous,
-          next,
+          previous: previous ? previous.id : null,
+          next: next ? next.id : null,
           updatedAt,
           group: "blog",
           locale,
