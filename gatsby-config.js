@@ -139,51 +139,83 @@ module.exports = {
             }) => {
               return nodes.map((node) => {
                 const url = new URL(`/blog/${node.slug}`, siteUrl).href
-                const author =
-                  node.people.length > 0
-                    ? `${node.people[0].email} (${node.people[0].firstName} ${node.people[0].lastName})`
-                    : `${process.env.ORGANIZATION_EMAIL} (${process.env.SITE_AUTHOR})`
-                const custom_elements = [
-                  { "content:encoded": node.content.html },
-                  { author },
-                  { "dc:date": node.date },
-                ]
+                const element = {
+                  title: node.title,
+                  description: node.excerpt,
+                  date: node.date,
+                  url,
+                  custom_elements: [
+                    { "content:encoded": node.content.html },
+                    { "dc:date": node.date },
+                  ],
+                  categories: node.categories.map(({ name }) => name),
+                }
 
-                node.categories.forEach(({ name }) =>
-                  custom_elements.push({ category: name })
-                )
-
-                if (node.image && node.image.localFile) {
-                  custom_elements.push({
-                    enclosure: {
-                      _attr: {
-                        url: new URL(node.image.localFile.publicURL, siteUrl)
-                          .href,
-                        length: node.image.localFile.size,
-                        type: node.image.mimeType,
-                      },
-                    },
+                if (node.people.length > 0) {
+                  element.author = `${node.people[0].email} (${node.people[0].firstName} ${node.people[0].lastName})`
+                  element.custom_elements.push({
+                    "dc:creator": `${node.people[0].firstName} ${node.people[0].lastName}`,
+                  })
+                } else {
+                  element.author = `${process.env.ORGANIZATION_EMAIL} (${process.env.SITE_AUTHOR})`
+                  element.custom_elements.push({
+                    "dc:creator": process.env.SITE_AUTHOR,
                   })
                 }
 
-                return Object.assign({}, node, {
-                  description: node.excerpt,
-                  date: node.date,
-                  url: url,
-                  guid: url,
-                  custom_elements,
-                  author,
-                })
+                if (node.image && node.image.localFile) {
+                  element.enclosure = {
+                    url: new URL(node.image.localFile.publicURL, siteUrl).href,
+                    length: node.image.localFile.size,
+                    size: node.image.localFile.size,
+                    type: node.image.mimeType,
+                  }
+                  element.custom_elements.push({
+                    "media:content": [
+                      {
+                        _attr: {
+                          url: new URL(node.image.localFile.publicURL, siteUrl)
+                            .href,
+                          medium: "image",
+                          width: node.image.width,
+                          height: node.image.height,
+                        },
+                      },
+                      { "media:title": node.image.title },
+                      {
+                        "media:credit": [
+                          {
+                            _attr: {
+                              role: "author",
+                              scheme: "urn:ebu",
+                            },
+                          },
+                          node.image.credits ? node.image.credits.text : null,
+                        ],
+                      },
+                    ],
+                  })
+                }
+
+                return element
               })
             },
-            setup: (options) => ({
-              ...options,
-              custom_elements: [
-                { language: process.env.LOCALE },
-                { "dc:language": process.env.LOCALE },
-                { "dc:creator": process.env.SITE_AUTHOR },
-              ],
-            }),
+            setup: (options) => {
+              return {
+                ...options,
+                feed_url: new URL("/feed/blog.xml", siteUrl).href,
+                site_url: new URL("/blog", siteUrl).href,
+                image_url: new URL("/share.jpg", siteUrl).href,
+                custom_elements: [
+                  { language: process.env.LOCALE },
+                  { "dc:language": process.env.LOCALE },
+                  { "dc:creator": process.env.SITE_AUTHOR },
+                ],
+                custom_namespaces: {
+                  media: "http://search.yahoo.com/mrss/",
+                },
+              }
+            },
             query: `
               {
                 allGraphCmsPost(filter: { stage: { eq: PUBLISHED }, locale: { eq: ${process.env.LOCALE} } }) {
@@ -208,14 +240,21 @@ module.exports = {
                         publicURL
                         size
                       }
+                      credits {
+                        text
+                      }
+                      title
+                      width
+                      height
                       mimeType
                     }
                   }
                 }
               }
             `,
-            output: "/rss.xml",
-            title: "Pittica",
+            output: "/feed/blog.xml",
+            title: process.env.NAME,
+            description: process.env.SITE_DESCRIPTION,
           },
         ],
       },
