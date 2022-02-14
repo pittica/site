@@ -90,7 +90,7 @@ module.exports = {
         },
         facebookPixel: {
           pixelId: process.env.FACEBOOK_PIXEL,
-          cookieName: 'pittica-gdpr-marketing',
+          cookieName: "pittica-gdpr-marketing",
         },
         environments: ["production", "development"],
       },
@@ -157,7 +157,8 @@ module.exports = {
                   custom_elements.push({
                     enclosure: {
                       _attr: {
-                        url: node.image.localFile.publicURL,
+                        url: new URL(node.image.localFile.publicURL, siteUrl).href
+                          .href,
                         length: node.image.localFile.size,
                         type: node.image.mimeType,
                       },
