@@ -157,7 +157,7 @@ module.exports = {
                   custom_elements.push({
                     enclosure: {
                       _attr: {
-                        url: new URL(node.image.localFile.publicURL, siteUrl).href
+                        url: new URL(node.image.localFile.publicURL, siteUrl)
                           .href,
                         length: node.image.localFile.size,
                         type: node.image.mimeType,
