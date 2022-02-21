@@ -183,15 +183,17 @@ module.exports = {
                       },
                       { "media:title": node.image.title },
                       {
-                        "media:credit": [
-                          {
-                            _attr: {
-                              role: "author",
-                              scheme: "urn:ebu",
-                            },
-                          },
-                          node.image.credits ? node.image.credits.text : null,
-                        ],
+                        "media:credit": node.image.credits
+                          ? [
+                              {
+                                _attr: {
+                                  role: "author",
+                                  scheme: "urn:ebu",
+                                },
+                              },
+                              node.image.credits.text,
+                            ]
+                          : null,
                       },
                     ],
                   })
