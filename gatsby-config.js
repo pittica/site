@@ -104,6 +104,14 @@ module.exports = {
       },
     },
     {
+      resolve: `@pittica/gatsby-plugin-hubspot`,
+      options: {
+        region: "eu1",
+        portal: process.env.HUBSPOT_PORTAL,
+        cookie: "pittica-gdpr-marketing"
+      },
+    },
+    {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
         host: siteUrl,
