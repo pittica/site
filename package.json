@@ -13,7 +13,7 @@
     "@pittica/gatsby-plugin-cookiehub": "^2.1.1",
     "@pittica/gatsby-plugin-hubspot": "^1.0.0",
     "@pittica/gatsby-plugin-navigation": "^3.2.2",
-    "@pittica/gatsby-plugin-seo": "^4.1.0",
+    "@pittica/gatsby-plugin-seo": "^4.2.2",
     "@pittica/gatsby-plugin-trustpilot-widget": "^3.0.0",
     "@pittica/gatsby-plugin-utils": "^2.2.0",
     "@pittica/gatsby-plugin-vcard": "1.0.0",

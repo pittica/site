@@ -30,6 +30,7 @@ exports.listfy = (group, slug, length, locale, stage, createPage) => {
         group,
         locale,
         stage,
+        header: true,
       },
     })
   )

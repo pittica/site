@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import PropTypes from "prop-types"
 import { Seo } from "@pittica/gatsby-plugin-seo"
 
@@ -15,9 +15,11 @@ export default function Layout({
   post,
   author,
   header,
+  next,
+  previous,
 }) {
   return (
-    <div>
+    <Fragment>
       <Seo
         title={title}
         description={description}
@@ -26,10 +28,12 @@ export default function Layout({
         image={image}
         postData={post}
         author={author}
+        next={next}
+        previous={previous}
       />
       {header && <Header title={title} subtitle={description} sticky={true} />}
       <Main>{children}</Main>
-    </div>
+    </Fragment>
   )
 }
 
@@ -44,6 +48,8 @@ Layout.propTypes = {
   post: PropTypes.object,
   author: PropTypes.string,
   header: PropTypes.bool,
+  next: PropTypes.string,
+  previous: PropTypes.string,
 }
 
 Layout.defaultProps = {

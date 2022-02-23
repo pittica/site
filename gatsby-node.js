@@ -176,6 +176,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
               updatedAt,
               group: "blog",
               locale,
+              blog: true,
             },
           })
         })
@@ -194,6 +195,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
               current: i + 1,
               group: "blog",
               locale,
+              header: true,
             },
           })
         })

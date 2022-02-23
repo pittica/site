@@ -35,7 +35,6 @@ export const pageQuery = graphql`
       skip: $skip
       filter: {
         categories: { elemMatch: { slug: { eq: $slug } } }
-        stage: { eq: $stage }
         locale: { eq: $locale }
       }
       sort: { fields: date, order: DESC }

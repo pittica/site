@@ -23,7 +23,7 @@ export default function Blog({ data: { post, previous, next }, location }) {
   return (
     <Layout
       title={post.title}
-      description={post.excerpt}
+      description={post.description}
       blog={true}
       image={getCoverFallback(post)}
       post={post}
@@ -31,6 +31,8 @@ export default function Blog({ data: { post, previous, next }, location }) {
       author={
         post.people && post.people.length > 0 ? post.people[0].name : null
       }
+      next={next ? `/blog/${next.slug}` : null}
+      previous={previous ? `/blog/${previous.slug}` : null}
     >
       <article className="blog">
         <header className={classNames("hero", "is-fullheight")}>
@@ -38,7 +40,9 @@ export default function Blog({ data: { post, previous, next }, location }) {
           <div className="hero-body">
             <div className={classNames("container", "has-text-centered")}>
               <h1 className="title">{post.title}</h1>
-              {post.excerpt && <h2 className="subtitle">{post.excerpt}</h2>}
+              {post.description && (
+                <h2 className="subtitle">{post.description}</h2>
+              )}
               {post.date && (
                 <PostMeta>
                   <Icon glyph="icon-pittica-clock">{post.date}</Icon>
@@ -110,7 +114,7 @@ export const pageQuery = graphql`
       id
       title
       date: formattedDate
-      excerpt
+      description: excerpt
       content {
         html
       }
