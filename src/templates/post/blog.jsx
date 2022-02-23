@@ -67,6 +67,10 @@ export default function Blog({ data: { post, previous, next }, location }) {
                   )}
                 </PostMeta>
               )}
+              <Icon
+                glyph="icon-pittica-arrow-down"
+                className={classNames("is-large", "has-text-light")}
+              />
             </div>
           </div>
           {post.tags.length > 0 && (
@@ -121,7 +125,12 @@ export const pageQuery = graphql`
       image {
         localFile {
           childImageSharp {
-            gatsbyImageData(width: 1920, height: 1080)
+            gatsbyImageData(
+              width: 1920
+              height: 1080
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+            )
           }
         }
         credits {
@@ -138,7 +147,12 @@ export const pageQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              gatsbyImageData(width: 240, height: 240)
+              gatsbyImageData(
+                width: 240
+                height: 240
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
         }
@@ -148,25 +162,11 @@ export const pageQuery = graphql`
       id
       title
       slug
-      image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(width: 640, height: 440)
-          }
-        }
-      }
     }
     previous: graphCmsPost(id: { eq: $previous }, stage: { eq: PUBLISHED }) {
       id
       title
       slug
-      image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(width: 640, height: 440)
-          }
-        }
-      }
     }
   }
 `

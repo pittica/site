@@ -11,7 +11,7 @@ export default function Attachments({ nodes }) {
     return (
       <div className={classNames("columns", "attachments")}>
         {nodes.map(
-          ({ id, title, fileName, localFile, category }, i) => {
+          ({ id, title, fileName, localFile, fileCategory }, i) => {
             if (localFile && localFile.publicURL) {
               const name = title || fileName
 
@@ -24,7 +24,7 @@ export default function Attachments({ nodes }) {
                     <p>
                       <Icon
                         glyph={`icon-pittica-file${
-                          category ? `-${category}` : ""
+                          fileCategory ? `-${fileCategory}` : ""
                         }`}
                         className="has-text-primary"
                       />

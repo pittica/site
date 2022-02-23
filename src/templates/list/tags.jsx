@@ -5,8 +5,8 @@ import Grid from "../../layouts/grid"
 
 export default function Tags({
   data: {
-    tag: { name },
     posts: { nodes },
+    tag: { name },
   },
   pageContext,
   location,
@@ -23,15 +23,22 @@ export default function Tags({
 }
 
 export const pageQuery = graphql`
-  query TagsListTemplate($slug: String, $limit: Int!, $skip: Int!) {
+  query TagsListTemplate(
+    $slug: String!
+    $limit: Int!
+    $skip: Int!
+    $locale: GraphCMS_Locale!
+    $stage: GraphCMS_Stage!
+  ) {
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip
-      sort: { fields: updatedAt, order: DESC }
       filter: {
         tags: { elemMatch: { slug: { eq: $slug } } }
-        stage: { eq: PUBLISHED }
+        stage: { eq: $stage }
+        locale: { eq: $locale }
       }
+      sort: { fields: date, order: DESC }
     ) {
       nodes {
         id
@@ -53,7 +60,11 @@ export const pageQuery = graphql`
         title
       }
     }
-    tag: graphCmsTag(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
+    tag: graphCmsTag(
+      slug: { eq: $slug }
+      locale: { eq: $locale }
+      stage: { eq: $stage }
+    ) {
       name
     }
   }

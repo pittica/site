@@ -34,7 +34,12 @@ export const pageQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              gatsbyImageData(width: 640, height: 440)
+              gatsbyImageData(
+                width: 640
+                height: 440
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
         }

@@ -5,8 +5,8 @@ import Grid from "../../layouts/grid"
 
 export default function Categories({
   data: {
-    category: { name },
     posts: { nodes },
+    category: { name },
   },
   pageContext,
   location,
@@ -23,15 +23,22 @@ export default function Categories({
 }
 
 export const pageQuery = graphql`
-  query CategoriesListTemplate($slug: String, $limit: Int!, $skip: Int!) {
+  query CategoriesListTemplate(
+    $slug: String!
+    $limit: Int!
+    $skip: Int!
+    $locale: GraphCMS_Locale!
+    $stage: GraphCMS_Stage!
+  ) {
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip
-      sort: { fields: date, order: DESC }
       filter: {
         categories: { elemMatch: { slug: { eq: $slug } } }
-        stage: { eq: PUBLISHED }
+        stage: { eq: $stage }
+        locale: { eq: $locale }
       }
+      sort: { fields: date, order: DESC }
     ) {
       nodes {
         id
@@ -53,7 +60,11 @@ export const pageQuery = graphql`
         title
       }
     }
-    category: graphCmsCategory(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
+    category: graphCmsCategory(
+      slug: { eq: $slug }
+      locale: { eq: $locale }
+      stage: { eq: $stage }
+    ) {
       name
     }
   }

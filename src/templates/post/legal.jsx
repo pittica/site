@@ -47,7 +47,7 @@ export const pageQuery = graphql`
         localFile {
           publicURL
         }
-        category
+        fileCategory
       }
     }
   }

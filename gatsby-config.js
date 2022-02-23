@@ -74,8 +74,6 @@ module.exports = {
           (process.env.ENV || process.env.NODE_ENV) !== "production"
             ? ["DRAFT", "PUBLISHED"]
             : ["PUBLISHED"],
-        queryConcurrency: 10,
-        typePrefix: "GraphCMS_",
       },
     },
     `gatsby-plugin-sass`,
@@ -108,7 +106,7 @@ module.exports = {
       options: {
         region: "eu1",
         portal: process.env.HUBSPOT_PORTAL,
-        cookie: "pittica-gdpr-marketing"
+        cookie: "pittica-gdpr-marketing",
       },
     },
     {
@@ -334,15 +332,18 @@ module.exports = {
 
             return page
           }),
-        serialize: ({ path, changefreq, priority, lastmod }) => {
-          return { url: path, changefreq, priority, lastmod }
-        },
+        serialize: ({ path, changefreq, priority, lastmod }) => ({
+          url: path,
+          changefreq,
+          priority,
+          lastmod,
+        }),
       },
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     {
-      resolve: "gatsby-plugin-preconnect",
+      resolve: `gatsby-plugin-preconnect`,
       options: {
         domains: [
           { domain: "https://www.gstatic.com", crossOrigin: true },
