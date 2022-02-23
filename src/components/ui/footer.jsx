@@ -15,7 +15,11 @@ import "../../scss/ui/_footer.scss"
 export default function Footer() {
   const {
     site: {
-      siteMetadata: { organization, appearance, locale },
+      siteMetadata: {
+        organization,
+        appearance: { background },
+        locale,
+      },
     },
     legal,
   } = useStaticQuery(
@@ -41,9 +45,7 @@ export default function Footer() {
               culture
             }
             appearance {
-              accent
               background
-              theme
             }
           }
         }
@@ -71,7 +73,7 @@ export default function Footer() {
               "has-text-left-mobile"
             )}
           >
-            <Logo color={appearance.background} />
+            <Logo color={background} />
           </div>
           <div className={classNames("column", "is-4")}>
             <h3>{organization.company}</h3>
