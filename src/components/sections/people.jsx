@@ -30,46 +30,56 @@ export default function People({ nodes, list }) {
     } else {
       return (
         <div className={classNames("columns", "is-multiline", "mb-6")}>
-          {nodes.map(({ id, firstName, lastName, image, roles, email, linkedIn, bio }, i) => (
-            <div
-              className={classNames("column", "has-text-centered")}
-              key={`people-${i}-${id}`}
-            >
-              <Card image={image} title={`${firstName} ${lastName}`}>
-                <h5 className="subtitle">{firstName} {lastName}</h5>
-                {roles.length > 0 && (
-                  <div>
-                    <strong>{commalify(roles)}</strong>
-                  </div>
-                )}
-                {(linkedIn || email) && (
-                  <div className="mt-2">
-                    {linkedIn && (
-                      <a href={linkedIn} title="LinkedIn" target="_new">
-                        <i
-                          className={classNames("icon-pittica-linkedin", "p-2")}
-                        />
-                      </a>
-                    )}
-                    {email && (
-                      <a href={`mailto:${email}`} title={email}>
-                        <i
-                          className={classNames("icon-pittica-envelope", "p-2")}
-                        />
-                      </a>
-                    )}
-                  </div>
-                )}
-                {bio && (
-                  <div>
-                    {bio.split("\n").map((line, i) => {
-                      return <p key={`${id}-bio-${i}`}>{line}</p>
-                    })}
-                  </div>
-                )}
-              </Card>
-            </div>
-          ))}
+          {nodes.map(
+            (
+              { id, firstName, lastName, image, roles, email, linkedIn, bio },
+              i
+            ) => (
+              <div className="column" key={`people-${i}-${id}`}>
+                <Card image={image} title={`${firstName} ${lastName}`}>
+                  <h5 className="subtitle">
+                    {firstName} {lastName}
+                  </h5>
+                  {roles.length > 0 && (
+                    <div>
+                      <strong>{commalify(roles)}</strong>
+                    </div>
+                  )}
+                  {(linkedIn || email) && (
+                    <div className="mt-2">
+                      {linkedIn && (
+                        <a href={linkedIn} title="LinkedIn" target="_new">
+                          <i
+                            className={classNames(
+                              "icon-pittica-linkedin",
+                              "p-2"
+                            )}
+                          />
+                        </a>
+                      )}
+                      {email && (
+                        <a href={`mailto:${email}`} title={email}>
+                          <i
+                            className={classNames(
+                              "icon-pittica-envelope",
+                              "p-2"
+                            )}
+                          />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                  {bio && (
+                    <div>
+                      {bio.split("\n").map((line, i) => {
+                        return <p key={`${id}-bio-${i}`}>{line}</p>
+                      })}
+                    </div>
+                  )}
+                </Card>
+              </div>
+            )
+          )}
         </div>
       )
     }

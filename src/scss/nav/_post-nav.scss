@@ -7,6 +7,10 @@
   a {
     background-color: $primary;
     color: $primary-invert;
+    height: auto;
+    span {
+      white-space: break-spaces;
+    }
     &.pagination-previous {
       i {
         padding-right: $size-7;

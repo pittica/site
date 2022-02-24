@@ -197,7 +197,9 @@ module.exports = {
                                   scheme: "urn:ebu",
                                 },
                               },
-                              node.image.credits.text,
+                              node.image.credits.text
+                                .replaceAll("\\n", "")
+                                .trim(),
                             ]
                           : null,
                       },
