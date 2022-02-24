@@ -12,6 +12,8 @@ export default function Index({
   data: {
     site: {
       siteMetadata: {
+        title,
+        description,
         appearance: { accent, theme },
       },
     },
@@ -21,13 +23,10 @@ export default function Index({
   location,
 }) {
   return (
-    <Layout
-      location={location}
-      description="Il tuo partner per la trasformazione digitale"
-    >
+    <Layout location={location} description={description}>
       <Underground accent={accent} theme={theme}>
-        <h1>Pittica</h1>
-        <h2>Il tuo partner per la trasformazione digitale</h2>
+        <h1>{title}</h1>
+        <h2>{description}</h2>
         <FeatureLink to="/about" label="Scopri" />
       </Underground>
       <Blog nodes={nodes} />
@@ -39,9 +38,11 @@ export default function Index({
 }
 
 export const pageQuery = graphql`
-  query IndexPage {
+  query IndexPage($locale: GraphCMS_Locale!, $stage: GraphCMS_Stage!) {
     site {
       siteMetadata {
+        title
+        description
         appearance {
           accent
           theme
@@ -50,7 +51,7 @@ export const pageQuery = graphql`
     }
     posts: allGraphCmsPost(
       limit: 3
-      filter: { locale: { eq: it }, stage: { eq: PUBLISHED } }
+      filter: { locale: { eq: $locale }, stage: { eq: $stage } }
       sort: { fields: date, order: DESC }
     ) {
       nodes {

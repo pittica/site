@@ -151,6 +151,15 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
         legals,
       },
     }) => {
+      createPage({
+        path: "/",
+        component: path.resolve(`./src/templates/index.jsx`),
+        context: {
+          locale: process.env.LOCALE,
+          stage: "PUBLISHED",
+        },
+      })
+
       pages.nodes.forEach(({ slug, updatedAt, locale }) => {
         createPage({
           path: `/${slug}`,
