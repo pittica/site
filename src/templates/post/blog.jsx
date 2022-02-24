@@ -2,6 +2,7 @@ import React from "react"
 import classNames from "classnames"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { Helmet } from "react-helmet"
 
 import PostContent from "../../components/ui/article/post-content"
 import PostFooter from "../../components/ui/article/post-footer"
@@ -34,6 +35,19 @@ export default function Blog({ data: { post, previous, next }, location }) {
       next={next ? `/blog/${next.slug}` : null}
       previous={previous ? `/blog/${previous.slug}` : null}
     >
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            Speakable: {
+              "@type": "SpeakableSpecification",
+              cssSelector: [
+                ".blog header h1.title",
+                ".blog .post-content .content",
+              ],
+            },
+          })}
+        </script>
+      </Helmet>
       <article className="blog">
         <header className={classNames("hero", "is-fullheight")}>
           <GatsbyImage image={cover} alt={post.title} className="cover" />
