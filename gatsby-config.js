@@ -277,6 +277,9 @@ module.exports = {
         theme_color: process.env.APPEARANCE_ACCENT,
         display: `minimal-ui`,
         icon: `images/icon.png`,
+        icon_options: {
+          purpose: `any maskable`,
+        },
       },
     },
     {

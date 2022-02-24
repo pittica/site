@@ -11,6 +11,7 @@ export default function TopMenu({ location }) {
   const {
     site: {
       siteMetadata: {
+        title,
         appearance: { background },
       },
     },
@@ -18,6 +19,7 @@ export default function TopMenu({ location }) {
     query TopMenu {
       site {
         siteMetadata {
+          title
           appearance {
             background
           }
@@ -38,7 +40,7 @@ export default function TopMenu({ location }) {
         { link: "https://support.pittica.com", label: "Supporto" },
       ]}
     >
-      <Link to="/" className="navbar-logo">
+      <Link to="/" className="navbar-logo" title={title}>
         <Logo color={background} width={316} height={69} />
       </Link>
     </Navbar>

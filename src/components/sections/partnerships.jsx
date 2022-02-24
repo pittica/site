@@ -51,7 +51,7 @@ function PartnershipsLink({ name, page, link, logo, logoUrl, width, height }) {
           <PartnershipsImage
             image={logo}
             logoUrl={logoUrl}
-            title={name}
+            name={name}
             width={width}
             height={height}
           />
@@ -63,7 +63,7 @@ function PartnershipsLink({ name, page, link, logo, logoUrl, width, height }) {
       <PartnershipsImage
         image={logo}
         logoUrl={logoUrl}
-        title={name}
+        name={name}
         width={width}
         height={height}
       />
