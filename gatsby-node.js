@@ -155,7 +155,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
         path: "/",
         component: path.resolve(`./src/templates/index.jsx`),
         context: {
-          locale: process.env.LOCALE,
+          locale: process.env.LOCALE_LANGUAGE,
           stage: "PUBLISHED",
         },
       })
