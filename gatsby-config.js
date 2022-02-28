@@ -7,11 +7,11 @@ const siteUrl = process.env.URL || `https://${process.env.HOST}`
 module.exports = {
   siteMetadata: {
     title: process.env.NAME,
-    author: process.env.SITE_AUTHOR,
+    author: process.env.AUTHOR,
     description: process.env.SITE_DESCRIPTION,
     locale: {
-      language: process.env.LOCALE.toLowerCase(),
-      culture: process.env.CULTURE.toUpperCase(),
+      language: process.env.LOCALE_LANGUAGE.toLowerCase(),
+      culture: process.env.LOCALE_CULTURE.toUpperCase(),
     },
     siteUrl: `${siteUrl}/`,
     organization: {
@@ -68,7 +68,7 @@ module.exports = {
       options: {
         endpoint: process.env.GRAPHCMS_ENDPOINT,
         token: process.env.GRAPHCMS_TOKEN,
-        locales: [process.env.LOCALE],
+        locales: [process.env.LOCALE_LANGUAGE],
         fragmentsPath: "fragments",
         stages:
           (process.env.ENV || process.env.NODE_ENV) !== "production"
@@ -120,7 +120,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-feed`,
       options: {
-        generator: process.env.SITE_AUTHOR,
+        generator: process.env.AUTHOR,
         query: `
           {
             site {
@@ -163,9 +163,9 @@ module.exports = {
                     "dc:creator": `${node.people[0].firstName} ${node.people[0].lastName}`,
                   })
                 } else {
-                  element.author = `${process.env.ORGANIZATION_EMAIL} (${process.env.SITE_AUTHOR})`
+                  element.author = `${process.env.ORGANIZATION_EMAIL} (${process.env.AUTHOR})`
                   element.custom_elements.push({
-                    "dc:creator": process.env.SITE_AUTHOR,
+                    "dc:creator": process.env.AUTHOR,
                   })
                 }
 
@@ -217,9 +217,9 @@ module.exports = {
                 site_url: new URL("/blog", siteUrl).href,
                 image_url: new URL("/share.jpg", siteUrl).href,
                 custom_elements: [
-                  { language: process.env.LOCALE },
-                  { "dc:language": process.env.LOCALE },
-                  { "dc:creator": process.env.SITE_AUTHOR },
+                  { language: process.env.LOCALE_LANGUAGE },
+                  { "dc:language": process.env.LOCALE_LANGUAGE },
+                  { "dc:creator": process.env.AUTHOR },
                 ],
                 custom_namespaces: {
                   media: "http://search.yahoo.com/mrss/",
@@ -228,7 +228,7 @@ module.exports = {
             },
             query: `
               {
-                allGraphCmsPost(filter: { stage: { eq: PUBLISHED }, locale: { eq: ${process.env.LOCALE} } }) {
+                allGraphCmsPost(filter: { stage: { eq: PUBLISHED }, locale: { eq: ${process.env.LOCALE_LANGUAGE} } }) {
                   nodes {
                     content {
                       html
