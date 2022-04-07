@@ -239,7 +239,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
       })
 
       portfolio.group.forEach(({ nodes, locale, stage, totalCount }) => {
-        listfy("portfolio", null, totalCount, locale, stage, createPage)
+        listfy("portfolio", null, totalCount, locale, stage, createPage, 24)
         postify("portfolio", nodes, locale, stage, createPage)
       })
 

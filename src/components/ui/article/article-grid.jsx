@@ -12,38 +12,34 @@ export default function ArticleGrid({ node }) {
 
   return (
     <article
-      node={node}
       slug={slug}
       className="article-grid"
       style={image ? { backgroundImage: `url(${image})` } : null}
     >
-      <header className="article-grid-header">
-        <h3 className="title">
-          <Link to={slug}>
+      <Link to={slug}>
+        <header className="article-grid-header">
+          <h3 className="title">
             <span>
               <strong>{node.title || slug}</strong>
             </span>
-          </Link>
-        </h3>
-        {node.date && (
-          <Link to={slug} className="date">
-            <small>
-              <i className="icon-pittica-clock" /> {node.date}
-            </small>
-          </Link>
-        )}
-      </header>
-      <section>
-        <Link
-          to={slug}
+          </h3>
+          {node.date && (
+            <span to={slug} className="date">
+              <small>
+                <i className="icon-pittica-clock" /> {node.date}
+              </small>
+            </span>
+          )}
+        </header>
+        <section
           dangerouslySetInnerHTML={{
             __html: node.description || node.excerpt,
           }}
         />
-      </section>
-      <div className="readmore-link">
-        <Link to={slug}>Leggi di più...</Link>
-      </div>
+        <div className="readmore-link">
+          <span>Leggi di più...</span>
+        </div>
+      </Link>
     </article>
   )
 }

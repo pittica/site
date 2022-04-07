@@ -11,6 +11,8 @@ fragment Person on Person {
   email
   phone
   linkedIn
+  gitHub
+  imdb
   createdBy {
     ... on User {
       remoteTypeName: __typename

@@ -174,6 +174,11 @@ export const pageQuery = graphql`
             }
           }
         }
+        phone
+        linkedIn
+        gitHub
+        imdb
+        email
       }
     }
     next: graphCmsPost(id: { eq: $next }, stage: { eq: PUBLISHED }) {

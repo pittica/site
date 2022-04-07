@@ -84,8 +84,6 @@ export const pageQuery = graphql`
           firstName
           lastName
           bio
-          email
-          linkedIn
           roles {
             name
           }
@@ -101,6 +99,11 @@ export const pageQuery = graphql`
               }
             }
           }
+          phone
+          email
+          gitHub
+          imdb
+          linkedIn
         }
         partners {
           id

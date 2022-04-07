@@ -2,8 +2,16 @@ require("dotenv").config()
 
 const path = require("path")
 
-exports.listfy = (group, slug, length, locale, stage, createPage) => {
-  const limit = parseInt(process.env.POSTS_PER_PAGE || 18)
+exports.listfy = (
+  group,
+  slug,
+  length,
+  locale,
+  stage,
+  createPage,
+  postsPerPage
+) => {
+  const limit = postsPerPage || parseInt(process.env.POSTS_PER_PAGE || 18)
   const pages = Math.ceil(length / limit)
   const pathParts = []
 
