@@ -3,8 +3,8 @@ import { graphql } from "gatsby"
 
 import Blog from "../components/sections/blog"
 import FeatureLink from "../components/ui/link/feature-link"
-import Partnerships from "../components/sections/partnerships"
-import Section from "../components/ui/section"
+import PostContent from "../components/ui/article/post-content"
+import PageSection from "../components/ui/article/page-section"
 import Underground from "../components/ui/gfx/underground"
 import Layout from "../layouts/layout"
 
@@ -18,7 +18,7 @@ export default function Index({
       },
     },
     posts: { nodes },
-    parterships,
+    page,
   },
   location,
 }) {
@@ -29,10 +29,12 @@ export default function Index({
         <h2>{description}</h2>
         <FeatureLink to="/about" label="Scopri" />
       </Underground>
+      {page && page.content && <PostContent content={page.content} />}
       <Blog nodes={nodes} />
-      <Section>
-        <Partnerships nodes={parterships.nodes} />
-      </Section>
+      {page &&
+        page.sections.map((section, i) => (
+          <PageSection key={`page-${i}-${section.id}`} section={section} />
+        ))}
     </Layout>
   )
 }
@@ -74,24 +76,127 @@ export const pageQuery = graphql`
         title
       }
     }
-    parterships: allGraphCmsPartnership(filter: { stage: { eq: PUBLISHED } }) {
-      nodes {
+    page: graphCmsPage(
+      locale: { eq: $locale }
+      stage: { eq: $stage }
+      slug: { eq: "index" }
+    ) {
+      content {
+        html
+      }
+      sections {
         id
-        name
-        page {
+        title
+        subtitle
+        offers {
+          id
+          title
           slug
+          description
+          image {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 640
+                  height: 440
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
+          }
         }
-        link
-        logo {
+        services {
+          id
+          title
+          slug
+          description
+          image {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 640
+                  height: 440
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
+          }
+        }
+        technologies {
+          logo {
+            localFile {
+              publicURL
+            }
+          }
+          link
+          name
+        }
+        people {
+          id
+          firstName
+          lastName
+          bio
+          roles {
+            name
+          }
+          image {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 240
+                  height: 240
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
+          }
+          phone
+          email
+          gitHub
+          imdb
+          linkedIn
+        }
+        partners {
+          id
+          link
+          name
+          logo {
+            localFile {
+              publicURL
+            }
+          }
+        }
+        partnerships {
+          id
+          name
+          page {
+            slug
+          }
+          link
+          logo {
+            localFile {
+              extension
+              publicURL
+            }
+            height
+            width
+            data
+          }
+          logoUrl
+        }
+        attachments {
+          id
+          title
+          fileName
           localFile {
-            extension
             publicURL
           }
-          height
-          width
-          data
+          fileCategory
         }
-        logoUrl
+        list
       }
     }
   }

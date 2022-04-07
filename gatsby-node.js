@@ -11,7 +11,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
   graphql(
     `
       query GatsbyNode($stage: GraphCMS_Stage) {
-        pages: allGraphCmsPage(filter: { stage: { eq: $stage } }) {
+        pages: allGraphCmsPage(
+          filter: { stage: { eq: $stage }, slug: { ne: "index" } }
+        ) {
           nodes {
             id
             slug
@@ -174,7 +176,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
       })
 
       posts.group.forEach(({ edges, totalCount, locale }) => {
-        edges.forEach(({ node: { slug, updatedAt }, previous, next }) => {
+        edges.forEach(({ node: { slug, updatedAt }, previous, next }) =>
           createPage({
             path: `/blog/${slug}`,
             component: path.resolve(`./src/templates/post/blog.jsx`),
@@ -188,12 +190,12 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
               blog: true,
             },
           })
-        })
+        )
 
         const limit = parseInt(process.env.POSTS_PER_PAGE || 18)
         const blogPages = Math.ceil(totalCount / limit)
 
-        Array.from({ length: blogPages }).forEach((_, i) => {
+        Array.from({ length: blogPages }).forEach((_, i) =>
           createPage({
             path: i === 0 ? `/blog` : `/blog/${i + 1}`,
             component: path.resolve(`./src/templates/list/blog.jsx`),
@@ -207,7 +209,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
               header: true,
             },
           })
-        })
+        )
       })
 
       const wrapperify = (nodes, group, title, icon) =>

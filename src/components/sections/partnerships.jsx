@@ -22,8 +22,16 @@ function PartnershipsImage({ name, logo, logoUrl, width, height }) {
       <ImageSwitch
         image={logo.localFile}
         title={name}
-        width={width ? width : logo.data.width ? logo.data.width : null}
-        height={height ? height : logo.data.height ? logo.data.height : null}
+        width={
+          width ? width : logo.data && logo.data.width ? logo.data.width : null
+        }
+        height={
+          height
+            ? height
+            : logo.data && logo.data.height
+            ? logo.data.height
+            : null
+        }
       />
     )
   } else {
@@ -88,7 +96,7 @@ export default function Partnerships({ nodes, list }) {
               return (
                 <div
                   key={`partnerships-${i}-${id}`}
-                  className={classNames("column", "is-4", "has-text-centered")}
+                  className={classNames("column", "has-text-centered")}
                 >
                   <PartnershipsLink
                     name={name}
