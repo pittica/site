@@ -1,8 +1,8 @@
 import React from "react"
 import { groupify } from "@pittica/gatsby-plugin-utils"
 
-import ArticleCage from "./article-cage"
 import Title from "../title"
+import ArticleCage from "./article-cage"
 
 import "../../../scss/ui/article/_page-grid.scss"
 

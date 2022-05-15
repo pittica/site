@@ -31,7 +31,7 @@ export default function Grid({
             {nodes.map((node) => (
               <div
                 className={classNames("column", "is-one-third")}
-                key={node.slug}
+                key={`grid-${node.id}`}
               >
                 <ArticleGrid node={node} />
               </div>

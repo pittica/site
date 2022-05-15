@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import classNames from "classnames"
 import { GatsbyImage } from "gatsby-plugin-image"
 
-import getCover from "../../utils/get-cover"
+import { getCover } from "../../utils/image"
 
 export default function Screenshots({ nodes, title }) {
   if (nodes && nodes.length > 0) {

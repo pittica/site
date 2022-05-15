@@ -127,6 +127,14 @@ fragment Asset on Asset {
       stage
     }
   }
+  seoImagePost {
+    ... on Post {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
   scheduledIn {
     ... on ScheduledOperation {
       remoteTypeName: __typename

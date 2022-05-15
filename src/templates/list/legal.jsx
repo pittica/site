@@ -2,8 +2,8 @@ import React from "react"
 import classNames from "classnames"
 import { graphql } from "gatsby"
 
-import PageGrid from "../../components/ui/article/page-grid"
 import Section from "../../components/ui/section"
+import PageGrid from "../../components/ui/article/page-grid"
 import ListNav from "../../components/nav/list-nav"
 import Layout from "../../layouts/layout"
 

@@ -1,11 +1,10 @@
 import React from "react"
 
 import Section from "../section"
-import Offers from "../../sections/offers"
+import RelatedBlock from "../../sections/related-block"
 import Partners from "../../sections/partners"
 import Partnerships from "../../sections/partnerships"
 import People from "../../sections/people"
-import Services from "../../sections/services"
 import Technologies from "../../sections/technologies"
 import Attachments from "../../sections/attachments"
 
@@ -26,8 +25,8 @@ export default function PageSection({
   return (
     <Section title={title} subtitle={subtitle}>
       <Technologies nodes={technologies} list={list} />
-      <Offers nodes={offers} list={list} />
-      <Services nodes={services} list={list} />
+      <RelatedBlock nodes={offers} list={list} group="offers" />
+      <RelatedBlock nodes={services} list={list} group="services" />
       <People nodes={people} list={list} />
       <Partners nodes={partners} list={list} />
       <Partnerships nodes={partnerships} list={list} />

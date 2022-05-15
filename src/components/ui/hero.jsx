@@ -16,14 +16,14 @@ export default function Hero({
       <div className="hero-body">
         <div className="container">
           <Title
-            className={classNames("is-size-1", {
+            className={classNames({
               "has-text-centered": centered,
             })}
           >
             {title}
           </Title>
           <Subtitle
-            className={classNames("is-size-3", {
+            className={classNames({
               "has-text-centered": centered,
             })}
           >

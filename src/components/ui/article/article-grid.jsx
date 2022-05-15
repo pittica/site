@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { groupify } from "@pittica/gatsby-plugin-utils"
 
-import getCoverFallback from "../../../utils/get-cover-fallback"
+import { getCoverFallback } from "../../../utils/image"
 
 import "../../../scss/ui/article/_article-grid.scss"
 

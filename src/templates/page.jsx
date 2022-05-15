@@ -4,6 +4,8 @@ import { graphql } from "gatsby"
 import PostContent from "../components/ui/article/post-content"
 import PageSection from "../components/ui/article/page-section"
 import Layout from "../layouts/layout"
+import ContactForm from "../components/contact-form"
+import Section from "../components/ui/section"
 
 export default function Page({ data: { post }, location }) {
   return (
@@ -18,6 +20,15 @@ export default function Page({ data: { post }, location }) {
       {post.sections.map((section, i) => (
         <PageSection key={`page-${i}-${section.id}`} section={section} />
       ))}
+      {post.contactForm && (
+        <Section title="Contattaci">
+          <ContactForm
+            region="eu1"
+            portalId="25034302"
+            formId="13783600-3a0e-4ed1-8233-d2a51d7c7c31"
+          />
+        </Section>
+      )}
     </Layout>
   )
 }
@@ -30,6 +41,7 @@ export const pageQuery = graphql`
       content {
         html
       }
+      contactForm
       sections {
         id
         title

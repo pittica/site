@@ -37,4 +37,14 @@
   .subtitle {
     font-family: $family-primary;
   }
+  .content {
+    &.rich {
+      a {
+        border-bottom: ($size-7 / 4) solid $primary;
+        &:hover {
+          border-bottom-color: $grey-darker;
+        }
+      }
+    }
+  }
 }

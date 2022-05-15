@@ -35,6 +35,12 @@
       }
       .hero-body {
         padding-top: $size-1 * 2;
+        .title {
+          display: inline-block;
+        }
+        .subtitle {
+          display: inline-block;
+        }
         .post-meta {
           margin-top: $size-7;
           .icon-text {
@@ -46,6 +52,13 @@
       .hero-foot {
         a {
           background-color: rgba($primary-invert, 0.85);
+          &:hover {
+            background-color: rgba($grey-darker, 0.85);
+            color: $primary-invert;
+          }
+          .icon-text {
+            display: flow-root;
+          }
         }
       }
     }

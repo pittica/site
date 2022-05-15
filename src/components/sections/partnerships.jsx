@@ -1,83 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 import classNames from "classnames"
 
-import ImageSwitch from "../ui/image/image-switch"
+import PartnershipLink from "../ui/link/partnership-link"
 
 import "../../scss/sections/_parterships.scss"
-
-function PartnershipsImage({ name, logo, logoUrl, width, height }) {
-  if (logoUrl) {
-    return (
-      <img
-        src={logoUrl}
-        alt={name}
-        width={width ? width : null}
-        height={height ? height : null}
-      />
-    )
-  } else if (logo && logo.localFile) {
-    return (
-      <ImageSwitch
-        image={logo.localFile}
-        title={name}
-        width={
-          width ? width : logo.data && logo.data.width ? logo.data.width : null
-        }
-        height={
-          height
-            ? height
-            : logo.data && logo.data.height
-            ? logo.data.height
-            : null
-        }
-      />
-    )
-  } else {
-    return <strong>{name}</strong>
-  }
-}
-
-function PartnershipsLink({ name, page, link, logo, logoUrl, width, height }) {
-  if (link || page) {
-    if (link) {
-      return (
-        <a href={link} target="_new" title={name}>
-          <PartnershipsImage
-            logo={logo}
-            logoUrl={logoUrl}
-            name={name}
-            width={width}
-            height={height}
-          />
-        </a>
-      )
-    } else {
-      return (
-        <Link to={`/${page.slug}`} target="_new" title={name}>
-          <PartnershipsImage
-            image={logo}
-            logoUrl={logoUrl}
-            name={name}
-            width={width}
-            height={height}
-          />
-        </Link>
-      )
-    }
-  } else {
-    return (
-      <PartnershipsImage
-        image={logo}
-        logoUrl={logoUrl}
-        name={name}
-        width={width}
-        height={height}
-      />
-    )
-  }
-}
 
 export default function Partnerships({ nodes, list }) {
   if (nodes && nodes.length > 0) {
@@ -96,9 +23,9 @@ export default function Partnerships({ nodes, list }) {
               return (
                 <div
                   key={`partnerships-${i}-${id}`}
-                  className={classNames("column", "has-text-centered")}
+                  className={classNames("column", "is-3", "has-text-centered")}
                 >
-                  <PartnershipsLink
+                  <PartnershipLink
                     name={name}
                     page={page}
                     link={link}

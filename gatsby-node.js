@@ -46,9 +46,11 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
               }
               next {
                 id
+                slug
               }
               previous {
                 id
+                slug
               }
             }
             totalCount
@@ -162,7 +164,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
         },
       })
 
-      pages.nodes.forEach(({ slug, updatedAt, locale }) => {
+      pages.nodes.forEach(({ slug, updatedAt, locale, stage }) => {
         createPage({
           path: `/${slug}`,
           component: path.resolve(`./src/templates/page.jsx`),
@@ -171,12 +173,13 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
             updatedAt,
             group: "page",
             locale,
+            stage,
           },
         })
       })
 
       posts.group.forEach(({ edges, totalCount, locale }) => {
-        edges.forEach(({ node: { slug, updatedAt }, previous, next }) =>
+        edges.forEach(({ node: { slug, updatedAt, stage }, previous, next }) =>
           createPage({
             path: `/blog/${slug}`,
             component: path.resolve(`./src/templates/post/blog.jsx`),
@@ -185,9 +188,9 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
               previous: previous ? previous.id : null,
               next: next ? next.id : null,
               updatedAt,
+              stage,
               group: "blog",
               locale,
-              blog: true,
             },
           })
         )
@@ -211,26 +214,6 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
           })
         )
       })
-
-      const wrapperify = (nodes, group, title, icon) =>
-        createPage({
-          path: `/${group}`,
-          component: path.resolve(`./src/templates/list.jsx`),
-          context: {
-            group,
-            title,
-            icon,
-            nodes: nodes.map(({ name, slug, posts, locale }) => ({
-              name,
-              slug,
-              count: posts.length,
-              locale,
-            })),
-          },
-        })
-
-      wrapperify(categories.nodes, "categories", "Categorie", "folder")
-      wrapperify(tags.nodes, "tags", "Tag", "tag")
 
       categories.nodes.forEach(({ slug, posts, locale, stage }) => {
         listfy("categories", slug, posts.length, locale, stage, createPage)

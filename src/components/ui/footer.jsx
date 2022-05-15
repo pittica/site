@@ -6,9 +6,8 @@ import { CookiesSettings } from "@pittica/gatsby-plugin-cookiehub"
 import { SocialFollow } from "@pittica/gatsby-plugin-seo"
 import { Logo } from "@pittica/art"
 
-import PrivacyLink from "./link/privacy-link"
-import Section from "./section"
 import Pair from "./pair"
+import PrivacyLink from "./link/privacy-link"
 
 import "../../scss/ui/_footer.scss"
 
@@ -94,6 +93,9 @@ export default function Footer() {
             <Pair label="E-Mail" value={organization.email} />
           </div>
           <div className={classNames("column", "is-4")}>
+            <div className="has-text-centered-mobile">
+              <SocialFollow />
+            </div>
             <div>
               <ul>
                 <li>
@@ -114,27 +116,20 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <div className="has-text-centered-mobile">
-              <SocialFollow />
-            </div>
           </div>
         </div>
-        <div className="columns">
-          <div className="column">
-            <Section>
-              <TrustpilotReviews
-                language={locale.language}
-                culture={locale.culture}
-                theme="dark"
-                username="pittica.com"
-                template="5419b6a8b0d04a076446a9ad"
-                business="5eaf034c658436000194e69b"
-              />
-            </Section>
+        <div className={classNames("columns", "is-multiline")}>
+          <div className={classNames("column", "is-full", "mt-6")}>
+            <TrustpilotReviews
+              language={locale.language}
+              culture={locale.culture}
+              theme="dark"
+              username="pittica.com"
+              template="5419b6a8b0d04a076446a9ad"
+              business="5eaf034c658436000194e69b"
+            />
           </div>
-        </div>
-        <div className="columns">
-          <div className={classNames("column", "is-full")}>
+          <div className={classNames("column", "is-full", "mt-3")}>
             © {new Date().getFullYear()}, {organization.company}
           </div>
         </div>

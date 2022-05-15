@@ -15,6 +15,9 @@
     height: 100%;
   }
   .image {
+    min-height: 75vh;
+    display: flex;
+    align-items: flex-end;
     svg {
       max-height: 75vh;
       margin-bottom: 0;

@@ -39,6 +39,7 @@ exports.listfy = (
         locale,
         stage,
         header: true,
+        blog: false,
       },
     })
   )

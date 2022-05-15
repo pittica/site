@@ -5,10 +5,10 @@ import TopMenu from "./src/components/nav/top-menu"
 
 import "./src/scss/style.scss"
 
-export function wrapPageElement({ element, props }) {
+export function wrapPageElement({ element, props: { location } }) {
   return (
     <div>
-      <TopMenu location={props.location} />
+      <TopMenu location={location} />
       {element}
       <Footer />
     </div>

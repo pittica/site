@@ -21,3 +21,28 @@ h6 {
     padding-top: 0;
   }
 }
+
+h1 {
+  &.title {
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+    font-size: $size-1;
+    a {
+      color: $primary;
+      font-size: $size-1;
+    }
+  }
+}
+
+h2 {
+  &.subtitle {
+    font-size: $size-3;
+    margin-bottom: $size-3;
+    a {
+      color: $subtitle-color;
+      &:hover {
+        color: $subtitle-color;
+      }
+    }
+  }
+}

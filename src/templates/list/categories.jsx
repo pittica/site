@@ -34,8 +34,11 @@ export const pageQuery = graphql`
       limit: $limit
       skip: $skip
       filter: {
-        categories: { elemMatch: { slug: { eq: $slug } } }
+        categories: {
+          elemMatch: { slug: { eq: $slug }, stage: { eq: $stage } }
+        }
         locale: { eq: $locale }
+        stage: { eq: $stage }
       }
       sort: { fields: date, order: DESC }
     ) {

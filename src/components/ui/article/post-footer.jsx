@@ -16,7 +16,7 @@ export default function PostFooter({ post: { people, image } }) {
               <h4 className="title">Cover</h4>
               {image.credits.html && (
                 <div
-                  className="content"
+                  className={classNames("content", "rich")}
                   dangerouslySetInnerHTML={{ __html: image.credits.html }}
                 />
               )}

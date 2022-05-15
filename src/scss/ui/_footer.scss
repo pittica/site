@@ -3,9 +3,10 @@
 
 .footer {
   overflow: hidden;
-  margin-top: -100px;
+  margin-top: -200px;
+  padding-bottom: $size-1;
   &:before {
-    content: "";
+    content: " ";
     display: block;
     position: relative;
     top: -100px;

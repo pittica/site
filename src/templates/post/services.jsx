@@ -1,14 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Section from "../../components/ui/section"
 import ContactForm from "../../components/contact-form"
 import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
-import Section from "../../components/ui/section"
-import Offers from "../../components/sections/offers"
+import RelatedBlock from "../../components/sections/related-block"
 import Layout from "../../layouts/layout"
 
-import getCoverFallback from "../../utils/get-cover-fallback"
+import { getCoverFallback } from "../../utils/image"
 
 export default function Services({ data: { post }, location }) {
   const cover = getCoverFallback(post)
@@ -32,7 +32,7 @@ export default function Services({ data: { post }, location }) {
           title="Offerte"
           subtitle="Le offerte collegate a questo servizio"
         >
-          <Offers nodes={post.offers} />
+          <RelatedBlock nodes={post.offers} group="offers" />
         </Section>
       )}
       <ContactForm

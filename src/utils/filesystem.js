@@ -23,6 +23,6 @@ exports.createAsset = async (
 
     return fileNode
   } catch (e) {
-    console.error("GraphCMS", e)
+    console.error("Asset", e)
   }
 }

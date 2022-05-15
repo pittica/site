@@ -2,8 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
 
-import StaticGrid from "../components/ui/article/static-grid"
 import Section from "../components/ui/section"
+import StaticGrid from "../components/ui/article/static-grid"
 import ListNav from "../components/nav/list-nav"
 import Layout from "./layout"
 

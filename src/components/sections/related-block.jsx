@@ -5,10 +5,10 @@ import classNames from "classnames"
 import PostList from "../ui/article/post-list"
 import StaticGrid from "../ui/article/static-grid"
 
-export default function Services({ nodes, list }) {
+export default function RelatedBlock({ nodes, group, list }) {
   if (nodes.length > 0) {
     if (list) {
-      return <PostList nodes={nodes} group="services" />
+      return <PostList nodes={nodes} group={group} />
     } else {
       return (
         <div className={classNames("columns", "is-multiline")}>
@@ -21,9 +21,9 @@ export default function Services({ nodes, list }) {
                   "is-6-tablet",
                   "is-3-desktop"
                 )}
-                key={`services-${i}-${node.id}`}
+                key={`${group}-${i}-${node.id}`}
               >
-                <StaticGrid node={node} group="services" />
+                <StaticGrid node={node} group={group} />
               </div>
             )
           })}
@@ -35,12 +35,13 @@ export default function Services({ nodes, list }) {
   }
 }
 
-Services.propTypes = {
+RelatedBlock.propTypes = {
   nodes: PropTypes.array.isRequired,
+  group: PropTypes.string.isRequired,
   list: PropTypes.bool,
 }
 
-Services.defaultProps = {
+RelatedBlock.defaultProps = {
   nodes: [],
   list: false,
 }

@@ -3,6 +3,7 @@ import classNames from "classnames"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { Helmet } from "react-helmet"
+import { groupify } from "@pittica/gatsby-plugin-utils"
 
 import PostContent from "../../components/ui/article/post-content"
 import PostFooter from "../../components/ui/article/post-footer"
@@ -11,10 +12,7 @@ import Icon from "../../components/ui/icon"
 import PostNav from "../../components/nav/post-nav"
 import Layout from "../../layouts/layout"
 
-import { groupify } from "@pittica/gatsby-plugin-utils"
-
-import getCoverFallback from "../../utils/get-cover-fallback"
-import getCover from "../../utils/get-cover"
+import { getSeoImage, getCover } from "../../utils/image"
 
 import "../../scss/templates/post/_blog.scss"
 
@@ -26,11 +24,13 @@ export default function Blog({ data: { post, previous, next }, location }) {
       title={post.title}
       description={post.description}
       blog={true}
-      image={getCoverFallback(post)}
+      image={getSeoImage(post)}
       post={post}
       location={location}
       author={
-        post.people && post.people.length > 0 ? post.people[0].name : null
+        post.people && post.people.length > 0
+          ? `${post.people[0].firstName} ${post.people[0].lastName}`
+          : null
       }
       next={next ? `/blog/${next.slug}` : null}
       previous={previous ? `/blog/${previous.slug}` : null}
@@ -53,9 +53,13 @@ export default function Blog({ data: { post, previous, next }, location }) {
           <GatsbyImage image={cover} alt={post.title} className="cover" />
           <div className="hero-body">
             <div className={classNames("container", "has-text-centered")}>
-              <h1 className="title">{post.title}</h1>
+              <div>
+                <h1 className="title">{post.title}</h1>
+              </div>
               {post.description && (
-                <h2 className="subtitle">{post.description}</h2>
+                <div>
+                  <h2 className="subtitle">{post.description}</h2>
+                </div>
               )}
               {post.date && (
                 <PostMeta>
@@ -70,7 +74,7 @@ export default function Blog({ data: { post, previous, next }, location }) {
                     <div className="container">
                       {post.categories.map((category, i) => (
                         <Icon
-                          key={`tags-${i}-${category.id}`}
+                          key={`categories-${i}-${category.id}`}
                           glyph="icon-pittica-folder"
                         >
                           <Link
@@ -153,6 +157,20 @@ export const pageQuery = graphql`
         }
         credits {
           html
+        }
+      }
+      seoImage {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(width: 1200, height: 628)
+          }
+        }
+      }
+      seoImageFallback: image {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(width: 1200, height: 628)
+          }
         }
       }
       people {

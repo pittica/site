@@ -16,6 +16,7 @@ fragment Page on Page {
       text
     }
   }
+  contactForm
   createdBy {
     ... on User {
       remoteTypeName: __typename

@@ -1,15 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Highlight from "../../components/ui/highlight"
+import Section from "../../components/ui/section"
 import ContactForm from "../../components/contact-form"
 import PostContent from "../../components/ui/article/post-content"
 import PostHeader from "../../components/ui/article/post-header"
-import Section from "../../components/ui/section"
-import Services from "../../components/sections/services"
-import Highlight from "../../components/ui/highlight"
+import RelatedBlock from "../../components/sections/related-block"
 import Layout from "../../layouts/layout"
 
-import getCoverFallback from "../../utils/get-cover-fallback"
+import { getCoverFallback } from "../../utils/image"
 import getPaymentInterval from "../../utils/get-payment-interval"
 
 export default function Offers({ data: { post }, location }) {
@@ -19,7 +19,6 @@ export default function Offers({ data: { post }, location }) {
     <Layout
       title={post.title}
       description={post.description}
-      blog={false}
       image={cover}
       post={post}
       location={location}
@@ -64,7 +63,7 @@ export default function Offers({ data: { post }, location }) {
             title="Servizi"
             subtitle="I servizi di riferimento dell'offerta"
           >
-            <Services nodes={post.services} />
+            <RelatedBlock nodes={post.services} group="services" />
           </Section>
         )}
       </article>
