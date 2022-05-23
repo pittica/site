@@ -6,6 +6,7 @@ const siteUrl = process.env.URL || `https://${process.env.HOST}`
 
 module.exports = {
   siteMetadata: {
+    siteUrl: `${siteUrl}/`,
     title: process.env.NAME,
     author: process.env.AUTHOR,
     description: process.env.SITE_DESCRIPTION,
@@ -13,7 +14,6 @@ module.exports = {
       language: process.env.LOCALE_LANGUAGE.toLowerCase(),
       culture: process.env.LOCALE_CULTURE.toUpperCase(),
     },
-    siteUrl: `${siteUrl}/`,
     organization: {
       company: process.env.ORGANIZATION_COMPANY,
       address: process.env.ORGANIZATION_ADDRESS_STREET,
@@ -345,7 +345,6 @@ module.exports = {
         }),
       },
     },
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-preconnect`,
@@ -360,7 +359,19 @@ module.exports = {
     {
       resolve: `@pittica/gatsby-plugin-seo`,
       options: {
+        siteUrl: `${siteUrl}/`,
+        title: process.env.NAME,
+        description: process.env.SITE_DESCRIPTION,
+        locale: {
+          language: process.env.LOCALE_LANGUAGE.toLowerCase(),
+          culture: process.env.LOCALE_CULTURE.toUpperCase(),
+        },
         image: `/share.jpg`,
+        organization: {
+          name: process.env.ORGANIZATION_COMPANY,
+          url: `${siteUrl}/`,
+          logo: `${siteUrl}/logo.png`,
+        },
         socials: {
           twitter: {
             username: process.env.SOCIAL_TWITTER_USERNAME,
@@ -381,6 +392,18 @@ module.exports = {
             icon: "icon-pittica-linkedin",
           },
         },
+        debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
+      },
+    },
+    {
+      resolve: `@pittica/gatsby-plugin-trustpilot-widget`,
+      options: {
+        language: process.env.LOCALE_LANGUAGE.toLowerCase(),
+        culture: process.env.LOCALE_CULTURE.toUpperCase(),
+        theme: "dark",
+        username: "pittica.com",
+        template: "5419b6a8b0d04a076446a9ad",
+        business: "5eaf034c658436000194e69b",
       },
     },
     {

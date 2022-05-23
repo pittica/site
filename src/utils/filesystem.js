@@ -10,7 +10,7 @@ exports.createAsset = async (
 ) => {
   try {
     const ext = path.extname(node.fileName)
-    const fileNode = await createRemoteFileNode({
+    return await createRemoteFileNode({
       url: node.url,
       parentNodeId: node.id,
       createNode,
@@ -20,8 +20,6 @@ exports.createAsset = async (
       name: path.basename(node.fileName, ext),
       ext,
     })
-
-    return fileNode
   } catch (e) {
     console.error("Asset", e)
   }

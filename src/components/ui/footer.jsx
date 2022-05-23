@@ -123,10 +123,6 @@ export default function Footer() {
             <TrustpilotReviews
               language={locale.language}
               culture={locale.culture}
-              theme="dark"
-              username="pittica.com"
-              template="5419b6a8b0d04a076446a9ad"
-              business="5eaf034c658436000194e69b"
             />
           </div>
           <div className={classNames("column", "is-full", "mt-3")}>
