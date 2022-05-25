@@ -290,7 +290,7 @@ module.exports = {
         output: "/./",
         query: `
           {
-            allSitePage {
+            allSitePage(filter: { path: { ne: "/offline-plugin-app-shell-fallback" } }) {
               nodes {
                 path
                 pageContext
