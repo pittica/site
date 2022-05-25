@@ -12,8 +12,13 @@ export default function Legal({ data: { post }, location }) {
     <Layout
       title={post.title}
       description={post.description}
-      post={post}
       location={location}
+      breadcrumb={[
+        {
+          url: "/legal/",
+          name: "Note Legali",
+        },
+      ]}
     >
       <article>
         <header>

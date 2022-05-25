@@ -17,9 +17,14 @@ export default function Services({ data: { post }, location }) {
     <Layout
       title={post.title}
       description={post.description}
-      post={post}
       image={cover}
       location={location}
+      breadcrumb={[
+        {
+          url: "/services/",
+          name: "Servizi",
+        },
+      ]}
     >
       <PostHeader
         image={cover}

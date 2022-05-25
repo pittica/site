@@ -25,7 +25,6 @@ export default function Blog({ data: { post, previous, next }, location }) {
       description={post.description}
       blog={true}
       image={getSeoImage(post)}
-      post={post}
       location={location}
       author={
         post.people && post.people.length > 0
@@ -34,6 +33,12 @@ export default function Blog({ data: { post, previous, next }, location }) {
       }
       next={next ? `/blog/${next.slug}` : null}
       previous={previous ? `/blog/${previous.slug}` : null}
+      breadcrumb={[
+        {
+          url: "/blog/",
+          name: "Blog",
+        },
+      ]}
     >
       <Speakable
         selector={[".blog header h1.title", ".blog .post-content .content"]}

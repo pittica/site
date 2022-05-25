@@ -12,11 +12,12 @@ export default function Layout({
   description,
   image,
   blog,
-  post,
   author,
   header,
   next,
   previous,
+  breadcrumb,
+  headline,
 }) {
   return (
     <Fragment>
@@ -26,10 +27,11 @@ export default function Layout({
         path={location.pathname}
         isBlogPost={blog}
         image={image}
-        postData={post}
         author={author}
         next={next}
         previous={previous}
+        breadcrumb={breadcrumb}
+        headline={headline}
       />
       {header && <Header title={title} subtitle={description} sticky={true} />}
       <Main>{children}</Main>
@@ -45,14 +47,16 @@ Layout.propTypes = {
   description: PropTypes.string,
   image: PropTypes.string,
   blog: PropTypes.bool,
-  post: PropTypes.object,
   author: PropTypes.string,
   header: PropTypes.bool,
   next: PropTypes.string,
   previous: PropTypes.string,
+  breadcrumb: PropTypes.arrayOf(PropTypes.object),
+  headline: PropTypes.string,
 }
 
 Layout.defaultProps = {
   blog: false,
   header: false,
+  breadcrumb: [],
 }

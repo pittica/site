@@ -14,7 +14,18 @@ export default function Portfolio({ data: { post }, location }) {
     post.image && post.image.localFile ? post.image.localFile.publicURL : null
 
   return (
-    <Layout title={post.title} post={post} image={cover} location={location}>
+    <Layout
+      title={post.title}
+      description={post.description}
+      image={cover}
+      location={location}
+      breadcrumb={[
+        {
+          url: "/portfolio/",
+          name: "Portfolio",
+        },
+      ]}
+    >
       <article>
         <PostHeader
           image={cover}

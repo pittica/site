@@ -20,8 +20,13 @@ export default function Offers({ data: { post }, location }) {
       title={post.title}
       description={post.description}
       image={cover}
-      post={post}
       location={location}
+      breadcrumb={[
+        {
+          url: "/offers/",
+          name: "Offerte",
+        },
+      ]}
     >
       <article
         itemProp="offers"
