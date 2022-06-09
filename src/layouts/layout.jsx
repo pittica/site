@@ -41,7 +41,6 @@ export default function Layout({
 
 Layout.propTypes = {
   children: PropTypes.any,
-  context: PropTypes.object,
   location: PropTypes.object,
   title: PropTypes.string,
   description: PropTypes.string,

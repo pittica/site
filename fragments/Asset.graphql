@@ -81,13 +81,6 @@ fragment Asset on Asset {
       stage
     }
   }
-  logoPartner {
-    ... on Partner {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   screenshotsPortfolio {
     ... on Portfolio {
       remoteTypeName: __typename
@@ -101,13 +94,6 @@ fragment Asset on Asset {
       remoteTypeName: __typename
       remoteId: id
       locale
-      stage
-    }
-  }
-  logoPartnership {
-    ... on Partnership {
-      remoteTypeName: __typename
-      remoteId: id
       stage
     }
   }

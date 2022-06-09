@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Blog from "../components/sections/blog"
 import FeatureLink from "../components/ui/link/feature-link"
@@ -22,12 +23,18 @@ export default function Index({
   },
   location,
 }) {
+  const { t } = useTranslation()
+
   return (
-    <Layout location={location} description={description}>
+    <Layout location={location}>
       <Underground accent={accent} theme={theme}>
-        <h1>{title}</h1>
-        <h2>{description}</h2>
-        <FeatureLink to="/about" label="Scopri" />
+        <h1>
+          <span>{title}</span>
+        </h1>
+        <h2>
+          <span>{description}</span>
+        </h2>
+        <FeatureLink to="/about" label={t("See More")} />
       </Underground>
       {page && page.content && <PostContent content={page.content} />}
       <Blog nodes={nodes} />
@@ -40,7 +47,11 @@ export default function Index({
 }
 
 export const pageQuery = graphql`
-  query IndexPage($locale: GraphCMS_Locale!, $stage: GraphCMS_Stage!) {
+  query IndexPage(
+    $locale: GraphCMS_Locale!
+    $stage: GraphCMS_Stage!
+    $language: String!
+  ) {
     site {
       siteMetadata {
         title
@@ -48,6 +59,15 @@ export const pageQuery = graphql`
         appearance {
           accent
           theme
+        }
+      }
+    }
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
         }
       }
     }
@@ -161,31 +181,45 @@ export const pageQuery = graphql`
         }
         partners {
           id
-          link
+          link {
+            title
+            url
+            page {
+              slug
+            }
+          }
           name
           logo {
-            localFile {
-              publicURL
+            url
+            asset {
+              localFile {
+                publicURL
+              }
             }
           }
         }
         partnerships {
           id
           name
-          page {
-            slug
-          }
-          link
-          logo {
-            localFile {
-              extension
-              publicURL
+          link {
+            title
+            url
+            page {
+              slug
             }
-            height
-            width
-            data
           }
-          logoUrl
+          logo {
+            url
+            asset {
+              localFile {
+                extension
+                publicURL
+              }
+              height
+              width
+              data
+            }
+          }
         }
         attachments {
           id

@@ -64,6 +64,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/locales`,
+        name: `locales`,
+      },
+    },
+    {
       resolve: `gatsby-source-graphcms`,
       options: {
         endpoint: process.env.GRAPHCMS_ENDPOINT,
@@ -74,6 +81,20 @@ module.exports = {
           (process.env.ENV || process.env.NODE_ENV) !== "production"
             ? ["DRAFT", "PUBLISHED"]
             : ["PUBLISHED"],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        localeJsonSourceName: `locales`,
+        languages: [process.env.LOCALE_LANGUAGE.toLowerCase(), 'en'],
+        defaultLanguage: process.env.LOCALE_LANGUAGE.toLowerCase(),
+        fallbackLanguage: process.env.LOCALE_LANGUAGE.toLowerCase(),
+        siteUrl,
+        i18nextOptions: {
+          defaultNS: "messages",
+          nonExplicitSupportedLngs: true,
+        },
       },
     },
     `gatsby-plugin-sass`,
@@ -107,6 +128,7 @@ module.exports = {
         region: "eu1",
         portal: process.env.HUBSPOT_PORTAL,
         cookie: "pittica-gdpr-marketing",
+        form: "13783600-3a0e-4ed1-8233-d2a51d7c7c31",
       },
     },
     {
@@ -114,7 +136,20 @@ module.exports = {
       options: {
         host: siteUrl,
         sitemap: `${siteUrl}/sitemap-index.xml`,
-        policy: [{ userAgent: "*", allow: "/" }],
+        env: {
+          development: {
+            policy: [{ userAgent: "*", disallow: ["/"] }],
+          },
+          production: {
+            policy: [
+              { userAgent: "*", allow: "/" },
+              {
+                userAgent: "*",
+                disallow: "/offline-plugin-app-shell-fallback",
+              },
+            ],
+          },
+        },
       },
     },
     {

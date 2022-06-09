@@ -1,8 +1,10 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { graphql, Link } from "gatsby"
 import { groupify } from "@pittica/gatsby-plugin-utils"
+import { Seo } from "@pittica/gatsby-plugin-seo"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
-import Layout from "../layouts/layout"
+import Header from "../components/ui/header"
 import Icon from "../components/ui/icon"
 
 export default function Categories({
@@ -11,8 +13,12 @@ export default function Categories({
     nodes: { nodes },
   },
 }) {
+  const { t } = useTranslation()
+
   return (
-    <Layout location={location} title="Categorie" header={true}>
+    <Fragment>
+      <Seo title={t("Categories")} path={location.pathname} />
+      <Header title={t("Categories")} />
       <div className="container">
         {nodes.length > 0 && (
           <ul className="inline">
@@ -37,12 +43,21 @@ export default function Categories({
           </ul>
         )}
       </div>
-    </Layout>
+    </Fragment>
   )
 }
 
 export const pageQuery = graphql`
-  query CategoriesPage {
+  query CategoriesPage($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     nodes: allGraphCmsCategory(
       filter: {
         stage: { eq: PUBLISHED }

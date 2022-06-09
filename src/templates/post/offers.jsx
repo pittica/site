@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Highlight from "../../components/ui/highlight"
 import Section from "../../components/ui/section"
@@ -10,9 +11,10 @@ import RelatedBlock from "../../components/sections/related-block"
 import Layout from "../../layouts/layout"
 
 import { getCoverFallback } from "../../utils/image"
-import getPaymentInterval from "../../utils/get-payment-interval"
 
 export default function Offers({ data: { post }, location }) {
+  const { t } = useTranslation()
+  const intervals = useTranslation("intervals")
   const cover = getCoverFallback(post)
 
   return (
@@ -24,7 +26,7 @@ export default function Offers({ data: { post }, location }) {
       breadcrumb={[
         {
           url: "/offers/",
-          name: "Offerte",
+          name: t("Offers"),
         },
       ]}
     >
@@ -38,12 +40,12 @@ export default function Offers({ data: { post }, location }) {
           title={post.title}
           description={post.description}
         >
-          {post.price && (
+          {post.price && post.price.value && (
             <Highlight>
               <strong itemProp="price" content={post.price}>
-                {post.price} €
-              </strong>
-              {getPaymentInterval(post)}
+                {post.price.value} €
+              </strong>{" "}
+              {intervals.t(post.price.unit)}
               <meta itemProp="priceCurrency" content="EUR" />
               <link itemProp="availability" href="https://schema.org/InStock" />
             </Highlight>
@@ -51,22 +53,21 @@ export default function Offers({ data: { post }, location }) {
           <meta itemProp="name" content={post.title} />
         </PostHeader>
         <PostContent content={post.content} />
-        {post.price && (
+        {post.price && post.price.vat && (
           <Section className="has-text-right">
-            <strong>i prezzi sono da intendersi IVA 22% esclusa.</strong>
+            <strong>
+              {t("prices are {{vat}}% VAT excluded.", { vat: post.price.vat })}
+            </strong>
           </Section>
         )}
         <ContactForm
-          title="Contattaci"
-          subtitle="Richiedi maggiori informazioni"
-          region="eu1"
-          portalId="25034302"
-          formId="13783600-3a0e-4ed1-8233-d2a51d7c7c31"
+          title={t("Contact Us")}
+          subtitle={t("Request more information")}
         />
         {post.services.length > 0 && (
           <Section
-            title="Servizi"
-            subtitle="I servizi di riferimento dell'offerta"
+            title={t("Services")}
+            subtitle={t("The reference services of the offer")}
           >
             <RelatedBlock nodes={post.services} group="services" />
           </Section>
@@ -77,17 +78,28 @@ export default function Offers({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query OffersPostTemplate($slug: String!) {
+  query OffersPostTemplate($slug: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     post: graphCmsOffer(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
-      slug
-      locale
       title
+      slug
       description
-      base
       content {
         html
       }
-      price
+      price {
+        value
+        unit
+        vat
+      }
       image {
         localFile {
           childImageSharp {
@@ -97,6 +109,13 @@ export const pageQuery = graphql`
               placeholder: BLURRED
               formats: [AUTO, WEBP, AVIF]
             )
+          }
+        }
+      }
+      seoImage: image {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(width: 1200, height: 628)
           }
         }
       }

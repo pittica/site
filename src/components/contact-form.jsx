@@ -25,9 +25,9 @@ export default function ContactForm({
 }
 
 ContactForm.propTypes = {
-  region: PropTypes.string.isRequired,
-  portalId: PropTypes.string.isRequired,
-  formId: PropTypes.string.isRequired,
+  region: PropTypes.string,
+  portalId: PropTypes.string,
+  formId: PropTypes.string,
   locale: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,

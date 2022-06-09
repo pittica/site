@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Grid from "../../layouts/grid"
 
@@ -11,12 +12,14 @@ export default function Tags({
   pageContext,
   location,
 }) {
+  const { t } = useTranslation()
+
   return (
     <Grid
       context={pageContext}
       nodes={nodes}
       label={name}
-      description={`Articoli con tag "${name}"`}
+      description={t('Articles with tag "{{name}}"', { name })}
       location={location}
     />
   )
@@ -29,7 +32,17 @@ export const pageQuery = graphql`
     $skip: Int!
     $locale: GraphCMS_Locale!
     $stage: GraphCMS_Stage!
+    $language: String!
   ) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip

@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import classNames from "classnames"
 import { groupify } from "@pittica/gatsby-plugin-utils"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Section from "../../components/ui/section"
 import Card from "../../components/ui/card"
@@ -15,12 +16,14 @@ export default function Portfolio({
   pageContext,
   location,
 }) {
+  const { t } = useTranslation()
+
   return (
     <Layout
       location={location}
       context={pageContext}
-      title="Portfolio"
-      description="I nostri lavori"
+      title={t("Portfolio")}
+      description={t("Our works")}
       header={true}
     >
       <Section>
@@ -52,9 +55,23 @@ export default function Portfolio({
 }
 
 export const pageQuery = graphql`
-  query PortfolioListTemplate($skip: Int!, $limit: Int!) {
+  query PortfolioListTemplate(
+    $skip: Int!
+    $limit: Int!
+    $locale: GraphCMS_Locale!
+    $language: String!
+  ) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     posts: allGraphCmsPortfolio(
-      filter: { stage: { eq: PUBLISHED } }
+      filter: { stage: { eq: PUBLISHED }, locale: { eq: $locale } }
       limit: $limit
       skip: $skip
       sort: { fields: [sticky, updatedAt], order: [DESC, DESC] }

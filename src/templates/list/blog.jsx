@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Grid from "../../layouts/grid"
 
@@ -10,19 +11,35 @@ export default function Blog({
   pageContext,
   location,
 }) {
+  const { t } = useTranslation()
+
   return (
     <Grid
+      location={location}
       context={pageContext}
       nodes={nodes}
-      label="Blog"
-      location={location}
-      description="Approfondimenti dal mondo digitale"
+      label={t("Blog")}
+      description={t("Insights from the digital world")}
     />
   )
 }
 
 export const pageQuery = graphql`
-  query BlogListTemplate($skip: Int!, $limit: Int!, $locale: GraphCMS_Locale!) {
+  query BlogListTemplate(
+    $skip: Int!
+    $limit: Int!
+    $locale: GraphCMS_Locale!
+    $language: String!
+  ) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     posts: allGraphCmsPost(
       limit: $limit
       skip: $skip

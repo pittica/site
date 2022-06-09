@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Section from "../../components/ui/section"
 import ContactForm from "../../components/contact-form"
@@ -11,6 +12,7 @@ import Layout from "../../layouts/layout"
 import { getCoverFallback } from "../../utils/image"
 
 export default function Services({ data: { post }, location }) {
+  const { t } = useTranslation()
   const cover = getCoverFallback(post)
 
   return (
@@ -22,39 +24,46 @@ export default function Services({ data: { post }, location }) {
       breadcrumb={[
         {
           url: "/services/",
-          name: "Servizi",
+          name: t("Services"),
         },
       ]}
     >
-      <PostHeader
-        image={cover}
-        title={post.title}
-        description={post.description}
-      />
-      <PostContent content={post.content} />
-      {post.offers.length > 0 && (
-        <Section
-          title="Offerte"
-          subtitle="Le offerte collegate a questo servizio"
-        >
-          <RelatedBlock nodes={post.offers} group="offers" />
-        </Section>
-      )}
-      <ContactForm
-        title="Contattaci"
-        subtitle="Richiedi maggiori informazioni"
-        region="eu1"
-        portalId="25034302"
-        formId="13783600-3a0e-4ed1-8233-d2a51d7c7c31"
-      />
+      <article>
+        <PostHeader
+          image={cover}
+          title={post.title}
+          description={post.description}
+        />
+        <PostContent content={post.content} />
+        {post.offers.length > 0 && (
+          <Section
+            title={t("Offers")}
+            subtitle={t("Offers related to this service")}
+          >
+            <RelatedBlock nodes={post.offers} group="offers" />
+          </Section>
+        )}
+        <ContactForm
+          title={t("Contact Us")}
+          subtitle={t("Request more information")}
+        />
+      </article>
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query ServicesPostTemplate($slug: String!) {
+  query ServicesPostTemplate($slug: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     post: graphCmsService(stage: { eq: PUBLISHED }, slug: { eq: $slug }) {
-      id
       title
       slug
       description
@@ -70,6 +79,13 @@ export const pageQuery = graphql`
               placeholder: BLURRED
               formats: [AUTO, WEBP, AVIF]
             )
+          }
+        }
+      }
+      seoImage: image {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(width: 1200, height: 628)
           }
         }
       }

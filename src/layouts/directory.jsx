@@ -9,18 +9,17 @@ import Layout from "./layout"
 
 export default function Directory({
   nodes,
-  location,
   context,
   title,
   description,
+  location,
 }) {
   return (
     <Layout
-      location={location}
-      context={context}
       title={title}
       description={description}
       header={true}
+      location={location}
     >
       <Section>
         <div className={classNames("columns", "is-multiline")}>

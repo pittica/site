@@ -31,20 +31,26 @@
     h1 {
       color: $primary;
       text-transform: uppercase;
-      background-color: rgba($primary-invert, 0.75);
       font-size: $size-2;
       @include until($desktop) {
         font-size: $size-2;
       }
+      span {
+        background-color: rgba($primary-invert, 0.75);
+        padding: $size-7;
+      }
     }
     h2 {
-      background-color: rgba($primary-invert, 0.75);
       font-size: $size-3;
       @include until($desktop) {
         font-size: $size-4;
       }
       @include until($tablet) {
         font-size: $size-5;
+      }
+      span {
+        background-color: rgba($primary-invert, 0.75);
+        padding: $size-7;
       }
     }
   }

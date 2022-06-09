@@ -1,7 +1,8 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classNames from "classnames"
 
-export default function Image({ src, title, size, className }) {
+export default function Image({ src, title, size, className, width, height }) {
   let classSize = null
 
   switch (size) {
@@ -37,6 +38,17 @@ export default function Image({ src, title, size, className }) {
       alt={title}
       title={title}
       className={classNames("image", classSize, className)}
+      width={width}
+      height={height}
     />
   )
+}
+
+Image.propTypes = {
+  src: PropTypes.string,
+  title: PropTypes.string,
+  size: PropTypes.number,
+  className: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
 }

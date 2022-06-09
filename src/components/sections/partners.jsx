@@ -2,7 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
 
-import ImageLink from "../ui/image/image-link"
+import Image from "../ui/image/image"
+import InnerLink from "../ui/link/inner-link"
 
 export default function Partners({ nodes, list }) {
   if (nodes.length > 0) {
@@ -18,7 +19,16 @@ export default function Partners({ nodes, list }) {
             )}
             key={`partners-${i}-${id}`}
           >
-            <ImageLink link={link} title={name} image={list ? null : logo} />
+            <InnerLink link={link} title={name}>
+              {list ? (
+                name
+              ) : (
+                <Image
+                  src={logo.url || logo.asset?.localFile?.publicURL}
+                  title={name}
+                />
+              )}
+            </InnerLink>
           </div>
         ))}
       </div>

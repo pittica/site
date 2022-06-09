@@ -1,6 +1,7 @@
 import React from "react"
 import classNames from "classnames"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Section from "../../components/ui/section"
 import PageGrid from "../../components/ui/article/page-grid"
@@ -14,19 +15,24 @@ export default function Legal({
   pageContext,
   location,
 }) {
+  const { t } = useTranslation()
+
   return (
     <Layout
       location={location}
       context={pageContext}
-      title="Note Legali"
-      description="Documenti e Condizioni di Fornitura Servizi"
+      title={t("Legals")}
+      description={t("Documents and Terms of Service")}
       header={true}
     >
       <Section>
         <div className={classNames("columns", "is-multiline")}>
           {nodes.map((node) => {
             return (
-              <div className={classNames("column", "is-half")} key={node.slug}>
+              <div
+                className={classNames("column", "is-half")}
+                key={`legal-${node.slug}`}
+              >
                 <PageGrid node={node} group={pageContext.group} />
               </div>
             )
@@ -39,9 +45,23 @@ export default function Legal({
 }
 
 export const pageQuery = graphql`
-  query LegalListTemplate($skip: Int!, $limit: Int!) {
+  query LegalListTemplate(
+    $skip: Int!
+    $limit: Int!
+    $locale: GraphCMS_Locale!
+    $language: String!
+  ) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     posts: allGraphCmsLegal(
-      filter: { stage: { eq: PUBLISHED } }
+      filter: { stage: { eq: PUBLISHED }, locale: { eq: $locale } }
       limit: $limit
       skip: $skip
     ) {

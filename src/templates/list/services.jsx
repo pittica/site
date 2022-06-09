@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import Directory from "../../layouts/directory"
 
@@ -10,19 +11,30 @@ export default function Offers({
   pageContext,
   location,
 }) {
+  const { t } = useTranslation()
+
   return (
     <Directory
       nodes={nodes}
       location={location}
       context={pageContext}
-      title="Servizi"
-      description="I nostri servizi"
+      title={t("Services")}
+      description={t("Our services")}
     />
   )
 }
 
 export const pageQuery = graphql`
-  query ServicesListTemplate($skip: Int!, $limit: Int!) {
+  query ServicesListTemplate($skip: Int!, $limit: Int!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     posts: allGraphCmsService(
       filter: { stage: { eq: PUBLISHED } }
       limit: $limit

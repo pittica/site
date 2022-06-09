@@ -4,6 +4,7 @@ import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { groupify } from "@pittica/gatsby-plugin-utils"
 import { Speakable } from "@pittica/gatsby-plugin-seo"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import PostContent from "../../components/ui/article/post-content"
 import PostFooter from "../../components/ui/article/post-footer"
@@ -12,11 +13,12 @@ import Icon from "../../components/ui/icon"
 import PostNav from "../../components/nav/post-nav"
 import Layout from "../../layouts/layout"
 
-import { getSeoImage, getCover } from "../../utils/image"
+import { getCover, getSeoImage } from "../../utils/image"
 
 import "../../scss/templates/post/_blog.scss"
 
 export default function Blog({ data: { post, previous, next }, location }) {
+  const { t } = useTranslation()
   const cover = getCover(post)
 
   return (
@@ -36,7 +38,7 @@ export default function Blog({ data: { post, previous, next }, location }) {
       breadcrumb={[
         {
           url: "/blog/",
-          name: "Blog",
+          name: t("Blog"),
         },
       ]}
     >
@@ -63,7 +65,9 @@ export default function Blog({ data: { post, previous, next }, location }) {
               )}
               {post.categories && post.categories.length > 0 && (
                 <PostMeta
-                  title={post.categories.length > 1 ? "Categorie" : "Categoria"}
+                  title={
+                    post.categories.length > 1 ? t("Categories") : t("Category")
+                  }
                 >
                   {post.categories.length > 0 && (
                     <div className="container">
@@ -122,12 +126,27 @@ export default function Blog({ data: { post, previous, next }, location }) {
 }
 
 export const pageQuery = graphql`
-  query BlogPostTemplate($slug: String!, $next: String, $previous: String) {
+  query BlogPostTemplate(
+    $slug: String!
+    $next: String
+    $previous: String
+    $language: String!
+  ) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     post: graphCmsPost(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
-      id
+      remoteTypeName
       title
-      date: formattedDate
+      slug
       description: excerpt
+      date: formattedDate
       content {
         html
       }

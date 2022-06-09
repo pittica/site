@@ -2,7 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
 
-import PartnershipLink from "../ui/link/partnership-link"
+import Image from "../ui/image/image"
+import InnerLink from "../ui/link/inner-link"
 
 import "../../scss/sections/_parterships.scss"
 
@@ -17,30 +18,43 @@ export default function Partnerships({ nodes, list }) {
           "parterships"
         )}
       >
-        {nodes.map(
-          ({ id, name, page, link, logo, logoUrl, width, height }, i) => {
-            if (logo || logoUrl) {
-              return (
-                <div
-                  key={`partnerships-${i}-${id}`}
-                  className={classNames("column", "is-3", "has-text-centered")}
-                >
-                  <PartnershipLink
-                    name={name}
-                    page={page}
-                    link={link}
-                    logo={list ? null : logo}
-                    logoUrl={list ? null : logoUrl}
-                    width={width}
-                    height={height}
-                  />
-                </div>
-              )
-            } else {
-              return null
-            }
+        {nodes.map(({ id, name, link, logo }, i) => {
+          if (logo) {
+            return (
+              <div
+                key={`partnerships-${i}-${id}`}
+                className={classNames("column", "is-3", "has-text-centered")}
+              >
+                <InnerLink link={link} title={name}>
+                  {list ? (
+                    name
+                  ) : (
+                    <Image
+                      src={logo.url || logo.asset?.localFile?.publicURL}
+                      title={name}
+                      width={
+                        logo.asset?.width
+                          ? logo.asset?.width
+                          : logo.asset?.data && logo.asset?.data.width
+                          ? logo.asset?.data.width
+                          : null
+                      }
+                      height={
+                        logo.asset?.height
+                          ? logo.asset?.height
+                          : logo.asset?.data && logo.asset?.data.height
+                          ? logo.asset?.data.height
+                          : null
+                      }
+                    />
+                  )}
+                </InnerLink>
+              </div>
+            )
+          } else {
+            return null
           }
-        )}
+        })}
       </div>
     )
   } else {

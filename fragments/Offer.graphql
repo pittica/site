@@ -16,7 +16,15 @@ fragment Offer on Offer {
       text
     }
   }
-  price
+  price {
+    ... on UnitPrice {
+      stage
+      id
+      value
+      vat
+      unit
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -54,7 +62,6 @@ fragment Offer on Offer {
       stage
     }
   }
-  base
   scheduledIn {
     ... on ScheduledOperation {
       remoteTypeName: __typename

@@ -1,13 +1,44 @@
 fragment Partnership on Partnership {
   stage
+  locale
   remoteId: id
-  createdAt
-  updatedAt
-  publishedAt
+  createdAt(variation: COMBINED)
+  updatedAt(variation: COMBINED)
+  publishedAt(variation: COMBINED)
   name
   slug
-  link
-  logoUrl
+  link {
+    ... on Link {
+      stage
+      locale
+      id
+      title
+      url
+      page {
+        ... on Page {
+          remoteTypeName: __typename
+          remoteId: id
+          locale
+          stage
+        }
+      }
+    }
+  }
+  logo {
+    ... on Image {
+      stage
+      id
+      url
+      asset {
+        ... on Asset {
+          remoteTypeName: __typename
+          remoteId: id
+          locale
+          stage
+        }
+      }
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -26,22 +57,6 @@ fragment Partnership on Partnership {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
-      stage
-    }
-  }
-  page {
-    ... on Page {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
-  }
-  logo {
-    ... on Asset {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
       stage
     }
   }

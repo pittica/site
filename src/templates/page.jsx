@@ -1,13 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { useTranslation } from "gatsby-plugin-react-i18next"
 
 import PostContent from "../components/ui/article/post-content"
 import PageSection from "../components/ui/article/page-section"
-import Layout from "../layouts/layout"
 import ContactForm from "../components/contact-form"
-import Section from "../components/ui/section"
+import Layout from "../layouts/layout"
 
 export default function Page({ data: { post }, location }) {
+  const { t } = useTranslation()
+
   return (
     <Layout
       title={post.title}
@@ -19,24 +21,34 @@ export default function Page({ data: { post }, location }) {
       {post.sections.map((section, i) => (
         <PageSection key={`page-${i}-${section.id}`} section={section} />
       ))}
-      {post.contactForm && (
-        <Section title="Contattaci">
-          <ContactForm
-            region="eu1"
-            portalId="25034302"
-            formId="13783600-3a0e-4ed1-8233-d2a51d7c7c31"
-          />
-        </Section>
-      )}
+      {post.contactForm && <ContactForm title={t("Contact Us")} />}
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query PageTemplate($slug: String!) {
-    post: graphCmsPage(slug: { eq: $slug }, stage: { eq: PUBLISHED }) {
+  query PageTemplate(
+    $slug: String!
+    $locale: GraphCMS_Locale!
+    $stage: GraphCMS_Stage!
+    $language: String!
+  ) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+    post: graphCmsPage(
+      slug: { eq: $slug }
+      stage: { eq: $stage }
+      locale: { eq: $locale }
+    ) {
       title
-      subtitle
+      description: subtitle
       content {
         html
       }
@@ -118,31 +130,43 @@ export const pageQuery = graphql`
         }
         partners {
           id
-          link
           name
+          link {
+            title
+            url
+            page {
+              slug
+            }
+          }
           logo {
-            localFile {
-              publicURL
+            asset {
+              localFile {
+                publicURL
+              }
             }
           }
         }
         partnerships {
           id
           name
-          page {
-            slug
-          }
-          link
-          logo {
-            localFile {
-              extension
-              publicURL
+          link {
+            title
+            url
+            page {
+              slug
             }
-            height
-            width
-            data
           }
-          logoUrl
+          logo {
+            url
+            asset {
+              localFile {
+                publicURL
+              }
+              height
+              width
+              data
+            }
+          }
         }
         attachments {
           id

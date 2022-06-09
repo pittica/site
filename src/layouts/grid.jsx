@@ -1,21 +1,23 @@
-import React from "react"
+import React, { Fragment } from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 import classNames from "classnames"
+import { Link, useTranslation } from "gatsby-plugin-react-i18next"
 
 import ArticleGrid from "../components/ui/article/article-grid"
 import Section from "../components/ui/section"
 import ListNav from "../components/nav/list-nav"
+import Header from "../components/ui/header"
 import Layout from "./layout"
 
 export default function Grid({
   context,
   nodes,
   label,
-  location,
   description,
   nav,
+  location,
 }) {
+  const { t } = useTranslation()
   const { name } = context
 
   if (nodes.length > 0) {
@@ -43,16 +45,16 @@ export default function Grid({
     )
   } else {
     return (
-      <Layout
-        location={location}
-        title={description ? label : `${label} "${name}"`}
-        description="Nessun Articolo Trovato"
-        header={true}
-      >
+      <Fragment>
+        <Header
+          title={description ? label : `${label} "${name}"`}
+          subtitle={t("No Articles Found")}
+          sticky={true}
+        />
         <div className={classNames("has-text-centered", "mb-6")}>
-          <Link to="/">Vai alla Home</Link>
+          <Link to="/">{t("Go to Home")}</Link>
         </div>
-      </Layout>
+      </Fragment>
     )
   }
 }
