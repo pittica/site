@@ -17,7 +17,7 @@ import { getCover, getSeoImage } from "../../utils/image"
 
 import "../../scss/templates/post/_blog.scss"
 
-export default function Blog({ data: { post, previous, next }, location }) {
+export default function Blog({ data: { post }, location }) {
   const { t } = useTranslation()
 
   return (
@@ -29,8 +29,6 @@ export default function Blog({ data: { post, previous, next }, location }) {
           ? `${post.people[0].firstName} ${post.people[0].lastName}`
           : null
       }
-      next={next ? `/blog/${next.slug}` : null}
-      previous={previous ? `/blog/${previous.slug}` : null}
       breadcrumb={[
         {
           url: "/blog/",
@@ -217,11 +215,13 @@ export const pageQuery = graphql`
     next: graphCmsPost(id: { eq: $next }, stage: { eq: PUBLISHED }) {
       id
       title
+      path
       slug
     }
     previous: graphCmsPost(id: { eq: $previous }, stage: { eq: PUBLISHED }) {
       id
       title
+      path
       slug
     }
   }

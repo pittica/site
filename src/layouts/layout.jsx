@@ -14,8 +14,6 @@ export default function Layout({
   blog,
   author,
   header,
-  next,
-  previous,
   breadcrumb,
   headline,
 }) {
@@ -28,8 +26,6 @@ export default function Layout({
         isBlogPost={blog}
         image={image}
         author={author}
-        next={next}
-        previous={previous}
         breadcrumb={breadcrumb}
         headline={headline}
       />
@@ -48,8 +44,6 @@ Layout.propTypes = {
   blog: PropTypes.bool,
   author: PropTypes.string,
   header: PropTypes.bool,
-  next: PropTypes.string,
-  previous: PropTypes.string,
   breadcrumb: PropTypes.arrayOf(PropTypes.object),
   headline: PropTypes.string,
 }

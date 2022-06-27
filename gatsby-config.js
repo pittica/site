@@ -78,7 +78,6 @@ module.exports = {
         token: process.env.GRAPHCMS_TOKEN,
         locales: [process.env.LOCALE_LANGUAGE],
         fragmentsPath: "fragments",
-        queryConcurrency: 20,
         stages:
           (process.env.ENV || process.env.NODE_ENV) !== "production"
             ? ["DRAFT", "PUBLISHED"]
@@ -430,6 +429,8 @@ module.exports = {
           },
         },
         fields: {
+          title: "post.title",
+          description: "post.description",
           image:
             "post.image.localFile.childImageSharp.gatsbyImageData.images.fallback.src",
           imageFallback:

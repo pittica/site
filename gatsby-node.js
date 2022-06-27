@@ -245,8 +245,8 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
     }
   )
 
-exports.createResolvers = ({ createResolvers }) => {
-  const resolvers = {
+exports.createResolvers = ({ createResolvers }) =>
+  createResolvers({
     GraphCMS_Post: {
       formattedDate: {
         type: "String",
@@ -257,11 +257,12 @@ exports.createResolvers = ({ createResolvers }) => {
           return m.format("l")
         },
       },
+      path: {
+        type: "String",
+        resolve: ({ slug }) => `/blog/${slug}`,
+      },
     },
-  }
-
-  createResolvers(resolvers)
-}
+  })
 
 exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
   createTypes(`
