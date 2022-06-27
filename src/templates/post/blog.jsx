@@ -19,14 +19,10 @@ import "../../scss/templates/post/_blog.scss"
 
 export default function Blog({ data: { post, previous, next }, location }) {
   const { t } = useTranslation()
-  const cover = getCover(post)
 
   return (
     <Layout
-      title={post.title}
-      description={post.description}
       blog={true}
-      image={getSeoImage(post)}
       location={location}
       author={
         post.people && post.people.length > 0
@@ -41,13 +37,18 @@ export default function Blog({ data: { post, previous, next }, location }) {
           name: t("Blog"),
         },
       ]}
+      image={getSeoImage(post)}
     >
       <Speakable
         selector={[".blog header h1.title", ".blog .post-content .content"]}
       />
       <article className="blog">
         <header className={classNames("hero", "is-fullheight")}>
-          <GatsbyImage image={cover} alt={post.title} className="cover" />
+          <GatsbyImage
+            image={getCover(post, "cover")}
+            alt={post.title}
+            className="cover"
+          />
           <div className="hero-body">
             <div className={classNames("container", "has-text-centered")}>
               <div>
@@ -120,7 +121,7 @@ export default function Blog({ data: { post, previous, next }, location }) {
         <PostContent content={post.content} />
       </article>
       <PostNav previous={previous} next={next} />
-      <PostFooter post={post} />
+      <PostFooter people={post.people} image={post.cover} />
     </Layout>
   )
 }
@@ -158,7 +159,7 @@ export const pageQuery = graphql`
         name
         slug
       }
-      image {
+      cover: image {
         localFile {
           childImageSharp {
             gatsbyImageData(
@@ -173,7 +174,7 @@ export const pageQuery = graphql`
           html
         }
       }
-      seoImage {
+      image: seoImage {
         localFile {
           childImageSharp {
             gatsbyImageData(width: 1200, height: 628)

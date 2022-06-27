@@ -16,10 +16,10 @@ function getSeoImage(post) {
   }
 }
 
-function getCover(post) {
+function getCover(post, field = "image") {
   if (post) {
-    return post.image && post.image.localFile
-      ? getImage(post.image.localFile.childImageSharp)
+    return post[field] && post[field].localFile
+      ? getImage(post[field].localFile.childImageSharp)
       : null
   } else {
     return null

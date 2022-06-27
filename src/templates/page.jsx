@@ -13,7 +13,7 @@ export default function Page({ data: { post }, location }) {
   return (
     <Layout
       title={post.title}
-      description={post.subtitle}
+      description={post.description}
       location={location}
       header={true}
     >

@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const { commalify } = require("@pittica/gatsby-plugin-utils")
+const { getSeoImage } = require("./src/utils/image")
 
 const siteUrl = process.env.URL || `https://${process.env.HOST}`
 
@@ -77,6 +78,7 @@ module.exports = {
         token: process.env.GRAPHCMS_TOKEN,
         locales: [process.env.LOCALE_LANGUAGE],
         fragmentsPath: "fragments",
+        queryConcurrency: 20,
         stages:
           (process.env.ENV || process.env.NODE_ENV) !== "production"
             ? ["DRAFT", "PUBLISHED"]
@@ -87,7 +89,7 @@ module.exports = {
       resolve: `gatsby-plugin-react-i18next`,
       options: {
         localeJsonSourceName: `locales`,
-        languages: [process.env.LOCALE_LANGUAGE.toLowerCase(), 'en'],
+        languages: [process.env.LOCALE_LANGUAGE.toLowerCase(), "en"],
         defaultLanguage: process.env.LOCALE_LANGUAGE.toLowerCase(),
         fallbackLanguage: process.env.LOCALE_LANGUAGE.toLowerCase(),
         siteUrl,
@@ -426,6 +428,12 @@ module.exports = {
             page: process.env.SOCIAL_LINKEDIN_PAGE,
             icon: "icon-pittica-linkedin",
           },
+        },
+        fields: {
+          image:
+            "post.image.localFile.childImageSharp.gatsbyImageData.images.fallback.src",
+          imageFallback:
+            "post.seoImageFallback.localFile.childImageSharp.gatsbyImageData.images.fallback.src",
         },
         debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
       },

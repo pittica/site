@@ -19,7 +19,7 @@ export default function Index({
       },
     },
     posts: { nodes },
-    page,
+    post,
   },
   location,
 }) {
@@ -36,10 +36,10 @@ export default function Index({
         </h2>
         <FeatureLink to="/about" label={t("See More")} />
       </Underground>
-      {page && page.content && <PostContent content={page.content} />}
+      {post && post.content && <PostContent content={post.content} />}
       <Blog nodes={nodes} />
-      {page &&
-        page.sections.map((section, i) => (
+      {post &&
+        post.sections.map((section, i) => (
           <PageSection key={`page-${i}-${section.id}`} section={section} />
         ))}
     </Layout>
@@ -96,7 +96,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    page: graphCmsPage(
+    post: graphCmsPage(
       locale: { eq: $locale }
       stage: { eq: $stage }
       slug: { eq: "index" }
@@ -107,7 +107,7 @@ export const pageQuery = graphql`
       sections {
         id
         title
-        subtitle
+        description: subtitle
         offers {
           id
           title
