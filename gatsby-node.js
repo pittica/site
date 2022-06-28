@@ -245,7 +245,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
     }
   )
 
-exports.createResolvers = ({ createResolvers }) =>
+exports.createResolvers = ({ createResolvers }) => {
   createResolvers({
     GraphCMS_Post: {
       formattedDate: {
@@ -263,6 +263,7 @@ exports.createResolvers = ({ createResolvers }) =>
       },
     },
   })
+}
 
 exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
   createTypes(`
