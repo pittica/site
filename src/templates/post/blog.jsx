@@ -17,7 +17,7 @@ import { getCover, getSeoImage } from "../../utils/image"
 
 import "../../scss/templates/post/_blog.scss"
 
-export default function Blog({ data: { post }, location }) {
+export default function Blog({ data: { post, next, previous }, location }) {
   const { t } = useTranslation()
 
   return (
@@ -36,6 +36,8 @@ export default function Blog({ data: { post }, location }) {
         },
       ]}
       image={getSeoImage(post)}
+      title={post.title}
+      description={post.description}
     >
       <Speakable
         selector={[".blog header h1.title", ".blog .post-content .content"]}

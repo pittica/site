@@ -1,7 +1,6 @@
 require("dotenv").config()
 
 const { commalify } = require("@pittica/gatsby-plugin-utils")
-const { getSeoImage } = require("./src/utils/image")
 
 const siteUrl = process.env.URL || `https://${process.env.HOST}`
 
@@ -448,6 +447,53 @@ module.exports = {
         organization: process.env.ORGANIZATION_COMPANY,
         logo: `${__dirname}/static/logo.png`,
         url: siteUrl,
+      },
+    },
+    {
+      resolve: `@pittica/gatsby-plugin-seo`,
+      options: {
+        siteUrl: `${siteUrl}/`,
+        title: process.env.NAME,
+        description: process.env.SITE_DESCRIPTION,
+        locale: {
+          language: process.env.LOCALE_LANGUAGE.toLowerCase(),
+          culture: process.env.LOCALE_CULTURE.toUpperCase(),
+        },
+        image: `/share.jpg`,
+        organization: {
+          name: process.env.ORGANIZATION_COMPANY,
+          url: `${siteUrl}/`,
+          logo: `${siteUrl}/logo.png`,
+        },
+        socials: {
+          twitter: {
+            username: process.env.SOCIAL_TWITTER_USERNAME,
+            icon: "icon-pittica-twitter",
+            show: false,
+          },
+          github: {
+            username: process.env.SOCIAL_GITHUB_USERNAME,
+            icon: "icon-pittica-github",
+          },
+          facebook: {
+            page: process.env.SOCIAL_FACEBOOK_PAGE,
+            app: process.env.SOCIAL_FACEBOOK_APP,
+            icon: "icon-pittica-facebook",
+          },
+          linkedin: {
+            page: process.env.SOCIAL_LINKEDIN_PAGE,
+            icon: "icon-pittica-linkedin",
+          },
+        },
+        fields: {
+          title: "post.title",
+          description: "post.description",
+          image:
+            "post.image.localFile.childImageSharp.gatsbyImageData.images.fallback.src",
+          imageFallback:
+            "post.seoImageFallback.localFile.childImageSharp.gatsbyImageData.images.fallback.src",
+        },
+        debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
       },
     },
   ],
