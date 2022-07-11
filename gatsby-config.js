@@ -350,12 +350,12 @@ module.exports = {
 
               if (pageContext.group) {
                 switch (pageContext.group) {
-                  case "post":
+                  case "blog":
                     page.changefreq = "monthly"
                     page.priority = 0.7
                     break
                   case "page":
-                    page.priority = 0.8
+                    page.priority = 0.9
                     break
                   case "portfolio":
                     page.priority = 0.6
