@@ -87,7 +87,7 @@ module.exports = {
       resolve: `gatsby-plugin-react-i18next`,
       options: {
         localeJsonSourceName: `locales`,
-        languages: [process.env.LOCALE_LANGUAGE.toLowerCase(), "en"],
+        languages: [process.env.LOCALE_LANGUAGE.toLowerCase()],
         defaultLanguage: process.env.LOCALE_LANGUAGE.toLowerCase(),
         fallbackLanguage: process.env.LOCALE_LANGUAGE.toLowerCase(),
         siteUrl,
